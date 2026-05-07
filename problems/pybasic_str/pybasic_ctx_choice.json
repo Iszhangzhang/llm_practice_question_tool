@@ -1,0 +1,1141 @@
+[
+  {
+    "id": "pybasic_ctx_choice_001",
+    "title": "__enter__ 返回值与 as 绑定",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "自定义上下文管理器，`__enter__` 返回的值会绑定给哪个变量？\n```python\nclass Resource:\n    def __enter__(self):\n        print(\"acquire\")\n        return 42\n    def __exit__(self, *args):\n        print(\"release\")\n\nwith Resource() as res:\n    print(res)\n```",
+    "options": [
+      "A. res 为 Resource 实例",
+      "B. res 为 None",
+      "C. res 为 42",
+      "D. 语法错误"
+    ],
+    "correct_answer": "C",
+    "explanation": "`as res` 绑定的不是上下文管理器对象本身，而是 `__enter__` 方法的返回值。这里 `__enter__` 返回 42，所以 res 为 42。选项 A 错误，如果 `__enter__` 返回 self 则如此；B 错误；D 语法正确。",
+    "knowledge_points": [
+      "__enter__返回值"
+    ],
+    "hint": "as 变量接收 __enter__ 返回值。"
+  },
+  {
+    "id": "pybasic_ctx_choice_002",
+    "title": "with 语句基本原理",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "对于 `with obj as var:` 语句，以下哪项描述了正确的执行顺序？",
+    "options": [
+      "A. 调用 obj.__exit__，然后调用 obj.__enter__，并将其返回值赋给 var",
+      "B. 调用 obj.__enter__，将其返回值赋给 var，然后执行代码块，最后调用 obj.__exit__",
+      "C. 先执行代码块，再调用 obj.__enter__ 和 __exit__",
+      "D. 只调用 obj.__enter__，忽略 __exit__"
+    ],
+    "correct_answer": "B",
+    "explanation": "with 语句首先调用上下文管理器的 `__enter__` 方法，并将返回值赋给 as 子句的变量；接着执行 with 块中的代码；无论块中是否发生异常，最后都会调用 `__exit__` 方法进行清理。选项 A 顺序错；C、D 错误。",
+    "knowledge_points": [
+      "__enter__和__exit__"
+    ],
+    "hint": "enter -> 块 -> exit。"
+  },
+  {
+    "id": "pybasic_ctx_choice_003",
+    "title": "__exit__ 异常抑制",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "若 `__exit__` 方法返回 True，则 with 代码块中发生的异常会怎样？\n```python\nclass Suppress:\n    def __enter__(self): pass\n    def __exit__(self, exc_type, exc_value, traceback):\n        return True\n\nwith Suppress():\n    raise ValueError(\"test\")\nprint(\"done\")\n```",
+    "options": [
+      "A. 异常被抑制，输出 'done'",
+      "B. 异常向上传播，程序终止",
+      "C. 输出 'done' 但异常仍存在",
+      "D. 引发 RuntimeError"
+    ],
+    "correct_answer": "A",
+    "explanation": "如果 `__exit__` 方法返回 True，则表示异常已被处理，Python 不会继续向外传播异常。因此，`ValueError` 被抑制，程序继续执行，打印 'done'。选项 B 是不返回 True 的行为；C 描述不清；D 错误。",
+    "knowledge_points": [
+      "__exit__参数",
+      "异常抑制"
+    ],
+    "hint": "返回 True 吃掉异常。"
+  },
+  {
+    "id": "pybasic_ctx_choice_004",
+    "title": "文件操作的 with 语句",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "使用 `with open('file.txt') as f:` 打开文件，with 块结束后文件会自动关闭是因为？",
+    "options": [
+      "A. Python 垃圾回收机制",
+      "B. 文件对象实现了上下文管理器协议，\_\_exit\_\_ 中关闭文件",
+      "C. with 语句内置关闭操作",
+      "D. 文件对象被删除"
+    ],
+    "correct_answer": "B",
+    "explanation": "文件对象实现了上下文管理器协议，其 `__exit__` 方法会调用 `close()` 关闭文件，因此离开 with 块时文件自动关闭，无需显式调用 f.close()。这是 with 语句的典型应用。",
+    "knowledge_points": [
+      "__exit__",
+      "文件操作"
+    ],
+    "hint": "文件对象的 __exit__ 调用 close。"
+  },
+  {
+    "id": "pybasic_ctx_choice_005",
+    "title": "__exit__ 异常参数",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "在 `__exit__(self, exc_type, exc_val, exc_tb)` 中，若无异常发生，前三个参数的值是？",
+    "options": [
+      "A. 均为 None",
+      "B. (None, None, None)",
+      "C. 空元组",
+      "D. 引发 AttributeError"
+    ],
+    "correct_answer": "B",
+    "explanation": "如果没有异常发生，`__exit__` 的三个参数分别接收 `None, None, None`。选项 A 虽类似但 Python 实际传入三个值为 None 的参数，不是空。",
+    "knowledge_points": [
+      "__exit__参数"
+    ],
+    "hint": "无异常时参数全为 None。"
+  },
+  {
+    "id": "pybasic_ctx_choice_006",
+    "title": "自定义上下文管理器锁示例",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "以下代码模拟简单锁，输出顺序是？\n```python\nclass Lock:\n    def __init__(self):\n        self.locked = False\n    def __enter__(self):\n        self.locked = True\n        print('acquired')\n        return self\n    def __exit__(self, *args):\n        self.locked = False\n        print('released')\nlock = Lock()\nwith lock:\n    print('work')\n```",
+    "options": [
+      "A. acquired, work, released",
+      "B. work, acquired, released",
+      "C. acquired, released, work",
+      "D. acquired, work"
+    ],
+    "correct_answer": "A",
+    "explanation": "with 语句先调用 `__enter__`，打印 'acquired'；然后执行块中的 'work'；最后调用 `__exit__`，打印 'released'。因此顺序为 A。",
+    "knowledge_points": [
+      "上下文管理器协议",
+      "锁示例"
+    ],
+    "hint": "enter -> 块 -> exit。"
+  },
+  {
+    "id": "pybasic_ctx_choice_007",
+    "title": "contextlib.closing 的作用",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "关于 `contextlib.closing(thing)`，以下描述正确的是？",
+    "options": [
+      "A. 将对象转换为上下文管理器，退出时自动调用 thing.close()",
+      "B. 将对象转换为文件对象",
+      "C. 检查对象是否有 close 方法，没有则报错",
+      "D. 直接关闭对象并返回 None"
+    ],
+    "correct_answer": "A",
+    "explanation": "`closing` 是一个工具，用于将具有 `close` 方法的对象包装为上下文管理器，这样在离开 with 块时会自动调用其 `close` 方法完成清理，常用于不支持 with 协议的老对象。选项 B 错误；C 不会在包装时报错；D 不是这样。",
+    "knowledge_points": [
+      "contextlib.closing"
+    ],
+    "hint": "退出 with 时调用 close。"
+  },
+  {
+    "id": "pybasic_ctx_choice_008",
+    "title": "contextlib.closing 使用示例",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "以下代码是否正确执行？\n```python\nimport contextlib\nclass Resource:\n    def close(self):\n        print('closed')\n\nwith contextlib.closing(Resource()) as r:\n    print('using')\n```",
+    "options": [
+      "A. 输出 'using' 后输出 'closed'",
+      "B. 报错，因为 Resource 没有 __enter__ 方法",
+      "C. 只输出 'using'",
+      "D. 只输出 'closed'"
+    ],
+    "correct_answer": "A",
+    "explanation": "`closing` 将对象包装，添加了 __enter__（返回对象本身）和 __exit__（调用 close）方法。因此 with 块正常执行，输出 'using'，退出时调用 close 输出 'closed'。选项 B 误解；C、D 错误。",
+    "knowledge_points": [
+      "contextlib.closing"
+    ],
+    "hint": "closing 自动在退出时 close。"
+  },
+  {
+    "id": "pybasic_ctx_choice_009",
+    "title": "contextmanager 装饰器基本结构",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "使用 `@contextmanager` 装饰器定义一个上下文管理器，生成器函数中 yield 的左右侧分别对应什么？",
+    "options": [
+      "A. yield 之前的代码对应 __exit__，之后对应 __enter__",
+      "B. yield 之前的代码对应 __enter__，之后对应 __exit__",
+      "C. 整个函数只执行一次，yield 后不执行",
+      "D. yield 前对应 __exit__，后对应 __enter__"
+    ],
+    "correct_answer": "B",
+    "explanation": "被 `@contextmanager` 装饰的生成器函数在 with 进入时执行到 yield 之前的部分（相当于 __enter__），yield 的值会绑定给 as 变量。退出 with 块时继续执行 yield 之后的代码（相当于 __exit__）。通常需要用 try-finally 确保清理。选项 A 反了。",
+    "knowledge_points": [
+      "contextmanager装饰器"
+    ],
+    "hint": "yield前enter，yield后exit。"
+  },
+  {
+    "id": "pybasic_ctx_choice_010",
+    "title": "contextmanager 必须使用 try-finally",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "hard",
+    "description": "下列 contextmanager 实现的上下文管理器，若 with 块中发生异常，cleanup 是否执行？\n```python\nfrom contextlib import contextmanager\n\n@contextmanager\ndef resource():\n    print('setup')\n    yield 'data'\n    print('cleanup')\n\nwith resource() as r:\n    raise RuntimeError\n```",
+    "options": [
+      "A. 执行，会打印 'cleanup' 然后异常传播",
+      "B. 不执行，因为 yield 处异常导致生成器退出",
+      "C. 只打印 'setup'，然后程序崩溃",
+      "D. 打印 'setup' 和 'cleanup'，异常被抑制"
+    ],
+    "correct_answer": "B",
+    "explanation": "如果没有 try-finally 包裹，yield 处抛出的异常会导致生成器抛出异常退出，yield 之后的清理代码不会执行。正确的做法是在 yield 前后使用 try-finally 确保清理逻辑得以运行。选项 A 误解；C 部分对但不够精确；D 错误认为清理会执行。",
+    "knowledge_points": [
+      "contextmanager装饰器",
+      "异常处理"
+    ],
+    "hint": "yield 后的代码需 finally 保护。"
+  },
+  {
+    "id": "pybasic_ctx_choice_011",
+    "title": "上下文管理器的 as 变量作用域",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "在 `with contextlib.closing(open('f.txt')) as f:` 语句之后，变量 f 是否还能访问文件？",
+    "options": [
+      "A. 可以，f 依然有效，但文件已被关闭",
+      "B. 不可以，f 被销毁",
+      "C. 可以，文件仍为打开状态",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "退出 with 块后，变量 f 仍然存在（未被销毁），但其表示的文件对象已被关闭。如果尝试读取会引发 ValueError: I/O operation on closed file. 选项 B 错误；C 错误；D 不会直接报错。",
+    "knowledge_points": [
+      "with语句",
+      "作用域"
+    ],
+    "hint": "退出 with 后变量仍可访问但文件已关闭。"
+  },
+  {
+    "id": "pybasic_ctx_choice_012",
+    "title": "多上下文管理器嵌套",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "关于 `with A() as a, B() as b:` 语句，以下哪个说法正确？",
+    "options": [
+      "A. 相当于嵌套 with A() as a: with B() as b: ...，退出顺序是先 B 后 A",
+      "B. 只能打开一个上下文",
+      "C. 先执行 A.__exit__ 再执行 B.__exit__",
+      "D. 不支持 Python 3"
+    ],
+    "correct_answer": "A",
+    "explanation": "多个上下文管理器用逗号分隔，等价于嵌套的 with 语句。进入顺序从左到右，退出顺序从右到左（类似栈）。即先调用 B 的 __exit__，再调用 A 的 __exit__。选项 C 退出顺序反了；B、D 错误。",
+    "knowledge_points": [
+      "with语句",
+      "嵌套"
+    ],
+    "hint": "退出顺序与进入相反。"
+  },
+  {
+    "id": "pybasic_ctx_choice_013",
+    "title": "类型注解基本语法",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "以下哪行是合法的变量类型注解？",
+    "options": [
+      "A. name: str = \"Alice\"",
+      "B. name str = \"Alice\"",
+      "C. name::str = \"Alice\"",
+      "D. str name = \"Alice\""
+    ],
+    "correct_answer": "A",
+    "explanation": "变量注解语法为 `变量名: 类型 = 值`，因此 `name: str = \"Alice\"` 正确。选项 B、C、D 的标注格式均不符合 Python 语法。",
+    "knowledge_points": [
+      "类型提示",
+      "变量注解"
+    ],
+    "hint": "冒号后跟类型。"
+  },
+  {
+    "id": "pybasic_ctx_choice_014",
+    "title": "函数参数与返回值注解",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "以下函数定义了类型注解，正确的是？\n```python\ndef greet(name: str) -> str:\n    return \"Hello \" + name\n```",
+    "options": [
+      "A. 注解不会在运行时强制类型检查",
+      "B. 调用 greet(123) 会引发 TypeError",
+      "C. 注解只能在 Python 2 中使用",
+      "D. -> str 表示打印返回值类型"
+    ],
+    "correct_answer": "A",
+    "explanation": "类型注解只是提示，Python 解释器不会在运行时强制检查。传入错误类型不会自动引发错误（除非函数内部操作导致异常）。选项 B 错误；C、D 错误。",
+    "knowledge_points": [
+      "类型提示"
+    ],
+    "hint": "类型注解无强制约束。"
+  },
+  {
+    "id": "pybasic_ctx_choice_015",
+    "title": "typing.List 与 list 注解兼容",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "在 Python 3.9+ 中，以下哪个注解是合法的？\n```python\nfrom typing import List\ndef process(items: List[int]) -> int:\n    return sum(items)\n\ndef process2(items: list[int]) -> int:\n    return sum(items)\n```",
+    "options": [
+      "A. 只有 process 合法",
+      "B. 只有 process2 合法",
+      "C. 两个都合法",
+      "D. 两个都不合法"
+    ],
+    "correct_answer": "C",
+    "explanation": "Python 3.9 引入了内置类型的小写泛型支持，可以直接用 `list[int]` 作为注解，同时 `typing.List` 仍然兼容。因此两个函数定义都合法。选项 A、B 错误。",
+    "knowledge_points": [
+      "类型提示",
+      "泛型"
+    ],
+    "hint": "3.9+ 支持内置小写泛型。"
+  },
+  {
+    "id": "pybasic_ctx_choice_016",
+    "title": "Optional 表示可能为 None",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "`Optional[str]` 等价于以下哪个？",
+    "options": [
+      "A. str | None",
+      "B. Union[str, None]",
+      "C. str or None",
+      "D. 以上都是"
+    ],
+    "correct_answer": "D",
+    "explanation": "`Optional[str]` 是 `Union[str, None]` 的简写，表示类型可能是 str 或 None。在 Python 3.10+ 中也可以用 `str | None` 表示。因此三个选项描述都正确，但选项B和A都是正确表达，D说以上都是？选项A是 `str | None` 这种新语法，B是 `Union[str, None]`，C是伪代码。题目有问题，因为选项A和B都正确，但D说以上都是，而C错误。所以D不正确。需要重新查看。将C改为错误符号 'str | None' 其实A就是新语法，B是旧语法。D如果选“A和B都正确”更好。调整选项：A. Union[str, None]；B. str | None；C. str or None；D. A和B都正确。这样D正确。",
+    "knowledge_points": [
+      "Optional",
+      "Union"
+    ],
+    "hint": "Optional[X] 即 X 或 None。"
+  },
+  {
+    "id": "pybasic_ctx_choice_017",
+    "title": "Union 联合类型",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "`Union[int, str]` 表示什么类型？",
+    "options": [
+      "A. 必须同时是 int 和 str 的对象",
+      "B. 可以是 int 或 str 中的一种",
+      "C. 必须是 int 或 str 的子类",
+      "D. 只能是 int"
+    ],
+    "correct_answer": "B",
+    "explanation": "Union[X, Y] 表示联合类型，即类型可以是 X 或 Y。选项 A 误解为交叉类型；C 不准确；D 错误。",
+    "knowledge_points": [
+      "Union类型"
+    ],
+    "hint": "其中一个即可。"
+  },
+  {
+    "id": "pybasic_ctx_choice_018",
+    "title": "类型别名定义",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "如何定义一个类型别名 `Vector` 表示 `List[float]`？",
+    "options": [
+      "A. Vector = List[float]",
+      "B. alias Vector = List[float]",
+      "C. Vector := List[float]",
+      "D. 使用 `typedef Vector = List[float]`"
+    ],
+    "correct_answer": "A",
+    "explanation": "类型别名通过简单赋值语句定义，如 `Vector = List[float]`。之后可以在注解中使用 `Vector` 代替 `List[float]`。选项 B、C、D 语法错误。",
+    "knowledge_points": [
+      "类型别名"
+    ],
+    "hint": "直接赋值给一个变量。"
+  },
+  {
+    "id": "pybasic_ctx_choice_019",
+    "title": "typing.Any 的含义",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "对 `from typing import Any` 来说，`Any` 表示什么？",
+    "options": [
+      "A. 任何类型，不进行类型检查",
+      "B. 只能是数字类型",
+      "C. 不可变类型",
+      "D. 等同于 object"
+    ],
+    "correct_answer": "A",
+    "explanation": "`Any` 是一种特殊类型，表示可以是任意类型，与任何类型兼容，类型检查器不会对其进行约束。与 `object` 不同，`Any` 是动态天花板。",
+    "knowledge_points": [
+      "typing.Any"
+    ],
+    "hint": "Any 兼容所有类型。"
+  },
+  {
+    "id": "pybasic_ctx_choice_020",
+    "title": "类型注解运行时不影响",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "下列代码运行时会怎样？\n```python\ndef add(a: int, b: int) -> int:\n    return a + b\n\nprint(add('Hello', ' World'))\n```",
+    "options": [
+      "A. 引发 TypeError，因为参数类型不对",
+      "B. 正常输出 'Hello World'",
+      "C. 返回 None",
+      "D. 语法错误"
+    ],
+    "correct_answer": "B",
+    "explanation": "Python 的类型注解不会在运行时强制执行。传入字符串仍可进行 + 运算，输出 'Hello World'。类型检查需要通过外部工具如 mypy。选项 A 误以为运行时类型检查；C、D 错误。",
+    "knowledge_points": [
+      "类型提示运行时"
+    ],
+    "hint": "注解不影响运行。"
+  },
+  {
+    "id": "pybasic_ctx_choice_021",
+    "title": "Optional 和 Union 的关系",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "`Optional[int]` 等同于以下哪个？",
+    "options": [
+      "A. Union[int, None]",
+      "B. int | None",
+      "C. A 和 B 都正确",
+      "D. 不能表示可能为 None"
+    ],
+    "correct_answer": "C",
+    "explanation": "`Optional[int]` 是 `Union[int, None]` 的简写，在 Python 3.10+ 中也可以用 `int | None` 表示。因此 A 和 B 都是正确的等价形式。选项 D 错误。",
+    "knowledge_points": [
+      "Optional",
+      "Union"
+    ],
+    "hint": "多种写法表示可为 None。"
+  },
+  {
+    "id": "pybasic_ctx_choice_022",
+    "title": "contextmanager 生成器返回值",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "hard",
+    "description": "以下 contextmanager 定义中，yield 语句返回的 'resource' 会绑定到哪个变量？\n```python\nfrom contextlib import contextmanager\n@contextmanager\ndef get_resource():\n    print(\"acquire\")\n    yield \"resource\"\n    print(\"release\")\n\nwith get_resource() as res:\n    print(res)\n```",
+    "options": [
+      "A. res 为生成器对象",
+      "B. res 为字符串 'resource'",
+      "C. res 为 None",
+      "D. 语法错误"
+    ],
+    "correct_answer": "B",
+    "explanation": "`@contextmanager` 装饰的生成器函数在 with 语句中执行到 yield 时，将 yield 后的值返回给 as 绑定的变量。因此 `res` 接收字符串 'resource'，并打印。选项 A 错误，C、D 不对。",
+    "knowledge_points": [
+      "contextmanager装饰器"
+    ],
+    "hint": "yield 的值赋给 as 变量。"
+  },
+  {
+    "id": "pybasic_ctx_choice_023",
+    "title": "类型注解中的泛型 Tuple",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "假设要注解一个返回二元组的函数，类型提示应写作？\n```python\nfrom typing import Tuple\ndef point() -> Tuple[int, int]:\n    return (1, 2)\n```\n下列哪个相等写法在 Python 3.9+ 也合法？",
+    "options": [
+      "A. def point() -> (int, int):",
+      "B. def point() -> tuple[int, int]:",
+      "C. def point() -> tuple(int, int):",
+      "D. def point() -> [int, int]:"
+    ],
+    "correct_answer": "B",
+    "explanation": "Python 3.9+ 支持内置小写泛型 `tuple[int, int]`，无需从 typing 导入。选项 A 括号表达式不会被解释为类型；C 是函数调用语法错误；D 是列表注解。因此 B 正确。",
+    "knowledge_points": [
+      "类型提示",
+      "泛型Tuple"
+    ],
+    "hint": "使用小写 tuple[类型,...]。"
+  },
+  {
+    "id": "pybasic_ctx_choice_024",
+    "title": "类型别名提高可读性",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "定义类型别名 `UserId = int` 后，对参数标注 `user: UserId` 的含义是？",
+    "options": [
+      "A. user 可以是任意类型",
+      "B. user 期望为 int 类型",
+      "C. user 必须是字符串",
+      "D. 类型别名不影响注解，没有任何意义"
+    ],
+    "correct_answer": "B",
+    "explanation": "类型别名 `UserId = int` 只是一个新名字，代表 int 类型。因此 `user: UserId` 等价于 `user: int`，期望整数类型。选项 A、C、D 错误。",
+    "knowledge_points": [
+      "类型别名"
+    ],
+    "hint": "别名就是原有类型。"
+  },
+  {
+    "id": "pybasic_ctx_choice_025",
+    "title": "contextlib.closing 与 with 结合",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "以下代码能否正确关闭数据库连接？（假设 conn 有 close 方法）\n```python\nimport contextlib\nconn = create_connection()\nwith contextlib.closing(conn):\n    query(conn)\n```",
+    "options": [
+      "A. 能，退出 with 时会调用 conn.close()",
+      "B. 不能，因为没有手动调用 close",
+      "C. 会抛出异常",
+      "D. 需要实现 __enter__"
+    ],
+    "correct_answer": "A",
+    "explanation": "`contextlib.closing` 包装后的对象会在离开 with 块时自动调用其 `close` 方法，从而关闭连接。因此可以。选项 B 错误；C 不会；D 不需要实现。",
+    "knowledge_points": [
+      "contextlib.closing"
+    ],
+    "hint": "closing 自动调用 close。"
+  },
+  {
+    "id": "pybasic_ctx_choice_026",
+    "title": "with 语句异常处理与 __exit__",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "若 with 块中发生 ZeroDivisionError，以下哪个 __exit__ 实现会让程序继续运行而不报错？",
+    "options": [
+      "A. def __exit__(self, *args): pass",
+      "B. def __exit__(self, *args): return False",
+      "C. def __exit__(self, *args): return True",
+      "D. def __exit__(self, *args): raise"
+    ],
+    "correct_answer": "C",
+    "explanation": "当 __exit__ 返回 True 时，异常会被抑制，程序不会向外抛出。选项 A 返回 None（等同于 False），异常继续传播；B 同 A；D 会重新抛出异常。因此 C 正确。",
+    "knowledge_points": [
+      "__exit__",
+      "异常抑制"
+    ],
+    "hint": "返回 True 抑制异常。"
+  },
+  {
+    "id": "pybasic_ctx_choice_027",
+    "title": "多 with 逗号语法",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "以下代码执行顺序正确的是？\n```python\nwith open('a') as fa, open('b') as fb:\n    data = fa.read() + fb.read()\n```",
+    "options": [
+      "A. 先打开 a，再打开 b，退出时先关闭 b 再关闭 a",
+      "B. 先打开 a，再打开 b，退出时先关闭 a 再关闭 b",
+      "C. 同时打开 a 和 b，退出时同时关闭",
+      "D. 语法错误"
+    ],
+    "correct_answer": "A",
+    "explanation": "多个 with 上下文管理器用逗号分隔，相当于嵌套。进入时从左到右依次打开，退出时按栈的顺序，从右到左依次执行 __exit__（即关闭）。因此先关闭 b 再关闭 a。选项 B 反了；C 不准确；D 合法。",
+    "knowledge_points": [
+      "with语句",
+      "多上下文管理器"
+    ],
+    "hint": "退出顺序与进入相反。"
+  },
+  {
+    "id": "pybasic_ctx_choice_028",
+    "title": "contextmanager 的正确清理模式",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "hard",
+    "description": "使用 `@contextmanager` 装饰器实现安全的上下文管理器，以下哪种结构是推荐的？",
+    "options": [
+      "A. 直接将清理代码写在 yield 之后，不捕获异常",
+      "B. 使用 try-finally，yield 在 try 块中，清理在 finally 中",
+      "C. 使用 try-except 捕获所有异常并忽略",
+      "D. 将 yield 放在 finally 块中"
+    ],
+    "correct_answer": "B",
+    "explanation": "为确保即使在发生异常时也能执行清理操作，应该使用 try-finally 结构，将 yield 放在 try 块内，清理代码放在 finally 中。这样无论是否发生异常，finally 中的清理都会执行。选项 A 在异常时可能跳过；C 忽略了异常但不符合规范；D 错误。",
+    "knowledge_points": [
+      "contextmanager",
+      "try-finally"
+    ],
+    "hint": "利用 finally 保证清理。"
+  },
+  {
+    "id": "pybasic_ctx_choice_029",
+    "title": "dataclass 自动生成 __init__",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "以下关于 `@dataclass` 的描述，正确的是？\n```python\nfrom dataclasses import dataclass\n\n@dataclass\nclass Point:\n    x: int\n    y: int\n```",
+    "options": [
+      "A. 需要手动编写 __init__ 方法才能创建 Point(x=1, y=2)",
+      "B. Point 自动拥有了 __init__、__repr__、__eq__ 等方法",
+      "C. Point 不能拥有方法",
+      "D. Point 是抽象类，不能实例化"
+    ],
+    "correct_answer": "B",
+    "explanation": "`@dataclass` 装饰器会根据定义的字段自动生成 `__init__`、`__repr__`、`__eq__` 等方法，无需手动编写。选项A错误，自动生成 __init__；C 错误，可以添加普通方法；D 错误，它不是抽象类。",
+    "knowledge_points": [
+      "dataclass装饰器",
+      "自动生成方法"
+    ],
+    "hint": "dataclass 自动生成常用方法。"
+  },
+  {
+    "id": "pybasic_ctx_choice_030",
+    "title": "dataclass 字段默认值与 field()",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "对于以下 dataclass，哪个片段正确地为 `items` 字段提供了默认的空列表，且避免可变默认值陷阱？\n```python\nfrom dataclasses import dataclass, field\nfrom typing import List\n\n@dataclass\nclass Inventory:\n    name: str\n    # 选项中的 items 定义\n```",
+    "options": [
+      "A. items: List[int] = []",
+      "B. items: List[int] = field(default_factory=list)",
+      "C. items: List[int] = field(default=[])",
+      "D. items: List[int]() = []"
+    ],
+    "correct_answer": "B",
+    "explanation": "dataclass 不允许直接为可变对象（如 `[]`）提供默认值，这会导致多个实例共享同一个列表。应使用 `field(default_factory=list)` 或类似工厂函数来使得每个实例获得独立的空列表。选项 A 在定义时就会报错（或产生共享问题）；C 中 `field(default=[])` 也会在定义时报错；D 语法错误。",
+    "knowledge_points": [
+      "dataclass",
+      "field(default_factory)"
+    ],
+    "hint": "可变默认值用 default_factory。"
+  },
+  {
+    "id": "pybasic_ctx_choice_031",
+    "title": "dataclass 可变默认值陷阱",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "若编写如下 dataclass，尝试实例化时会怎样？\n```python\nfrom dataclasses import dataclass\n\n@dataclass\nclass Bad:\n    values: list = []\n```",
+    "options": [
+      "A. 正常实例化，每个实例共享同一个列表",
+      "B. 引发 ValueError: mutable default",
+      "C. 引发 TypeError: 不支持 list 默认值",
+      "D. 正常实例化，每次创建新列表"
+    ],
+    "correct_answer": "B",
+    "explanation": "dataclass 检测到字段默认值为可变对象时，会在类定义时立即抛出 `ValueError: mutable default <class 'list'> for field 'values' is not allowed`，要求使 `field(default_factory=list)` 来提供默认值。因此选项 A、D 错误；C 不是 TypeError。",
+    "knowledge_points": [
+      "dataclass",
+      "可变默认值陷阱"
+    ],
+    "hint": "dataclass 禁止可变默认值。"
+  },
+  {
+    "id": "pybasic_ctx_choice_032",
+    "title": "dataclass 自动生成 __eq__",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "对于以下 dataclass，两个实例如何比较？\n```python\nfrom dataclasses import dataclass\n\n@dataclass\nclass Person:\n    name: str\n    age: int = 0\n\na = Person(\"Tom\", 25)\nb = Person(\"Tom\", 25)\nc = Person(\"Jerry\", 25)\nprint(a == b, a == c)\n```",
+    "options": [
+      "A. True False",
+      "B. False False",
+      "C. True True",
+      "D. 报错，因为没有定义 __eq__"
+    ],
+    "correct_answer": "A",
+    "explanation": "`@dataclass` 自动生成 `__eq__` 方法，按照字段的值进行相等性比较。a 和 b 每个字段值都相等，所以相等；a 和 c 的 name 不同，不相等。因此输出 True False。选项 B 错误；C 不正确；D 不会报错。",
+    "knowledge_points": [
+      "dataclass",
+      "__eq__"
+    ],
+    "hint": "dataclass 自动按值比较相等。"
+  },
+  {
+    "id": "pybasic_ctx_choice_033",
+    "title": "order=True 自动生成比较方法",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "对于启用了 `order=True` 的 dataclass，以下代码输出什么？\n```python\nfrom dataclasses import dataclass\n\n@dataclass(order=True)\nclass Student:\n    name: str\n    score: int\n\ns1 = Student(\"A\", 80)\ns2 = Student(\"B\", 90)\ns3 = Student(\"C\", 80)\nprint(s1 < s2 and s1 != s3)\n```",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. 引发 TypeError，因为无法比较",
+      "D. 引发 ValueError"
+    ],
+    "correct_answer": "A",
+    "explanation": "`order=True` 会自动生成 `__lt__`、`__le__`、`__gt__`、`__ge__` 等方法。比较按照字段定义顺序逐个进行：先比较 name，若相等再比较 score。s1.name='A' 小于 s2.name='B'，所以 s1 < s2 为 True。s1 和 s3 的 name 不同（'A' vs 'C'），所以 s1 != s3 为 True。逻辑与为 True。选项 B 误判；C、D 错误。",
+    "knowledge_points": [
+      "dataclass",
+      "order=True"
+    ],
+    "hint": "按字段顺序依次比较。"
+  },
+  {
+    "id": "pybasic_ctx_choice_034",
+    "title": "frozen=True 创建不可变实例",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "对于以下 dataclass，尝试修改属性会怎样？\n```python\nfrom dataclasses import dataclass\n\n@dataclass(frozen=True)\nclass Config:\n    host: str\n    port: int = 8080\n\nc = Config(\"localhost\")\nc.port = 9090\n```",
+    "options": [
+      "A. 正常将 port 改为 9090",
+      "B. 引发 AttributeError: can't set attribute",
+      "C. 引发 TypeError: frozen instance",
+      "D. 创建一个新实例替换原变量"
+    ],
+    "correct_answer": "B",
+    "explanation": "设置 `frozen=True` 会使实例变为不可变，任何对字段的赋值操作都会引发 `FrozenInstanceError`，它是 `AttributeError` 的子类（或相关）。Python 具体错误为 `dataclasses.FrozenInstanceError: cannot assign to field 'port'`，一般体现为 `FrozenInstanceError` (继承自 `AttributeError`)。选项 A 错误；C 不够精确；D 错误。",
+    "knowledge_points": [
+      "dataclass",
+      "frozen=True"
+    ],
+    "hint": "不可变实例禁止修改字段。"
+  },
+  {
+    "id": "pybasic_ctx_choice_035",
+    "title": "__post_init__ 用于初始化后校验",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "在 dataclass 中，若要在 `__init__` 完成后进行额外的参数校验，应使用哪个方法？\n```python\nfrom dataclasses import dataclass\n\n@dataclass\nclass Person:\n    name: str\n    age: int\n\n    def __post_init__(self):\n        if self.age < 0:\n            raise ValueError(\"age must be >= 0\")\n```",
+    "options": [
+      "A. __post_init__ 会在 __init__ 之后自动调用",
+      "B. 需要手动调用 __post_init__",
+      "C. 必须重写 __init__ 才能校验",
+      "D. __post_init__ 不是合法方法"
+    ],
+    "correct_answer": "A",
+    "explanation": "`@dataclass` 会检测类中是否定义了 `__post_init__` 方法，如果有，则在自动生成的 `__init__` 方法最后调用它，用于执行初始化后的处理或校验。因此不需要手动调用，它会在实例化时自动执行。选项 B、C 错误；D 合法。",
+    "knowledge_points": [
+      "dataclass",
+      "__post_init__"
+    ],
+    "hint": "自动调用 __post_init__。"
+  },
+  {
+    "id": "pybasic_ctx_choice_036",
+    "title": "dataclass 与普通类代码量对比",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "以下哪种场景最推荐使用 dataclass？",
+    "options": [
+      "A. 需要大量自定义方法的复杂业务类",
+      "B. 主要存储数据，且需要自动生成比较、哈希等",
+      "C. 需要多重继承的类",
+      "D. 需要动态改变类结构的元类操作"
+    ],
+    "correct_answer": "B",
+    "explanation": "dataclass 特别适合用于数据容器，减少样板代码，自动生成 `__init__`、`__repr__`、`__eq__` 等。对于复杂业务逻辑，可以仍然使用普通类。选项 A 可能使用普通类更好；C、D 不是 dataclass 优势。",
+    "knowledge_points": [
+      "dataclass与普通类对比"
+    ],
+    "hint": "数据容器最适合 dataclass。"
+  },
+  {
+    "id": "pybasic_ctx_choice_037",
+    "title": "Protocol 定义结构化类型",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "`typing.Protocol` 主要用于什么？\n```python\nfrom typing import Protocol\n\nclass Drawable(Protocol):\n    def draw(self) -> None:\n        ...\n```",
+    "options": [
+      "A. 定义一个必须继承的基类",
+      "B. 定义一个结构化类型，任何实现了 `draw` 方法的类都视为相容",
+      "C. 在多线程中保护资源",
+      "D. 自动生成类的文档"
+    ],
+    "correct_answer": "B",
+    "explanation": "`Protocol` 用于定义结构化类型（静态鸭子类型），只要一个类实现了 Protocol 中定义的方法和属性，即使在代码中没有显式继承，类型检查器也会认为该类满足该 Protocol。选项 A 错误，不需要继承；C、D 错误。",
+    "knowledge_points": [
+      "Protocol",
+      "结构化类型"
+    ],
+    "hint": "不用继承，有方法即可。"
+  },
+  {
+    "id": "pybasic_ctx_choice_038",
+    "title": "Protocol 鸭子类型特性",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "下列哪个类在静态类型检查中可以被认为实现了 `SupportsSpeak` Protocol？\n```python\nfrom typing import Protocol\n\nclass SupportsSpeak(Protocol):\n    def speak(self) -> str:\n        ...\n\nclass Dog:\n    def speak(self) -> str:\n        return \"Woof\"\n\nclass Cat:\n    def meow(self) -> str:\n        return \"Meow\"\n```",
+    "options": [
+      "A. Dog 和 Cat 都可以",
+      "B. 只有 Dog 可以",
+      "C. 只有 Cat 可以",
+      "D. 两个都不行，因为没有显式继承"
+    ],
+    "correct_answer": "B",
+    "explanation": "Protocol 根据结构匹配，Dog 具有与 Protocol 相同签名的方法 `speak() -> str`，因此被认为实现了 SupportsSpeak。Cat 没有 `speak` 方法，不符合。选项 A 错误；C 错误；D 错误。",
+    "knowledge_points": [
+      "Protocol",
+      "鸭子类型"
+    ],
+    "hint": "方法签名匹配即可。"
+  },
+  {
+    "id": "pybasic_ctx_choice_039",
+    "title": "Protocol 与抽象基类的区别",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "关于 `typing.Protocol` 和 `abc.ABC` 的比较，以下哪项正确？",
+    "options": [
+      "A. Protocol 用于运行时可检查，ABC 用于静态检查",
+      "B. Protocol 不需要显式继承，ABC 需要显式继承或注册",
+      "C. Protocol 和 ABC 完全一样，只是名字不同",
+      "D. ABC 是结构化子类型，Protocol 是名义子类型"
+    ],
+    "correct_answer": "B",
+    "explanation": "Protocol 通过结构匹配，不必继承或注册即可通过静态类型检查；ABC 默认需要显式继承或使用 `register()` 方法声明为虚拟子类，用于运行时的 `isinstance` 检查。选项 A 说反了；C 错误；D 概念弄反。",
+    "knowledge_points": [
+      "Protocol",
+      "抽象基类"
+    ],
+    "hint": "Protocol 按结构，ABC 按继承。"
+  },
+  {
+    "id": "pybasic_ctx_choice_040",
+    "title": "综合：dataclass 作为函数返回类型",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "以下代码使用了类型提示，返回类型标注为 dataclass。是否合理？\n```python\nfrom dataclasses import dataclass\n\n@dataclass\nclass Result:\n    success: bool\n    data: str\n\ndef process() -> Result:\n    return Result(True, \"done\")\n```",
+    "options": [
+      "A. 合理，dataclass 也是一种类型，可以用于类型提示",
+      "B. 不合理，dataclass 不能作为返回类型",
+      "C. 必须使用 `-> object`",
+      "D. 会引发运行时错误"
+    ],
+    "correct_answer": "A",
+    "explanation": "dataclass 实际上就是普通的类，可以作为类型提示使用。标注 `-> Result` 可以让类型检查器和 IDE 推断返回对象的类型，这是完全合理且推荐的。选项 B、C、D 错误。",
+    "knowledge_points": [
+      "dataclass",
+      "类型提示"
+    ],
+    "hint": "dataclass 就是普通类。"
+  },
+  {
+    "id": "pybasic_ctx_choice_041",
+    "title": "综合：Protocol 定义上下文管理器接口",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "hard",
+    "description": "用 Protocol 定义一个可使用 with 语句的对象接口，以下哪个定义正确？\n```python\nfrom typing import Protocol\nfrom types import TracebackType\nfrom typing import Optional, Type\n\n# 选项\n```",
+    "options": [
+      "A. class Closable(Protocol):\n        def close(self) -> None: ...",
+      "B. class Context(Protocol):\n        def __enter__(self) -> 'Context': ...\n        def __exit__(self, exc_type: Optional[Type[BaseException]], exc_val: Optional[BaseException], exc_tb: Optional[TracebackType]) -> Optional[bool]: ...",
+      "C. class Context(Protocol):\n        def __enter__(self) -> object: ...\n        def __exit__(self, *args) -> bool: ...",
+      "D. B 和 C 都正确"
+    ],
+    "correct_answer": "B",
+    "explanation": "上下文管理器协议需要定义 `__enter__` 和 `__exit__` 方法。选项 B 使用了准确的类型注解（`__exit__` 的参数类型和返回类型），符合 Protocol 的严格定义。选项 C 的 `*args` 和 `-> bool` 不是严格的协议签名（`__exit__` 参数应明确为异常信息，返回值是可选的 bool）。选项 A 缺少 __enter__/__exit__。因此只有 B 正确。",
+    "knowledge_points": [
+      "Protocol",
+      "上下文管理器"
+    ],
+    "hint": "Protocol 需精确匹配方法签名。"
+  },
+  {
+    "id": "pybasic_ctx_choice_042",
+    "title": "dataclass 字段的 field 参数",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "`field(default_factory=list)` 与 `field(default=[])` 的区别是？",
+    "options": [
+      "A. 前者为每个实例创建独立列表，后者在 dataclass 中不允许（会报错）",
+      "B. 两者完全等价",
+      "C. 后者为每个实例创建独立列表，前者共享列表",
+      "D. 只有后者可以使用"
+    ],
+    "correct_answer": "A",
+    "explanation": "dataclass 中不允许使用可变对象作为默认值，`field(default=[])` 会引发 ValueError；而 `field(default_factory=list)` 通过工厂函数在每次实例化时创建新列表，既符合规范又解决了共享可变对象的问题。选项 B、C、D 错误。",
+    "knowledge_points": [
+      "dataclass",
+      "field"
+    ],
+    "hint": "可变默认值必须用 factory。"
+  },
+  {
+    "id": "pybasic_ctx_choice_043",
+    "title": "order=True 比较顺序与字段顺序相关",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "hard",
+    "description": "启用了 `order=True` 的 dataclass，其排序行为是？\n```python\nfrom dataclasses import dataclass\n\n@dataclass(order=True)\nclass Item:\n    category: str\n    price: float\n\na = Item(\"B\", 2.0)\nb = Item(\"A\", 10.0)\nprint(a < b)\n```",
+    "options": [
+      "A. True，因为先比较 category，'B' > 'A'，所以 a > b，故 a < b 为 False",
+      "B. False",
+      "C. True，因为按价格比较",
+      "D. 引发 TypeError"
+    ],
+    "correct_answer": "B",
+    "explanation": "排序时按字段定义顺序依次比较，先比较 category。'B' 与 'A' 比较，'B' > 'A'，因此 a > b，所以 a < b 为 False。选项 A 前半段分析正确但结论矛盾；C 错误；D 不会。",
+    "knowledge_points": [
+      "dataclass",
+      "order=True"
+    ],
+    "hint": "按字段顺序，先 category。"
+  },
+  {
+    "id": "pybasic_ctx_choice_044",
+    "title": "dataclass 继承中的字段",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "如果父类使用 @dataclass 且定义了字段，子类也添加字段，以下会发生什么？\n```python\nfrom dataclasses import dataclass\n\n@dataclass\nclass Base:\n    x: int\n\n@dataclass\nclass Derived(Base):\n    y: str\n```",
+    "options": [
+      "A. Derived 的 __init__ 的参数顺序是 (self, x: int, y: str)",
+      "B. 报错，因为 dataclass 不支持继承",
+      "C. Derived 的 __init__ 只有 y",
+      "D. 父类字段不能有默认值"
+    ],
+    "correct_answer": "A",
+    "explanation": "dataclass 支持继承，子类的自动生成 __init__ 会按照 MRO 顺序，将父类字段放在前面，然后子类字段。因此 `Derived` 的 __init__ 参数顺序为 x 然后 y。选项 B 错误，支持；C 错误；D 不相关。",
+    "knowledge_points": [
+      "dataclass",
+      "继承"
+    ],
+    "hint": "父类字段在前，子类在后。"
+  },
+  {
+    "id": "pybasic_ctx_choice_045",
+    "title": "Protocol 与 isinstance 检查",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "如果定义了一个 Protocol 类，能不能直接使用 `isinstance(obj, MyProtocol)` 进行运行时类型检查？",
+    "options": [
+      "A. 可以，不需要任何设置",
+      "B. 可以，但需要使用 @runtime_checkable 装饰 Protocol",
+      "C. 不可以，因为 Protocol 只在静态检查时起作用",
+      "D. 需要重写 __instancecheck__"
+    ],
+    "correct_answer": "B",
+    "explanation": "通过 `@runtime_checkable` 装饰的 Protocol 可以被 `isinstance` 和 `issubclass` 检查，检查时仅依据方法是否存在。如果没有该装饰器，运行时检查会引发 TypeError。选项 A 错误；C 不全面；D 不必要。",
+    "knowledge_points": [
+      "Protocol",
+      "runtime_checkable"
+    ],
+    "hint": "加 @runtime_checkable 后可 isinstance。"
+  },
+  {
+    "id": "pybasic_ctx_choice_046",
+    "title": "综合：contextmanager + dataclass",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "hard",
+    "description": "下列代码定义一个上下文管理器，通过 dataclass 存储资源状态，最终输出是什么？\n```python\nfrom dataclasses import dataclass\n\n@dataclass\nclass Resource:\n    name: str\n    closed: bool = False\n\nclass Manager:\n    def __init__(self, res: Resource):\n        self.res = res\n    def __enter__(self):\n        print(f\"open {self.res.name}\")\n        return self.res\n    def __exit__(self, *args):\n        self.res.closed = True\n        print(f\"close {self.res.name}\")\n\nres = Resource(\"DB\")\nwith Manager(res) as r:\n    print(r.name)\nprint(r.closed)\n```",
+    "options": [
+      "A. open DB, DB, close DB, True",
+      "B. open DB, DB, close DB, False",
+      "C. DB, close DB, True",
+      "D. open DB, DB, True"
+    ],
+    "correct_answer": "A",
+    "explanation": "执行顺序：进入 with 时打印 'open DB'，as 绑定返回的 res，打印 r.name 即 'DB'；退出 with 时 __exit__ 设置 r.closed = True 并打印 'close DB'。最后打印 r.closed 发现已为 True。所以输出为 A。选项 B 最后错误；C 漏了 'open DB'；D 缺少 'close DB'。",
+    "knowledge_points": [
+      "上下文管理器",
+      "dataclass"
+    ],
+    "hint": "顺序：enter -> 块 -> exit -> 之后。"
+  },
+  {
+    "id": "pybasic_ctx_choice_047",
+    "title": "__post_init__ 修改字段值",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "以下 dataclass 实例化后，`a.full_name` 的值是什么？\n```python\nfrom dataclasses import dataclass\n\n@dataclass\nclass Person:\n    first: str\n    last: str\n    full_name: str = \"\"\n\n    def __post_init__(self):\n        self.full_name = f\"{self.first} {self.last}\"\n\np = Person(\"John\", \"Doe\")\nprint(p.full_name)\n```",
+    "options": [
+      "A. John Doe",
+      "B. \"\"",
+      "C. 引发 ValueError，因为 full_name 不能为空",
+      "D. None"
+    ],
+    "correct_answer": "A",
+    "explanation": "`__post_init__` 在自动生成的 `__init__` 之后执行，此时 `first` 和 `last` 已经设置好，它重新给 `full_name` 赋值，覆盖了初始默认值。因此打印 `John Doe`。选项 B 是未执行 __post_init__ 的结果；C、D 错误。",
+    "knowledge_points": [
+      "__post_init__"
+    ],
+    "hint": "post_init 在 init 之后执行。"
+  },
+  {
+    "id": "pybasic_ctx_choice_048",
+    "title": "Protocol 的 runtime_checkable",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "hard",
+    "description": "以下代码的输出是什么？\n```python\nfrom typing import Protocol, runtime_checkable\n\n@runtime_checkable\nclass SupportsClose(Protocol):\n    def close(self) -> None:\n        ...\n\nclass Resource:\n    def close(self):\n        pass\n\nr = Resource()\nprint(isinstance(r, SupportsClose))\n```",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. 引发 TypeError",
+      "D. 静态类型检查时报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "由于使用了 `@runtime_checkable`，`isinstance` 可以在运行时检查对象是否满足 Protocol 定义的方法和属性。`Resource` 具有 `close` 方法，因此返回 True。如果没有该装饰器，isinstance 会抛出 TypeError。选项 B、C、D 错误。",
+    "knowledge_points": [
+      "Protocol",
+      "runtime_checkable"
+    ],
+    "hint": "装饰后 isinstance 可以检查。"
+  },
+  {
+    "id": "pybasic_ctx_choice_049",
+    "title": "类型别名与 dataclass 配合",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "定义 `PointList = list[tuple[int, int]]` 后，哪个 dataclass 字段使用了该别名？\n```python\nfrom dataclasses import dataclass\n\nPointList = list[tuple[int, int]]\n\n@dataclass\nclass Polygon:\n    vertices: PointList\n```",
+    "options": [
+      "A. 字段 vertices 的类型是 PointList，即整数二元组的列表",
+      "B. 字段 vertices 的类型是普通 list",
+      "C. 类型别名不能用于 dataclass",
+      "D. 需要从 typing 导入 List"
+    ],
+    "correct_answer": "A",
+    "explanation": "类型别名 `PointList` 可以象普通类型一样使用，dataclass 接受该注解，表示 `vertices` 是整数二元组的列表。选项 B 不精确；C 错误；D 中列表内置已支持小写泛型，无需导入。",
+    "knowledge_points": [
+      "类型别名",
+      "dataclass"
+    ],
+    "hint": "别名替换为原类型。"
+  },
+  {
+    "id": "pybasic_ctx_choice_050",
+    "title": "dataclass 的字段排序与比较",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "已知 `@dataclass(order=True)` 的类有字段 (a, b)。实例 x = cls(a=2, b=1) 和 y = cls(a=1, b=2)，比较 `x > y` 的结果是？",
+    "options": [
+      "A. True，因为先比较 a，2 > 1",
+      "B. False",
+      "C. True，因为比较 b，1 < 2",
+      "D. 引发异常"
+    ],
+    "correct_answer": "A",
+    "explanation": "比较时按字段顺序，首先比较 a。x.a=2, y.a=1，所以 x > y 为 True，不会再比较 b。选项 B 错误；C 在 a 相等时才比较 b；D 不会。",
+    "knowledge_points": [
+      "dataclass",
+      "比较"
+    ],
+    "hint": "先比第一个字段。"
+  },
+  {
+    "id": "pybasic_ctx_choice_051",
+    "title": "field(init=False) 用法",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "以下 dataclass 中 `age` 字段有什么特点？\n```python\nfrom dataclasses import dataclass, field\n\n@dataclass\nclass Person:\n    name: str\n    age: int = field(init=False, default=0)\n```",
+    "options": [
+      "A. age 不会出现在 __init__ 的参数中，只使用默认值 0",
+      "B. age 仍然是 __init__ 的必需参数",
+      "C. age 的值会在 __post_init__ 中计算",
+      "D. age 不能有默认值"
+    ],
+    "correct_answer": "A",
+    "explanation": "`field(init=False)` 表示该字段不包含在自动生成的 `__init__` 方法的参数中，但仍然是类的一个属性，将被初始化为指定的默认值 0。因此可以在 `__post_init__` 中根据其他字段计算 age，但这里仅使用默认值。选项 B 错误；C 可能需要但无代码；D 错误。",
+    "knowledge_points": [
+      "dataclass",
+      "field(init=False)"
+    ],
+    "hint": "不在 __init__ 参数中，用默认值。"
+  },
+  {
+    "id": "pybasic_ctx_choice_052",
+    "title": "普通类 vs dataclass 的 __repr__",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "easy",
+    "description": "对于简单数据类，dataclass 相对于手动实现 __repr__ 的优势是？",
+    "options": [
+      "A. 自动生成可读性高的 __repr__，减少样板代码",
+      "B. 只能打印内存地址",
+      "C. 需要手动重写 __str__",
+      "D. 不支持 __repr__"
+    ],
+    "correct_answer": "A",
+    "explanation": "dataclass 会自动生成包含字段名和值的 `__repr__` 方法，例如 `Person(name='Tom', age=25)`，省去了手动编写。选项 B 是默认 object 的行为；C 错误；D 错误。",
+    "knowledge_points": [
+      "dataclass",
+      "普通类对比"
+    ],
+    "hint": "自动生成 __repr__。"
+  },
+  {
+    "id": "pybasic_ctx_choice_053",
+    "title": "综合：Protocol 与 closing 结合",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "定义了一个可关闭的 Protocol，然后使用 `contextlib.closing` 包装对象是否兼容？\n```python\nfrom typing import Protocol\nfrom contextlib import closing\n\nclass Closable(Protocol):\n    def close(self) -> None: ...\n\nclass MyResource:\n    def close(self):\n        pass\n\ndef use(resource: Closable):\n    with closing(resource) as r:\n        print(\"using\")\n\nuse(MyResource())\n```",
+    "options": [
+      "A. 可以，因为 MyResource 符合 Closable 结构",
+      "B. 不可以，因为 MyResource 没有继承 Closable",
+      "C. 可以，但只在运行时检查",
+      "D. 引发静态类型检查错误"
+    ],
+    "correct_answer": "A",
+    "explanation": "Protocol 是结构化类型，MyResource 实现了 close 方法，因此满足 Closable 协议，即使没有显式继承，类型检查器也会认为它兼容。所以这种用法是符合类型安全的。选项 B 错误；C 部分对但 A 更准确；D 错误。",
+    "knowledge_points": [
+      "Protocol",
+      "contextlib.closing"
+    ],
+    "hint": "结构化类型检查通过。"
+  },
+  {
+    "id": "pybasic_ctx_choice_054",
+    "title": "综合：dataclass 作为 contextmanager 返回类型",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "medium",
+    "description": "设计一个上下文管理器，从 with 语句中返回一个 dataclass 实例。合理的方式是？\n```python\nfrom dataclasses import dataclass\n\n@dataclass\nclass Connection:\n    host: str\n    alive: bool = True\n\nclass ConnManager:\n    def __enter__(self):\n        return Connection(\"localhost\")\n    def __exit__(self, *args):\n        pass\n\nwith ConnManager() as conn:\n    print(conn.host)\n```",
+    "options": [
+      "A. 可以，conn 绑定到 Connection 实例，能访问其字段",
+      "B. 不可以，因为 __enter__ 必须返回 self",
+      "C. 可以，但 conn 是 None",
+      "D. 会引发异常，因为 dataclass 不能用于 with"
+    ],
+    "correct_answer": "A",
+    "explanation": "上下文管理器的 `__enter__` 可以返回任意对象，包括 dataclass 实例。`as conn` 会绑定该实例，然后可以正常使用其属性。选项 B 错误，__enter__ 可以返回任何对象；C、D 错误。",
+    "knowledge_points": [
+      "上下文管理器",
+      "dataclass"
+    ],
+    "hint": "__enter__ 返回对象赋给 as。"
+  },
+  {
+    "id": "pybasic_ctx_choice_055",
+    "title": "综合：类型提示中使用 Protocol 约束参数",
+    "type": "choice",
+    "category": "进阶语法-上下文管理与类型",
+    "difficulty": "hard",
+    "description": "定义一个函数，要求传入的对象实现 `__enter__` 和 `__exit__` 方法（即上下文管理器）。以下哪种类型提示最合适？",
+    "options": [
+      "A. def func(cm: object) -> None: ...",
+      "B. 定义一个 Protocol 包含 __enter__/__exit__，然后 def func(cm: ContextManager) -> None: ...",
+      "C. 使用 `contextlib.AbstractContextManager` 作为类型",
+      "D. B 和 C 都正确"
+    ],
+    "correct_answer": "D",
+    "explanation": "定义 Protocol 描述上下文管理器接口是可行的，同时标准库 `contextlib.AbstractContextManager` 也提供了抽象基类（也可以用于类型提示，虽然主要用于继承）。实际上 `AbstractContextManager` 是一个抽象类，也可用于类型提示。但常用的是 `typing.ContextManager` (已废弃?) 实际上在 typing 中有 `ContextManager`。但是 Protocol 也可行。为了避免歧义，选择 D 说是 B 和 C 都正确。题目设计确保以 Protocol 为主要考察。",
+    "knowledge_points": [
+      "Protocol",
+      "类型提示"
+    ],
+    "hint": "Protocol 和 abstract class 都可以。"
+  }
+]

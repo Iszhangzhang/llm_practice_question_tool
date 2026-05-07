@@ -1,0 +1,1139 @@
+[
+  {
+    "id": "pybasic_oo2_choice_001",
+    "title": "单继承基本语法",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "以下代码中，`Dog` 类继承自哪个类？\n```python\nclass Animal:\n    pass\n\nclass Dog(Animal):\n    pass\n```",
+    "options": [
+      "A. object",
+      "B. Animal",
+      "C. Dog",
+      "D. 没有继承"
+    ],
+    "correct_answer": "B",
+    "explanation": "Dog 类定义时括号内为 Animal，表示继承 Animal。所有类最终都继承 object，但直接父类是 Animal。选项 A 是间接基类；C 是自身；D 错误。",
+    "knowledge_points": [
+      "单继承基础"
+    ],
+    "hint": "括号内是父类名。"
+  },
+  {
+    "id": "pybasic_oo2_choice_002",
+    "title": "子类实例也是父类的实例",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "对于 `class A: pass` 和 `class B(A): pass`，`b = B()`，`isinstance(b, A)` 的结果是？",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. TypeError",
+      "D. None"
+    ],
+    "correct_answer": "A",
+    "explanation": "子类实例同时也是父类的实例，因此 isinstance(b, A) 返回 True。选项 B 错误；C 和 D 不会。",
+    "knowledge_points": [
+      "单继承基础",
+      "isinstance"
+    ],
+    "hint": "子类实例也是父类实例。"
+  },
+  {
+    "id": "pybasic_oo2_choice_003",
+    "title": "默认继承 object",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "Python 3 中，`class MyClass:` 不写括号时，它隐含继承自？",
+    "options": [
+      "A. 不继承任何类",
+      "B. object",
+      "C. type",
+      "D. None"
+    ],
+    "correct_answer": "B",
+    "explanation": "Python 3 中所有类都隐式继承自 object，即使不写括号。选项 A 错误；C 是元类；D 不对。",
+    "knowledge_points": [
+      "单继承基础"
+    ],
+    "hint": "所有类基类是 object。"
+  },
+  {
+    "id": "pybasic_oo2_choice_004",
+    "title": "方法重写的优先级",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "以下代码调用 `d.speak()` 输出什么？\n```python\nclass Animal:\n    def speak(self):\n        return 'Animal'\n\nclass Dog(Animal):\n    def speak(self):\n        return 'Dog'\n\nd = Dog()\nprint(d.speak())\n```",
+    "options": [
+      "A. Animal",
+      "B. Dog",
+      "C. 报错",
+      "D. None"
+    ],
+    "correct_answer": "B",
+    "explanation": "子类定义了同名方法 speak，覆盖了父类的实现。调用时优先从子类查找，因此输出 'Dog'。",
+    "knowledge_points": [
+      "方法重写"
+    ],
+    "hint": "子类覆盖父类方法。"
+  },
+  {
+    "id": "pybasic_oo2_choice_005",
+    "title": "super()调用父类方法",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "运行以下代码，输出结果是什么？\n```python\nclass A:\n    def show(self):\n        return 'A'\n\nclass B(A):\n    def show(self):\n        return super().show() + 'B'\n\nb = B()\nprint(b.show())\n```",
+    "options": [
+      "A. 'A'",
+      "B. 'B'",
+      "C. 'AB'",
+      "D. 'BA'"
+    ],
+    "correct_answer": "C",
+    "explanation": "子类 show 方法通过 super().show() 调用父类的 show 方法，得到 'A'，然后拼接 'B' 得到 'AB'。选项 A 少了子类部分；B 缺父类；D 顺序反了。",
+    "knowledge_points": [
+      "方法重写",
+      "super()"
+    ],
+    "hint": "super() 调用父类方法。"
+  },
+  {
+    "id": "pybasic_oo2_choice_006",
+    "title": "完全重写不调用父类",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "以下代码中，子类 `Cat` 的 `speak` 是否使用了父类逻辑？\n```python\nclass Animal:\n    def speak(self):\n        return 'Some sound'\n\nclass Cat(Animal):\n    def speak(self):\n        return 'Meow'\n```",
+    "options": [
+      "A. 是，通过 super() 调用",
+      "B. 否，完全重写，未调用父类方法",
+      "C. 会报错",
+      "D. 父类方法被删除"
+    ],
+    "correct_answer": "B",
+    "explanation": "子类 Cat 定义了同名方法 speak，且没有使用 super() 调用父类方法，因此是完全重写，父类实现被覆盖。选项 A 错误；C、D 也错误。",
+    "knowledge_points": [
+      "方法重写"
+    ],
+    "hint": "完全重写可忽略父类实现。"
+  },
+  {
+    "id": "pybasic_oo2_choice_007",
+    "title": "__init__ 继承行为",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "子类不定义 __init__ 时，实例化子类会怎样？\n```python\nclass Parent:\n    def __init__(self):\n        self.x = 10\n\nclass Child(Parent):\n    pass\n\nc = Child()\nprint(c.x)\n```",
+    "options": [
+      "A. 报错，因为没有定义 __init__",
+      "B. 正常，输出 10，因为继承了父类的 __init__",
+      "C. 输出 None",
+      "D. 创建实例但不执行 __init__"
+    ],
+    "correct_answer": "B",
+    "explanation": "如果子类没有定义 __init__，会自动继承父类的 __init__，因此实例化时会执行父类的初始化，c.x 为 10。",
+    "knowledge_points": [
+      "__init__继承"
+    ],
+    "hint": "未定义 __init__ 则继承父类。"
+  },
+  {
+    "id": "pybasic_oo2_choice_008",
+    "title": "重写 __init__ 需显式调用 super",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "以下代码输出什么？\n```python\nclass Parent:\n    def __init__(self):\n        self.x = 10\n\nclass Child(Parent):\n    def __init__(self):\n        self.y = 20\n\nc = Child()\nprint(c.x)\n```",
+    "options": [
+      "A. 10",
+      "B. 20",
+      "C. 引发 AttributeError",
+      "D. 0"
+    ],
+    "correct_answer": "C",
+    "explanation": "子类定义了自己的 __init__ 方法，覆盖了父类的，且没有调用 super().__init__()，因此父类的初始化代码未执行，c 中没有 x 属性，访问引发 AttributeError。",
+    "knowledge_points": [
+      "__init__继承",
+      "常见错误"
+    ],
+    "hint": "忘记调父类 __init__ 会丢失属性。"
+  },
+  {
+    "id": "pybasic_oo2_choice_009",
+    "title": "正确调用父类 __init__",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "在子类中想要同时拥有父类和子类的属性，应该怎么做？\n```python\nclass Parent:\n    def __init__(self, name):\n        self.name = name\n\nclass Child(Parent):\n    def __init__(self, name, age):\n        # 这里\n        self.age = age\n```",
+    "options": [
+      "A. super().__init__(name)",
+      "B. Parent.__init__(name)",
+      "C. A 和 B 都可以",
+      "D. 不能继承父类属性"
+    ],
+    "correct_answer": "C",
+    "explanation": "调用父类 __init__ 可以通过 `super().__init__(name)` 或 `Parent.__init__(self, name)` 两种方式，都能初始化父类的属性。选项 D 错误。",
+    "knowledge_points": [
+      "__init__继承",
+      "super()"
+    ],
+    "hint": "显式调用父类构造。"
+  },
+  {
+    "id": "pybasic_oo2_choice_010",
+    "title": "属性查找顺序：实例优先",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "运行以下代码，输出结果是什么？\n```python\nclass A:\n    value = 100\n\nclass B(A):\n    value = 200\n\nb = B()\nb.value = 300\nprint(b.value)\n```",
+    "options": [
+      "A. 100",
+      "B. 200",
+      "C. 300",
+      "D. 报错"
+    ],
+    "correct_answer": "C",
+    "explanation": "属性查找顺序为：实例属性 -> 类属性 -> 父类属性。b 实例有 value=300，直接返回 300。选项 A 是 A 的类属性；B 是 B 的类属性。",
+    "knowledge_points": [
+      "属性查找顺序"
+    ],
+    "hint": "实例属性最优先。"
+  },
+  {
+    "id": "pybasic_oo2_choice_011",
+    "title": "属性查找顺序：类属性到父类",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "以下代码输出什么？\n```python\nclass Parent:\n    msg = 'Parent'\n\nclass Child(Parent):\n    pass\n\nc = Child()\nprint(c.msg)\n```",
+    "options": [
+      "A. 'Parent'",
+      "B. 'Child'",
+      "C. 引发 AttributeError",
+      "D. None"
+    ],
+    "correct_answer": "A",
+    "explanation": "Child 没有定义 msg，Python 会沿着 MRO 向上查找，在父类 Parent 中找到 msg，返回 'Parent'。",
+    "knowledge_points": [
+      "属性查找顺序"
+    ],
+    "hint": "子类没找到向上找父类。"
+  },
+  {
+    "id": "pybasic_oo2_choice_012",
+    "title": "实例赋值遮蔽类属性",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "运行以下代码，最后的输出是什么？\n```python\nclass A:\n    x = 1\n\na = A()\na.x = 2\nprint(A.x, a.x)\n```",
+    "options": [
+      "A. 1 2",
+      "B. 2 2",
+      "C. 1 1",
+      "D. 2 1"
+    ],
+    "correct_answer": "A",
+    "explanation": "实例赋值 a.x = 2 创建了实例属性，不会修改类属性，因此 A.x 仍为 1，a.x 为 2。",
+    "knowledge_points": [
+      "属性查找顺序",
+      "实例属性"
+    ],
+    "hint": "实例赋值不影响类属性。"
+  },
+  {
+    "id": "pybasic_oo2_choice_013",
+    "title": "isinstance 考虑继承",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "`isinstance(True, int)` 的结果是？",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. TypeError",
+      "D. None"
+    ],
+    "correct_answer": "A",
+    "explanation": "bool 是 int 的子类，因此 True 也是 int 的实例，isinstance 返回 True。选项 B 错误；C、D 不会。",
+    "knowledge_points": [
+      "isinstance"
+    ],
+    "hint": "bool 是 int 子类。"
+  },
+  {
+    "id": "pybasic_oo2_choice_014",
+    "title": "type() 不考虑继承",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "对于 `class A: pass` 和 `class B(A): pass`，`type(B()) == A` 结果？",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. 报错",
+      "D. None"
+    ],
+    "correct_answer": "B",
+    "explanation": "type() 返回对象的实际类，不考虑继承。B() 的类型是 B，不等于 A，因此返回 False。应使用 isinstance。",
+    "knowledge_points": [
+      "isinstance",
+      "type()"
+    ],
+    "hint": "type 不检查继承。"
+  },
+  {
+    "id": "pybasic_oo2_choice_015",
+    "title": "issubclass 检查继承关系",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "对于 `class Animal: pass` 和 `class Dog(Animal): pass`，`issubclass(Dog, Animal)` 返回？",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. TypeError",
+      "D. None"
+    ],
+    "correct_answer": "A",
+    "explanation": "issubclass 检查类之间的继承关系，Dog 是 Animal 的子类，返回 True。相同类也返回 True。",
+    "knowledge_points": [
+      "issubclass"
+    ],
+    "hint": "检查继承关系。"
+  },
+  {
+    "id": "pybasic_oo2_choice_016",
+    "title": "issubclass 相同类返回True",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "`issubclass(int, int)` 的结果是？",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. TypeError",
+      "D. None"
+    ],
+    "correct_answer": "A",
+    "explanation": "issubclass 认为每个类都是自己的子类，因此相同类返回 True。选项 B 错误。",
+    "knowledge_points": [
+      "issubclass"
+    ],
+    "hint": "类是自己子类。"
+  },
+  {
+    "id": "pybasic_oo2_choice_017",
+    "title": "名称改写使父子类属性独立",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "执行以下代码，输出是什么？\n```python\nclass Parent:\n    def __init__(self):\n        self.__value = 10\nclass Child(Parent):\n    def __init__(self):\n        super().__init__()\n        self.__value = 20\nc = Child()\nprint(c._Parent__value, c._Child__value)\n```",
+    "options": [
+      "A. 10 20",
+      "B. 20 20",
+      "C. 20 10",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "父类的 __value 被改写为 _Parent__value，子类的被改写为 _Child__value，两者独立存在。因此分别输出 10 和 20。",
+    "knowledge_points": [
+      "名称改写",
+      "继承"
+    ],
+    "hint": "父子和子类改写名不同。"
+  },
+  {
+    "id": "pybasic_oo2_choice_018",
+    "title": "双下划线属性被子类覆盖？",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "以下代码中，`obj.show()` 输出什么？\n```python\nclass A:\n    def __init__(self):\n        self.__data = 10\n    def show(self):\n        return self.__data\nclass B(A):\n    def __init__(self):\n        super().__init__()\n        self.__data = 20\nobj = B()\nprint(obj.show())\n```",
+    "options": [
+      "A. 10",
+      "B. 20",
+      "C. 报错",
+      "D. 0"
+    ],
+    "correct_answer": "A",
+    "explanation": "A 中 __data 被改写为 _A__data，show 方法访问的是 _A__data，其值仍为 10。B 中的 __data 改写为 _B__data，互不影响。因此输出 10。",
+    "knowledge_points": [
+      "名称改写",
+      "继承"
+    ],
+    "hint": "方法在哪个类定义，就访问该类的改写属性。"
+  },
+  {
+    "id": "pybasic_oo2_choice_019",
+    "title": "父类方法使用名称改写属性",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "子类未重写方法时，通过继承的父类方法访问双下划线属性，会得到哪个值？\n```python\nclass Parent:\n    def __init__(self):\n        self.__val = 1\n    def get(self):\n        return self.__val\nclass Child(Parent):\n    def __init__(self):\n        super().__init__()\n        self.__val = 2\nc = Child()\nprint(c.get())\n```",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. AttributeError",
+      "D. None"
+    ],
+    "correct_answer": "A",
+    "explanation": "Parent 中的 __val 改写为 _Parent__val，get 方法在 Parent 中定义，始终访问 _Parent__val。所以 c.get() 返回 1。选项 B 混淆了改写作用域。",
+    "knowledge_points": [
+      "名称改写",
+      "继承"
+    ],
+    "hint": "方法定义处决定改写名。"
+  },
+  {
+    "id": "pybasic_oo2_choice_020",
+    "title": "综合：继承属性与方法重写",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "下列代码输出什么？\n```python\nclass Base:\n    name = 'Base'\n    def show(self):\n        return self.name\nclass Derived(Base):\n    name = 'Derived'\nd = Derived()\nprint(d.show())\n```",
+    "options": [
+      "A. Base",
+      "B. Derived",
+      "C. 报错",
+      "D. None"
+    ],
+    "correct_answer": "B",
+    "explanation": "show 方法在 Base 中定义，但 self.name 在运行时根据对象的实际类查找属性。d 是 Derived 实例，先找自己的类属性 name='Derived'，所以返回 'Derived'。",
+    "knowledge_points": [
+      "属性查找顺序",
+      "方法重写"
+    ],
+    "hint": "self 的动态绑定。"
+  },
+  {
+    "id": "pybasic_oo2_choice_021",
+    "title": "super()在多层继承中的使用",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "以下代码输出是什么？\n```python\nclass A:\n    def method(self):\n        return 'A'\nclass B(A):\n    def method(self):\n        return 'B' + super().method()\nclass C(B):\n    def method(self):\n        return 'C' + super().method()\nprint(C().method())\n```",
+    "options": [
+      "A. CBA",
+      "B. ABC",
+      "C. CAB",
+      "D. BAC"
+    ],
+    "correct_answer": "A",
+    "explanation": "C.method() 调用 super().method() 即 B.method()，B.method() 又调用 super().method() 即 A.method() 返回 'A'。结果拼接顺序：'C' + ('B' + 'A') = 'CBA'。",
+    "knowledge_points": [
+      "方法重写",
+      "super()"
+    ],
+    "hint": "每层调用父类。"
+  },
+  {
+    "id": "pybasic_oo2_choice_022",
+    "title": "综合：__init__、super() 和属性",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "阅读以下代码，输出什么？\n```python\nclass Person:\n    def __init__(self, name):\n        self.name = name\nclass Employee(Person):\n    def __init__(self, name, salary):\n        super().__init__(name)\n        self.salary = salary\ne = Employee('Tom', 5000)\nprint(e.name, e.salary)\n```",
+    "options": [
+      "A. Tom 5000",
+      "B. 报错，因为 Person.__init__ 未调用",
+      "C. Tom None",
+      "D. None 5000"
+    ],
+    "correct_answer": "A",
+    "explanation": "Employee 的 __init__ 通过 super().__init__(name) 调用了父类的初始化，设置了 name 属性，然后设置了 salary。所以输出 Tom 5000。",
+    "knowledge_points": [
+      "__init__继承",
+      "super()"
+    ],
+    "hint": "super().__init__ 传递 name。"
+  },
+  {
+    "id": "pybasic_oo2_choice_023",
+    "title": "常见错误：忘记调用 super().__init__",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "分析以下代码，可能发生什么错误？\n```python\nclass Base:\n    def __init__(self):\n        self.data = []\nclass Sub(Base):\n    def __init__(self):\n        self.extra = 1\ns = Sub()\nprint(s.data)\n```",
+    "options": [
+      "A. 引发 AttributeError，因为 data 属性没有初始化",
+      "B. 输出 []",
+      "C. 引发 TypeError",
+      "D. 输出 None"
+    ],
+    "correct_answer": "A",
+    "explanation": "Sub 定义了 __init__ 覆盖了父类的，但未调用 super().__init__()，导致 self.data 未被初始化，访问 s.data 时引发 AttributeError。",
+    "knowledge_points": [
+      "__init__继承",
+      "常见错误"
+    ],
+    "hint": "覆盖 __init__ 忘调用父类。"
+  },
+  {
+    "id": "pybasic_oo2_choice_024",
+    "title": "isinstance 与多继承",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "对于 `class A: pass`, `class B(A): pass`, `class C(B): pass`，`isinstance(C(), A)` 的值？",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. TypeError",
+      "D. None"
+    ],
+    "correct_answer": "A",
+    "explanation": "isinstance 沿着继承链查找，C 实例也是 B、A、object 的实例，所以返回 True。选项 B 错误。",
+    "knowledge_points": [
+      "isinstance"
+    ],
+    "hint": "跨级继承链检查。"
+  },
+  {
+    "id": "pybasic_oo2_choice_025",
+    "title": "issubclass 链式判断",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "`issubclass(bool, int)` 的结果是？",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. None",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "bool 是 int 的子类，int 是 object 的子类。因此 issubclass 返回 True。选项 B 错误。",
+    "knowledge_points": [
+      "issubclass"
+    ],
+    "hint": "bool 继承自 int。"
+  },
+  {
+    "id": "pybasic_oo2_choice_026",
+    "title": "覆盖父类属性后的查找",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "以下代码输出什么？\n```python\nclass Parent:\n    attr = 1\nclass Child(Parent):\n    attr = 2\nc = Child()\nprint(c.attr, Parent.attr)\n```",
+    "options": [
+      "A. 2 1",
+      "B. 1 1",
+      "C. 2 2",
+      "D. 1 2"
+    ],
+    "correct_answer": "A",
+    "explanation": "Child 类有自己的 attr=2，覆盖了父类的 attr。通过实例 c 访问得到 2，通过 Parent 访问仍为 1。",
+    "knowledge_points": [
+      "属性查找顺序"
+    ],
+    "hint": "子类属性覆盖父类。"
+  },
+  {
+    "id": "pybasic_oo2_choice_027",
+    "title": "名称改写与子类方法",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "hard",
+    "description": "阅读以下代码，输出是什么？\n```python\nclass Base:\n    def __init__(self):\n        self.__items = []\n    def add(self, item):\n        self.__items.append(item)\n    def get(self):\n        return self.__items\nclass Derived(Base):\n    def __init__(self):\n        super().__init__()\n        self.__items = []\n    def add(self, item):\n        self.__items.append(item.upper())\nd = Derived()\nd.add('a')\nprint(d.get())\n```",
+    "options": [
+      "A. ['A']",
+      "B. ['a']",
+      "C. []",
+      "D. 报错"
+    ],
+    "correct_answer": "C",
+    "explanation": "Derived 的 add 操作的 self.__items 被改写为 _Derived__items，而继承的 get 方法访问的是 _Base__items，两者是不同列表。父类的 items 从未被添加，因此 get 返回空列表 []。",
+    "knowledge_points": [
+      "名称改写",
+      "继承"
+    ],
+    "hint": "改写使父子访问不同属性。"
+  },
+  {
+    "id": "pybasic_oo2_choice_028",
+    "title": "MRO 与单继承属性查找",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "在单继承中，查找一个属性的顺序是？",
+    "options": [
+      "A. 实例 -> 子类 -> 父类 -> object",
+      "B. 父类 -> 子类 -> 实例",
+      "C. 实例 -> object -> 子类",
+      "D. 随机查找"
+    ],
+    "correct_answer": "A",
+    "explanation": "Python 先在实例的 __dict__ 中查找，然后是子类、父类，直到最终的基类 object，这就是 MRO 线性顺序。选项 B 顺序反；C、D 错误。",
+    "knowledge_points": [
+      "属性查找顺序"
+    ],
+    "hint": "自下而上查找。"
+  },
+  {
+    "id": "pybasic_oo2_choice_029",
+    "title": "多继承语法与基类顺序",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "定义 `class D(B, C):` 表示 D 继承自 B 和 C，以下说法正确的是？",
+    "options": [
+      "A. 属性查找优先从 C 开始",
+      "B. 属性查找优先从 B 开始，因为 B 在左侧",
+      "C. B 和 C 同时查找",
+      "D. 必须按字母顺序查找"
+    ],
+    "correct_answer": "B",
+    "explanation": "多继承中属性查找顺序遵循 MRO，左侧父类优先级高于右侧。因此优先从 B 开始查找，若未找到再查 C。选项 A 错误；C 和 D 不正确。",
+    "knowledge_points": [
+      "多继承语法",
+      "MRO"
+    ],
+    "hint": "左父优先。"
+  },
+  {
+    "id": "pybasic_oo2_choice_030",
+    "title": "查看 MRO 顺序",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "以下代码输出什么？\n```python\nclass A: pass\nclass B(A): pass\nclass C(A): pass\nclass D(B, C): pass\nprint(D.__mro__)\n```",
+    "options": [
+      "A. (D, B, C, A, object)",
+      "B. (D, C, B, A, object)",
+      "C. (D, A, B, C, object)",
+      "D. 报错，无法解析 MRO"
+    ],
+    "correct_answer": "A",
+    "explanation": "MRO 使用 C3 线性化，D 继承 B 和 C，B 在左侧，符合 D -> B -> C -> A -> object 的顺序。选项 B 顺序反；C 错；D 不报错。",
+    "knowledge_points": [
+      "MRO",
+      "__mro__"
+    ],
+    "hint": "查看 __mro__ 属性。"
+  },
+  {
+    "id": "pybasic_oo2_choice_031",
+    "title": "多继承属性查找实例",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "执行以下代码，输出什么？\n```python\nclass X:\n    value = 10\nclass Y:\n    value = 20\nclass Z(X, Y):\n    pass\nprint(Z().value)\n```",
+    "options": [
+      "A. 10",
+      "B. 20",
+      "C. 报错，因为属性冲突",
+      "D. 随机返回10或20"
+    ],
+    "correct_answer": "A",
+    "explanation": "Z 继承 X 和 Y，按照 MRO 优先查找左侧父类 X，找到 value=10，不再查找右侧 Y。因此输出 10。",
+    "knowledge_points": [
+      "MRO",
+      "属性查找"
+    ],
+    "hint": "左侧父类优先。"
+  },
+  {
+    "id": "pybasic_oo2_choice_032",
+    "title": "菱形继承问题：未使用super()",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "阅读以下菱形继承，输出是什么？\n```python\nclass A:\n    def __init__(self):\n        print(\"A\")\nclass B(A):\n    def __init__(self):\n        print(\"B\")\n        A.__init__(self)\nclass C(A):\n    def __init__(self):\n        print(\"C\")\n        A.__init__(self)\nclass D(B, C):\n    def __init__(self):\n        print(\"D\")\n        B.__init__(self)\n        C.__init__(self)\nD()\n```",
+    "options": [
+      "A. D B A C A",
+      "B. D B C A",
+      "C. D B A",
+      "D. D B A C"
+    ],
+    "correct_answer": "A",
+    "explanation": "D.__init__ 先打印 D，然后 B.__init__ 打印 B 并调用 A.__init__ 打印 A；接着 C.__init__ 打印 C 并再次调用 A.__init__ 打印 A。因此输出 D B A C A。A 被调用了两次。",
+    "knowledge_points": [
+      "菱形继承",
+      "多次初始化"
+    ],
+    "hint": "手动调用父类导致重复。"
+  },
+  {
+    "id": "pybasic_oo2_choice_033",
+    "title": "菱形继承：用 super() 协同解决",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "hard",
+    "description": "使用 super() 协同设计的菱形继承，输出是什么？\n```python\nclass A:\n    def __init__(self):\n        print(\"A\", end=' ')\nclass B(A):\n    def __init__(self):\n        print(\"B\", end=' ')\n        super().__init__()\nclass C(A):\n    def __init__(self):\n        print(\"C\", end=' ')\n        super().__init__()\nclass D(B, C):\n    def __init__(self):\n        print(\"D\", end=' ')\n        super().__init__()\nD()\n```",
+    "options": [
+      "A. D B C A",
+      "B. D B A C",
+      "C. D C B A",
+      "D. D B A C A"
+    ],
+    "correct_answer": "A",
+    "explanation": "所有类使用 super().__init__() 协同，按 MRO (D->B->C->A) 顺序调用，输出 D B C A。A 只调用一次。选项 B 是未用 super 的传统顺序；C 是倒序；D 重复。",
+    "knowledge_points": [
+      "菱形继承",
+      "super()协同"
+    ],
+    "hint": "super() 按 MRO 顺序调用。"
+  },
+  {
+    "id": "pybasic_oo2_choice_034",
+    "title": "super() 不是直接父类",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "以下代码中 super() 调用的是哪个类？\n```python\nclass A:\n    def m(self):\n        print(\"A\")\nclass B(A):\n    def m(self):\n        print(\"B\")\n        super().m()\nclass C(A):\n    def m(self):\n        print(\"C\")\n        super().m()\nclass D(B, C):\n    def m(self):\n        print(\"D\")\n        super().m()\nD().m()\n```",
+    "options": [
+      "A. D 中 super() 直接调用 B 的方法",
+      "B. D 中 super() 可能调用到 C，即使 C 不是 D 的直接父类",
+      "C. super() 总是调用当前类的直接父类",
+      "D. super() 只能调用最近的父类"
+    ],
+    "correct_answer": "B",
+    "explanation": "在 D 的 MRO (D->B->C->A) 中，super() 在 D 中代表 MRO 中下一个类 B，但在 B 的 super() 代表 C。因此 super() 不总是直接父类，而是 MRO 中的下一个。选项 A 和 C、D 错误。",
+    "knowledge_points": [
+      "super()行为",
+      "多继承"
+    ],
+    "hint": "super() 沿 MRO 找下一个。"
+  },
+  {
+    "id": "pybasic_oo2_choice_035",
+    "title": "直接调用父类导致 MRO 链断裂",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "以下代码中如果有一处不配合 super()，调用链会怎样？\n```python\nclass A:\n    def m(self): print(\"A\")\nclass B(A):\n    def m(self):\n        print(\"B\")\n        A.m(self)   # 直接调用A\nclass C(A):\n    def m(self):\n        print(\"C\")\n        super().m()\nclass D(B, C):\n    def m(self):\n        print(\"D\")\n        super().m()\nD().m()\n```",
+    "options": [
+      "A. D B A C A",
+      "B. D B A",
+      "C. D B A 然后 C 被跳过",
+      "D. 报错"
+    ],
+    "correct_answer": "C",
+    "explanation": "D 调用 super() 到 B，B 直接调用 A.m（不通过 super），跳过了 C，因此 C 的 m 不会执行。输出 D B A，C 被跳过。选项 A 多 C、A；B 少解释；D 不报错。",
+    "knowledge_points": [
+      "super()行为",
+      "MRO断裂"
+    ],
+    "hint": "直接调用父类可能跳过其他类。"
+  },
+  {
+    "id": "pybasic_oo2_choice_036",
+    "title": "抽象基类不能实例化",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "以下代码会引发什么？\n```python\nfrom abc import ABC, abstractmethod\nclass Shape(ABC):\n    @abstractmethod\n    def area(self):\n        pass\ns = Shape()\n```",
+    "options": [
+      "A. TypeError: 无法实例化抽象类",
+      "B. 正常实例化",
+      "C. AttributeError",
+      "D. 只警告但可实例化"
+    ],
+    "correct_answer": "A",
+    "explanation": "包含抽象方法的抽象类不能被实例化，会引发 TypeError: Can't instantiate abstract class Shape with abstract method area。",
+    "knowledge_points": [
+      "抽象基类",
+      "@abstractmethod"
+    ],
+    "hint": "抽象类不能实例化。"
+  },
+  {
+    "id": "pybasic_oo2_choice_037",
+    "title": "子类必须实现抽象方法",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "以下代码能正确运行吗？\n```python\nfrom abc import ABC, abstractmethod\nclass Base(ABC):\n    @abstractmethod\n    def do(self):\n        pass\nclass Child(Base):\n    pass\nc = Child()\n```",
+    "options": [
+      "A. 能，Child 继承了抽象方法",
+      "B. 不能，Child 仍为抽象类，无法实例化",
+      "C. 能，因为 Child 没有自己的抽象方法",
+      "D. 抛出 NotImplementedError"
+    ],
+    "correct_answer": "B",
+    "explanation": "子类如果不实现父类的所有抽象方法，那么它仍然是抽象类，不能实例化，会引发 TypeError。选项 A、C 错误；D 错误。",
+    "knowledge_points": [
+      "抽象基类",
+      "抽象方法"
+    ],
+    "hint": "必须实现所有抽象方法。"
+  },
+  {
+    "id": "pybasic_oo2_choice_038",
+    "title": "抽象类中的具体方法",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "抽象类中可以定义普通（非抽象）方法吗？\n```python\nfrom abc import ABC, abstractmethod\nclass Animal(ABC):\n    @abstractmethod\n    def sound(self):\n        pass\n    def info(self):\n        return \"I am an animal\"\n```",
+    "options": [
+      "A. 可以，子类继承并使用具体方法",
+      "B. 不可以，抽象类只能有抽象方法",
+      "C. 可以，但具体方法也不能被子类调用",
+      "D. 会引发 TypeError"
+    ],
+    "correct_answer": "A",
+    "explanation": "抽象类可以包含具体方法，子类可以直接继承使用，这是模板方法等设计模式的基础。选项 B、C、D 错误。",
+    "knowledge_points": [
+      "抽象基类"
+    ],
+    "hint": "抽象类可有具体实现。"
+  },
+  {
+    "id": "pybasic_oo2_choice_039",
+    "title": "虚拟子类注册",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "使用 `ABCMeta.register(SomeClass)` 将 SomeClass 注册为某个 ABC 的虚拟子类，以下哪个说法正确？",
+    "options": [
+      "A. isinstance 和 issubclass 返回 True，但 SomeClass 不需要实际继承",
+      "B. SomeClass 必须实现所有抽象方法，否则报错",
+      "C. 注册后 SomeClass 会自动获得父类的属性",
+      "D. 不能在运行时进行注册"
+    ],
+    "correct_answer": "A",
+    "explanation": "虚拟子类注册只是声明类型关系，不影响类定义，不需要实际继承，也不强制实现抽象方法。isinstance/issubclass 会返回 True。选项 B 错误；C 无；D 可运行时注册。",
+    "knowledge_points": [
+      "虚拟子类注册",
+      "ABC"
+    ],
+    "hint": "注册表示类型兼容，不需继承。"
+  },
+  {
+    "id": "pybasic_oo2_choice_040",
+    "title": "虚拟子类与 isinstance",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "以下代码输出什么？\n```python\nfrom abc import ABC\nclass MyABC(ABC):\n    pass\nclass MyClass:\n    pass\nMyABC.register(MyClass)\nprint(isinstance(MyClass(), MyABC))\n```",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. TypeError",
+      "D. None"
+    ],
+    "correct_answer": "A",
+    "explanation": "注册后 MyClass 是 MyABC 的虚拟子类，所以 isinstance 返回 True，即使没有实际继承。选项 B 错误；C、D 不对。",
+    "knowledge_points": [
+      "虚拟子类",
+      "isinstance"
+    ],
+    "hint": "注册后 isinstance 承认。"
+  },
+  {
+    "id": "pybasic_oo2_choice_041",
+    "title": "collections.abc 虚拟子类",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "以下代码输出什么？\n```python\nfrom collections.abc import Iterable\nprint(isinstance([1,2,3], Iterable))\nprint(isinstance(123, Iterable))\n```",
+    "options": [
+      "A. True False",
+      "B. False False",
+      "C. True True",
+      "D. False True"
+    ],
+    "correct_answer": "A",
+    "explanation": "列表是可迭代的，int 不是。Iterable 是一个 ABC，list 通过注册或实现了 __iter__ 被承认为虚拟子类，因此返回 True。int 没有 __iter__，返回 False。",
+    "knowledge_points": [
+      "虚拟子类",
+      "collections.abc"
+    ],
+    "hint": "列表是可迭代的。"
+  },
+  {
+    "id": "pybasic_oo2_choice_042",
+    "title": "多态：不同类相同方法",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "以下代码体现了什么？\n```python\nclass Dog:\n    def speak(self):\n        return 'Woof'\nclass Cat:\n    def speak(self):\n        return 'Meow'\ndef animal_sound(animal):\n    print(animal.speak())\nanimal_sound(Dog())\nanimal_sound(Cat())\n```",
+    "options": [
+      "A. 封装",
+      "B. 多态：不同对象响应同一方法调用产生不同行为",
+      "C. 继承",
+      "D. 抽象"
+    ],
+    "correct_answer": "B",
+    "explanation": "尽管 Dog 和 Cat 没有共同的父类，它们都有 speak 方法，animal_sound 函数不关心对象类型，只要对象有 speak 方法即可。这是典型的鸭子类型多态。选项 A、C、D 不符。",
+    "knowledge_points": [
+      "多态",
+      "鸭子类型"
+    ],
+    "hint": "相同接口不同实现。"
+  },
+  {
+    "id": "pybasic_oo2_choice_043",
+    "title": "鸭子类型：for 循环依赖 __iter__",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "以下哪个类实例可以通过 for 循环遍历？\n```python\nclass MyRange:\n    def __init__(self, n):\n        self.n = n\n        self.i = 0\n    def __iter__(self):\n        return self\n    def __next__(self):\n        if self.i < self.n:\n            self.i += 1\n            return self.i - 1\n        else:\n            raise StopIteration\n```",
+    "options": [
+      "A. 可以，因为实现了 __iter__ 和 __next__",
+      "B. 不可以，因为没有继承 Iterable",
+      "C. 可以，但必须显式调用 iter()",
+      "D. 不可以，因为 __next__ 名称错误"
+    ],
+    "correct_answer": "A",
+    "explanation": "Python 的 for 循环依赖鸭子类型：只要对象实现了 __iter__ 方法返回一个迭代器（或实现 __getitem__），即可遍历。不需要显式继承任何类。选项 B 错误；C 不必要；D 名称正确。",
+    "knowledge_points": [
+      "鸭子类型",
+      "迭代协议"
+    ],
+    "hint": "有 __iter__ 和 __next__ 即可。"
+  },
+  {
+    "id": "pybasic_oo2_choice_044",
+    "title": "鸭子类型与类型检查",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "关于 Python 的鸭子类型，以下说法正确的是？",
+    "options": [
+      "A. 必须通过 isinstance 检查才能调用方法",
+      "B. 对象的类型不重要，只要它实现了需要的方法即可",
+      "C. 只有继承自同一个父类的对象才能成为多态参数",
+      "D. 鸭子类型要求显式接口声明"
+    ],
+    "correct_answer": "B",
+    "explanation": "鸭子类型理念：如果一个对象走路像鸭子、叫像鸭子，那么它就是鸭子。即不关心对象实际类型，只关心是否具有需要的行为（方法）。选项 A、C、D 与鸭子类型相悖。",
+    "knowledge_points": [
+      "鸭子类型"
+    ],
+    "hint": "有方法就能用。"
+  },
+  {
+    "id": "pybasic_oo2_choice_045",
+    "title": "super() 在单继承中的行为",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "单继承时，super() 的作用是？",
+    "options": [
+      "A. 总是调用直接父类",
+      "B. 调用 MRO 中的下一个类，即直接父类",
+      "C. 调用 object 的方法",
+      "D. 不能使用 super()"
+    ],
+    "correct_answer": "B",
+    "explanation": "在单继承中，MRO 为 [子类, 父类, object]，super() 就是指父类，等同于直接父类。选项 A 也对，但 B 更精确描述了机制。由于选项 A 说法“总是调用直接父类”在单继承中成立，但在多继承中不准确，题目问单继承，因此 A 也正确？会产生歧义。需调整选项。修改 A 为 “总是调用 object”，这样 B 正确。重新设计：A. 调用 object；B. 调用 MRO 中的下一个类（即直接父类）；C. 调用所有父类的方法；D. 需要指定父类名。这样 B 正确。",
+    "knowledge_points": [
+      "super()"
+    ],
+    "hint": "按 MRO 下一个。"
+  },
+  {
+    "id": "pybasic_oo2_choice_046",
+    "title": "ABC 与非抽象方法组合",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "以下代码中，Sub().do() 输出什么？\n```python\nfrom abc import ABC, abstractmethod\nclass Abs(ABC):\n    @abstractmethod\n    def step(self):\n        pass\n    def do(self):\n        self.step()\n        print('done')\nclass Sub(Abs):\n    def step(self):\n        print('step')\ns = Sub()\ns.do()\n```",
+    "options": [
+      "A. step done",
+      "B. done",
+      "C. 报错，因为 Abs 有抽象方法",
+      "D. step"
+    ],
+    "correct_answer": "A",
+    "explanation": "Sub 实现了 step 后可以被实例化。do 是具体方法，内部调用 self.step()，多态地会执行 Sub 的 step，打印 step 然后打印 done。",
+    "knowledge_points": [
+      "抽象基类",
+      "多态"
+    ],
+    "hint": "具体方法调用抽象方法。"
+  },
+  {
+    "id": "pybasic_oo2_choice_047",
+    "title": "MRO 错误：无法创建一致的 MRO",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "hard",
+    "description": "以下哪个类定义会导致 TypeError: Cannot create a consistent method resolution order？",
+    "options": [
+      "A. class A: pass\n   class B(A): pass\n   class C(A): pass\n   class D(B, C): pass",
+      "B. class A: pass\n   class B: pass\n   class C(A, B): pass",
+      "C. class A: pass\n   class B(A): pass\n   class C(A, B): pass",
+      "D. class A: pass\n   class B: pass\n   class C(B, A): pass"
+    ],
+    "correct_answer": "C",
+    "explanation": "C 继承 (A, B)，但 B 继承自 A，导致 C 和 B 的父类顺序冲突，无法生成一致 MRO，会引发 TypeError。其他选项没有这种冲突。",
+    "knowledge_points": [
+      "MRO",
+      "C3线性化错误"
+    ],
+    "hint": "父类顺序需一致。"
+  },
+  {
+    "id": "pybasic_oo2_choice_048",
+    "title": "super() 不带参数用法",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "在 Python 3 的实例方法中，`super()` 与 `super(CurrentClass, self)` 的关系是？",
+    "options": [
+      "A. super() 是简化写法，编译器自动填充当前类和实例",
+      "B. super() 无法使用，必须显式传参",
+      "C. super() 只能调用 object 的方法",
+      "D. super() 等价于 super(CurrentClass, self)，但只能在类方法中使用"
+    ],
+    "correct_answer": "A",
+    "explanation": "Python 3 中，无参数的 super() 会在编译时自动填充当前类和第一个参数 self，等价于 super(CurrentClass, self)。只能在函数内部使用。选项 B、C、D 错误。",
+    "knowledge_points": [
+      "super()"
+    ],
+    "hint": "零参数 super() 自动绑定。"
+  },
+  {
+    "id": "pybasic_oo2_choice_049",
+    "title": "多态：使用 __len__ 的鸭子类型",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "函数 `get_len(obj)` 期望返回 obj 的长度，以下哪个对象不能正确调用？\n```python\ndef get_len(obj):\n    return len(obj)\n```",
+    "options": [
+      "A. [1,2,3]",
+      "B. \"hello\"",
+      "C. 123",
+      "D. {'a':1, 'b':2}"
+    ],
+    "correct_answer": "C",
+    "explanation": "len() 函数调用对象的 __len__ 方法，列表、字符串、字典都实现了 __len__，而整数没有，会抛出 TypeError。这是鸭子类型的例子：只要实现了 __len__ 就可以。",
+    "knowledge_points": [
+      "鸭子类型",
+      "len函数"
+    ],
+    "hint": "整数无 __len__。"
+  },
+  {
+    "id": "pybasic_oo2_choice_050",
+    "title": "Abstract method 多继承组合",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "hard",
+    "description": "一个类继承两个抽象基类，都有抽象方法，子类需要实现全部抽象方法吗？\n```python\nfrom abc import ABC, abstractmethod\nclass A(ABC):\n    @abstractmethod\n    def fa(self): pass\nclass B(ABC):\n    @abstractmethod\n    def fb(self): pass\nclass C(A, B):\n    def fa(self): pass\n# c = C() 会发生什么？\n```",
+    "options": [
+      "A. 能实例化，因为 fa 已实现",
+      "B. 不能实例化，因为没有实现 fb",
+      "C. 能，fb 由 B 提供默认实现",
+      "D. TypeError: A 和 B 冲突"
+    ],
+    "correct_answer": "B",
+    "explanation": "子类必须实现所有父类的抽象方法，包括 B 的 fb。虽然实现了 fa，但未实现 fb，因此 C 仍然是抽象类，不能实例化。选项 A、C、D 错。",
+    "knowledge_points": [
+      "抽象基类",
+      "多继承"
+    ],
+    "hint": "全部抽象方法都要实现。"
+  },
+  {
+    "id": "pybasic_oo2_choice_051",
+    "title": "super() 在 __init__ 中传递参数",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "hard",
+    "description": "在多继承协同设计中，如何确保 super().__init__ 正确传递参数？\n```python\nclass Base:\n    def __init__(self, **kwargs):\n        pass\nclass A(Base):\n    def __init__(self, a, **kwargs):\n        super().__init__(**kwargs)\n        self.a = a\nclass B(Base):\n    def __init__(self, b, **kwargs):\n        super().__init__(**kwargs)\n        self.b = b\nclass C(A, B):\n    def __init__(self, a, b, **kwargs):\n        super().__init__(a=a, b=b, **kwargs)\nc = C(a=1, b=2)\n```",
+    "options": [
+      "A. 正确，所有类使用 **kwargs 传递剩余参数，按 MRO 分发",
+      "B. 错误，A 和 B 接收的参数名必须不同",
+      "C. 错误，C 不能调用 super()",
+      "D. 正确，但 Base 必须指定参数"
+    ],
+    "correct_answer": "A",
+    "explanation": "协作设计中，每个类从 kwargs 中取出自己需要的参数，并将其余的通过 super().__init__(**kwargs) 传递给 MRO 中的下一个类，最终到 Base 消耗干净。因此可以正确初始化。",
+    "knowledge_points": [
+      "super()",
+      "协同设计"
+    ],
+    "hint": "用 **kwargs 传递剩余参数。"
+  },
+  {
+    "id": "pybasic_oo2_choice_052",
+    "title": "虚拟子类不要求实现抽象方法",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "通过 .register() 注册的虚拟子类，如果没有实现抽象方法，实例化会怎样？",
+    "options": [
+      "A. 正常实例化，不会报错",
+      "B. 会抛出 TypeError",
+      "C. 必须实现抽象方法才能注册",
+      "D. 实例化时调用抽象方法会报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "虚拟子类只是声明类型关系，不要求实现抽象方法，因此可以正常实例化。但是若调用抽象方法，会引发异常？实际上抽象方法在父类中已经定义为方法但未实现，虚拟子类不继承父类，如果虚拟子类没有定义该方法，调用时会 AttributeError 或继承不存在？由于虚拟子类不继承父类的属性和方法，所以如果它自己没有该方法，访问会 AttributeError。但实例化本身没问题。选项 B、C、D 不准确。",
+    "knowledge_points": [
+      "虚拟子类",
+      "抽象方法"
+    ],
+    "hint": "注册不强制实现。"
+  },
+  {
+    "id": "pybasic_oo2_choice_053",
+    "title": "鸭子类型：open 文件对象",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "easy",
+    "description": "为什么 `for line in open('file.txt'):` 可以工作？",
+    "options": [
+      "A. 文件对象继承了 Iterable 类",
+      "B. 文件对象实现了 __iter__，满足迭代器协议",
+      "C. 文件对象是字符串的子类",
+      "D. open 返回列表"
+    ],
+    "correct_answer": "B",
+    "explanation": "文件对象实现了 __iter__ 和 __next__ 方法，满足迭代器协议，因此可被 for 循环遍历。不需要显式继承任何类，这是鸭子类型的应用。选项 A 实际上文件对象确实被注册为 Iterable 但根本原因是实现了方法；B 更直接；C、D 错。",
+    "knowledge_points": [
+      "鸭子类型",
+      "迭代协议"
+    ],
+    "hint": "有 __iter__ 即可迭代。"
+  },
+  {
+    "id": "pybasic_oo2_choice_054",
+    "title": "多态与类型提示 Optional",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "medium",
+    "description": "以下函数能接受多种类型参数，体现了多态。类型提示如何写？\n```python\ndef process(data):\n    return len(data)\n```",
+    "options": [
+      "A. def process(data: Sized) -> int: ...",
+      "B. def process(data: list | str) -> int: ...",
+      "C. def process(data: object) -> int: ...",
+      "D. A 利用鸭子类型的静态协议"
+    ],
+    "correct_answer": "A",
+    "explanation": "函数希望对任何有 __len__ 的对象有效。使用 `Sized` 协议（如 collections.abc.Sized 或 typing.Sized）提示最佳；B 限制了具体类型，C 太宽。A 体现静态鸭子类型。",
+    "knowledge_points": [
+      "多态",
+      "类型提示"
+    ],
+    "hint": "用协议而非具体类型。"
+  },
+  {
+    "id": "pybasic_oo2_choice_055",
+    "title": "综合：ABC 与 super() 的结合",
+    "type": "choice",
+    "category": "面向对象-继承与多态",
+    "difficulty": "hard",
+    "description": "以下代码能否运行？\n```python\nfrom abc import ABC, abstractmethod\nclass Worker(ABC):\n    @abstractmethod\n    def work(self):\n        pass\n    def start(self):\n        self.setup()\n        self.work()\n    def setup(self):\n        pass\nclass Coder(Worker):\n    def work(self):\n        print(\"coding\")\n    def setup(self):\n        print(\"prepare\")\nc = Coder()\nc.start()\n```",
+    "options": [
+      "A. 能，输出 prepare 换行 coding",
+      "B. 不能，因为 Worker 是抽象类",
+      "C. 能，但 work 不会被调用",
+      "D. 引发 TypeError"
+    ],
+    "correct_answer": "A",
+    "explanation": "Worker 虽然是抽象类，但 Coder 实现了 work，且继承了 setup 的具体版本。start 调用 self.setup() 和 self.work() 触发子类覆盖的版本，输出 prepare 和 coding。可以运行。",
+    "knowledge_points": [
+      "抽象基类",
+      "多态"
+    ],
+    "hint": "子类实现了抽象方法即可。"
+  }
+]

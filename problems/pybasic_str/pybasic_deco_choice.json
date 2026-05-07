@@ -1,0 +1,1143 @@
+[
+  {
+    "id": "pybasic_deco_choice_001",
+    "title": "闭包的基本定义",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "easy",
+    "description": "下列哪种情况形成了闭包？\n```python\ndef outer():\n    x = 10\n    def inner():\n        return x\n    return inner\nf = outer()\n```",
+    "options": [
+      "A. 是，因为 inner 引用了外部变量 x",
+      "B. 不是，因为 x 是整数不可变",
+      "C. 不是，因为没有调用 inner",
+      "D. 是，但必须调用 outer() 才会形成"
+    ],
+    "correct_answer": "A",
+    "explanation": "闭包是指内部函数引用了外部函数的变量，并且外部函数返回了内部函数。这里 inner 引用了 x，outer 返回 inner 并赋值给 f，形成了闭包。选项 B 错误，闭包与变量类型无关；C 错误，没有调用 inner 不代表不是闭包；D 后半句正确但 A 更准确描述形成闭包。",
+    "knowledge_points": [
+      "闭包定义"
+    ],
+    "hint": "内层函数引用外层变量。"
+  },
+  {
+    "id": "pybasic_deco_choice_002",
+    "title": "闭包延迟绑定：循环陷阱",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "阅读以下代码，输出结果是什么？\n```python\nfuncs = []\nfor i in range(3):\n    def f():\n        return i\n    funcs.append(f)\nfor f in funcs:\n    print(f(), end=' ')\n```",
+    "options": [
+      "A. 0 1 2",
+      "B. 2 2 2",
+      "C. 3 3 3",
+      "D. 0 0 0"
+    ],
+    "correct_answer": "B",
+    "explanation": "闭包中的 f 引用了变量 i，但循环结束后 i 的值为 2，所有闭包都引用同一个变量 i，因此都输出 2。这是典型的延迟绑定陷阱。选项 A 误以为每次保存 i 的值；C 将 range(3) 的结束值误用。",
+    "knowledge_points": [
+      "闭包延迟绑定"
+    ],
+    "hint": "闭包捕获的是变量名。"
+  },
+  {
+    "id": "pybasic_deco_choice_003",
+    "title": "解决延迟绑定：默认参数",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "下列代码输出什么？\n```python\nfuncs = []\nfor i in range(3):\n    def f(x=i):\n        return x\n    funcs.append(f)\nfor f in funcs:\n    print(f(), end=' ')\n```",
+    "options": [
+      "A. 0 1 2",
+      "B. 2 2 2",
+      "C. 0 0 0",
+      "D. 3 3 3"
+    ],
+    "correct_answer": "A",
+    "explanation": "利用默认参数 `x=i` 在函数定义时将当前 i 的值绑定到参数 x，这样每个闭包都有自己独立的默认值，不再共享变量 i，因此输出 0 1 2。",
+    "knowledge_points": [
+      "闭包延迟绑定",
+      "默认参数"
+    ],
+    "hint": "默认参数在定义时求值。"
+  },
+  {
+    "id": "pybasic_deco_choice_004",
+    "title": "解决延迟绑定：工厂函数",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "以下代码输出什么？\n```python\ndef make_f(i):\n    def f():\n        return i\n    return f\nfuncs = [make_f(i) for i in range(3)]\nfor f in funcs:\n    print(f(), end=' ')\n```",
+    "options": [
+      "A. 0 1 2",
+      "B. 2 2 2",
+      "C. 0 0 0",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "工厂函数 make_f 接收参数 i，每次调用时 i 作为参数绑定到当前值，返回的闭包引用的是函数自己的局部变量 i，避免了共享。因此输出 0 1 2。",
+    "knowledge_points": [
+      "闭包延迟绑定",
+      "工厂函数"
+    ],
+    "hint": "通过参数传递绑定当前值。"
+  },
+  {
+    "id": "pybasic_deco_choice_005",
+    "title": "闭包中修改外部变量需要 nonlocal",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "运行以下代码会引发什么？\n```python\ndef outer():\n    count = 0\n    def inner():\n        count += 1\n        return count\n    return inner\nf = outer()\nprint(f())\n```",
+    "options": [
+      "A. 输出 1",
+      "B. 输出 0",
+      "C. 引发 UnboundLocalError",
+      "D. 引发 NameError"
+    ],
+    "correct_answer": "C",
+    "explanation": "在闭包 inner 中，`count += 1` 试图修改外部变量 count，但由于没有 nonlocal 声明，Python 将 count 视为局部变量，但局部变量在第一次引用前未被赋值，导致 UnboundLocalError。",
+    "knowledge_points": [
+      "闭包变量修改",
+      "nonlocal"
+    ],
+    "hint": "修改外部变量需 nonlocal。"
+  },
+  {
+    "id": "pybasic_deco_choice_006",
+    "title": "使用 nonlocal 正确修改",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "easy",
+    "description": "下面代码输出什么？\n```python\ndef outer():\n    count = 0\n    def inner():\n        nonlocal count\n        count += 1\n        return count\n    return inner\nf = outer()\nprint(f(), f())\n```",
+    "options": [
+      "A. 1 2",
+      "B. 1 1",
+      "C. 0 0",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "使用 nonlocal 声明后，闭包可以修改外部变量 count。第一次调用返回 1，第二次返回 2。选项 B 是未使用 nonlocal 的情况但会报错。",
+    "knowledge_points": [
+      "闭包变量修改",
+      "nonlocal"
+    ],
+    "hint": "nonlocal 允许修改外部变量。"
+  },
+  {
+    "id": "pybasic_deco_choice_007",
+    "title": "装饰器原理：等价转换",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "easy",
+    "description": "已知装饰器定义：\n```python\ndef deco(func):\n    return func\n@deco\ndef hello():\n    return 'Hi'\n```\n`@deco` 的效果等价于？",
+    "options": [
+      "A. hello = deco(hello)",
+      "B. hello = deco(hello())",
+      "C. deco(hello)",
+      "D. hello = deco"
+    ],
+    "correct_answer": "A",
+    "explanation": "装饰器语法 `@deco` 等价于在被装饰函数定义后执行 `hello = deco(hello)`，即把函数对象传递给装饰器，并用返回的新函数替代原函数。选项 B 传递了调用结果；C 没有重新赋值；D 错误。",
+    "knowledge_points": [
+      "装饰器原理"
+    ],
+    "hint": "装饰器语法就是函数重赋值。"
+  },
+  {
+    "id": "pybasic_deco_choice_008",
+    "title": "最简单的装饰器：记录日志",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "easy",
+    "description": "执行以下代码，调用 `add(2,3)` 会输出什么？\n```python\ndef logger(func):\n    def wrapper(*args):\n        print('calling')\n        return func(*args)\n    return wrapper\n@logger\ndef add(a, b):\n    return a + b\nprint(add(2, 3))\n```",
+    "options": [
+      "A. calling 5",
+      "B. 5 calling",
+      "C. 5",
+      "D. calling"
+    ],
+    "correct_answer": "A",
+    "explanation": "装饰器 logger 为 add 增添了打印日志的功能。调用 add(2,3) 时，进入 wrapper，先打印 'calling'，再执行原 add 函数返回 5，最后 print 输出。顺序为 'calling' 换行 '5'。选项 B 顺序反了；C 没有日志；D 没有返回值。",
+    "knowledge_points": [
+      "简单装饰器"
+    ],
+    "hint": "装饰器在函数执行前打印日志。"
+  },
+  {
+    "id": "pybasic_deco_choice_009",
+    "title": "装饰器应用：计时功能",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "下列装饰器实现的功能是？\n```python\nimport time\ndef timer(func):\n    def wrapper(*args, **kwargs):\n        start = time.time()\n        result = func(*args, **kwargs)\n        print(time.time() - start)\n        return result\n    return wrapper\n@timer\ndef compute():\n    pass\n```",
+    "options": [
+      "A. 打印函数开始时间",
+      "B. 打印函数执行耗时",
+      "C. 优化函数执行速度",
+      "D. 缓存函数结果"
+    ],
+    "correct_answer": "B",
+    "explanation": "装饰器在函数执行前后记录时间戳并打印差值，功能是计算函数执行耗时。选项 A 仅打印开始时间；C 是性能优化，但 decorator 不会加快执行；D 是缓存，未实现。",
+    "knowledge_points": [
+      "简单装饰器",
+      "应用场景"
+    ],
+    "hint": "计算时间差。"
+  },
+  {
+    "id": "pybasic_deco_choice_010",
+    "title": "装饰器保留原函数元信息",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "装饰后的函数 wrapper 可能丢失原名和文档字符串，通常使用哪个工具保留？",
+    "options": [
+      "A. @property",
+      "B. functools.wraps",
+      "C. functools.partial",
+      "D. __name__"
+    ],
+    "correct_answer": "B",
+    "explanation": "`functools.wraps` 是一个装饰器，用于更新 wrapper 函数的 `__name__`、`__doc__` 等属性，使其看起来像原函数。选项 A 是属性装饰器；C 是偏函数；D 是属性名。",
+    "knowledge_points": [
+      "装饰器",
+      "functools.wraps"
+    ],
+    "hint": "使用 wraps 保持元信息。"
+  },
+  {
+    "id": "pybasic_deco_choice_011",
+    "title": "带参数装饰器的结构",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "带参数装饰器 `@deco(arg)` 的实现通常需要几层函数嵌套？",
+    "options": [
+      "A. 1 层",
+      "B. 2 层",
+      "C. 3 层",
+      "D. 取决于参数个数"
+    ],
+    "correct_answer": "C",
+    "explanation": "带参数装饰器需要三层：最外层接收装饰器参数，中间层接收被装饰函数，最内层是实际的 wrapper 函数。例如 `def deco(arg): def decorator(func): def wrapper(*args): ... return wrapper; return decorator`。选项 A、B 层数不够；D 错误。",
+    "knowledge_points": [
+      "带参数装饰器",
+      "嵌套结构"
+    ],
+    "hint": "三层嵌套结构。"
+  },
+  {
+    "id": "pybasic_deco_choice_012",
+    "title": "带参数装饰器：重复调用次数",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "以下带参数装饰器的输出是什么？\n```python\ndef repeat(n):\n    def decorator(func):\n        def wrapper(*args):\n            for _ in range(n):\n                func(*args)\n        return wrapper\n    return decorator\n@repeat(2)\ndef greet():\n    print('Hi')\ngreet()\n```",
+    "options": [
+      "A. 输出一次 Hi",
+      "B. 输出两次 Hi",
+      "C. 输出 'Hi' 两次，且函数返回None",
+      "D. 输出 None None"
+    ],
+    "correct_answer": "B",
+    "explanation": "装饰器 repeat(2) 使得 greet 被调用时会重复执行 2 次，因此打印两次 'Hi'。选项 A 是未装饰行为；C 多余描述；D 错误。",
+    "knowledge_points": [
+      "带参数装饰器"
+    ],
+    "hint": "重复调用函数 n 次。"
+  },
+  {
+    "id": "pybasic_deco_choice_013",
+    "title": "带参数装饰器的执行顺序",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "hard",
+    "description": "对于 `@deco(arg)` 装饰的函数，执行顺序是：",
+    "options": [
+      "A. 先调用 deco(arg) 得到装饰器，再将函数传给该装饰器并替换",
+      "B. 直接将函数和 arg 传给 deco",
+      "C. 将 arg 传给被装饰函数",
+      "D. 语法错误"
+    ],
+    "correct_answer": "A",
+    "explanation": "`@deco(arg)` 首先调用 `deco(arg)` 返回一个真正的装饰器（通常是一个接受 func 的函数），然后立即将下方定义的函数传递给这个装饰器，并替换函数名。选项 B 错误理解传参；C 没有这回事；D 合法。",
+    "knowledge_points": [
+      "带参数装饰器"
+    ],
+    "hint": "deco(arg) 先执行，返回装饰器。"
+  },
+  {
+    "id": "pybasic_deco_choice_014",
+    "title": "装饰器应用：权限校验",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "以下装饰器可能用于什么场景？\n```python\ndef require_auth(func):\n    def wrapper(user, *args):\n        if user != 'admin':\n            raise PermissionError\n        return func(user, *args)\n    return wrapper\n```",
+    "options": [
+      "A. 日志记录",
+      "B. 缓存",
+      "C. 权限校验",
+      "D. 异常重试"
+    ],
+    "correct_answer": "C",
+    "explanation": "装饰器检查 user 是否为 'admin'，不是则抛出权限错误，这是典型的权限校验装饰器。选项 A、B、D 均不符合功能。",
+    "knowledge_points": [
+      "装饰器应用场景",
+      "权限校验"
+    ],
+    "hint": "检查用户身份。"
+  },
+  {
+    "id": "pybasic_deco_choice_015",
+    "title": "装饰器应用：缓存结果",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "下列装饰器实现了什么功能？\n```python\ndef memoize(func):\n    cache = {}\n    def wrapper(*args):\n        if args not in cache:\n            cache[args] = func(*args)\n        return cache[args]\n    return wrapper\n```",
+    "options": [
+      "A. 性能分析",
+      "B. 结果缓存",
+      "C. 日志",
+      "D. 重试机制"
+    ],
+    "correct_answer": "B",
+    "explanation": "装饰器使用字典缓存函数参数和对应的返回值，相同参数直接返回缓存值，这是结果缓存（备忘录模式）。选项 A、C、D 错误。",
+    "knowledge_points": [
+      "装饰器应用场景",
+      "缓存"
+    ],
+    "hint": "避免重复计算。"
+  },
+  {
+    "id": "pybasic_deco_choice_016",
+    "title": "装饰器应用：保持函数签名",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "在装饰器内部定义 wrapper 时，通常使用 `*args, **kwargs` 的作用是？",
+    "options": [
+      "A. 让 wrapper 可以接受任意参数并传递给原函数",
+      "B. 减少代码量",
+      "C. 为了语法正确",
+      "D. 装饰器必须这样写"
+    ],
+    "correct_answer": "A",
+    "explanation": "使用 `*args, **kwargs` 可以使装饰器适应任何函数签名，将接收到的参数原封不动地传递给被装饰函数，保持通用性。",
+    "knowledge_points": [
+      "装饰器",
+      "参数传递"
+    ],
+    "hint": "任意参数透传。"
+  },
+  {
+    "id": "pybasic_deco_choice_017",
+    "title": "多个装饰器叠加顺序",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "对于 `@d1\n@d2\ndef f(): pass`，等价于？",
+    "options": [
+      "A. f = d1(d2(f))",
+      "B. f = d2(d1(f))",
+      "C. d1(d2(f()))",
+      "D. f = d1(d2(f)) 且执行顺序从内向外"
+    ],
+    "correct_answer": "A",
+    "explanation": "多个装饰器从最靠近函数的开始应用，即 `@d1\n@d2\ndef f(): pass` 等价于 `f = d1(d2(f))`。选项 B 顺序反了；C 错误调用；D 错在顺序。",
+    "knowledge_points": [
+      "装饰器原理",
+      "叠加"
+    ],
+    "hint": "装饰器从下往上应用。"
+  },
+  {
+    "id": "pybasic_deco_choice_018",
+    "title": "装饰器叠加执行效果",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "hard",
+    "description": "执行以下代码，输出是什么？\n```python\ndef deco1(func):\n    def wrapper():\n        print('1')\n        func()\n        print('1')\n    return wrapper\ndef deco2(func):\n    def wrapper():\n        print('2')\n        func()\n        print('2')\n    return wrapper\n@deco1\n@deco2\ndef say():\n    print('Hi')\nsay()\n```",
+    "options": [
+      "A. 1 2 Hi 2 1",
+      "B. 2 1 Hi 1 2",
+      "C. 1 Hi 2 1",
+      "D. 2 Hi 1 2"
+    ],
+    "correct_answer": "A",
+    "explanation": "装饰顺序：先 @deco2 再 @deco1，即 say = deco1(deco2(say))。调用 say() 时，进入 deco1 wrapper，先打印 1，再调用 deco2 的 wrapper，打印 2，调用原始 say 打印 Hi，然后 deco2 结束打印 2，最后 deco1 结束打印 1。结果 1 2 Hi 2 1。",
+    "knowledge_points": [
+      "装饰器叠加",
+      "执行顺序"
+    ],
+    "hint": "装饰器包裹像洋葱层。"
+  },
+  {
+    "id": "pybasic_deco_choice_019",
+    "title": "闭包变量共享陷阱",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "以下代码输出什么？\n```python\ndef outer():\n    funcs = []\n    for i in range(3):\n        funcs.append(lambda: i)\n    return funcs\nfor f in outer():\n    print(f(), end=' ')\n```",
+    "options": [
+      "A. 0 1 2",
+      "B. 2 2 2",
+      "C. 0 0 0",
+      "D. 3 3 3"
+    ],
+    "correct_answer": "B",
+    "explanation": "与 def 相同，lambda 也构成闭包，捕获的是变量 i。循环结束后 i=2，所有 lambda 都输出 2。",
+    "knowledge_points": [
+      "闭包延迟绑定",
+      "lambda陷阱"
+    ],
+    "hint": "lambda 同样面临延迟绑定。"
+  },
+  {
+    "id": "pybasic_deco_choice_020",
+    "title": "装饰器返回新函数但保留原函数名",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "easy",
+    "description": "装饰器一般返回一个新函数 wrapper，这会导致被装饰函数的名字变成 wrapper。如何解决？",
+    "options": [
+      "A. 在 wrapper 内设置 __name__ = func.__name__",
+      "B. 使用 @wraps(func) 装饰 wrapper",
+      "C. 使用 return func 而非 wrapper",
+      "D. A 和 B 都可以"
+    ],
+    "correct_answer": "D",
+    "explanation": "手动设置 __name__ 或者使用 functools.wraps 都可以让 wrapper 继承原函数的元信息。选项 C 直接用原函数则失去了装饰器的额外功能。",
+    "knowledge_points": [
+      "装饰器",
+      "functools.wraps"
+    ],
+    "hint": "复制元信息。"
+  },
+  {
+    "id": "pybasic_deco_choice_021",
+    "title": "闭包实现计数器",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "下列代码实现了一个计数器闭包，连续三次调用 `c()` 的输出是？\n```python\ndef create_counter():\n    x = 0\n    def counter():\n        nonlocal x\n        x += 1\n        return x\n    return counter\nc = create_counter()\nprint(c(), c(), c())\n```",
+    "options": [
+      "A. 1 2 3",
+      "B. 1 1 1",
+      "C. 0 1 2",
+      "D. 3 3 3"
+    ],
+    "correct_answer": "A",
+    "explanation": "闭包 counter 使用 nonlocal 修改外部变量 x，每次调用递增并返回，依次输出 1,2,3。",
+    "knowledge_points": [
+      "闭包变量修改",
+      "nonlocal"
+    ],
+    "hint": "闭包保持计数状态。"
+  },
+  {
+    "id": "pybasic_deco_choice_022",
+    "title": "装饰器在模块导入时立即执行",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "在模块中定义一个被装饰的函数时，装饰器内的代码（非 wrapper 内部）何时执行？",
+    "options": [
+      "A. 函数被调用时",
+      "B. 函数定义时（即模块加载时）",
+      "C. 每次调用 wrapper 时",
+      "D. 装饰器永远不会自动执行"
+    ],
+    "correct_answer": "B",
+    "explanation": "装饰器在函数定义时立即执行，将原始函数传给装饰器并重新绑定。所以装饰器工厂函数（非 wrapper）在模块导入时执行一次，而 wrapper 在每次调用时执行。",
+    "knowledge_points": [
+      "装饰器原理",
+      "执行时机"
+    ],
+    "hint": "装饰发生在定义时。"
+  },
+  {
+    "id": "pybasic_deco_choice_023",
+    "title": "带参数装饰器记录函数调用",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "hard",
+    "description": "以下带参数装饰器实现将函数调用信息记录到文件。其参数 file_name 的作用是？\n```python\ndef log_to(file_name):\n    def decorator(func):\n        def wrapper(*args):\n            with open(file_name, 'a') as f:\n                f.write(f'{func.__name__} called\\n')\n            return func(*args)\n        return wrapper\n    return decorator\n```",
+    "options": [
+      "A. 指定被装饰函数名",
+      "B. 指定日志输出文件名",
+      "C. 指定日志格式",
+      "D. 指定函数参数"
+    ],
+    "correct_answer": "B",
+    "explanation": "最外层参数 file_name 用于传递日志文件名，使得装饰器可以灵活地指定不同的日志文件。选项 A、C、D 错误。",
+    "knowledge_points": [
+      "带参数装饰器",
+      "应用场景"
+    ],
+    "hint": "装饰器参数定制行为。"
+  },
+  {
+    "id": "pybasic_deco_choice_024",
+    "title": "闭包与装饰器的关系",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "easy",
+    "description": "通常一个简单的装饰器内部会形成一个闭包。这句话是？",
+    "options": [
+      "A. 正确，装饰器函数内部的 wrapper 引用了外层变量 func",
+      "B. 错误，装饰器与闭包完全无关",
+      "C. 正确，但必须是带参数装饰器",
+      "D. 错误，只有类装饰器才是闭包"
+    ],
+    "correct_answer": "A",
+    "explanation": "简单装饰器如外层函数接收 func，内部定义 wrapper 并引用 func，形成了闭包。因此装饰器通常基于闭包实现。选项 B、C、D 错误。",
+    "knowledge_points": [
+      "闭包",
+      "装饰器"
+    ],
+    "hint": "wrapper 引用外部传入的 func。"
+  },
+  {
+    "id": "pybasic_deco_choice_025",
+    "title": "使用偏函数避免循环陷阱",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "使用 `functools.partial` 可以解决循环中闭包延迟绑定问题。以下代码输出什么？\n```python\nfrom functools import partial\ndef f(i):\n    return i\nfuncs = [partial(f, i) for i in range(3)]\nfor func in funcs:\n    print(func(), end=' ')\n```",
+    "options": [
+      "A. 0 1 2",
+      "B. 2 2 2",
+      "C. 0 0 0",
+      "D. 3 3 3"
+    ],
+    "correct_answer": "A",
+    "explanation": "partial 在创建时绑定了参数 i 的当前值，所以每个偏函数都有独立的参数值，输出 0 1 2。",
+    "knowledge_points": [
+      "闭包延迟绑定",
+      "partial"
+    ],
+    "hint": "partial 提前绑定参数。"
+  },
+  {
+    "id": "pybasic_deco_choice_026",
+    "title": "装饰器示例：重试机制",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "下列装饰器实现了什么？\n```python\nimport time\ndef retry(n=3):\n    def deco(func):\n        def wrapper(*args):\n            for i in range(n):\n                try:\n                    return func(*args)\n                except Exception as e:\n                    if i == n - 1:\n                        raise\n                    time.sleep(1)\n        return wrapper\n    return deco\n```",
+    "options": [
+      "A. 缓存",
+      "B. 重试机制",
+      "C. 定时任务",
+      "D. 权限检查"
+    ],
+    "correct_answer": "B",
+    "explanation": "装饰器在函数失败时自动重试指定次数，最后一次仍失败则抛出异常。这是典型的重试机制。",
+    "knowledge_points": [
+      "装饰器应用场景",
+      "重试"
+    ],
+    "hint": "失败后重试 n 次。"
+  },
+  {
+    "id": "pybasic_deco_choice_027",
+    "title": "装饰器作用域与闭包结合",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "hard",
+    "description": "阅读代码，输出结果是什么？\n```python\ndef deco(func):\n    cache = {}\n    def wrapper(x):\n        if x not in cache:\n            cache[x] = func(x)\n        return cache[x]\n    return wrapper\n@deco\ndef square(x):\n    return x * x\nprint(square(2), square(2), square(3))\n```",
+    "options": [
+      "A. 4 4 9",
+      "B. 4 4 4",
+      "C. 4 4 9 但第二次 square(2) 未重新计算",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "装饰器使用闭包缓存结果，第一次 square(2) 计算并缓存，第二次返回缓存值，square(3) 计算并返回。输出 4 4 9。选项 B 错误；C 正确但表述多余；A 直接输出结果。",
+    "knowledge_points": [
+      "装饰器",
+      "闭包缓存"
+    ],
+    "hint": "相同参数返回缓存结果。"
+  },
+  {
+    "id": "pybasic_deco_choice_028",
+    "title": "装饰器参数 func 的传递",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "easy",
+    "description": "在装饰器内 `def wrapper(*args, **kwargs):` 调用 `func(*args, **kwargs)` 的作用是？",
+    "options": [
+      "A. 捕获所有参数并原样传递给被装饰函数",
+      "B. 限制函数参数数量",
+      "C. 修改函数签名",
+      "D. 防止参数错误"
+    ],
+    "correct_answer": "A",
+    "explanation": "通过 *args 和 **kwargs 可以接收任意位置和关键字参数，并将它们完整地传递给被包装的函数，保持通用性。",
+    "knowledge_points": [
+      "装饰器",
+      "参数传递"
+    ],
+    "hint": "通用参数透传。"
+  },
+  {
+    "id": "pybasic_deco_choice_029",
+    "title": "多层装饰器的应用顺序",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "对于如下定义：\n```python\n@d1\n@d2\ndef f():\n    pass\n```\n其等价形式是？",
+    "options": [
+      "A. f = d1(d2(f))",
+      "B. f = d2(d1(f))",
+      "C. f = d1(d2(f()))",
+      "D. d1(d2(f))"
+    ],
+    "correct_answer": "A",
+    "explanation": "装饰器从靠近函数定义的位置开始应用，先执行 @d2 即 f = d2(f)，然后 @d1 即 f = d1(f)，所以最终等价于 f = d1(d2(f))。选项 B 顺序相反；C 错误地调用了函数；D 没有赋值。",
+    "knowledge_points": [
+      "多层装饰器顺序"
+    ],
+    "hint": "装饰器从下往上应用。"
+  },
+  {
+    "id": "pybasic_deco_choice_030",
+    "title": "多层装饰器执行顺序示例",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "执行以下代码，输出结果是？\n```python\ndef deco1(func):\n    def wrapper():\n        print('A')\n        func()\n        print('B')\n    return wrapper\n\ndef deco2(func):\n    def wrapper():\n        print('C')\n        func()\n        print('D')\n    return wrapper\n\n@deco1\n@deco2\ndef say():\n    print('X')\nsay()\n```",
+    "options": [
+      "A. A C X D B",
+      "B. C A X B D",
+      "C. A C X B D",
+      "D. C A X D B"
+    ],
+    "correct_answer": "A",
+    "explanation": "装饰顺序：say = deco1(deco2(say))。调用 say() 进入 deco1 的 wrapper，先打印 A，再调用 deco2 的 wrapper。deco2 wrapper 先打印 C，调用原始 say 打印 X，然后打印 D，返回后 deco1 打印 B。最终顺序 A C X D B。",
+    "knowledge_points": [
+      "多层装饰器顺序"
+    ],
+    "hint": "调用时从外到内包裹。"
+  },
+  {
+    "id": "pybasic_deco_choice_031",
+    "title": "多层装饰器中wraps的作用范围",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "hard",
+    "description": "当一个函数被多个装饰器装饰时，若只有最内层装饰器使用了 @wraps，那么最终函数的 __name__ 是？\n```python\nfrom functools import wraps\ndef d1(func):\n    def wrapper(*args):\n        return func(*args)\n    return wrapper\ndef d2(func):\n    @wraps(func)\n    def wrapper(*args):\n        return func(*args)\n    return wrapper\n@d1\n@d2\ndef target():\n    pass\nprint(target.__name__)\n```",
+    "options": [
+      "A. target",
+      "B. wrapper",
+      "C. d2",
+      "D. None"
+    ],
+    "correct_answer": "B",
+    "explanation": "装饰顺序为 target = d1(d2(target))。d2 内使用了 wraps，返回的 wrapper 名字为 target，但 d1 没有使用 wraps，返回的 wrapper 名字为 wrapper。最终 target 指向 d1 的 wrapper，其 __name__ 为 'wrapper'。",
+    "knowledge_points": [
+      "多层装饰器顺序",
+      "functools.wraps"
+    ],
+    "hint": "最外层装饰器决定最终名字。"
+  },
+  {
+    "id": "pybasic_deco_choice_032",
+    "title": "不使用wraps导致的问题",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "easy",
+    "description": "若装饰器内部没有使用 @wraps，会导致什么常见问题？",
+    "options": [
+      "A. 被装饰函数的 __doc__ 和 __name__ 丢失",
+      "B. 装饰器无法接受参数",
+      "C. 装饰器不能叠加",
+      "D. 装饰器只对类方法有效"
+    ],
+    "correct_answer": "A",
+    "explanation": "不使用 wraps 时，返回的 wrapper 函数会覆盖原函数的元信息（如 __name__、__doc__），导致调试和文档生成困难。其他选项均错误。",
+    "knowledge_points": [
+      "functools.wraps"
+    ],
+    "hint": "丢失函数名和文档。"
+  },
+  {
+    "id": "pybasic_deco_choice_033",
+    "title": "wraps保留元信息的示例",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "easy",
+    "description": "使用 @wraps 后，被装饰函数的 __name__ 将会是？\n```python\nfrom functools import wraps\ndef deco(func):\n    @wraps(func)\n    def wrapper():\n        \"\"\"wrapper doc\"\"\"\n        return func()\n    return wrapper\n@deco\ndef original():\n    \"\"\"original doc\"\"\"\n    pass\nprint(original.__name__)\n```",
+    "options": [
+      "A. original",
+      "B. wrapper",
+      "C. deco",
+      "D. None"
+    ],
+    "correct_answer": "A",
+    "explanation": "@wraps(func) 将原函数的 __name__、__doc__ 等属性复制到 wrapper 上，因此 original.__name__ 保持为 'original'。",
+    "knowledge_points": [
+      "functools.wraps"
+    ],
+    "hint": "wraps复制函数元信息。"
+  },
+  {
+    "id": "pybasic_deco_choice_034",
+    "title": "wraps与装饰器参数同时使用",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "在带参数装饰器中使用 @wraps 时，应装饰在哪个函数上？",
+    "options": [
+      "A. 最内层的 wrapper 函数",
+      "B. 中间的 decorator 函数",
+      "C. 最外层的函数",
+      "D. 不需使用"
+    ],
+    "correct_answer": "A",
+    "explanation": "带参数装饰器的结构为：外层接收参数，中间层接收 func，最内层为 wrapper。@wraps 应放在最内层 wrapper 上，使其继承原函数的元信息。",
+    "knowledge_points": [
+      "functools.wraps",
+      "带参数装饰器"
+    ],
+    "hint": "wraps放在实际替换原函数的函数上。"
+  },
+  {
+    "id": "pybasic_deco_choice_035",
+    "title": "基本类装饰器实现",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "以下类装饰器的作用是？\n```python\nclass Logger:\n    def __init__(self, func):\n        self.func = func\n    def __call__(self, *args):\n        print('calling')\n        return self.func(*args)\n@Logger\ndef add(a, b):\n    return a + b\n```",
+    "options": [
+      "A. 在函数调用前后打印日志",
+      "B. 拦截异常",
+      "C. 缓存返回值",
+      "D. 修改函数参数"
+    ],
+    "correct_answer": "A",
+    "explanation": "类装饰器通过 __init__ 接收函数，__call__ 实现调用增强。@Logger 等价于 add = Logger(add)，调用 add 时触发 __call__，打印日志后执行原函数。",
+    "knowledge_points": [
+      "类装饰器"
+    ],
+    "hint": "__call__实现装饰逻辑。"
+  },
+  {
+    "id": "pybasic_deco_choice_036",
+    "title": "类装饰器带参数",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "hard",
+    "description": "下列带参数的类装饰器打印结果是什么？\n```python\nclass Repeat:\n    def __init__(self, times):\n        self.times = times\n    def __call__(self, func):\n        def wrapper(*args):\n            for _ in range(self.times):\n                func(*args)\n        return wrapper\n@Repeat(2)\ndef greet():\n    print('Hi')\ngreet()\n```",
+    "options": [
+      "A. 输出 Hi 两次",
+      "B. 输出 Hi 一次",
+      "C. 语法错误",
+      "D. 输出 Hi 无限次"
+    ],
+    "correct_answer": "A",
+    "explanation": "Repeat(2) 创建一个实例，接收参数 2 存入 self.times，然后实例作为装饰器调用 __call__ 接收函数并返回 wrapper。调用 greet 时重复执行原函数 2 次，打印两次 Hi。",
+    "knowledge_points": [
+      "类装饰器",
+      "带参数装饰器"
+    ],
+    "hint": "实例化后调用__call__。"
+  },
+  {
+    "id": "pybasic_deco_choice_037",
+    "title": "类装饰器与函数装饰器等价性",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "easy",
+    "description": "类装饰器的 __call__ 方法相当于函数装饰器中的哪一部分？",
+    "options": [
+      "A. 最外层的参数接收部分",
+      "B. 内部 wrapper 函数",
+      "C. 接收函数的中间层",
+      "D. 装饰器本身不执行"
+    ],
+    "correct_answer": "B",
+    "explanation": "函数装饰器返回的 wrapper 函数在调用时执行增强逻辑；类装饰器中，实例被调用时进入 __call__，其中包装逻辑类似于 wrapper 函数的作用。",
+    "knowledge_points": [
+      "类装饰器"
+    ],
+    "hint": "__call__就是那个包装函数。"
+  },
+  {
+    "id": "pybasic_deco_choice_038",
+    "title": "@staticmethod 原理",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "easy",
+    "description": "关于 @staticmethod，以下说法正确的是？",
+    "options": [
+      "A. 它把方法转换为静态方法，不自动传递 self 或 cls",
+      "B. 它把一个函数转变为类方法，自动接收 cls",
+      "C. 它把一个方法变成属性",
+      "D. 它是函数装饰器，返回一个 property 对象"
+    ],
+    "correct_answer": "A",
+    "explanation": "@staticmethod 将方法定义为静态方法，调用时不会自动传递实例或类作为第一个参数。选项 B 描述的是 classmethod；C 是 property；D 错误。",
+    "knowledge_points": [
+      "内置装饰器",
+      "@staticmethod"
+    ],
+    "hint": "静态方法无隐式 self 参数。"
+  },
+  {
+    "id": "pybasic_deco_choice_039",
+    "title": "@classmethod 的隐式参数",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "easy",
+    "description": "使用 @classmethod 装饰的方法，调用时自动传入的第一个参数是？",
+    "options": [
+      "A. 类对象 cls",
+      "B. 实例 self",
+      "C. 无额外参数",
+      "D. 装饰器本身"
+    ],
+    "correct_answer": "A",
+    "explanation": "@classmethod 将方法转换为类方法，调用时（无论通过类还是实例）都会自动将类本身作为第一个参数传入，惯用名 cls。",
+    "knowledge_points": [
+      "内置装饰器",
+      "@classmethod"
+    ],
+    "hint": "类方法接收类对象。"
+  },
+  {
+    "id": "pybasic_deco_choice_040",
+    "title": "@property 的基本使用",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "easy",
+    "description": "@property 装饰器的作用是？",
+    "options": [
+      "A. 将方法作为属性访问（getter）",
+      "B. 将属性变为可调用对象",
+      "C. 把私有变量暴露为公有",
+      "D. 只读属性的替代"
+    ],
+    "correct_answer": "A",
+    "explanation": "@property 装饰器可以将类的方法转变为如同访问属性一样调用（即 obj.method 不加括号），常用于实现 getter。还可以配合 setter。选项 B 相反；C 不准确；D 是部分功能但不全面。",
+    "knowledge_points": [
+      "内置装饰器",
+      "@property"
+    ],
+    "hint": "方法变属性访问。"
+  },
+  {
+    "id": "pybasic_deco_choice_041",
+    "title": "@staticmethod 与 @classmethod 区分",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "以下哪个说法正确区分了 @staticmethod 和 @classmethod？",
+    "options": [
+      "A. @staticmethod 不能访问类属性，@classmethod 可以",
+      "B. @staticmethod 不传递隐式参数，@classmethod 传递 cls",
+      "C. @staticmethod 只能用于类，@classmethod 只能用于实例",
+      "D. 两者完全相同，只是名字不同"
+    ],
+    "correct_answer": "B",
+    "explanation": "@staticmethod 定义的方法没有隐含的第一个参数；@classmethod 定义的方法第一个参数是类对象 cls。选项 A 不完全正确（静态方法可以通过类名访问）；C 错误；D 错误。",
+    "knowledge_points": [
+      "内置装饰器",
+      "@staticmethod",
+      "@classmethod"
+    ],
+    "hint": "参数传递差异。"
+  },
+  {
+    "id": "pybasic_deco_choice_042",
+    "title": "装饰器实现重试机制",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "下列装饰器 retry 实现的机制是？\n```python\ndef retry(max_attempts):\n    def decorator(func):\n        def wrapper(*args, **kwargs):\n            for attempt in range(max_attempts):\n                try:\n                    return func(*args, **kwargs)\n                except Exception:\n                    if attempt == max_attempts - 1:\n                        raise\n        return wrapper\n    return decorator\n```",
+    "options": [
+      "A. 缓存结果",
+      "B. 失败重试指定次数",
+      "C. 延迟执行",
+      "D. 并发执行"
+    ],
+    "correct_answer": "B",
+    "explanation": "装饰器在函数执行失败时捕获异常并重试，直到成功或达到最大尝试次数，最后一次抛出异常。是典型的失败重试机制。",
+    "knowledge_points": [
+      "综合应用",
+      "重试装饰器"
+    ],
+    "hint": "异常后重新调用。"
+  },
+  {
+    "id": "pybasic_deco_choice_043",
+    "title": "装饰器实现参数类型检查",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "下列装饰器实现的功能是？\n```python\ndef enforce_type(expected_type):\n    def decorator(func):\n        def wrapper(arg):\n            if not isinstance(arg, expected_type):\n                raise TypeError\n            return func(arg)\n        return wrapper\n    return decorator\n@enforce_type(str)\ndef greet(name):\n    return f\"Hello {name}\"\n```",
+    "options": [
+      "A. 返回值类型检查",
+      "B. 参数个数检查",
+      "C. 参数类型检查",
+      "D. 异常捕获"
+    ],
+    "correct_answer": "C",
+    "explanation": "装饰器 enforce_type 接收期望的类型参数，在 wrapper 中检查第一个参数是否为该类型，否则抛出 TypeError。这是参数类型检查。",
+    "knowledge_points": [
+      "综合应用",
+      "类型检查"
+    ],
+    "hint": "装饰器验证参数类型。"
+  },
+  {
+    "id": "pybasic_deco_choice_044",
+    "title": "装饰器实现单例模式",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "hard",
+    "description": "下列装饰器将类装饰成单例，请问多次实例化类，得到的对象是？\n```python\ndef singleton(cls):\n    instances = {}\n    def get_instance(*args):\n        if cls not in instances:\n            instances[cls] = cls(*args)\n        return instances[cls]\n    return get_instance\n@singleton\nclass MyClass:\n    pass\na = MyClass()\nb = MyClass()\n```",
+    "options": [
+      "A. a 与 b 是同一个对象",
+      "B. a 与 b 是不同的对象",
+      "C. 第二次实例化抛异常",
+      "D. 两者均为 None"
+    ],
+    "correct_answer": "A",
+    "explanation": "装饰器 singleton 使用字典缓存类的实例，第一次创建实例后存入缓存，之后再次调用返回缓存的同一个对象，实现单例。因此 a is b 为 True。",
+    "knowledge_points": [
+      "综合应用",
+      "单例模式"
+    ],
+    "hint": "缓存实例确保唯一。"
+  },
+  {
+    "id": "pybasic_deco_choice_045",
+    "title": "wraps与单例装饰器的结合注意点",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "在实现单例的装饰器中，使用 @wraps 时应该装饰在哪个函数上？",
+    "options": [
+      "A. 返回的 get_instance 函数上",
+      "B. 原类定义上",
+      "C. 装饰器外界上",
+      "D. 不需要 wraps"
+    ],
+    "correct_answer": "A",
+    "explanation": "装饰器返回的是 get_instance 函数（代替原类），若不使用 wraps，该函数的 __name__ 等元信息会丢失。应使用 @wraps(cls) 装饰 get_instance 以保留类的元信息。",
+    "knowledge_points": [
+      "functools.wraps",
+      "综合应用"
+    ],
+    "hint": "wraps装饰返回的函数。"
+  },
+  {
+    "id": "pybasic_deco_choice_046",
+    "title": "多层装饰器中内部函数调用原函数",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "下列代码的输出是什么？\n```python\ndef deco1(func):\n    def wrapper():\n        return f\"[1 {func()} 1]\"\n    return wrapper\ndef deco2(func):\n    def wrapper():\n        return f\"(2 {func()} 2)\"\n    return wrapper\n@deco1\n@deco2\ndef greet():\n    return \"Hi\"\nprint(greet())\n```",
+    "options": [
+      "A. [1 (2 Hi 2) 1]",
+      "B. (2 [1 Hi 1] 2)",
+      "C. [1 Hi 1]",
+      "D. (2 Hi 2)"
+    ],
+    "correct_answer": "A",
+    "explanation": "greet = deco1(deco2(greet))。调用时先进入 deco1 的 wrapper，拼接 [1 和 1]，中间的 func() 调用 deco2 的 wrapper，拼接 (2 和 2)，其内部 func() 调用原始 greet 返回 Hi。最终结果为 [1 (2 Hi 2) 1]。",
+    "knowledge_points": [
+      "多层装饰器顺序"
+    ],
+    "hint": "由外到内拼接字符串。"
+  },
+  {
+    "id": "pybasic_deco_choice_047",
+    "title": "不使用wraps导致文档丢失",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "easy",
+    "description": "若装饰器未使用 @wraps，调用 help(func) 将显示什么？",
+    "options": [
+      "A. 显示 wrapper 函数的文档",
+      "B. 显示原函数的文档",
+      "C. 显示装饰器的文档",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "未使用 wraps 时，原函数被替换为 wrapper，help() 会显示 wrapper 的文档（如果有）。原函数的文档丢失了。选项 B 错误；C、D 不对。",
+    "knowledge_points": [
+      "functools.wraps"
+    ],
+    "hint": "help显示替换函数的信息。"
+  },
+  {
+    "id": "pybasic_deco_choice_048",
+    "title": "类装饰器中保留元信息",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "在类装饰器中想要保留原函数的 __name__，通常如何实现？",
+    "options": [
+      "A. 在 __call__ 中使用 @wraps 装饰内部 wrapper 函数",
+      "B. 在 __init__ 中设置 self.__name__ = func.__name__",
+      "C. 无需处理，类装饰器自动保留",
+      "D. 覆盖 __name__ 属性"
+    ],
+    "correct_answer": "A",
+    "explanation": "类装饰器的 __call__ 方法可能返回一个 wrapper 函数，需要在该 wrapper 上使用 @wraps(func) 来继承原函数的元信息。选项 B 不能解决 wrapper 本身名字的问题；C 错误；D 不通用。",
+    "knowledge_points": [
+      "类装饰器",
+      "functools.wraps"
+    ],
+    "hint": "在返回的 wrapper 上使用 wraps。"
+  },
+  {
+    "id": "pybasic_deco_choice_049",
+    "title": "classmethod 典型用法",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "以下代码中，通过类和实例调用的结果是什么？\n```python\nclass Demo:\n    @classmethod\n    def method(cls):\n        return cls.__name__\nprint(Demo.method())\nprint(Demo().method())\n```",
+    "options": [
+      "A. 都输出 Demo",
+      "B. 第一个输出 Demo，第二个报错",
+      "C. 都输出 None",
+      "D. 都报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "@classmethod 定义的方法可以通过类直接调用，也可通过实例调用。无论哪种方式，cls 都会接收到类本身，因此都输出 'Demo'。",
+    "knowledge_points": [
+      "内置装饰器",
+      "@classmethod"
+    ],
+    "hint": "cls 始终是类对象。"
+  },
+  {
+    "id": "pybasic_deco_choice_050",
+    "title": "property 实现计算属性",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "下列代码输出什么？\n```python\nclass Rect:\n    def __init__(self, w, h):\n        self.w = w\n        self.h = h\n    @property\n    def area(self):\n        return self.w * self.h\nr = Rect(3, 4)\nprint(r.area)\n```",
+    "options": [
+      "A. 12",
+      "B. <property object ...>",
+      "C. 报错，area 不是属性",
+      "D. 7"
+    ],
+    "correct_answer": "A",
+    "explanation": "@property 将 area 方法转变为属性，访问 r.area 时会调用该方法并返回结果 3*4=12。不需要加括号。选项 B 是如果不使用 @property 返回 property 对象；C、D 错误。",
+    "knowledge_points": [
+      "内置装饰器",
+      "@property"
+    ],
+    "hint": "方法变属性访问。"
+  },
+  {
+    "id": "pybasic_deco_choice_051",
+    "title": "staticmethod 无法访问实例属性",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "easy",
+    "description": "@staticmethod 装饰的方法内部能否直接访问实例属性？",
+    "options": [
+      "A. 不能，因为没有 self 参数",
+      "B. 可以，通过 self 访问",
+      "C. 可以，通过 cls 访问",
+      "D. 可以，与普通方法一样"
+    ],
+    "correct_answer": "A",
+    "explanation": "@staticmethod 不会自动传递 self 或 cls，因此在方法内部没有实例引用，无法直接访问实例属性。",
+    "knowledge_points": [
+      "内置装饰器",
+      "@staticmethod"
+    ],
+    "hint": "缺少 self 参数。"
+  },
+  {
+    "id": "pybasic_deco_choice_052",
+    "title": "装饰器综合：带缓存与日志",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "hard",
+    "description": "若同时使用日志装饰器和缓存装饰器，通常应将缓存装饰器放在内层还是外层？",
+    "options": [
+      "A. 内层，先缓存查询，避免日志重复输出",
+      "B. 外层，日志应记录每次缓存操作",
+      "C. 两者顺序无关",
+      "D. 只能使用一个装饰器"
+    ],
+    "correct_answer": "A",
+    "explanation": "通常将缓存装饰器放在靠近原函数的位置（内层），这样当缓存命中时就不必进入外层装饰器执行日志等额外操作，提高效率，且日志可能记录到缓存未命中的调用。选项 B 会导致缓存命中后依然执行日志装饰器；C、D 错误。",
+    "knowledge_points": [
+      "多层装饰器顺序",
+      "综合应用"
+    ],
+    "hint": "缓存放在内层更高效。"
+  },
+  {
+    "id": "pybasic_deco_choice_053",
+    "title": "类装饰器接收参数并记录",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "hard",
+    "description": "以下带参数的类装饰器 CountCalls 实现调用计数，调用 add(1,2) 两次后，访问 add.count 的值是？\n```python\nclass CountCalls:\n    def __init__(self, func):\n        self.func = func\n        self.count = 0\n    def __call__(self, *args):\n        self.count += 1\n        return self.func(*args)\n@CountCalls\ndef add(a, b):\n    return a + b\nadd(1,2)\nadd(3,4)\nprint(add.count)\n```",
+    "options": [
+      "A. 2",
+      "B. 1",
+      "C. 0",
+      "D. 报错，add 无 count 属性"
+    ],
+    "correct_answer": "A",
+    "explanation": "类装饰器将 add 替换为 CountCalls 实例，该实例有 count 属性，__call__ 中递增。每次调用 add 实际调用实例的 __call__，count 自增，两次后为 2。",
+    "knowledge_points": [
+      "类装饰器"
+    ],
+    "hint": "实例属性记录状态。"
+  },
+  {
+    "id": "pybasic_deco_choice_054",
+    "title": "functools.wraps 在类装饰器中的应用",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "medium",
+    "description": "在类装饰器的 __call__ 中返回一个内部函数 wrapper，应如何保留原函数的元信息？",
+    "options": [
+      "A. 在 wrapper 定义前使用 @wraps(self.func)",
+      "B. 在 __init__ 中设置 self.__wrapped__",
+      "C. 在 __call__ 返回前调用 wraps(self.func)",
+      "D. 无需操作，类自动处理"
+    ],
+    "correct_answer": "A",
+    "explanation": "如果 __call__ 返回一个 wrapper 函数（而非直接调用原函数），应该在该 wrapper 定义前使用 @wraps(self.func) 装饰，这样 wrapper 会继承原函数的元信息。",
+    "knowledge_points": [
+      "类装饰器",
+      "functools.wraps"
+    ],
+    "hint": "@wraps 用在内部函数定义前。"
+  },
+  {
+    "id": "pybasic_deco_choice_055",
+    "title": "装饰器综合：参数校验与 wraps 结合",
+    "type": "choice",
+    "category": "进阶语法-装饰器与闭包",
+    "difficulty": "hard",
+    "description": "设计一个带参数装饰器 require_role(role)，检查用户角色。装饰后函数名为？\n```python\nfrom functools import wraps\ndef require_role(role):\n    def decorator(func):\n        @wraps(func)\n        def wrapper(user, *args):\n            if user['role'] != role:\n                raise PermissionError\n            return func(user, *args)\n        return wrapper\n    return decorator\n@require_role('admin')\ndef delete_user(user, uid):\n    \"\"\"delete a user\"\"\"\n    pass\nprint(delete_user.__name__)\n```",
+    "options": [
+      "A. delete_user",
+      "B. wrapper",
+      "C. decorator",
+      "D. require_role"
+    ],
+    "correct_answer": "A",
+    "explanation": "在最内层 wrapper 上使用了 @wraps(func)，它继承了原函数 func 的元信息，因此 delete_user.__name__ 为 'delete_user'。",
+    "knowledge_points": [
+      "functools.wraps",
+      "综合应用"
+    ],
+    "hint": "wraps 保留原名。"
+  }
+]

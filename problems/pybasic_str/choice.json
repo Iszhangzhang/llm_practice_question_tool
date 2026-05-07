@@ -1,0 +1,523 @@
+[
+  {
+    "id": "pybasic_str_choice_001",
+    "title": "字符串正反向索引",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "easy",
+    "description": "已知字符串 `s = \"Python\"`，想要获取字符 `'h'`，以下哪个选项是正确的？",
+    "options": [
+      "A. s[2]",
+      "B. s[-3]",
+      "C. s[3] 和 s[-3] 都可以",
+      "D. s[-4]"
+    ],
+    "correct_answer": "C",
+    "explanation": "字符串索引从0开始，正向索引：'P'=0，'y'=1，'t'=2，'h'=3，'o'=4，'n'=5。反向索引：-1代表'n'，-2为'o'，-3为'h'，-4为't'。因此s[3]和s[-3]都指向'h'。选项A s[2]是't'，选项B虽正确但不如C全面，选项D s[-4]是't'。正确选项C。",
+    "knowledge_points": [
+      "字符串正向索引",
+      "字符串反向索引"
+    ],
+    "hint": "索引从0开始，末尾-1。"
+  },
+  {
+    "id": "pybasic_str_choice_002",
+    "title": "字符串切片缺省值",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "easy",
+    "description": "对于字符串 `s = \"HelloWorld\"`，执行 `print(s[5:])` 会输出什么？",
+    "options": [
+      "A. 'Hello'",
+      "B. 'World'",
+      "C. 'HelloWorld'",
+      "D. 报错"
+    ],
+    "correct_answer": "B",
+    "explanation": "切片 `s[5:]` 从索引5开始到字符串末尾。'HelloWorld'索引0-4为'H','e','l','l','o'，索引5为'W'，所以得到'World'。结束值缺省表示取到末尾。选项A是s[:5]的结果，选项C是完整字符串，切片越界不报错故D错误。",
+    "knowledge_points": [
+      "字符串切片语法",
+      "切片缺省值"
+    ],
+    "hint": "省略结束值取到末尾。"
+  },
+  {
+    "id": "pybasic_str_choice_003",
+    "title": "切片步长取值",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "运行以下代码，输出结果是？\n```python\ns = \"abcdefg\"\nprint(s[1:6:2])\n```",
+    "options": [
+      "A. 'bdf'",
+      "B. 'bcdef'",
+      "C. 'aceg'",
+      "D. 'b d f'"
+    ],
+    "correct_answer": "A",
+    "explanation": "切片 `s[1:6:2]` 含义：从索引1开始到索引6（不包含），步长为2。索引1='b'，3='d'，5='f'，步长2依次取1,3,5位置字符，结果为'bdf'。不包含索引6的'g'。选项B是步长1的结果，C是s[0::2]，D添加了空格。",
+    "knowledge_points": [
+      "字符串切片步长",
+      "切片边界"
+    ],
+    "hint": "步长2隔一个取一个字符。"
+  },
+  {
+    "id": "pybasic_str_choice_004",
+    "title": "索引越界与切片容错",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "hard",
+    "description": "以下哪行代码执行时**不会**引发错误（异常）？\n```python\nA. print(\"abc\"[3])\nB. print(\"abc\"[-4])\nC. print(\"abc\"[0:100])\nD. \"abc\"[0] = 'A'\n```",
+    "options": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "correct_answer": "C",
+    "explanation": "A项索引3超出最大索引2，引发IndexError；B项反向索引-4超出范围（有效反向范围为-1到-3），引发IndexError；C项切片[0:100]结束值远超长度，但切片允许越界，会安全返回到末尾的子串，不会报错；D项试图修改字符串元素，字符串不可变，引发TypeError。只有C不引发异常。",
+    "knowledge_points": [
+      "字符串索引越界错误",
+      "字符串切片越界处理",
+      "字符串不可变性"
+    ],
+    "hint": "切片越界不报错，索引越界报错。"
+  },
+  {
+    "id": "pybasic_str_choice_005",
+    "title": "负步长切片应用",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "hard",
+    "description": "已知 `s = \"abcdefg\"`，想要得到子串 `'eca'`，下列哪个表达式正确？",
+    "options": [
+      "A. s[4::-2]",
+      "B. s[-3:-6:-2]",
+      "C. s[4:0:-2]",
+      "D. s[5:1:-2]"
+    ],
+    "correct_answer": "A",
+    "explanation": "目标字符索引：e在4，c在2，a在0。选项A `s[4::-2]` 从索引4开始到开头步长-2，依次取4(e)、2(c)、0(a)，得到'eca'，正确。B `s[-3:-6:-2]` 负索引-3为e，-5为c，不包含-6(b)，得'ec'。C `s[4:0:-2]` 结束索引0不包含，得'ec'。D `s[5:1:-2]` 取5(f)、3(d)，得'fd'。",
+    "knowledge_points": [
+      "负步长切片",
+      "切片缺省值"
+    ],
+    "hint": "步长负值时注意起止位置。"
+  },
+  {
+    "id": "pybasic_str_choice_006",
+    "title": "字符串不可变性概念",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "easy",
+    "description": "以下关于Python字符串的说法，正确的是？",
+    "options": [
+      "A. 字符串是可变序列，可以修改个别字符",
+      "B. 字符串不可变，因此不能进行切片操作",
+      "C. 字符串不可变，所有修改方法都返回新字符串",
+      "D. 字符串长度不可变，不能重新赋值"
+    ],
+    "correct_answer": "C",
+    "explanation": "Python字符串是不可变序列，不能原地修改字符，任何“修改”操作（如replace、upper等）都会产生并返回一个新的字符串对象，原字符串不变。A错误，B错误，可以进行切片。D错误，字符串变量可以重新赋值指向新字符串。",
+    "knowledge_points": [
+      "字符串不可变性"
+    ],
+    "hint": "所有方法返回新字符串。"
+  },
+  {
+    "id": "pybasic_str_choice_007",
+    "title": "修改字符串字符的错误",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "easy",
+    "description": "下列哪行代码会引发TypeError？",
+    "options": [
+      "A. s = \"abc\"; s[0] = 'A'",
+      "B. s = \"abc\"; s = s + \"d\"",
+      "C. s = \"abc\"; s.replace('a', 'A')",
+      "D. s = \"abc\"; s * 2"
+    ],
+    "correct_answer": "A",
+    "explanation": "字符串是不可变类型，不能通过索引赋值修改元素，`s[0] = 'A'` 会抛出TypeError。B是拼接并重新赋值，合法；C调用replace返回新串但不修改原串，不报错；D重复运算合法。",
+    "knowledge_points": [
+      "字符串不可变性",
+      "TypeError"
+    ],
+    "hint": "索引赋值会引发错误。"
+  },
+  {
+    "id": "pybasic_str_choice_008",
+    "title": "upper方法不改变原串",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "执行以下代码后，输出结果是什么？\n```python\ns = \"hello\"\ns.upper()\nprint(s)\n```",
+    "options": [
+      "A. 'HELLO'",
+      "B. 'hello'",
+      "C. 'Hello'",
+      "D. 抛出异常"
+    ],
+    "correct_answer": "B",
+    "explanation": "字符串不可变，`s.upper()` 返回一个新的全大写字符串，但并没有赋值回变量s，因此s本身没有改变，print(s)仍输出原始字符串'hello'。",
+    "knowledge_points": [
+      "字符串不可变性",
+      "大小写转换"
+    ],
+    "hint": "方法返回新串，原串不变。"
+  },
+  {
+    "id": "pybasic_str_choice_009",
+    "title": "replace方法不改变原串",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "执行以下代码后，输出结果是什么？\n```python\ns = \"Java\"\ns.replace(\"J\", \"j\")\nprint(s)\n```",
+    "options": [
+      "A. 'java'",
+      "B. 'Java'",
+      "C. 'jJava'",
+      "D. 报错"
+    ],
+    "correct_answer": "B",
+    "explanation": "`s.replace(\"J\",\"j\")` 返回替换后的新字符串'java'，但未赋值给s，因此s仍是'Java'，print输出原串。这体现了字符串不可变性。",
+    "knowledge_points": [
+      "字符串不可变性",
+      "replace方法"
+    ],
+    "hint": "replace返回新字符串。"
+  },
+  {
+    "id": "pybasic_str_choice_010",
+    "title": "字符串拼接操作",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "easy",
+    "description": "表达式 `\"py\" + \"thon\"` 的值是？",
+    "options": [
+      "A. 'py thon'",
+      "B. 'python'",
+      "C. 'py+thon'",
+      "D. ('py', 'thon')"
+    ],
+    "correct_answer": "B",
+    "explanation": "加号 `+` 用于字符串拼接，会将两个字符串首尾连接，结果为新字符串'python'。选项A多了空格，C保留了加号，D是元组。",
+    "knowledge_points": [
+      "字符串拼接"
+    ],
+    "hint": "+ 直接连接字符串。"
+  },
+  {
+    "id": "pybasic_str_choice_011",
+    "title": "字符串重复操作",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "easy",
+    "description": "表达式 `\"Go\" * 3` 的值是？",
+    "options": [
+      "A. 'GoGoGo'",
+      "B. 'Go Go Go'",
+      "C. 'Go3'",
+      "D. ('Go', 'Go', 'Go')"
+    ],
+    "correct_answer": "A",
+    "explanation": "星号 `*` 用于重复字符串，\"Go\"重复3次拼接成'GoGoGo'。不会自动添加空格，也不会转成数字拼接。",
+    "knowledge_points": [
+      "字符串重复"
+    ],
+    "hint": "* 重复并拼接字符串。"
+  },
+  {
+    "id": "pybasic_str_choice_012",
+    "title": "join方法拼接",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "以下代码的输出是什么？\n```python\nprint(\"-\".join([\"2023\", \"08\", \"15\"]))\n```",
+    "options": [
+      "A. '2023-08-15'",
+      "B. '2023 08 15'",
+      "C. ['2023', '-', '08', '-', '15']",
+      "D. '20230815'"
+    ],
+    "correct_answer": "A",
+    "explanation": "`str.join(iterable)` 用调用字符串作为分隔符，将可迭代对象中的字符串元素拼接起来。这里用'-'连接列表项，结果为'2023-08-15'。选项B缺少分隔符，C是插入分隔符的列表，D无分隔符拼接。",
+    "knowledge_points": [
+      "join方法",
+      "字符串拼接"
+    ],
+    "hint": "分隔符应用于每对元素之间。"
+  },
+  {
+    "id": "pybasic_str_choice_013",
+    "title": "高效字符串拼接方式",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "在处理大量字符串拼接（如循环中拼接成最终大字符串）时，以下哪种方式通常效率最高？",
+    "options": [
+      "A. 在循环中不断使用 `+` 拼接",
+      "B. 使用 `str.join()` 方法拼接列表",
+      "C. 使用 `*` 重复操作符",
+      "D. 使用 `%` 格式化操作符"
+    ],
+    "correct_answer": "B",
+    "explanation": "循环中使用 `+` 会不断创建新字符串对象，导致大量内存分配，效率低下。`str.join()` 会预先计算总长度一次分配内存，效率高。C和D不适合大量拼接场景。",
+    "knowledge_points": [
+      "join高效拼接",
+      "字符串拼接性能"
+    ],
+    "hint": "join预先分配内存，避免中间对象。"
+  },
+  {
+    "id": "pybasic_str_choice_014",
+    "title": "find方法查找子串",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "easy",
+    "description": "代码 `\"hello world\".find(\"world\")` 的返回值是？",
+    "options": [
+      "A. 6",
+      "B. 7",
+      "C. True",
+      "D. -1"
+    ],
+    "correct_answer": "A",
+    "explanation": "`find` 返回子串首次出现的起始索引。'hello world'中，'world'起始于索引6（'w'在位置6）。索引位置：h(0)e(1)l(2)l(3)o(4)空格(5)w(6)…。若未找到则返回-1。",
+    "knowledge_points": [
+      "find方法",
+      "字符串查找"
+    ],
+    "hint": "find返回索引，未找到返回-1。"
+  },
+  {
+    "id": "pybasic_str_choice_015",
+    "title": "rfind从右侧查找",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "在 `\"hello world\".rfind(\"l\")` 中，返回结果是？",
+    "options": [
+      "A. 2",
+      "B. 3",
+      "C. 9",
+      "D. -1"
+    ],
+    "correct_answer": "C",
+    "explanation": "`rfind` 返回子串最后出现的位置索引。'hello world'字符索引：h(0)e(1)l(2)l(3)o(4)空格(5)w(6)o(7)r(8)l(9)d(10)。最后一个'l'出现在索引9。",
+    "knowledge_points": [
+      "rfind方法",
+      "字符串查找"
+    ],
+    "hint": "rfind从右向左找，返回正索引。"
+  },
+  {
+    "id": "pybasic_str_choice_016",
+    "title": "index查找失败异常",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "执行 `\"hello world\".index(\"x\")` 会引发什么异常？",
+    "options": [
+      "A. AttributeError",
+      "B. IndexError",
+      "C. ValueError",
+      "D. TypeError"
+    ],
+    "correct_answer": "C",
+    "explanation": "`index` 方法在找不到子串时抛出 `ValueError`，而 `find` 返回 -1。IndexError是索引越界异常，这里不会发生。子串未找到属于值错误。",
+    "knowledge_points": [
+      "index方法",
+      "ValueError"
+    ],
+    "hint": "未找到子串抛出ValueError。"
+  },
+  {
+    "id": "pybasic_str_choice_017",
+    "title": "count统计子串次数",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "表达式 `\"banana\".count(\"ana\")` 的值是多少？",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. 3",
+      "D. 0"
+    ],
+    "correct_answer": "A",
+    "explanation": "`count` 统计非重叠子串出现次数。'banana'中，'ana'从索引1开始出现一次（b a n a n a 中 a n a 在1-3），后面剩余部分为'na'，无法再形成不重叠的'ana'，所以只计1次。若重叠计数会是2，但Python不会叠计。",
+    "knowledge_points": [
+      "count方法",
+      "非重叠统计"
+    ],
+    "hint": "count统计非重叠出现次数。"
+  },
+  {
+    "id": "pybasic_str_choice_018",
+    "title": "replace替换操作",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "easy",
+    "description": "代码 `\"Hello Java\".replace(\"Java\", \"Python\")` 的结果是？",
+    "options": [
+      "A. 'Hello Python'",
+      "B. 'Hello Java'",
+      "C. 'Python'",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "`replace` 将字符串中的'Java'替换为'Python'，返回新字符串'Hello Python'。原始字符串不变但这里直接返回结果。",
+    "knowledge_points": [
+      "replace方法"
+    ],
+    "hint": "替换所有匹配项，返回新串。"
+  },
+  {
+    "id": "pybasic_str_choice_019",
+    "title": "split分割字符串",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "`\"a,b,c\".split(\",\")` 的执行结果是什么？",
+    "options": [
+      "A. 'a,b,c'",
+      "B. 'a b c'",
+      "C. ['a', 'b', 'c']",
+      "D. ['a,b,c']"
+    ],
+    "correct_answer": "C",
+    "explanation": "`split(\",\")` 以逗号为分隔符分割字符串，返回列表，元素为分隔后的子串。结果为 ['a','b','c']。",
+    "knowledge_points": [
+      "split方法"
+    ],
+    "hint": "split返回列表，去除分隔符。"
+  },
+  {
+    "id": "pybasic_str_choice_020",
+    "title": "split默认空白分割",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "`\"Python   is    fun\".split()` 的执行结果是什么？",
+    "options": [
+      "A. ['Python', 'is', 'fun']",
+      "B. ['Python', '', '', 'is', '', '', '', 'fun']",
+      "C. ['Python   is    fun']",
+      "D. 'Python is fun'"
+    ],
+    "correct_answer": "A",
+    "explanation": "不带参数的 `split()` 会以任意连续空白字符（空格、制表符等）作为分隔符进行分割，并忽略空字符串。结果 ['Python','is','fun']。指定分隔符时会严格按分隔符分割并保留空串。",
+    "knowledge_points": [
+      "split方法",
+      "默认空白分割"
+    ],
+    "hint": "无参split合并连续空白。"
+  },
+  {
+    "id": "pybasic_str_choice_021",
+    "title": "rsplit最大分割次数",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "hard",
+    "description": "字符串 `\"one,two,three,four\".rsplit(\",\", 2)` 的返回值是？",
+    "options": [
+      "A. ['one', 'two', 'three,four']",
+      "B. ['one,two', 'three', 'four']",
+      "C. ['one', 'two', 'three', 'four']",
+      "D. ['one,two,three', 'four']"
+    ],
+    "correct_answer": "B",
+    "explanation": "`rsplit(sep, maxsplit)` 从右侧开始分割，最多分割 `maxsplit` 次。此处 `rsplit(\",\",2)` 从右侧分割2次：第一次分割得 ['one,two,three','four']，第二次对左侧'one,two,three'再分割得 ['one,two','three','four']。选项A是`split(\",\",2)`的结果，C是无限制分割，D是`rsplit(\",\",1)`的结果。",
+    "knowledge_points": [
+      "rsplit方法",
+      "最大分割次数"
+    ],
+    "hint": "从右向左分割，次数限制。"
+  },
+  {
+    "id": "pybasic_str_choice_022",
+    "title": "upper大小写转换",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "easy",
+    "description": "代码 `\"python\".upper()` 的返回值是什么？",
+    "options": [
+      "A. 'PYTHON'",
+      "B. 'Python'",
+      "C. 'python'",
+      "D. 'pYTHON'"
+    ],
+    "correct_answer": "A",
+    "explanation": "`upper()` 方法将字符串所有小写字母转换为大写，返回新字符串 'PYTHON'。",
+    "knowledge_points": [
+      "upper方法",
+      "大小写转换"
+    ],
+    "hint": "将所有字母转为大写。"
+  },
+  {
+    "id": "pybasic_str_choice_023",
+    "title": "swapcase大小写互换",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "`\"Hello World\".swapcase()` 的返回值是什么？",
+    "options": [
+      "A. 'hELLO wORLD'",
+      "B. 'HELLO WORLD'",
+      "C. 'hello world'",
+      "D. 'Hello world'"
+    ],
+    "correct_answer": "A",
+    "explanation": "`swapcase()` 将字符串中的大写字母转为小写，小写字母转为大写。'H'->'h', 'ello'->'ELLO', ' ' 不变, 'W'->'w', 'orld'->'ORLD'，结果为 'hELLO wORLD'。",
+    "knowledge_points": [
+      "swapcase方法",
+      "大小写转换"
+    ],
+    "hint": "大写变小写，小写变大写。"
+  },
+  {
+    "id": "pybasic_str_choice_024",
+    "title": "title方法首字母大写",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "`\"hello world\".title()` 的返回值是什么？",
+    "options": [
+      "A. 'Hello World'",
+      "B. 'Hello world'",
+      "C. 'HELLO WORLD'",
+      "D. 'hello world'"
+    ],
+    "correct_answer": "A",
+    "explanation": "`title()` 将每个单词的首字母大写，其余字母小写。'hello' -> 'Hello', 'world' -> 'World'，结果为 'Hello World'。",
+    "knowledge_points": [
+      "title方法",
+      "大小写转换"
+    ],
+    "hint": "每个单词首字母大写。"
+  },
+  {
+    "id": "pybasic_str_choice_025",
+    "title": "capitalize方法注意点",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "hard",
+    "description": "以下代码的输出结果是？\n```python\nprint(\"hello WORLD\".capitalize())\n```",
+    "options": [
+      "A. 'Hello world'",
+      "B. 'Hello WORLD'",
+      "C. 'HELLO WORLD'",
+      "D. 'Hello World'"
+    ],
+    "correct_answer": "A",
+    "explanation": "`capitalize()` 将字符串的第一个字符转为大写，其余所有字符转为小写。首字母 'h' -> 'H'，剩余 'ELLO WORLD' -> 'ello world'，结果为 'Hello world'。注意不同于 `title()`，后者每个单词首字母大写。",
+    "knowledge_points": [
+      "capitalize方法",
+      "大小写转换"
+    ],
+    "hint": "仅首字母大写，其余全小写。"
+  }
+]

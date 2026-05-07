@@ -1,0 +1,548 @@
+[
+  {
+    "id": "regex_coding_001",
+    "title": "提取手机号码",
+    "type": "coding",
+    "category": "正则表达式",
+    "difficulty": "easy",
+    "description": "编写一个正则表达式，提取给定字符串中的所有中国大陆手机号码（1开头，第二位为3-9，后跟9位数字）。",
+    "code_template": "import re\n\n# 在此填写你的正则表达式\npattern = r''\n\n# 以下代码自动运行测试\ntest_string = '我的号码是13812345678，备用号码15900001111'\nmatches = re.findall(pattern, test_string)\nprint(matches)",
+    "test_cases": [
+      {
+        "input": "",
+        "expected_output": "['13812345678', '15900001111']",
+        "rule": "exact"
+      }
+    ],
+    "knowledge_points": [
+      "量词",
+      "字符类",
+      "findall"
+    ],
+    "hint": "手机号格式：1[3-9]xxxxxxxxx。可以用字符类 [3-9] 代表第二位取值范围，用 \\d{9} 表示后续9位数字。"
+  },
+  {
+    "id": "pybasic_str_choice_026",
+    "title": "strip方法指定字符",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "easy",
+    "description": "代码 `\"...example...\".strip(\".\")` 的结果是？",
+    "options": [
+      "A. 'example'",
+      "B. '...example'",
+      "C. '.example.'",
+      "D. 'example...'"
+    ],
+    "correct_answer": "A",
+    "explanation": "strip('.') 移除字符串两端所有的点号，中间的example保留，结果为'example'。注意不会移除中间的字符。选项B只移除了右侧点号，C只移除了一侧，D只移除了左侧，均不符合strip两端移除的行为。",
+    "knowledge_points": [
+      "strip方法",
+      "去除指定字符"
+    ],
+    "hint": "strip移除两端字符。"
+  },
+  {
+    "id": "pybasic_str_choice_027",
+    "title": "startswith接受元组参数",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "easy",
+    "description": "已知 `s = \"hello.py\"`，以下哪个选项返回 `True`？",
+    "options": [
+      "A. s.startswith(('.py', '.txt'))",
+      "B. s.startswith(('he', 'hi'))",
+      "C. s.startswith('el')",
+      "D. s.startswith(('.he'))"
+    ],
+    "correct_answer": "B",
+    "explanation": "startswith 可以接受元组作为前缀检查，若有一个元素匹配则返回True。s='hello.py' 以'he'开头，满足元组('he','hi')中的'he'，因此B正确。A中元组都是后缀，不匹配；C从索引0开始检查，'el'不是开头；D是字符串'.he'，不匹配。",
+    "knowledge_points": [
+      "startswith方法",
+      "元组参数"
+    ],
+    "hint": "元组中任意一个前缀匹配即可。"
+  },
+  {
+    "id": "pybasic_str_choice_028",
+    "title": "isdigit判断数字串",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "easy",
+    "description": "下列代码输出什么？\n```python\nprint(\"123\".isdigit(), \"12a\".isdigit())\n```",
+    "options": [
+      "A. True True",
+      "B. False True",
+      "C. True False",
+      "D. False False"
+    ],
+    "correct_answer": "C",
+    "explanation": "isdigit() 判断字符串是否全部由数字字符组成。\"123\"全是数字，返回True；\"12a\"包含字母'a'，返回False。所以输出 True False。",
+    "knowledge_points": [
+      "isdigit方法"
+    ],
+    "hint": "纯数字才返回True。"
+  },
+  {
+    "id": "pybasic_str_choice_029",
+    "title": "f-string简单使用",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "easy",
+    "description": "以下代码输出是什么？\n```python\nname = \"Python\"\nprint(f\"Hello {name}!\")\n```",
+    "options": [
+      "A. Hello {name}!",
+      "B. Hello Python!",
+      "C. f'Hello Python!'",
+      "D. 'Hello Python!'"
+    ],
+    "correct_answer": "B",
+    "explanation": "f-string 会将花括号内的变量替换为对应的值，因此 f\"Hello {name}!\" 将 name 的值 'Python' 替换进去，结果为 'Hello Python!'。选项A未替换格式；选项C带有 f 前缀；选项D带引号，但 print 不会输出引号。",
+    "knowledge_points": [
+      "f-string格式化"
+    ],
+    "hint": "花括号内变量会替换为值。"
+  },
+  {
+    "id": "pybasic_str_choice_030",
+    "title": "lstrip移除左侧字符集",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "执行 `\"abacada\".lstrip(\"abc\")` 的结果是？",
+    "options": [
+      "A. 'da'",
+      "B. 'ada'",
+      "C. 'd'",
+      "D. 'acada'"
+    ],
+    "correct_answer": "A",
+    "explanation": "lstrip(\"abc\") 会从字符串左侧开始，只要字符在给定字符集\"abc\"中就移除，直到遇到不在该集合中的字符为止。'abacada' 左侧依次是 'a','b','a','c','a'，都属于{a,b,c}，都被移除，遇到'd'停止，保留右侧的'da'。选项B考虑不完整，C过度移除，D只移了第一个'a'。",
+    "knowledge_points": [
+      "lstrip方法",
+      "字符集"
+    ],
+    "hint": "移除左侧任意在字符集中的字符。"
+  },
+  {
+    "id": "pybasic_str_choice_031",
+    "title": "isspace判断空白字符",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "下列代码的输出是？\n```python\nprint(' '.isspace(), '\\n'.isspace(), ''.isspace(), 'abc'.isspace())\n```",
+    "options": [
+      "A. True True False False",
+      "B. True True True False",
+      "C. False True False False",
+      "D. True False False False"
+    ],
+    "correct_answer": "A",
+    "explanation": "字符串' '（空格）和'\\n'（换行）都由空白字符组成且非空，isspace()返回True；''空字符串没有字符，返回False；'abc'含有非空白字符，返回False。输出为True True False False。选项B错误地认为空字符串为True，C和D部分错误。",
+    "knowledge_points": [
+      "isspace方法",
+      "空白字符"
+    ],
+    "hint": "空字符串和含非空白字符返回False。"
+  },
+  {
+    "id": "pybasic_str_choice_032",
+    "title": "rstrip移除右侧字符集",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "执行 `\"report.pdf\".rstrip(\".pdf\")` 的结果是？",
+    "options": [
+      "A. 'report'",
+      "B. 'repor'",
+      "C. 'report.pdf'",
+      "D. 'report.t'"
+    ],
+    "correct_answer": "A",
+    "explanation": "rstrip(\".pdf\") 将右侧的字符'.','p','d','f'依次移除，遇到't'（不在集合中）停止。原字符串 'report.pdf' 右侧依次是 f,d,p,. 均被移除，剩下 'report'。注意不是移除子串，而是移除字符集。选项B误将't'移除；C没有移除；D错误。",
+    "knowledge_points": [
+      "rstrip方法",
+      "指定字符集"
+    ],
+    "hint": "rstrip移除字符集，非子串。"
+  },
+  {
+    "id": "pybasic_str_choice_033",
+    "title": "转义字符的len计算",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "`len(\"a\\nb\")` 的值是多少？",
+    "options": [
+      "A. 2",
+      "B. 3",
+      "C. 4",
+      "D. 1"
+    ],
+    "correct_answer": "B",
+    "explanation": "字符串 \"a\\nb\" 包含三个字符：'a'、换行符'\\n'和'b'。\\n是一个转义字符，代表一个字符，因此长度为3。选项A误将\\n当两个字符计算；C错误；D完全错误。",
+    "knowledge_points": [
+      "转义字符",
+      "len函数"
+    ],
+    "hint": "转义序列只算一个字符。"
+  },
+  {
+    "id": "pybasic_str_choice_034",
+    "title": "原始字符串的作用",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "`print(r\"c:\\name\\test\")` 的输出是什么？",
+    "options": [
+      "A. c:\\name\\test",
+      "B. c:\\name\\test (但实际换行)",
+      "C. c:",
+      "D. 报语法错误"
+    ],
+    "correct_answer": "A",
+    "explanation": "原始字符串前缀 r 使得反斜杠被当作普通字符，不再解释转义序列。因此 \\n 不是换行，而是两个字符：反斜杠和n。输出正好是 c:\\name\\test。选项B误解，C不完整，D不会报错。",
+    "knowledge_points": [
+      "原始字符串",
+      "转义字符"
+    ],
+    "hint": "r字符串中反斜杠是普通字符。"
+  },
+  {
+    "id": "pybasic_str_choice_035",
+    "title": "in操作符与空字符串",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "执行 `print('' in 'abc')` 的结果是？",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. 报错",
+      "D. None"
+    ],
+    "correct_answer": "A",
+    "explanation": "空字符串被认为是任何字符串的子串，因此 '' in 'abc' 返回 True。这是一个常见陷阱。选项B误认为不包含；C不会报错；D不是返回值。",
+    "knowledge_points": [
+      "in操作符",
+      "空字符串"
+    ],
+    "hint": "空字符串总是在任何字符串中。"
+  },
+  {
+    "id": "pybasic_str_choice_036",
+    "title": "字符串字典序比较",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "表达式 `'10' > '2'` 的结果是什么？",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. 报错",
+      "D. 不确定"
+    ],
+    "correct_answer": "B",
+    "explanation": "字符串比较是按字典序逐字符比较的。'10'的第一个字符'1'与'2'比较，因为'1'的Unicode码点小于'2'，所以整个'10'小于'2'，因此 '10' > '2' 为False。选项A误以为会比较数值；C和D错误。",
+    "knowledge_points": [
+      "字符串比较",
+      "字典序"
+    ],
+    "hint": "字符逐个比较，非数值比较。"
+  },
+  {
+    "id": "pybasic_str_choice_037",
+    "title": "chr函数基本使用",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "easy",
+    "description": "`chr(65)` 的返回值是？",
+    "options": [
+      "A. 'A'",
+      "B. 65",
+      "C. '65'",
+      "D. 'a'"
+    ],
+    "correct_answer": "A",
+    "explanation": "chr() 根据Unicode码点返回对应字符，65对应大写字母'A'。选项B是整数；C是字符串'65'；D是小写'a'。",
+    "knowledge_points": [
+      "chr函数",
+      "字符编码"
+    ],
+    "hint": "65码点是A。"
+  },
+  {
+    "id": "pybasic_str_choice_038",
+    "title": "f-string中花括号转义",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "hard",
+    "description": "以下代码的输出是什么？\n```python\nname = \"Alice\"\nprint(f\"{{name}} is {name}\")\n```",
+    "options": [
+      "A. {name} is Alice",
+      "B. {{name}} is Alice",
+      "C. Alice is Alice",
+      "D. 语法错误"
+    ],
+    "correct_answer": "A",
+    "explanation": "在 f-string 中，双花括号 `{{` 和 `}}` 被转义成单个花括号，不会被解释为表达式。因此 `{{name}}` 输出 `{name}` 字面量，而 `{name}` 被替换为 'Alice'。最终结果为 '{name} is Alice'。选项B包含了双花括号；C误认为两个都替换；D不会报错。",
+    "knowledge_points": [
+      "f-string转义",
+      "花括号"
+    ],
+    "hint": "双花括号输出单个花括号。"
+  },
+  {
+    "id": "pybasic_str_choice_039",
+    "title": "中文字符串的编码报错",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "hard",
+    "description": "假设执行 `'你好'.encode('ascii')`，会发生什么？",
+    "options": [
+      "A. 返回 b'\\xe4\\xbd\\xa0\\xe5\\xa5\\xbd'",
+      "B. 引发 UnicodeDecodeError",
+      "C. 引发 UnicodeEncodeError",
+      "D. 返回 b'你好'"
+    ],
+    "correct_answer": "C",
+    "explanation": "ASCII编码只能编码0-127之间的字符，无法处理中文字符。调用encode('ascii')时，因为字符'你好'的Unicode码点超出ASCII范围，会引发UnicodeEncodeError。选项A是UTF-8编码结果；选项B是解码错误；D类型不对。",
+    "knowledge_points": [
+      "encode方法",
+      "UnicodeEncodeError"
+    ],
+    "hint": "ASCII无法编码非ASCII字符。"
+  },
+  {
+    "id": "pybasic_str_choice_040",
+    "title": "%字符串格式化",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "代码 `print(\"结果：%d 和 %s\" % (42, \"测试\"))` 的输出是？",
+    "options": [
+      "A. 结果：42 和 \"测试\"",
+      "B. 结果：42 和 测试",
+      "C. 结果：%d 和 %s",
+      "D. 报类型错误"
+    ],
+    "correct_answer": "B",
+    "explanation": "%格式化将%d替换为整数42，%s替换为字符串'测试'，结果为'结果：42 和 测试'。注意输出不带引号。选项A多了引号；C未替换；D不会报错。",
+    "knowledge_points": [
+      "%格式化",
+      "占位符"
+    ],
+    "hint": "%d表示整数，%s表示字符串。"
+  },
+  {
+    "id": "pybasic_str_choice_041",
+    "title": "空字符串的布尔值",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "easy",
+    "description": "`bool(\"\")` 的返回值是什么？",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. None",
+      "D. 报错"
+    ],
+    "correct_answer": "B",
+    "explanation": "空字符串被视为假值，因此 bool(\"\") 返回 False。这是Python的常见规则。选项A误认为空字符串为真。",
+    "knowledge_points": [
+      "空字符串",
+      "布尔值"
+    ],
+    "hint": "空字符串为假。"
+  },
+  {
+    "id": "pybasic_str_choice_042",
+    "title": "字符串是可迭代对象",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "easy",
+    "description": "以下代码是否能正确执行？\n```python\nfor i in \"Python\":\n    print(i)\n```",
+    "options": [
+      "A. 能，依次输出字母 P y t h o n",
+      "B. 能，但只输出 'Python'",
+      "C. 不能，字符串不可迭代",
+      "D. 能，但输出索引数字"
+    ],
+    "correct_answer": "A",
+    "explanation": "Python字符串是一个字符序列，可迭代，for循环会依次取每个字符并打印，因此输出每个字母一行。选项B误解；C错误；D不会产生索引。",
+    "knowledge_points": [
+      "字符串可迭代",
+      "for循环"
+    ],
+    "hint": "字符串可逐个字符迭代。"
+  },
+  {
+    "id": "pybasic_str_choice_043",
+    "title": "转义双引号输出",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "执行 `print(\"\\\"Hello\\\"\")` 的输出是什么？",
+    "options": [
+      "A. \"Hello\"",
+      "B. Hello",
+      "C. \\\"Hello\\\"",
+      "D. 语法错误"
+    ],
+    "correct_answer": "A",
+    "explanation": "字符串中的 \\\" 是转义的双引号，print 时会输出双引号字符，因此结果为 \"Hello\"（包含双引号）。选项B缺少引号；C输出反斜杠；D不会语法错误。",
+    "knowledge_points": [
+      "转义字符",
+      "双引号"
+    ],
+    "hint": "\\\" 表示一个双引号字符。"
+  },
+  {
+    "id": "pybasic_str_choice_044",
+    "title": "format与ord结合",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "下列代码输出什么？\n```python\nprint(\"ASCII of A is {:d}\".format(ord('A')))\n```",
+    "options": [
+      "A. ASCII of A is 65",
+      "B. ASCII of A is A",
+      "C. 报错",
+      "D. ASCII of A is 65.0"
+    ],
+    "correct_answer": "A",
+    "explanation": "ord('A')返回整数65，然后format用{:d}指定十进制整数格式，插入字符串，结果为'ASCII of A is 65'。选项B未转换；C不会报错；D是浮点数格式不对。",
+    "knowledge_points": [
+      "str.format格式化",
+      "ord函数",
+      "格式规范"
+    ],
+    "hint": "ord('A')是65，:d表示整数。"
+  },
+  {
+    "id": "pybasic_str_choice_045",
+    "title": "转义字符单引号",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "表达式 `'It\\'s a pen'` 表示的字符串内容是？",
+    "options": [
+      "A. It's a pen",
+      "B. It\\'s a pen",
+      "C. It\\\\'s a pen",
+      "D. 语法错误"
+    ],
+    "correct_answer": "A",
+    "explanation": "在单引号包围的字符串中，使用 \\' 表示单引号字面量，因此整个字符串实际代表 It's a pen。选项B误解转义，C加入了多余反斜杠，D不会语法错误。",
+    "knowledge_points": [
+      "转义字符",
+      "单引号"
+    ],
+    "hint": "\\' 在单引号字符串中表示单引号。"
+  },
+  {
+    "id": "pybasic_str_choice_046",
+    "title": "strip默认移除空白",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "easy",
+    "description": "`'   hello   '.strip()` 输出什么？",
+    "options": [
+      "A. 'hello'",
+      "B. '   hello'",
+      "C. 'hello   '",
+      "D. '   hello   '"
+    ],
+    "correct_answer": "A",
+    "explanation": "无参数的 strip() 会移除字符串两端的空白字符（空格等），中间的空白保留，所以结果是 'hello'。选项B只移除右侧，C只移除左侧，D未移除。",
+    "knowledge_points": [
+      "strip方法",
+      "空白字符"
+    ],
+    "hint": "strip无参去除两端空白。"
+  },
+  {
+    "id": "pybasic_str_choice_047",
+    "title": "encode转换为bytes",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "easy",
+    "description": "执行 `'hello'.encode()` 会得到什么？",
+    "options": [
+      "A. b'hello'",
+      "B. 'hello'",
+      "C. 'bhello'",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "字符串的 encode() 方法默认使用 utf-8 编码，返回 bytes 对象 b'hello'。选项B是字符串；C格式错误；D不会报错。",
+    "knowledge_points": [
+      "encode方法",
+      "bytes类型"
+    ],
+    "hint": "encode返回以b开头的bytes。"
+  },
+  {
+    "id": "pybasic_str_choice_048",
+    "title": "f-string中嵌套引号规则",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "hard",
+    "description": "以下哪个f-string表达式在传统Python版本（3.11及更早）中合法且能正常输出 `He said \"hello\"`？\n```python\n# A\nf\"He said \\\"hello\\\"\"\n# B\nf'He said \"hello\"'\n# C\nf\"He said \"hello\"\"\n# D\nf'He said 'hello''\n```",
+    "options": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "correct_answer": "B",
+    "explanation": "在Python 3.11及之前，f-string内部不允许使用反斜杠转义字符如\\\"，因此A会引发语法错误。B使用单引号作为f-string定界符，内部双引号无需转义，语法正确，输出He said \"hello\"。C和D引号未正确匹配。注意Python 3.12起A也合法，但按常见考题语境选B。",
+    "knowledge_points": [
+      "f-string引号",
+      "转义字符限制"
+    ],
+    "hint": "让内外引号类型不同。"
+  },
+  {
+    "id": "pybasic_str_choice_049",
+    "title": "endswith接受元组",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "medium",
+    "description": "检查文件名是否以 .jpg 或 .png 结尾，用 `f.endswith(('.jpg', '.png'))` 是否正确？",
+    "options": [
+      "A. 正确，如果文件后缀是'.jpg'返回True",
+      "B. 错误，endswith不能接受元组",
+      "C. 只能用于startswith",
+      "D. 会抛异常"
+    ],
+    "correct_answer": "A",
+    "explanation": "endswith 同样可以接受元组参数，检查字符串是否以其中任何一个元素结尾。因此该写法正确，可判断文件扩展名。选项B错误；C误解；D不会异常。",
+    "knowledge_points": [
+      "endswith方法",
+      "元组参数"
+    ],
+    "hint": "endswith同样支持元组。"
+  },
+  {
+    "id": "pybasic_str_choice_050",
+    "title": "字符串比较与Unicode陷阱",
+    "type": "choice",
+    "category": "Python基础-字符串",
+    "difficulty": "hard",
+    "description": "比较 `'abc' > 'ABC'` 的结果是？",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. 结果为0",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "字符比较基于Unicode码点。小写字母'a'的码点97 > 'A'的码点65，因此第一个字符就决定了大小，'abc' > 'ABC' 为True。选项B误以为大小写无关；C混淆比较结果类型；D不会报错。",
+    "knowledge_points": [
+      "字符串比较",
+      "Unicode码点"
+    ],
+    "hint": "小写字母码点大于大写字母。"
+  }
+]

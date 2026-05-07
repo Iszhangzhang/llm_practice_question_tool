@@ -1,0 +1,1114 @@
+[
+  {
+    "id": "linux_admin_choice_001",
+    "title": "useradd -m 创建用户家目录",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "执行 `useradd -m alice` 命令，`-m` 选项的作用是什么？",
+    "options": [
+      "A. 指定用户主组",
+      "B. 创建用户家目录",
+      "C. 设置用户登录Shell",
+      "D. 设定用户密码"
+    ],
+    "correct_answer": "B",
+    "explanation": "`-m` 选项表示创建用户的同时在 `/home/` 下创建该用户的家目录。选项 A 对应 `-g`，C 对应 `-s`，D 需要用 `passwd` 命令设置。因此 B 正确。",
+    "knowledge_points": [
+      "useradd：-m 创建家目录"
+    ],
+    "hint": "m 即 make home"
+  },
+  {
+    "id": "linux_admin_choice_002",
+    "title": "useradd 指定主组与附加组",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "执行 `useradd -m -s /bin/bash -g users -G wheel,docker bob`，关于bob用户的描述正确的是？",
+    "options": [
+      "A. 主组为wheel，附加组为users",
+      "B. 主组为users，附加组为wheel和docker",
+      "C. 主组为bob，无附加组",
+      "D. 命令错误，-g 与 -G 不能同时使用"
+    ],
+    "correct_answer": "B",
+    "explanation": "`-g` 指定用户的主组，`-G` 指定附加组（多个组用逗号分隔）。该命令设置主组为 users，附加组包括 wheel 和 docker，两者可以共存。选项 A 主组错，C 忽略指定组，D 错误。",
+    "knowledge_points": [
+      "useradd：-g 主组，-G 附加组"
+    ],
+    "hint": "主组用 -g，额外组用 -G"
+  },
+  {
+    "id": "linux_admin_choice_003",
+    "title": "usermod -aG 追加附加组",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "用户tom原本附加组为audio，现要追加video组而不删除原有附加组，正确的命令是？",
+    "options": [
+      "A. usermod -G video tom",
+      "B. usermod -aG video tom",
+      "C. usermod -g video tom",
+      "D. usermod -a -g video tom"
+    ],
+    "correct_answer": "B",
+    "explanation": "`usermod -G` 直接设置会替换原有附加组，加上 `-a` 选项才能将新组追加到现有附加组列表。`-g` 修改主组，不会影响附加组。因此 B 正确。选项 A 会覆盖原组，C 改主组，D 语法错。",
+    "knowledge_points": [
+      "usermod：-aG 追加附加组"
+    ],
+    "hint": "-a 表示 append"
+  },
+  {
+    "id": "linux_admin_choice_004",
+    "title": "usermod -L/-U 锁定与解锁密码",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "管理员需要暂时锁定用户 jane 的密码登录，应使用哪条命令？",
+    "options": [
+      "A. usermod -U jane",
+      "B. usermod -L jane",
+      "C. passwd -l jane",
+      "D. userdel jane"
+    ],
+    "correct_answer": "B",
+    "explanation": "`usermod -L` 用于锁定用户密码（在密码前加 !），`-U` 解锁。虽然 `passwd -l` 也可锁定，但题目明确要求使用 `usermod` 命令，且选项 C 属于 passwd 范畴。D 是删除用户。所以 B 正确。",
+    "knowledge_points": [
+      "usermod：-L/-U 锁定/解锁"
+    ],
+    "hint": "L 表示 Lock"
+  },
+  {
+    "id": "linux_admin_choice_005",
+    "title": "groupadd 创建组",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "创建一个名为 developers 的新组，正确的命令是？",
+    "options": [
+      "A. groupadd developers",
+      "B. groupdel developers",
+      "C. usermod -g developers",
+      "D. newgrp developers"
+    ],
+    "correct_answer": "A",
+    "explanation": "`groupadd` 命令用于在系统中创建新的群组。选项 B 用于删除组，C 是修改用户的主组，D 是临时切换当前会话的组身份。因此 A 正确。",
+    "knowledge_points": [
+      "groupadd 创建组"
+    ],
+    "hint": "添加组用 add"
+  },
+  {
+    "id": "linux_admin_choice_006",
+    "title": "查看组信息 /etc/group",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "要查看当前系统中所有组的信息，应查看哪个文件？",
+    "options": [
+      "A. /etc/passwd",
+      "B. /etc/group",
+      "C. /etc/shadow",
+      "D. /etc/hosts"
+    ],
+    "correct_answer": "B",
+    "explanation": "`/etc/group` 文件存储了系统所有组的信息，每行一个组，格式为组名:口令:GID:成员列表。选项 A 存储用户账号，C 存储加密密码，D 是主机名映射。因此 B 正确。",
+    "knowledge_points": [
+      "/etc/group 查看组信息"
+    ],
+    "hint": "组信息在 /etc/group"
+  },
+  {
+    "id": "linux_admin_choice_007",
+    "title": "id 命令查看用户所属组",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "执行 `id -nG bob` 命令，输出的是什么？",
+    "options": [
+      "A. bob 的 UID 和 GID",
+      "B. bob 的用户名和主组名",
+      "C. bob 所属的所有组名",
+      "D. bob 的主组 GID"
+    ],
+    "correct_answer": "C",
+    "explanation": "`id -G` 显示用户所有组的 GID，结合 `-n` 选项则显示组名，因此 `-nG` 输出 bob 所属的所有组名。选项 A 是默认 `id` 输出，B 需要 `-ng`，D 是 `-g` 的输出。",
+    "knowledge_points": [
+      "id 命令查看用户所属组"
+    ],
+    "hint": "-nG 显示所有组名"
+  },
+  {
+    "id": "linux_admin_choice_008",
+    "title": "passwd 修改当前用户密码",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "普通用户 alice 修改自己的登录密码，应执行以下哪条命令？",
+    "options": [
+      "A. passwd alice",
+      "B. passwd",
+      "C. sudo passwd",
+      "D. usermod -p"
+    ],
+    "correct_answer": "B",
+    "explanation": "普通用户执行 `passwd`（不带参数）即可修改自己的密码，系统会提示输入当前密码和新密码。选项 A 是 root 修改指定用户密码，C 是提权操作，D 不能用于修改密码。因此 B 正确。",
+    "knowledge_points": [
+      "passwd 修改密码"
+    ],
+    "hint": "不带用户名就是改自己"
+  },
+  {
+    "id": "linux_admin_choice_009",
+    "title": "su - 切换用户并加载环境",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "从 root 切换到 bob 用户并加载 bob 完整的环境变量，正确命令是？",
+    "options": [
+      "A. su bob",
+      "B. su - bob",
+      "C. sudo bob",
+      "D. su -c bob"
+    ],
+    "correct_answer": "B",
+    "explanation": "`su - bob` (或 `su -l bob`) 模拟一次完整的登录，会加载 bob 的环境变量、家目录等。`su bob` 仅切换用户身份而不改变环境。选项 C 错误，D 是执行命令。因此 B 正确。",
+    "knowledge_points": [
+      "su - 切换用户并加载环境"
+    ],
+    "hint": "带 - 表示 login shell"
+  },
+  {
+    "id": "linux_admin_choice_010",
+    "title": "sudo 免密码配置",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "要让用户 jack 无需密码执行所有 sudo 命令，应在 /etc/sudoers 中添加哪一行？",
+    "options": [
+      "A. jack ALL=(ALL) ALL",
+      "B. jack ALL=(ALL) NOPASSWD: ALL",
+      "C. %wheel ALL=(ALL) NOPASSWD: ALL",
+      "D. jack=NOPASSWD:ALL"
+    ],
+    "correct_answer": "B",
+    "explanation": "sudoers 中用户授权格式为 用户 主机=(运行身份) 命令标签。`NOPASSWD:` 表示该条目不需要密码验证。选项 A 缺少 NOPASSWD 仍需密码，C 是授予 wheel 组，D 格式错误。",
+    "knowledge_points": [
+      "sudo 提权，/etc/sudoers 配置"
+    ],
+    "hint": "用 NOPASSWD 标签免密码"
+  },
+  {
+    "id": "linux_admin_choice_011",
+    "title": "ps aux 列 %MEM 含义",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "`ps aux` 输出中的 `%MEM` 列表示什么？",
+    "options": [
+      "A. 进程的 CPU 使用率",
+      "B. 进程占用的物理内存百分比",
+      "C. 进程的虚拟内存大小",
+      "D. 进程启动时间"
+    ],
+    "correct_answer": "B",
+    "explanation": "`%MEM` 是该进程占用的物理内存占系统总内存的百分比。%CPU 是 CPU 使用率，VSZ 是虚拟内存，START 或 TIME 是时间相关列。因此 B 正确。",
+    "knowledge_points": [
+      "ps aux 字段：%MEM"
+    ],
+    "hint": "%MEM 是内存的百分比"
+  },
+  {
+    "id": "linux_admin_choice_012",
+    "title": "查找进程 PID 的方法",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "以下哪个命令无法获取名为 nginx 进程的 PID？",
+    "options": [
+      "A. pgrep nginx",
+      "B. ps -ef | grep nginx | awk '{print $2}'",
+      "C. ps aux | grep [n]ginx | awk '{print $2}'",
+      "D. which nginx"
+    ],
+    "correct_answer": "D",
+    "explanation": "`which nginx` 仅查找可执行文件的路径，不返回进程 PID。A 的 `pgrep` 直接返回 PID；B 和 C 通过 `ps` 和 `awk` 组合均可提取 PID（C 使用 `[n]ginx` 技巧避免 grep 自身）。故 D 无法获取 PID。",
+    "knowledge_points": [
+      "pgrep 根据名称查找进程PID",
+      "ps 搭配 awk 提取 PID"
+    ],
+    "hint": "which 只找程序路径"
+  },
+  {
+    "id": "linux_admin_choice_013",
+    "title": "ps aux STAT 列含义",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "在 `ps aux` 输出中，某进程的 STAT 列显示为 `Ss`，这表示什么状态？",
+    "options": [
+      "A. 进程正在运行中",
+      "B. 进程处于可中断睡眠状态且是会话领导者",
+      "C. 进程已停止",
+      "D. 进程为僵尸进程"
+    ],
+    "correct_answer": "B",
+    "explanation": "`S` 表示可中断睡眠，`s`（小写）表示该进程是会话领导者（session leader）。`R` 表示运行，`T` 停止，`Z` 僵尸。因此 `Ss` 表示睡眠状态的会话领导者。",
+    "knowledge_points": [
+      "ps aux 字段 STAT"
+    ],
+    "hint": "大写 S 睡眠，小写 s 会话领导"
+  },
+  {
+    "id": "linux_admin_choice_014",
+    "title": "top 按 CPU 排序",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "在 top 交互界面中，按哪个键可以将进程列表按 CPU 使用率降序排列？",
+    "options": [
+      "A. M",
+      "B. P",
+      "C. T",
+      "D. R"
+    ],
+    "correct_answer": "B",
+    "explanation": "top 中按 `P` 键按 CPU 使用率排序，`M` 按内存排序，`T` 按运行时间排序，`R` 为 renice 调整优先级。因此 B 正确。",
+    "knowledge_points": [
+      "top 常用按键：P按CPU排序"
+    ],
+    "hint": "P 代表 Processor"
+  },
+  {
+    "id": "linux_admin_choice_015",
+    "title": "top 退出方式",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "在 top 运行时，要优雅地退出程序，应按哪个键？",
+    "options": [
+      "A. Esc",
+      "B. q",
+      "C. Ctrl+C",
+      "D. Ctrl+D"
+    ],
+    "correct_answer": "B",
+    "explanation": "top 的退出命令是 `q`，程序会正常退出。Ctrl+C 发送中断信号也可退出，但 `q` 是 top 定义的正确退出按键。Esc 和 Ctrl+D 不能退出 top。因此 B 正确。",
+    "knowledge_points": [
+      "top 常用按键：q退出"
+    ],
+    "hint": "按 q 退出"
+  },
+  {
+    "id": "linux_admin_choice_016",
+    "title": "load average 含义",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "top 输出的 `load average: 0.50, 0.75, 1.00`，这三个数值分别表示什么时间段的平均负载？",
+    "options": [
+      "A. 1秒、5秒、15秒",
+      "B. 1分钟、5分钟、15分钟",
+      "C. 1分钟、10分钟、30分钟",
+      "D. 立即、短期、长期"
+    ],
+    "correct_answer": "B",
+    "explanation": "load average 的三个值分别表示过去 1 分钟、5 分钟和 15 分钟的平均运行队列长度（可运行和不可中断的进程数）。选项 A 的时间单位错误，C 和 D 不是标准时间间隔。",
+    "knowledge_points": [
+      "load average 含义"
+    ],
+    "hint": "1, 5, 15 分钟"
+  },
+  {
+    "id": "linux_admin_choice_017",
+    "title": "kill 默认信号",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "执行 `kill 1234` 时，默认向 PID 为 1234 的进程发送什么信号？",
+    "options": [
+      "A. SIGKILL (9)",
+      "B. SIGTERM (15)",
+      "C. SIGHUP (1)",
+      "D. SIGINT (2)"
+    ],
+    "correct_answer": "B",
+    "explanation": "kill 默认发送 SIGTERM (15)，进程可以捕获此信号并做清理后再退出。SIGKILL (9) 需要显式指定 -9，SIGHUP 常用于重新加载配置，SIGINT 相当于 Ctrl+C。因此 B 正确。",
+    "knowledge_points": [
+      "kill 发送信号（默认SIGTERM 15）"
+    ],
+    "hint": "默认信号是 TERM"
+  },
+  {
+    "id": "linux_admin_choice_018",
+    "title": "pkill 强制终止进程",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "要强制终止所有名为 httpd 的进程，应该使用哪条命令？",
+    "options": [
+      "A. kill httpd",
+      "B. pkill -9 httpd",
+      "C. killall httpd",
+      "D. pgrep httpd"
+    ],
+    "correct_answer": "B",
+    "explanation": "`pkill -9 httpd` 发送 SIGKILL 信号给所有名为 httpd 的进程，实现强制终止。选项 C 的 `killall httpd` 默认发送 SIGTERM，不是强制终止；A 语法错误；D 只是查找 PID。因此 B 正确。",
+    "knowledge_points": [
+      "pkill 根据进程名发信号",
+      "信号：-9 SIGKILL"
+    ],
+    "hint": "pkill -9 强制杀死"
+  },
+  {
+    "id": "linux_admin_choice_019",
+    "title": "kill -l 显示信号列表",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "执行 `kill -l` 命令的作用是什么？",
+    "options": [
+      "A. 列出所有正在运行的进程",
+      "B. 显示系统支持的所有信号名称列表",
+      "C. 打印上一次发送的信号",
+      "D. 锁定终端"
+    ],
+    "correct_answer": "B",
+    "explanation": "`kill -l` 会列出当前系统支持的所有信号名称和对应的编号，如 1) SIGHUP, 9) SIGKILL 等。选项 A 是 `ps` 的功能，C 和 D 与命令无关。因此 B 正确。",
+    "knowledge_points": [
+      "信号列表：kill -l"
+    ],
+    "hint": "-l 列出信号"
+  },
+  {
+    "id": "linux_admin_choice_020",
+    "title": "df -h 查看磁盘使用",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "要以人类可读的格式查看所有文件系统的磁盘使用情况，应使用哪条命令？",
+    "options": [
+      "A. du -sh",
+      "B. df -h",
+      "C. lsblk",
+      "D. fdisk -l"
+    ],
+    "correct_answer": "B",
+    "explanation": "`df -h` 显示已挂载文件系统的磁盘总容量、已用、可用及挂载点，并以 KB/MB/GB 单位显示。选项 A 用于查看目录大小，C 列出块设备，D 显示分区表。因此 B 正确。",
+    "knowledge_points": [
+      "df -h 查看分区磁盘使用情况"
+    ],
+    "hint": "df 看磁盘分区用量"
+  },
+  {
+    "id": "linux_admin_choice_021",
+    "title": "du -sh 统计目录大小",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "要查看 /var/log 目录下每个子目录所占用的磁盘空间总和，正确的命令是？",
+    "options": [
+      "A. du -sh /var/log/*",
+      "B. du -ah /var/log",
+      "C. df -h /var/log",
+      "D. ls -lh /var/log"
+    ],
+    "correct_answer": "A",
+    "explanation": "`du -sh /var/log/*` 会对 /var/log 下的每个文件和目录输出总大小（-s 汇总，-h 可读性）。选项 B 列出所有文件不含汇总，C 查看的是整个分区使用情况，D 列出文件详情但不统计子目录及其内容大小。",
+    "knowledge_points": [
+      "du -sh 目录/* 统计目录大小"
+    ],
+    "hint": "-s 总结，-h 人类可读"
+  },
+  {
+    "id": "linux_admin_choice_022",
+    "title": "du 结合 sort 找最大目录",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "要找出当前目录下占用空间最大的前3个子目录，正确的命令序列是？",
+    "options": [
+      "A. du -s * | sort -rn | head -3",
+      "B. du -sh * | sort -h | head -3",
+      "C. du -s * | sort -n | tail -3",
+      "D. du -sh * | head -3"
+    ],
+    "correct_answer": "A",
+    "explanation": "`du -s *` 输出每个子目录的大小（以 KB 为单位），`sort -rn` 按数值逆序排列（最大在前），`head -3` 取前三。选项 B 的 `sort -h` 可处理带单位的大小但兼容性较差；C 为正序取末尾三个（但也是最大，不过排序后取 tail -3 也可，但不如 A 规范，且需用 -rn 更直观）；D 未排序，只取头部不一定最大。故 A 最稳妥。",
+    "knowledge_points": [
+      "du 结合 sort 排序"
+    ],
+    "hint": "先用 -s 取数值再排序"
+  },
+  {
+    "id": "linux_admin_choice_023",
+    "title": "mount 挂载设备",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "将设备 /dev/sdb1 挂载到 /mnt/backup 目录，正确的命令是？",
+    "options": [
+      "A. mount /mnt/backup /dev/sdb1",
+      "B. mount /dev/sdb1 /mnt/backup",
+      "C. mount /dev/sdb1",
+      "D. /dev/sdb1 mount /mnt/backup"
+    ],
+    "correct_answer": "B",
+    "explanation": "`mount` 命令的基本格式是 `mount 设备 挂载点`，即设备在前，挂载点在后。选项 A 顺序颠倒，C 缺少挂载点会使用 /etc/fstab 中的设定（若未配置则失败），D 语法错误。",
+    "knowledge_points": [
+      "mount 挂载设备"
+    ],
+    "hint": "设备在前，挂载点在后"
+  },
+  {
+    "id": "linux_admin_choice_024",
+    "title": "lsblk 查看块设备",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "要列出系统所有块设备（磁盘、分区）的树形结构及挂载点，应使用哪条命令？",
+    "options": [
+      "A. fdisk -l",
+      "B. lsblk",
+      "C. df -h",
+      "D. du -a /"
+    ],
+    "correct_answer": "B",
+    "explanation": "`lsblk` 以树状结构列出所有块设备及其挂载点、大小等信息，适合查看磁盘层次。`fdisk -l` 显示分区表，不包含树形挂载关系；`df -h` 只显示已挂载文件系统；`du` 统计文件大小。因此 B 正确。",
+    "knowledge_points": [
+      "lsblk 列出块设备详情"
+    ],
+    "hint": "lsblk 列出块设备树"
+  },
+  {
+    "id": "linux_admin_choice_025",
+    "title": "/etc/fstab 字段含义",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "在 /etc/fstab 文件中，每行有6个字段，其中第二个字段代表什么？",
+    "options": [
+      "A. 文件系统类型",
+      "B. 挂载点",
+      "C. 设备标识",
+      "D. 挂载选项"
+    ],
+    "correct_answer": "B",
+    "explanation": "/etc/fstab 格式为：设备标识  挂载点  文件系统类型  挂载选项  dump  pass。因此第二个字段是挂载点。选项 A 是第三字段，C 是第一字段，D 是第四字段。",
+    "knowledge_points": [
+      "/etc/fstab 格式与含义"
+    ],
+    "hint": "第二个字段是挂载点"
+  },
+  {
+    "id": "linux_admin_choice_026",
+    "title": "综合：usermod 追加组并验证",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "hard",
+    "description": "用户 alice 当前仅属于 alice 组。将其加入 sudo 组并验证，正确的命令序列是？",
+    "options": [
+      "A. usermod -aG sudo alice && id alice",
+      "B. usermod -G sudo alice && groups alice",
+      "C. groupadd sudo alice",
+      "D. sudo usermod -aG sudo alice"
+    ],
+    "correct_answer": "A",
+    "explanation": "使用 `usermod -aG sudo alice` 追加附加组，然后用 `id alice` 查看用户的 UID 和所有组以验证。选项 B 的 `-G` 未加 `-a` 会替换原有组，丢失 alice 主组；C 命令语法错误；D 使用 sudo 执行 usermod 可能因 alice 不在 sudoers 而失败。",
+    "knowledge_points": [
+      "usermod -aG 追加附加组",
+      "id 命令查看用户所属组"
+    ],
+    "hint": "验证用 id 命令"
+  },
+  {
+    "id": "linux_admin_choice_027",
+    "title": "综合：pgrep 统计进程数",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "要准确统计当前系统中名为 sshd 的进程个数，最佳命令是？",
+    "options": [
+      "A. ps aux | grep sshd | wc -l",
+      "B. pgrep -c sshd",
+      "C. ps -ef | grep -c sshd",
+      "D. A 和 B 都可以"
+    ],
+    "correct_answer": "B",
+    "explanation": "`pgrep -c` 直接返回匹配进程的计数，精确无误。选项 A 的 `ps | grep` 管道会统计到 grep 自身，除非用 `grep [s]shd` 等技巧过滤，直接使用会多计数；C 的 `grep -c` 统计匹配行数也会包含 grep 进程。因此 B 是最佳且准确的命令。",
+    "knowledge_points": [
+      "pgrep 根据名称查找进程PID",
+      "ps 与 grep 管道统计"
+    ],
+    "hint": "pgrep -c 直接计数"
+  },
+  {
+    "id": "linux_admin_choice_028",
+    "title": "综合：top 内发送信号",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "在 top 界面中，要终止某个进程，按 `k` 键后需要依次输入什么？",
+    "options": [
+      "A. 进程的 PID 和信号编号",
+      "B. 进程名称",
+      "C. 信号编号和进程 PID",
+      "D. 进程 UID"
+    ],
+    "correct_answer": "A",
+    "explanation": "按 `k` 后，top 首先提示输入要终止的进程 PID，然后再询问发送哪个信号（默认为 15，即 SIGTERM），因此需要先输入 PID 再输入信号。选项 B 不需要名称，C 顺序错误，D 无关。",
+    "knowledge_points": [
+      "top 交互按键 k 发送信号",
+      "信号与进程终止"
+    ],
+    "hint": "先 PID 后信号"
+  },
+  {
+    "id": "linux_admin_choice_029",
+    "title": "ping -c 指定发送次数",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "要仅发送4个ICMP回显请求到8.8.8.8，应使用哪条命令？",
+    "options": [
+      "A. ping -c 4 8.8.8.8",
+      "B. ping -n 4 8.8.8.8",
+      "C. ping -t 4 8.8.8.8",
+      "D. ping -s 4 8.8.8.8"
+    ],
+    "correct_answer": "A",
+    "explanation": "ping 的 -c 选项指定发送数据包的次数，执行4次后自动停止。选项 B 的 -n 是数字输出不解析主机名，C 的 -t 常用于Windows持续ping，D 的 -s 是设置包大小。因此 A 正确。",
+    "knowledge_points": [
+      "ping 用法：-c 指定次数"
+    ],
+    "hint": "-c 代表 count"
+  },
+  {
+    "id": "linux_admin_choice_030",
+    "title": "ping -i 与 -W 超时设置",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "执行 `ping -c 3 -i 0.5 -W 1 10.0.0.1`，以下描述正确的是？",
+    "options": [
+      "A. 每0.5秒发一次包，若1秒内未响应则视为超时",
+      "B. 每1秒发一次包，共发3次，超时时间为0.5秒",
+      "C. 连续发送3个包，间隔0.5秒，总执行时间1秒",
+      "D. 发送3次，超时1秒，并静默输出"
+    ],
+    "correct_answer": "A",
+    "explanation": "-i 0.5 表示发送间隔为0.5秒，-W 1 表示等待每个回复的超时时间为1秒，-c 3 发送3个包。选项 B 把 -i 和 -W 混淆；C 的总执行时间计算错误；D 无静默选项。",
+    "knowledge_points": [
+      "ping：-i 间隔，-W 超时"
+    ],
+    "hint": "-i interval, -W timeout"
+  },
+  {
+    "id": "linux_admin_choice_031",
+    "title": "traceroute 的作用",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "traceroute 命令的主要功能是什么？",
+    "options": [
+      "A. 测试网络带宽",
+      "B. 显示数据包到达目标所经过的路由节点",
+      "C. 查看本地网络接口配置",
+      "D. 下载远程文件"
+    ],
+    "correct_answer": "B",
+    "explanation": "traceroute 利用 ICMP 或 UDP 逐步增加 TTL 值来探测中间路由器的 IP 地址，从而显示路径。选项 A 是测速工具，C 是 ifconfig/ip 命令，D 是 wget/curl。",
+    "knowledge_points": [
+      "traceroute 简单概念"
+    ],
+    "hint": "追踪路由路径"
+  },
+  {
+    "id": "linux_admin_choice_032",
+    "title": "ping 协议与防火墙",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "ping 命令使用哪种网络协议，并且默认的目标端口是什么？",
+    "options": [
+      "A. TCP 协议，端口 80",
+      "B. UDP 协议，端口 53",
+      "C. ICMP 协议，无端口概念",
+      "D. HTTP 协议，端口 443"
+    ],
+    "correct_answer": "C",
+    "explanation": "ping 使用 ICMP (Internet Control Message Protocol) 回显请求和应答，工作在 IP 层，不涉及传输层的端口。选项 A、B、D 均为有端口的具体应用协议。",
+    "knowledge_points": [
+      "理解ICMP"
+    ],
+    "hint": "ICMP 不涉及端口"
+  },
+  {
+    "id": "linux_admin_choice_033",
+    "title": "curl -o 保存文件",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "使用 curl 将 http://example.com/file.zip 下载并保存为 local.zip，正确命令是？",
+    "options": [
+      "A. curl -o local.zip http://example.com/file.zip",
+      "B. curl -O http://example.com/file.zip",
+      "C. curl -L -o local.zip http://example.com/file.zip",
+      "D. curl http://example.com/file.zip > local.zip"
+    ],
+    "correct_answer": "A",
+    "explanation": "`curl -o 文件名` 将下载内容写入指定文件，选项 A 正确。B 使用 `-O` 会按远程文件名保存，即 file.zip；C 添加了 `-L` 跟随重定向，但题目未要求重定向，非最佳答案；D 重定向输出也正确，但可能导致二进制损坏（在某些 shell 中），不如 -o 稳妥。题目要求选择正确命令，A 为标准写法。",
+    "knowledge_points": [
+      "curl 基本用法：-o 写入文件"
+    ],
+    "hint": "小写 o 指定文件名"
+  },
+  {
+    "id": "linux_admin_choice_034",
+    "title": "curl -L 跟随重定向",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "若 curl 请求一个返回 301/302 重定向的 URL，要自动跟随至最终内容，需添加哪个选项？",
+    "options": [
+      "A. -R",
+      "B. -L",
+      "C. -f",
+      "D. -v"
+    ],
+    "correct_answer": "B",
+    "explanation": "`-L` 或 `--location` 让 curl 自动跟随 HTTP 重定向。选项 A 不存在，C 的 `-f` 是失败时静默，D 的 `-v` 显示详细信息但不自动跟随。因此 B 正确。",
+    "knowledge_points": [
+      "curl：-L 跟随重定向"
+    ],
+    "hint": "L 代表 Location"
+  },
+  {
+    "id": "linux_admin_choice_035",
+    "title": "wget -c 断点续传",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "下载大文件时中断了，要从中断处继续下载，wget 应使用哪个选项？",
+    "options": [
+      "A. -r",
+      "B. -c",
+      "C. -b",
+      "D. -q"
+    ],
+    "correct_answer": "B",
+    "explanation": "wget 的 `-c` 或 `--continue` 选项开启断点续传，从已下载的部分继续。选项 A 是递归下载，C 是后台执行，D 是静默模式。",
+    "knowledge_points": [
+      "wget：-c 断点续传"
+    ],
+    "hint": "c 是 continue"
+  },
+  {
+    "id": "linux_admin_choice_036",
+    "title": "curl -O 使用远程文件名",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "执行 `curl -O http://example.com/files/report.pdf` 后，本地保存的文件名是什么？",
+    "options": [
+      "A. report.pdf",
+      "B. files/report.pdf",
+      "C. http_example_com_files_report.pdf",
+      "D. 无文件保存"
+    ],
+    "correct_answer": "A",
+    "explanation": "`-O` (大写) 使用远程 URL 的文件名部分保存，即 `report.pdf`，不会创建目录结构。选项 B 错误，curl 不会创建目录；C 是 wget 有时递归的行为；D 不会不保存。",
+    "knowledge_points": [
+      "curl：-O 使用远程文件名"
+    ],
+    "hint": "大写 O 保留远程文件名"
+  },
+  {
+    "id": "linux_admin_choice_037",
+    "title": "curl 与 wget 递归下载区别",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "hard",
+    "description": "需要一个工具递归下载整个网站页面，最适合的是？",
+    "options": [
+      "A. wget -r",
+      "B. curl -r",
+      "C. wget -O all.html",
+      "D. curl -L -O"
+    ],
+    "correct_answer": "A",
+    "explanation": "wget 原生支持递归下载 (`-r`)，可以下载网页及其链接的资源。curl 本身不支持递归，需要借助其他工具。选项 B 不存在，C 只是输出到指定文件，D 是跟随重定向和保存文件，不递归。因此 A 正确。",
+    "knowledge_points": [
+      "wget：-r 递归",
+      "curl 与 wget 的主要区别"
+    ],
+    "hint": "wget 支持递归，curl 不直接支持"
+  },
+  {
+    "id": "linux_admin_choice_038",
+    "title": "netstat -tuln 查看监听端口",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "要查看本机所有正在监听的 TCP 和 UDP 端口（数字形式），应使用哪个命令？",
+    "options": [
+      "A. netstat -tun",
+      "B. netstat -tuln",
+      "C. netstat -a",
+      "D. netstat -tln"
+    ],
+    "correct_answer": "B",
+    "explanation": "`-tuln` 组合：t (TCP), u (UDP), l (listening), n (numeric)，显示所有监听状态的 TCP/UDP 端口且不解析服务名。选项 A 缺少 l，会显示所有连接；C 包含非监听连接；D 缺少 udp。",
+    "knowledge_points": [
+      "netstat 常用选项：-tuln"
+    ],
+    "hint": "tuln 覆盖 TCP/UDP 监听数字"
+  },
+  {
+    "id": "linux_admin_choice_039",
+    "title": "netstat -p 显示进程",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "执行 `netstat -tulnp` 时，`-p` 选项的作用是什么？",
+    "options": [
+      "A. 显示数据包统计",
+      "B. 显示使用该 socket 的进程名和 PID",
+      "C. 对端口进行优先级排序",
+      "D. 显示路由表"
+    ],
+    "correct_answer": "B",
+    "explanation": "netstat 的 `-p` 选项会显示每个 socket 对应的程序名和 PID，需要 root 权限才能显示所有进程信息。选项 A 是 -s，C 和 D 无此功能。因此 B 正确。",
+    "knowledge_points": [
+      "netstat：-p 显示进程名"
+    ],
+    "hint": "p 即 program"
+  },
+  {
+    "id": "linux_admin_choice_040",
+    "title": "ss 作为 netstat 替代",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "以下哪条 ss 命令可提供与 `netstat -tuln` 类似的输出？",
+    "options": [
+      "A. ss -tun",
+      "B. ss -tuln",
+      "C. ss -a",
+      "D. ss -l"
+    ],
+    "correct_answer": "B",
+    "explanation": "`ss -tuln` 与 netstat -tuln 参数含义相同：t (TCP)，u (UDP)，l (listening)，n (numeric)，因此功能对等。选项 A 缺少 l 只显示所有 TCP/UDP；C 所有连接；D 仅监听但可能只 TCP。",
+    "knowledge_points": [
+      "ss：-tuln 作为 netstat 的替代"
+    ],
+    "hint": "ss 参数与 netstat 类似"
+  },
+  {
+    "id": "linux_admin_choice_041",
+    "title": "查看端口 80 占用",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "要找出占用 80 端口的进程，以下哪条命令最精确？",
+    "options": [
+      "A. ss -tuln | grep :80",
+      "B. netstat -tunlp | grep :80",
+      "C. ps aux | grep 80",
+      "D. lsof -i :80"
+    ],
+    "correct_answer": "D",
+    "explanation": "`lsof -i :80` 专门列出使用 80 端口的进程，输出详细且精确。选项 A 缺少 -p 无法看到进程；B 中 grep :80 可能匹配到含 80 的其他端口（如 8080），不够精确需要写成 `:80 `，且需要 root 权限；C 与端口无关。因此 D 最为直接精确。",
+    "knowledge_points": [
+      "netstat 与 ss 查看端口占用",
+      "lsof 查看端口"
+    ],
+    "hint": "lsof -i :端口直接显示进程"
+  },
+  {
+    "id": "linux_admin_choice_042",
+    "title": "ss 过滤 ESTABLISHED 连接",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "使用 ss 命令仅显示状态为 ESTABLISHED 的 TCP 连接，应使用：",
+    "options": [
+      "A. ss -tan state established",
+      "B. ss -t state established",
+      "C. ss -t -s ESTAB",
+      "D. ss -ant | grep ESTAB"
+    ],
+    "correct_answer": "A",
+    "explanation": "`ss -tan state established` 中 `-t` 表示 TCP，`-a` 所有，`-n` 数字，`state established` 过滤已建立的连接。选项 B 缺少 `-a` 可能不全；C 语法错误；D 通过 grep 也能实现，但 ss 内置过滤更高效，且题目要求用 ss 的过滤功能，A 为标准写法。",
+    "knowledge_points": [
+      "ss 进阶：过滤连接状态"
+    ],
+    "hint": "使用 state 关键字过滤"
+  },
+  {
+    "id": "linux_admin_choice_043",
+    "title": "ss 统计 TIME-WAIT 连接数",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "hard",
+    "description": "要统计当前系统中处于 TIME-WAIT 状态的 TCP 连接数量，最佳命令是？",
+    "options": [
+      "A. ss -tan state time-wait | wc -l",
+      "B. ss -tan | grep TIME-WAIT | wc -l",
+      "C. netstat -n | grep TIME_WAIT | wc -l",
+      "D. ss -t state time-wait | wc -l"
+    ],
+    "correct_answer": "A",
+    "explanation": "`ss -tan state time-wait` 直接过滤出 TIME-WAIT 连接，然后管道统计行数。注意状态名在 ss 中是 'time-wait'（带连字符）。选项 B 用 grep 也可，但不如 A 原生支持快；C 的 netstat 状态显示为 TIME_WAIT（下划线），需正确匹配，且输出格式不同；D 缺少 `-a` 可能遗漏非监听连接。A 为最佳实践。",
+    "knowledge_points": [
+      "ss 进阶：过滤连接状态",
+      "组合与排查场景"
+    ],
+    "hint": "ss 内建 state 过滤再 wc -l"
+  },
+  {
+    "id": "linux_admin_choice_044",
+    "title": "ss 与 grep 配合查找某 IP 连接",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "需要查看本地与 192.168.1.100 的所有 TCP 连接，使用哪条命令？",
+    "options": [
+      "A. ss -tn | grep '192.168.1.100'",
+      "B. ss -tan state established | grep 192.168.1.100",
+      "C. netstat -tun | grep 192.168.1.100",
+      "D. 任何包含 192.168.1.100 的命令都可以"
+    ],
+    "correct_answer": "A",
+    "explanation": "`ss -tn` 显示所有 TCP 连接（数字格式），配合 `grep '192.168.1.100'` 可过滤出与该 IP 相关的连接，包括临时端口，简便有效。B 仅显示已建立连接，可能遗漏其他状态；C 的 netstat 也可，但不如 A 简洁且 ss 是现代工具。题目问“使用哪条命令”，A 是直接有效且无多余状态限制的通用方法。",
+    "knowledge_points": [
+      "ss 进阶：与 grep 配合使用"
+    ],
+    "hint": "先显示全部 TCP，再用 grep 过滤"
+  },
+  {
+    "id": "linux_admin_choice_045",
+    "title": "uname -a 输出信息",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "执行 `uname -a` 后，不会包含下列哪项信息？",
+    "options": [
+      "A. 内核版本",
+      "B. 主机名",
+      "C. 硬件架构",
+      "D. CPU 型号"
+    ],
+    "correct_answer": "D",
+    "explanation": "`uname -a` 显示内核名称、主机名、内核版本、内核发行号、硬件架构等，但不包括 CPU 型号（需要查看 /proc/cpuinfo）。选项 A、B、C 均在输出中。因此 D 正确。",
+    "knowledge_points": [
+      "uname -a 查看内核版本及硬件架构"
+    ],
+    "hint": "CPU 型号在 /proc/cpuinfo"
+  },
+  {
+    "id": "linux_admin_choice_046",
+    "title": "free -h 查看内存",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "要查看系统内存总量、已用、可用等信息，且以人类可读格式显示，应使用:",
+    "options": [
+      "A. free",
+      "B. free -m",
+      "C. free -h",
+      "D. top"
+    ],
+    "correct_answer": "C",
+    "explanation": "`free -h` 将数值自动缩放为 KB, MB, GB 等可读格式。选项 A 默认 KB 单位不便于阅读；B 固定 MB；D 的 top 也显示内存但非单独命令。因此 C 正确。",
+    "knowledge_points": [
+      "free -h 查看内存使用"
+    ],
+    "hint": "-h 可读格式"
+  },
+  {
+    "id": "linux_admin_choice_047",
+    "title": "uptime 查看负载",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "`uptime` 命令的输出包含以下哪项信息？",
+    "options": [
+      "A. 当前时间、系统运行时长、登录用户数、平均负载",
+      "B. 内核版本、CPU型号、内存使用",
+      "C. 进程总数、僵尸进程数、CPU使用率",
+      "D. 磁盘 I/O 等待、内存负载、交换使用"
+    ],
+    "correct_answer": "A",
+    "explanation": "uptime 显示当前时间、系统已经运行的时间、当前登录的用户数以及过去1、5、15分钟的平均负载。选项 B 的部分信息来自 uname 和 /proc/cpuinfo；C 来自 top；D 来自 vmstat 等。",
+    "knowledge_points": [
+      "uptime 查看系统运行时长及负载"
+    ],
+    "hint": "显示时间和负载平均值"
+  },
+  {
+    "id": "linux_admin_choice_048",
+    "title": "查看 CPU 详细信息",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "要查看 CPU 的型号名称、核心数、缓存大小等，应查看哪个文件或执行什么命令？",
+    "options": [
+      "A. cat /proc/cpuinfo",
+      "B. lsblk",
+      "C. uname -a",
+      "D. free -h"
+    ],
+    "correct_answer": "A",
+    "explanation": "`/proc/cpuinfo` 包含了每个 CPU 核心的详细信息（型号、核心数、缓存等）。选项 B 的 lsblk 显示块设备，C 的 uname -a 只有内核和架构信息，D 的 free 显示内存。因此 A 正确。",
+    "knowledge_points": [
+      "cat /proc/cpuinfo 查看CPU信息"
+    ],
+    "hint": "CPU 详细信息在 proc 文件系统"
+  },
+  {
+    "id": "linux_admin_choice_049",
+    "title": "hostname 查看主机名",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "easy",
+    "description": "要显示当前系统的主机名，应使用哪条命令？",
+    "options": [
+      "A. whoami",
+      "B. hostname",
+      "C. uname",
+      "D. pwd"
+    ],
+    "correct_answer": "B",
+    "explanation": "`hostname` 打印系统主机名。whoami 显示当前用户名，uname 显示内核信息，pwd 显示当前目录。因此 B 正确。",
+    "knowledge_points": [
+      "hostname 查看主机名"
+    ],
+    "hint": "就是主机名命令本身"
+  },
+  {
+    "id": "linux_admin_choice_050",
+    "title": "磁盘满排查：找出最大文件",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "服务器磁盘空间不足，要快速找出根目录下占用空间最大的前5个文件（不考虑目录），可使用：",
+    "options": [
+      "A. find / -type f -exec du -h {} \\; | sort -rh | head -5",
+      "B. du -ah / | sort -rh | head -5",
+      "C. ls -lhR / | sort -k5 -h | tail -5",
+      "D. du -sh /*"
+    ],
+    "correct_answer": "B",
+    "explanation": "`du -ah /` 列出所有文件和目录的大小（-a 包含文件），然后 `sort -rh` 按人类可读大小逆序，`head -5` 取前5，包含文件。选项 A 的 find -exec du 效率低且输出格式可能不一致；C 的 ls 排序可能会受子目录影响且不准确；D 只显示第一层目录。因此 B 最佳。",
+    "knowledge_points": [
+      "组合与排查场景：磁盘满排查"
+    ],
+    "hint": "用 du -ah 列出所有文件"
+  },
+  {
+    "id": "linux_admin_choice_051",
+    "title": "检查服务端口是否监听",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "要确认 nginx 服务是否正常运行并监听 80 端口，最简单且可靠的命令是？",
+    "options": [
+      "A. ping localhost",
+      "B. curl -I http://localhost",
+      "C. ss -tlnp | grep ':80 '",
+      "D. systemctl status nginx"
+    ],
+    "correct_answer": "C",
+    "explanation": "`ss -tlnp | grep ':80 '` 直接检查 80 端口是否处于 LISTEN 状态并显示绑定进程。A 只能证明 IP 可达；B 的 curl 返回 HTTP 头可能因服务配置或防火墙问题而不完全代表端口监听；D 查看服务状态但可能伪装为 active 而实际端口未绑定。因此端口检查最直接。",
+    "knowledge_points": [
+      "组合与排查场景：检查服务端口是否监听",
+      "ss -tlnp"
+    ],
+    "hint": "直接查端口监听状态"
+  },
+  {
+    "id": "linux_admin_choice_052",
+    "title": "查找并处理僵尸进程",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "hard",
+    "description": "发现系统僵尸进程（Z状态）过多，要找出所有僵尸进程的父进程PID并终止，最佳操作是？",
+    "options": [
+      "A. ps aux | grep -w Z | awk '{print $2}' | xargs kill -9",
+      "B. ps -e -o stat,ppid,pid | grep '^Z' | awk '{print $2}' | xargs kill",
+      "C. killall zombie",
+      "D. top 按 Z 排序后手动 kill"
+    ],
+    "correct_answer": "B",
+    "explanation": "僵尸进程本身不能被直接杀死（已结束），应杀死其父进程让其被 init 收养。`ps -e -o stat,ppid,pid` 输出状态、父进程PID、进程PID，grep '^Z' 过滤僵尸行，awk 提取父进程 PID，然后 kill 父进程。选项 A 直接 kill 僵尸 PID 无效；C 不存在 zombie 进程名；D 无法解决根本，且 top 不能直接杀僵尸。",
+    "knowledge_points": [
+      "组合与排查场景：僵尸进程查找"
+    ],
+    "hint": "杀父进程而不是僵尸本身"
+  },
+  {
+    "id": "linux_admin_choice_053",
+    "title": "批量杀死某进程",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "hard",
+    "description": "需要强制终止所有名为 chrome 的进程，正确的命令是？",
+    "options": [
+      "A. pkill -9 chrome",
+      "B. kill -9 $(pgrep chrome)",
+      "C. killall chrome",
+      "D. kill -9 chrome"
+    ],
+    "correct_answer": "A",
+    "explanation": "`pkill -9 chrome` 直接按名称发送 SIGKILL，准确无误。B 使用命令替换，若进程名含特殊字符可能展开出错，且无法处理同名的参数问题。C 的 killall 默认发送 SIGTERM，不是强制。D 后不跟 PID，语法错误。因此 A 最合适。",
+    "knowledge_points": [
+      "pkill 根据进程名发信号",
+      "组合与排查场景：批量杀死进程"
+    ],
+    "hint": "pkill -9 直接按名强制终止"
+  },
+  {
+    "id": "linux_admin_choice_054",
+    "title": "端口占用杀进程综合",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "已知 8080 端口被占用，要找到占用进程并终止它，以下命令序列哪条是正确的？",
+    "options": [
+      "A. kill $(ss -tlnp | grep ':8080' | awk '{print $NF}' | cut -d, -f1)",
+      "B. lsof -i :8080 | grep LISTEN | awk '{print $2}' | xargs kill",
+      "C. fuser -k 8080/tcp",
+      "D. ss -tlnp | grep :8080 | awk '{print $4}' | xargs kill"
+    ],
+    "correct_answer": "C",
+    "explanation": "`fuser -k 8080/tcp` 是专用于杀死占用指定端口进程的工具，简洁可靠。A 提取 PID 可能因 netstat 列变化失败；B 需要过滤 LISTEN 且 xargs 可能因无 PID 而报错；D 的 $4 是地址列不是进程。因此 C 最准确。",
+    "knowledge_points": [
+      "fuser 杀死端口占用",
+      "组合与排查场景：端口占用杀进程"
+    ],
+    "hint": "fuser -k 专门杀端口进程"
+  },
+  {
+    "id": "linux_admin_choice_055",
+    "title": "下载文件并检查完整性",
+    "type": "choice",
+    "category": "Linux-系统管理",
+    "difficulty": "medium",
+    "description": "wget 下载文件后，希望验证其 MD5 哈希是否与官方提供的一致，以下哪条命令能达到目的？",
+    "options": [
+      "A. wget -c http://example.com/file.iso && md5sum file.iso",
+      "B. curl -O http://example.com/file.iso && md5sum file.iso",
+      "C. wget -O file.iso http://example.com/file.iso ; md5sum file.iso",
+      "D. 以上都可以"
+    ],
+    "correct_answer": "D",
+    "explanation": "所有三个选项都是先下载文件（A 续传，B 使用 curl -O 下载，C 指定输出），然后执行 md5sum 计算哈希进行验证，均可实现目的。答案选 D。",
+    "knowledge_points": [
+      "wget 与 curl 下载",
+      "md5sum 校验"
+    ],
+    "hint": "下载并用 md5sum 计算哈希"
+  }
+]

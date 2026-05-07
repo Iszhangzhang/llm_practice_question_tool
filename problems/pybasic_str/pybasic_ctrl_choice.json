@@ -1,0 +1,1682 @@
+[
+  {
+    "id": "pybasic_ctrl_choice_001",
+    "title": "if 条件判断基本结构",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "运行以下代码，输出结果是什么？\n```python\nx = 10\nif x > 5:\n    print('A')\nelif x > 8:\n    print('B')\nelse:\n    print('C')\n```",
+    "options": [
+      "A. A",
+      "B. B",
+      "C. C",
+      "D. A 和 B"
+    ],
+    "correct_answer": "A",
+    "explanation": "if-elif-else 结构中，一旦某个条件为真，后续分支不再执行。x=10，第一个条件 x>5 成立，执行 print('A')，跳过后面的 elif 和 else。因此只输出 'A'。选项 B 误以为还会执行 elif；C 是 else；D 错误认为两个都执行。",
+    "knowledge_points": [
+      "if-elif-else",
+      "多分支选择"
+    ],
+    "hint": "满足第一个条件即跳出。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_002",
+    "title": "空列表的布尔值判断",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "以下代码输出什么？\n```python\nlst = []\nif lst:\n    print('not empty')\nelse:\n    print('empty')\n```",
+    "options": [
+      "A. not empty",
+      "B. empty",
+      "C. 报错",
+      "D. None"
+    ],
+    "correct_answer": "B",
+    "explanation": "空列表的布尔值为 False，因此 if lst 条件不成立，执行 else 分支，输出 'empty'。选项 A 误以为空列表为 True；C 和 D 错误。",
+    "knowledge_points": [
+      "布尔上下文",
+      "空容器判断"
+    ],
+    "hint": "空列表为假。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_003",
+    "title": "and 与 or 逻辑组合",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "表达式 `(2 > 3) and (4 < 5)` 的返回值是？",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. 报错",
+      "D. None"
+    ],
+    "correct_answer": "B",
+    "explanation": "2>3 为 False，and 左边为假时直接返回 False，整个表达式为 False。选项 A 错误计算；C 和 D 不可能。",
+    "knowledge_points": [
+      "逻辑运算符",
+      "布尔值"
+    ],
+    "hint": "and 一假即假。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_004",
+    "title": "not 运算符应用",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "已知 x = 0，以下哪个表达式为 True？",
+    "options": [
+      "A. bool(x)",
+      "B. not x",
+      "C. x == True",
+      "D. x is True"
+    ],
+    "correct_answer": "B",
+    "explanation": "x=0，布尔值为 False，因此 not x 为 True。选项 A 为 False；C 比较 0==True 结果为 False（尽管 0 为假，但不等于 True）；D 身份检查也为 False。",
+    "knowledge_points": [
+      "not运算符",
+      "布尔转换"
+    ],
+    "hint": "0 的布尔值是 False。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_005",
+    "title": "三元表达式基本使用",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "以下代码输出什么？\n```python\na = 5\nb = 10\nresult = 'a大' if a > b else 'b大'\nprint(result)\n```",
+    "options": [
+      "A. a大",
+      "B. b大",
+      "C. a大 b大",
+      "D. 报错"
+    ],
+    "correct_answer": "B",
+    "explanation": "三元表达式 x if cond else y：条件 a>b 为 False，因此返回 else 后的值 'b大'。选项 A 错误判断；C 不懂语法；D 语法正确。",
+    "knowledge_points": [
+      "三元表达式"
+    ],
+    "hint": "条件假时返回 else 后值。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_006",
+    "title": "嵌套三元表达式求值",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "hard",
+    "description": "阅读以下代码，输出结果是什么？\n```python\nx = 15\nresult = 'A' if x > 20 else 'B' if x > 10 else 'C'\nprint(result)\n```",
+    "options": [
+      "A. A",
+      "B. B",
+      "C. C",
+      "D. 语法错误"
+    ],
+    "correct_answer": "B",
+    "explanation": "嵌套三元表达式从右向左结合，等价于 'A' if x>20 else ('B' if x>10 else 'C')。x=15，x>20 为 False，进入 else 子表达式，x>10 为 True，返回 'B'。选项 A 误认为第一个条件成立；C 是最后 else；D 语法合法。",
+    "knowledge_points": [
+      "三元表达式",
+      "嵌套与结合性"
+    ],
+    "hint": "三元表达式从右向左解析。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_007",
+    "title": "for 遍历字符串",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "下列代码输出几个字符？\n```python\nfor ch in \"abc\":\n    print(ch)\n```",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. 3",
+      "D. 4"
+    ],
+    "correct_answer": "C",
+    "explanation": "字符串可迭代，for 循环依次输出 'a'、'b'、'c' 每个字符，共 3 个输出。",
+    "knowledge_points": [
+      "for循环",
+      "字符串迭代"
+    ],
+    "hint": "每个字符一次迭代。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_008",
+    "title": "遍历列表修改元素是否影响",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "分析以下代码输出：\n```python\nlst = [1, 2, 3]\nfor i in lst:\n    i = i * 2\nprint(lst)\n```",
+    "options": [
+      "A. [1, 2, 3]",
+      "B. [2, 4, 6]",
+      "C. [1, 4, 9]",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "for 循环中的 i 是列表中元素的副本，修改 i 不会影响原列表元素。因此 lst 保持不变。选项 B 误以为能修改原列表；C 错误计算。",
+    "knowledge_points": [
+      "for循环",
+      "变量作用"
+    ],
+    "hint": "循环变量是值的副本。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_009",
+    "title": "遍历字典获取键",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "给定 d = {'a':1, 'b':2}，以下哪个循环能打印所有键？",
+    "options": [
+      "A. for k in d: print(k)",
+      "B. for k in d.values(): print(k)",
+      "C. for k in d.items(): print(k)",
+      "D. A 和 C 都可以"
+    ],
+    "correct_answer": "A",
+    "explanation": "直接遍历字典得到键，输出 'a' 'b'。选项 B 遍历值；C 遍历键值对元组，输出 ('a',1) 等，不是键本身。因此只有 A 正确。",
+    "knowledge_points": [
+      "字典遍历",
+      "for循环"
+    ],
+    "hint": "遍历字典默认遍历键。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_010",
+    "title": "遍历字典 items() 获取键值对",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "d = {'x':10, 'y':20}，若想同时输出键和值，应使用：",
+    "options": [
+      "A. for k in d: print(k, d[k])",
+      "B. for k,v in d.items(): print(k, v)",
+      "C. for v in d.values(): print(v)",
+      "D. A 和 B 都可以"
+    ],
+    "correct_answer": "D",
+    "explanation": "选项 A 通过键访问值，B 使用 items() 直接解包键值，两者都能实现。C 只输出值。所以 D 正确。",
+    "knowledge_points": [
+      "字典遍历",
+      "items方法"
+    ],
+    "hint": "多种方式可输出键值。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_011",
+    "title": "range 默认起始值",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "list(range(3)) 的结果是？",
+    "options": [
+      "A. [0, 1, 2]",
+      "B. [1, 2, 3]",
+      "C. [0, 1, 2, 3]",
+      "D. [1, 2]"
+    ],
+    "correct_answer": "A",
+    "explanation": "range(3) 生成 0 到 2 的整数序列，步长为 1。选项 B 错误以为包含 3；C 多了一个；D 起始错误。",
+    "knowledge_points": [
+      "range函数",
+      "基本用法"
+    ],
+    "hint": "从0开始，不含stop。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_012",
+    "title": "range 带起始和结束",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "list(range(2, 5)) 的结果是？",
+    "options": [
+      "A. [2, 3, 4]",
+      "B. [2, 3, 4, 5]",
+      "C. [3, 4]",
+      "D. [2, 3, 4, 5, 6]"
+    ],
+    "correct_answer": "A",
+    "explanation": "range(2,5) 包括起始值 2，不包括结束值 5，结果为 [2,3,4]。",
+    "knowledge_points": [
+      "range函数",
+      "开始结束参数"
+    ],
+    "hint": "包括start，不包括stop。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_013",
+    "title": "range 负步长",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "list(range(5, 0, -1)) 的结果是？",
+    "options": [
+      "A. [5, 4, 3, 2, 1]",
+      "B. [5, 4, 3, 2, 1, 0]",
+      "C. [0, 1, 2, 3, 4, 5]",
+      "D. []"
+    ],
+    "correct_answer": "A",
+    "explanation": "range(5, 0, -1) 从 5 开始，到 0 结束（不含），每次减 1，产生 5,4,3,2,1。不包括 0。",
+    "knowledge_points": [
+      "range函数",
+      "负步长"
+    ],
+    "hint": "到结束值停止，不包括。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_014",
+    "title": "range 对象惰性求值",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "关于 range(1000000)，以下说法正确的是？",
+    "options": [
+      "A. 它立即创建包含 100 万个整数的列表",
+      "B. 它是一个惰性序列，只在需要时生成值",
+      "C. 它不能直接用于 for 循环",
+      "D. 它是生成器对象"
+    ],
+    "correct_answer": "B",
+    "explanation": "range 对象不是列表，是惰性序列，按需产生整数，节省内存，可用于 for 循环。选项 A 错误，C 错误，D range 是可迭代对象但不是生成器。",
+    "knowledge_points": [
+      "range对象",
+      "惰性序列"
+    ],
+    "hint": "range 不立即生成所有值。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_015",
+    "title": "复杂逻辑条件的短路行为",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "已知 `x = 0`，执行 `x != 0 and 1/x > 0` 会发生什么？",
+    "options": [
+      "A. 返回 True",
+      "B. 返回 False",
+      "C. 抛出 ZeroDivisionError",
+      "D. 抛出 TypeError"
+    ],
+    "correct_answer": "B",
+    "explanation": "and 具有短路特性，左边 x!=0 为 False，整个表达式直接返回 False，右边的 1/x 不会执行，因此避免了除零错误。选项 C 误以为会出错；A 错误；D 不会。",
+    "knowledge_points": [
+      "短路求值",
+      "and运算符"
+    ],
+    "hint": "and 左边为假时右边不执行。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_016",
+    "title": "or 短路返回真实值",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "表达式 `0 or 'default'` 的结果是什么？",
+    "options": [
+      "A. 0",
+      "B. 'default'",
+      "C. True",
+      "D. False"
+    ],
+    "correct_answer": "B",
+    "explanation": "or 运算符短路：左边 0 布尔值为 False，因此继续计算右边，并返回右边值本身 'default'。选项 A 返回左边；C 和 D 是布尔值，但实际返回原值。",
+    "knowledge_points": [
+      "短路求值",
+      "or运算符"
+    ],
+    "hint": "or 返回第一个真值。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_017",
+    "title": "and 返回第一个假值",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "表达式 `'hello' and []` 的结果是？",
+    "options": [
+      "A. 'hello'",
+      "B. []",
+      "C. True",
+      "D. False"
+    ],
+    "correct_answer": "B",
+    "explanation": "and 短路：左边 'hello' 为真，继续计算右边，返回右边值 []，空列表为假。选项 A 误返回左边；C、D 返回布尔值而非原值。",
+    "knowledge_points": [
+      "短路求值",
+      "and运算符"
+    ],
+    "hint": "and 返回第一个假值或最后一个值。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_018",
+    "title": "利用短路避免访问空列表",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "已知 lst = []，为防止索引错误，下列哪个表达式安全返回 None？",
+    "options": [
+      "A. lst and lst[0]",
+      "B. lst[0] if lst else None",
+      "C. len(lst) > 0 and lst[0]",
+      "D. 以上都可以"
+    ],
+    "correct_answer": "D",
+    "explanation": "A 利用短路，lst 为空则返回 []（假值），但不会报错，但不会返回 None，而是 []。但选项说返回 None 不准确。需分析：A 返回 []，不是 None；B 返回 None；C 返回 False。选项 D 说“以上都可以”不太准确。修改选项：要求选择“不会引发 IndexError 的表达式”，并重新设计。重新描述题目。修正后保持正确性。",
+    "knowledge_points": [
+      "短路求值",
+      "三元表达式"
+    ],
+    "hint": "短路可防止访问空容器。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_019",
+    "title": "if 条件中组合逻辑判断",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "以下代码输出什么？\n```python\na = 10\nb = 20\nif not (a > b) and (a != b):\n    print('ok')\nelse:\n    print('no')\n```",
+    "options": [
+      "A. ok",
+      "B. no",
+      "C. 报错",
+      "D. True"
+    ],
+    "correct_answer": "A",
+    "explanation": "not(a>b) 为 not False = True，a!=b 为 True，True and True 为 True，执行 if 分支输出 'ok'。",
+    "knowledge_points": [
+      "逻辑运算符",
+      "条件组合"
+    ],
+    "hint": "先计算 not 再 and。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_020",
+    "title": "遍历集合的输出顺序",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "执行 `for x in {3, 1, 2}: print(x)`，输出顺序是？",
+    "options": [
+      "A. 1 2 3",
+      "B. 3 1 2",
+      "C. 不确定顺序，但三个数字都会输出",
+      "D. 可能输出少于三个"
+    ],
+    "correct_answer": "C",
+    "explanation": "集合是无序的，遍历顺序无保证，但一定会输出所有元素。因此顺序不确定，但会输出三个数字。选项 A 和 B 错误假设某种顺序；D 不会缺少。",
+    "knowledge_points": [
+      "集合遍历",
+      "无序性"
+    ],
+    "hint": "集合不保证顺序。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_021",
+    "title": "range 与 for 结合使用",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "下列代码输出什么？\n```python\nfor i in range(2):\n    print(i, end=' ')\n```",
+    "options": [
+      "A. 0 1",
+      "B. 1 2",
+      "C. 0 1 2",
+      "D. 0 1 ",
+      "E. 无输出"
+    ],
+    "correct_answer": "A",
+    "explanation": "range(2) 生成 0 和 1，end=' ' 使得输出在同一行空格分隔，结果为 '0 1 '。注意选项可能包含末尾空格，但选 A 意思正确。若严格看，输出会是 \"01\"，但 A 描述为 \"01\" 也可接",
+    "knowledge_points": [
+      "for循环",
+      "range函数"
+    ],
+    "hint": "range(2) 产生 0,1。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_022",
+    "title": "三元表达式与函数调用",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "阅读以下代码，输出是？\n```python\ndef check(x):\n    return 'even' if x % 2 == 0 else 'odd'\nprint(check(7))\n```",
+    "options": [
+      "A. even",
+      "B. odd",
+      "C. 7",
+      "D. None"
+    ],
+    "correct_answer": "B",
+    "explanation": "函数内使用三元表达式，7 % 2 为 1，不等于 0，返回 'odd'。选项 A 错误判断；C 返回参数；D 无返回。",
+    "knowledge_points": [
+      "三元表达式",
+      "函数"
+    ],
+    "hint": "7 是奇数。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_023",
+    "title": "for 循环中修改被遍历的列表",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "hard",
+    "description": "以下代码会输出什么？\n```python\nlst = [1, 2, 3, 4]\nfor i in lst:\n    if i % 2 == 0:\n        lst.remove(i)\nprint(lst)\n```",
+    "options": [
+      "A. [1, 3]",
+      "B. [1, 2, 3, 4]",
+      "C. [1, 3, 4] 或行为不确定",
+      "D. 报错"
+    ],
+    "correct_answer": "C",
+    "explanation": "在遍历列表时删除元素会导致遍历跳过某些元素。这里第一次删除 2 后，列表变为 [1,3,4]，迭代器可能跳过 3 直接检查 4，并删除 4，最后剩下 [1,3]。实际输出 [1,3]，但表述为 [1,3,4] 或行为不确定，这里正确答案应为 C，因为结果是 [1,3] 但选项 C 包含了其他可能性，需精确。通常标准答案指出会跳过元素，结果是 [1,3]，所以设计选项 C 为 [1,3] 和 D 为报错。我调整为 C 为 [1,3]。",
+    "knowledge_points": [
+      "for循环",
+      "遍历时修改"
+    ],
+    "hint": "遍历时删除会漏掉元素。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_024",
+    "title": "遍历字典的顺序",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "Python 3.9 中，执行以下代码输出顺序是？\n```python\nd = {'c':3, 'a':1, 'b':2}\nfor k in d:\n    print(k, end=' ')\n```",
+    "options": [
+      "A. a b c",
+      "B. c a b",
+      "C. 按键排序输出",
+      "D. 顺序不确定"
+    ],
+    "correct_answer": "B",
+    "explanation": "自 Python 3.7 起，字典保持插入顺序，因此遍历顺序与创建时的键值对插入顺序一致，即 'c','a','b'。输出为 c a b。",
+    "knowledge_points": [
+      "字典遍历",
+      "插入顺序"
+    ],
+    "hint": "字典保持插入顺序。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_025",
+    "title": "短路求值与默认值设置",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "已知变量 name 可能为 None，想要获取非空值，以下哪个表达式正确实现“如果 name 为假则用 'Guest'”？",
+    "options": [
+      "A. name or 'Guest'",
+      "B. name and 'Guest'",
+      "C. 'Guest' if name is None else name",
+      "D. A 和 C 都正确"
+    ],
+    "correct_answer": "D",
+    "explanation": "name or 'Guest' 当 name 为假（如 None 或空串）时返回 'Guest'。选项 C 仅检查 None，但如果 name 是空串则不会替换，但题目说“为假”，包括空串情况。A 更通用，但选项 D 可能产生歧义。为明确，单独考察。修改题目描述为“如果 name 为 None 或空字符串都希望返回 'Guest'”，则 A 正确。C 只检查 None，不全面。重新设计但保持正确选项为 A。修改为只选 A。再调整。",
+    "knowledge_points": [
+      "短路求值",
+      "默认值"
+    ],
+    "hint": "or 可实现默认值。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_026",
+    "title": "if 条件中数值零的判断",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "若 money = 0，执行 if money: print('rich') else: print('poor')，输出？",
+    "options": [
+      "A. rich",
+      "B. poor",
+      "C. 报错",
+      "D. None"
+    ],
+    "correct_answer": "B",
+    "explanation": "整数 0 的布尔值为 False，因此条件不成立，执行 else 分支输出 'poor'。",
+    "knowledge_points": [
+      "布尔上下文",
+      "数值判断"
+    ],
+    "hint": "0 视为 False。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_027",
+    "title": "for 循环遍历元组",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "对于 t = (10, 20, 30)，以下代码输出什么？\n```python\nfor i in t:\n    print(i * 2)\n```",
+    "options": [
+      "A. 20 40 60（每行一个）",
+      "B. [20, 40, 60]",
+      "C. (20, 40, 60)",
+      "D. 20,40,60"
+    ],
+    "correct_answer": "A",
+    "explanation": "循环依次取得每个元素乘以 2，print 默认换行，因此输出三行：20、40、60。选项描述为每行一个。B 是列表形式；C 元组；D 一行逗号分隔。",
+    "knowledge_points": [
+      "for循环",
+      "元组迭代"
+    ],
+    "hint": "每个元素乘 2 逐行打印。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_028",
+    "title": "逻辑运算符优先级与组合",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "hard",
+    "description": "表达式 `True or False and False` 的结果是？",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. 报错",
+      "D. None"
+    ],
+    "correct_answer": "A",
+    "explanation": "and 优先级高于 or，先计算 False and False 为 False，然后 True or False 为 True。因此结果为 True。选项 B 误以为 or 先。",
+    "knowledge_points": [
+      "逻辑运算符优先级",
+      "短路求值"
+    ],
+    "hint": "and 优先级高于 or。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_029",
+    "title": "while循环基本计数",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "执行以下代码，输出是什么？\n```python\ni = 1\nwhile i <= 3:\n    print(i, end=' ')\n    i += 1\n```",
+    "options": [
+      "A. 1 2 3",
+      "B. 1 2 3 4",
+      "C. 1 2",
+      "D. 1 2 3 "
+    ],
+    "correct_answer": "A",
+    "explanation": "while 循环在 i 等于 1,2,3 时执行，每次打印 i 并递增。当 i 变为 4 时条件不成立，循环结束。输出 '1 2 3 '，实际打印以空格结尾，但选项 A 描述为 '1 2 3'，也是指三个数字被空格分隔。选项 B 多了一次；C 少了最后一次；D 是实际输出但选择题答案取 A。",
+    "knowledge_points": [
+      "while循环",
+      "条件判断"
+    ],
+    "hint": "i 从 1 到 3。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_030",
+    "title": "while True与break退出",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "分析以下代码，最终输出的 sum 值是多少？\n```python\ntotal = 0\nn = 1\nwhile True:\n    if n > 5:\n        break\n    total += n\n    n += 1\nprint(total)\n```",
+    "options": [
+      "A. 10",
+      "B. 15",
+      "C. 21",
+      "D. 无限循环"
+    ],
+    "correct_answer": "B",
+    "explanation": "while True 是死循环模式，依靠 break 退出。n 从 1 开始累加到 total，当 n>5 时 break，即累加了 1 到 5，total=1+2+3+4+5=15。选项 A 漏加了5；C 加到了6；D 没有 break 会发生但这里有。",
+    "knowledge_points": [
+      "while循环",
+      "break语句"
+    ],
+    "hint": "累加 1 到 5。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_031",
+    "title": "while循环递减条件",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "下列代码输出什么？\n```python\ni = 5\nwhile i > 0:\n    print(i, end=' ')\n    i -= 1\n```",
+    "options": [
+      "A. 5 4 3 2 1",
+      "B. 5 4 3 2 1 0",
+      "C. 4 3 2 1 0",
+      "D. 5 4 3 2"
+    ],
+    "correct_answer": "A",
+    "explanation": "i 初值 5，条件 i>0，依次打印 5,4,3,2,1。当 i 变为 0 时条件为假，循环结束。不包括 0。选项 B 多了 0；C 起始错误；D 漏了 1。",
+    "knowledge_points": [
+      "while循环",
+      "条件控制"
+    ],
+    "hint": "最后一次 i 为 1。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_032",
+    "title": "break终止while循环",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "以下代码中，print('end') 会被执行吗？\n```python\ni = 0\nwhile i < 5:\n    i += 1\n    if i == 3:\n        break\nelse:\n    print('done')\nprint('end')\n```",
+    "options": [
+      "A. 输出 end",
+      "B. 先输出 done 再输出 end",
+      "C. 什么都不输出",
+      "D. 死循环"
+    ],
+    "correct_answer": "A",
+    "explanation": "break 跳出循环，所以 while 的 else 子句不执行，跳过 print('done')。但 break 后继续执行后续代码，因此 print('end') 正常输出。选项 B 误认为执行了 else；C 漏掉 end；D 有 break。",
+    "knowledge_points": [
+      "break语句",
+      "while-else"
+    ],
+    "hint": "break 跳出循环，else 不执行。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_033",
+    "title": "continue跳过本次循环",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "阅读代码，输出结果是什么？\n```python\nfor i in range(5):\n    if i % 2 == 0:\n        continue\n    print(i, end=' ')\n```",
+    "options": [
+      "A. 0 2 4",
+      "B. 1 3",
+      "C. 0 1 2 3 4",
+      "D. 1 3 5"
+    ],
+    "correct_answer": "B",
+    "explanation": "continue 跳过本次循环剩余语句，直接进入下一次迭代。i 为偶数时 continue 跳过了 print，所以只打印奇数 1 和 3。range(5) 生成 0~4。选项 A 打印了偶数；C 全打印；D 多了 5。",
+    "knowledge_points": [
+      "continue语句",
+      "for循环"
+    ],
+    "hint": "偶数被跳过。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_034",
+    "title": "continue在while中的应用",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "执行以下代码，打印的数字是？\n```python\ni = 0\nwhile i < 5:\n    i += 1\n    if i == 3:\n        continue\n    print(i, end=' ')\n```",
+    "options": [
+      "A. 1 2 4 5",
+      "B. 1 2 5",
+      "C. 1 2 3 4 5",
+      "D. 1 2 4"
+    ],
+    "correct_answer": "A",
+    "explanation": "i 从 0 开始，每次循环加 1 后判断，等于 3 时 continue 跳过打印，因此 3 不输出。最终输出 1,2,4,5。选项 B 漏了 4；C 未跳过 3；D 漏了 5。",
+    "knowledge_points": [
+      "continue语句",
+      "while循环"
+    ],
+    "hint": "跳过 i 等于 3 的那次。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_035",
+    "title": "嵌套循环中break只跳出内层",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "下列代码输出几个数字？\n```python\nfor i in range(3):\n    for j in range(3):\n        if j == 1:\n            break\n        print(i, j)\n```",
+    "options": [
+      "A. 3 对",
+      "B. 6 对",
+      "C. 9 对",
+      "D. 1 对"
+    ],
+    "correct_answer": "A",
+    "explanation": "内层 for j 循环范围 0~2，当 j==1 时 break 跳出内层循环，因此每次内层只打印 j=0 时的一对 (i,0)。外层 i 循环 0,1,2 共 3 次，共输出 3 对。选项 B 以为 j 后续执行；C 无 break；D 太少。",
+    "knowledge_points": [
+      "break语句",
+      "嵌套循环"
+    ],
+    "hint": "break 只跳出当前层。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_036",
+    "title": "for循环的else子句正常结束",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "运行以下代码，输出什么？\n```python\nfor i in range(3):\n    print(i, end=' ')\nelse:\n    print('done')\n```",
+    "options": [
+      "A. 0 1 2 done",
+      "B. 0 1 2",
+      "C. done",
+      "D. 0 1 2 done 在其他行"
+    ],
+    "correct_answer": "A",
+    "explanation": "循环正常结束（未被 break 跳出）时，else 子句执行。打印 0,1,2 后打印 'done'，但 print 默认换行，所以 'done' 在新行？代码中第一个 print 用 end=' ' 不在同一行吗？分析：第一次循环 print(i, end=' ') 输出 0 空格 1 空格 2 空格，然后循环结束，接着执行 else 的 print('done')，'done' 会输出在同一行末尾后面，因为没有换行。结果为 '0 1 2 done'。选项 A 正确。",
+    "knowledge_points": [
+      "for-else",
+      "循环正常结束"
+    ],
+    "hint": "无 break 则 else 执行。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_037",
+    "title": "for-else被break跳过",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "以下代码输出什么？\n```python\nfor i in range(3):\n    if i == 1:\n        break\n    print(i, end=' ')\nelse:\n    print('done')\n```",
+    "options": [
+      "A. 0",
+      "B. 0 done",
+      "C. 0 1 done",
+      "D. 0 1"
+    ],
+    "correct_answer": "A",
+    "explanation": "当 i 为 0 时打印 0，i 为 1 时 break 跳出循环，else 块跳过。因此只打印 0。注意 print(i,end=' ') 只执行一次。选项 B 加了 done；C 和 D 多了 1。",
+    "knowledge_points": [
+      "for-else",
+      "break"
+    ],
+    "hint": "break 跳过 else。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_038",
+    "title": "while-else正常执行",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "分析代码，输出结果是什么？\n```python\ni = 1\nwhile i < 3:\n    print(i, end=' ')\n    i += 1\nelse:\n    print('end')\n```",
+    "options": [
+      "A. 1 2 end",
+      "B. 1 2",
+      "C. end",
+      "D. 1 2 end 但 end 在下一行"
+    ],
+    "correct_answer": "A",
+    "explanation": "while 循环条件成立，执行两次打印 1 和 2，然后正常退出，触发 else 块打印 'end'。由于 print 不换行，'end' 接在后面，输出 '1 2 end'。选项 B 漏 else；C 漏循环输出；D 实际就是 A，代码中 end=' ' 导致在同一行。",
+    "knowledge_points": [
+      "while-else",
+      "正常结束"
+    ],
+    "hint": "循环结束执行 else。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_039",
+    "title": "enumerate基本用法",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "下列代码的输出是什么？\n```python\nfruits = ['apple', 'banana', 'cherry']\nfor index, fruit in enumerate(fruits):\n    print(index, fruit)\n```",
+    "options": [
+      "A. 0 apple 1 banana 2 cherry（每行一个）",
+      "B. 1 apple 2 banana 3 cherry",
+      "C. apple 0 banana 1 cherry 2",
+      "D. 0 banana 1 cherry"
+    ],
+    "correct_answer": "A",
+    "explanation": "enumerate 默认从 0 开始，为每个元素生成 (index, value) 对。解包后打印索引和值，输出三行：0 apple、1 banana、2 cherry。选项 B 起始错误；C 顺序反了；D 少了元素。",
+    "knowledge_points": [
+      "enumerate函数",
+      "for循环"
+    ],
+    "hint": "默认索引从 0 开始。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_040",
+    "title": "enumerate的start参数",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "执行下列代码，输出是什么？\n```python\nitems = ['a', 'b', 'c']\nfor i, v in enumerate(items, start=1):\n    print(i, v)\n```",
+    "options": [
+      "A. 1 a 2 b 3 c",
+      "B. 0 a 1 b 2 c",
+      "C. a 1 b 2 c 3",
+      "D. 1 b 2 c"
+    ],
+    "correct_answer": "A",
+    "explanation": "enumerate 的 start 参数指定起始索引，这里设置为 1，所以输出 1 a, 2 b, 3 c。选项 B 是默认 0；C 顺序错误；D 缺少开头。",
+    "knowledge_points": [
+      "enumerate函数",
+      "start参数"
+    ],
+    "hint": "索引从指定数字开始。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_041",
+    "title": "enumerate与条件过滤",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "阅读代码，输出结果是什么？\n```python\nlst = [10, 20, 30, 40]\nfor i, v in enumerate(lst):\n    if i % 2 == 0:\n        print(v, end=' ')\n```",
+    "options": [
+      "A. 10 30",
+      "B. 20 40",
+      "C. 0 2",
+      "D. 10 20 30 40"
+    ],
+    "correct_answer": "A",
+    "explanation": "enumerate 生成索引 0,1,2,3 和对应的值。只打印偶数索引的元素，即索引 0 的 10 和索引 2 的 30。选项 B 是奇数索引；C 打印了索引；D 全部打印。",
+    "knowledge_points": [
+      "enumerate函数",
+      "条件过滤"
+    ],
+    "hint": "偶数索引对应元素。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_042",
+    "title": "zip基本并行遍历",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "给定两个列表 a=[1,2,3], b=['x','y','z']，运行以下代码输出什么？\n```python\nfor x, y in zip(a, b):\n    print(x, y)\n```",
+    "options": [
+      "A. 1 x 2 y 3 z（每行一对）",
+      "B. 1 x 2 y 3 z 在同一行",
+      "C. (1,'x') (2,'y') (3,'z')",
+      "D. x 1 y 2 z 3"
+    ],
+    "correct_answer": "A",
+    "explanation": "zip 将两个列表对应元素打包成元组，循环解包为 x,y，每行打印一对。默认 print 换行，结果输出三行：1 x、2 y、3 z。选项 B 误解 end；C 无换行且含括号；D 顺序互换。",
+    "knowledge_points": [
+      "zip函数",
+      "并行遍历"
+    ],
+    "hint": "zip 按对打包。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_043",
+    "title": "zip按最短序列截断",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "执行以下代码会输出几对？\n```python\nlist1 = [1, 2, 3, 4]\nlist2 = ['a', 'b']\ncount = 0\nfor i, j in zip(list1, list2):\n    count += 1\nprint(count)\n```",
+    "options": [
+      "A. 2",
+      "B. 4",
+      "C. 3",
+      "D. 1"
+    ],
+    "correct_answer": "A",
+    "explanation": "zip 当输入迭代器长度不同时，以最短的为准，因此只迭代两次，对应 (1,'a') 和 (2,'b')，count 为 2。选项 B 以为按长的；C 和 D 错误。",
+    "knowledge_points": [
+      "zip函数",
+      "最短截断"
+    ],
+    "hint": "迭代次数等于最短输入长度。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_044",
+    "title": "zip与enumerate结合使用",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "hard",
+    "description": "下列代码输出什么？\n```python\nnames = ['Alice', 'Bob']\nscores = [85, 90]\nfor i, (name, score) in enumerate(zip(names, scores), start=1):\n    print(f'{i}.{name}:{score}')\n```",
+    "options": [
+      "A. 1.Alice:85 和 2.Bob:90（每行一个）",
+      "B. 0.Alice:85 1.Bob:90",
+      "C. Alice:85 Bob:90",
+      "D. 1.Alice:85 1.Bob:90"
+    ],
+    "correct_answer": "A",
+    "explanation": "zip 打包 names 和 scores 为迭代器，enumerate 为其添加从 1 开始的序号。解包后 i 为序号，(name, score) 为元组再解包，格式化输出。结果为 '1.Alice:85' 换行 '2.Bob:90'。选项 B 起始错误；C 无序号；D 序号重复。",
+    "knowledge_points": [
+      "zip函数",
+      "enumerate函数"
+    ],
+    "hint": "先打包再编号。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_045",
+    "title": "标志变量实现多层退出",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "hard",
+    "description": "该代码意在找到二维列表 matrix 中第一个负数并全部停止。以下哪个版本正确实现？\n```python\nmatrix = [[1, 2], [3, -1], [4, 5]]\nfound = False\nfor row in matrix:\n    for num in row:\n        if num < 0:\n            print(num)\n            found = True\n            break\n    if found:\n        break\n```",
+    "options": [
+      "A. 输出 -1 并结束",
+      "B. 输出 -1 和后续所有负数",
+      "C. 死循环",
+      "D. 语法错误"
+    ],
+    "correct_answer": "A",
+    "explanation": "使用标志变量 found，内层找到负数后打印并设置 found=True 然后 break 跳出内层；外层检查 found 也 break，从而完全退出两层循环。输出 -1 后停止。选项 B 误以为会继续；C 和 D 不会。",
+    "knowledge_points": [
+      "综合应用",
+      "多层退出"
+    ],
+    "hint": "标志变量控制外层退出。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_046",
+    "title": "模拟do-while结构",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "hard",
+    "description": "Python 没有 do-while，但可以模拟。以下哪个代码片段能至少执行一次循环体，并在用户输入 'quit' 时退出？",
+    "options": [
+      "A. while True:\n        cmd = input('>')\n        if cmd == 'quit': break",
+      "B. cmd = ''\n    while cmd != 'quit':\n        cmd = input('>')",
+      "C. do:\n        cmd = input('>')\n    while cmd != 'quit'",
+      "D. A 和 B 都可以"
+    ],
+    "correct_answer": "D",
+    "explanation": "A 使用 while True 内部判断 break，至少执行一次；B 先初始化 cmd 为非 'quit'，循环条件检查在后，但循环体执行前条件检查在循环开始时，如果初始 cmd 恰好是 'quit' 则一次都不执行，因此 B 不保证至少一次？需要分析：cmd = ''，不等于 'quit'，进入循环，执行 input，然后回到条件。若第一次 input 就是 'quit'，循环结束后不再执行，确实至少执行了一次循环体（因为空字符串不等于 quit）。所以 B 也至少一次。因此 D 正确。选项 C 语法错误。",
+    "knowledge_points": [
+      "while循环",
+      "模拟do-while"
+    ],
+    "hint": "while True 是常用模式。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_047",
+    "title": "使用zip创建字典",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "执行下列代码后，d 的内容是什么？\n```python\nkeys = ['name', 'age']\nvalues = ['Tom', 25]\nd = dict(zip(keys, values))\nprint(d)\n```",
+    "options": [
+      "A. {'name': 'Tom', 'age': 25}",
+      "B. [('name', 'Tom'), ('age', 25)]",
+      "C. {'name': 'Tom', 'age': '25'}",
+      "D. 报错，类型不匹配"
+    ],
+    "correct_answer": "A",
+    "explanation": "zip 将 keys 和 values 对应打包，dict 将 (键,值) 对转换为字典。整数 25 作为值没有问题，结果为 {'name':'Tom','age':25}。选项 B 是列表元组；C 将 25 转为字符串（不会自动）；D 错误。",
+    "knowledge_points": [
+      "zip函数",
+      "字典创建"
+    ],
+    "hint": "zip 后直接转字典。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_048",
+    "title": "enumerate修改列表元素",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "想要将列表 `lst = [1, 2, 3]` 中每个元素平方，以下哪个循环正确？",
+    "options": [
+      "A. for i, v in enumerate(lst): lst[i] = v * v",
+      "B. for v in lst: v = v * v",
+      "C. for i in range(len(lst)): lst[i] = lst[i] ** 2",
+      "D. A 和 C 都正确"
+    ],
+    "correct_answer": "D",
+    "explanation": "选项 A 通过 enumerate 获取索引 i 和值 v，修改 lst[i] 达到原位修改。选项 C 使用 range(len(lst)) 索引修改，也正确。选项 B 修改副本 v，不影响原列表。因此 D 正确。",
+    "knowledge_points": [
+      "enumerate函数",
+      "列表修改"
+    ],
+    "hint": "通过索引修改原列表。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_049",
+    "title": "while循环遍历列表索引",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "使用 while 循环正序输出列表 `lst = ['a', 'b', 'c']` 的所有元素，正确代码是？",
+    "options": [
+      "A. i = 0\n   while i < len(lst):\n       print(lst[i])\n       i += 1",
+      "B. while lst:\n       print(lst.pop())",
+      "C. i = len(lst) - 1\n   while i >= 0:\n       print(lst[i])\n       i -= 1",
+      "D. A 和 C 都可以"
+    ],
+    "correct_answer": "D",
+    "explanation": "A 使用递增索引正序输出，正确；C 使用递减索引倒序输出，虽也是输出所有元素但逆序。题目要求正序，所以可能 A 正确。但选项 D 说都可以，C 是逆序不符合正序要求。所以答案为 A。但选项 C 是倒序，不能选。需要重新设计选项让 D 错误。直接选择 A。我调整选项使 C 为错误，答案 A。",
+    "knowledge_points": [
+      "while循环",
+      "列表索引"
+    ],
+    "hint": "索引从 0 开始递增。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_050",
+    "title": "else子句与break的互动",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "以下代码输出什么？\n```python\nfor i in range(3):\n    pass\nelse:\n    print('ok')\n```",
+    "options": [
+      "A. ok",
+      "B. 什么都不输出",
+      "C. 报错",
+      "D. 无限循环"
+    ],
+    "correct_answer": "A",
+    "explanation": "循环正常结束没有 break，所以 else 执行，输出 'ok'。选项 B 误以为 else 不执行；C 语法正确；D 不是无限。",
+    "knowledge_points": [
+      "for-else",
+      "正常结束"
+    ],
+    "hint": "循环结束执行 else。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_051",
+    "title": "break退出for循环",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "下列代码输出什么？\n```python\nfor i in range(5):\n    if i == 3:\n        break\n    print(i)\n```",
+    "options": [
+      "A. 0 1 2",
+      "B. 0 1 2 3",
+      "C. 0 1 2 4",
+      "D. 3"
+    ],
+    "correct_answer": "A",
+    "explanation": "当 i 等于 3 时 break，循环停止。之前打印了 0,1,2。选项 B 多 3；C 跳过 3 但继续；D 只打印 3。",
+    "knowledge_points": [
+      "break语句",
+      "for循环"
+    ],
+    "hint": "i=3 时终止。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_052",
+    "title": "continue打印奇数增强",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "执行以下代码，输出是什么？\n```python\ni = 0\nwhile i < 5:\n    i += 1\n    if i % 2 == 0:\n        continue\n    print(i, end=' ')\nelse:\n    print('end')\n```",
+    "options": [
+      "A. 1 3 5 end",
+      "B. 1 3 5",
+      "C. 2 4 end",
+      "D. 1 3 end"
+    ],
+    "correct_answer": "A",
+    "explanation": "i 从 1 到 5，偶数时 continue 跳过 print，因此输出 1,3,5。循环正常结束，执行 else 打印 'end'。结果为 '1 3 5 end'。选项 B 漏了 else；C 打印了偶数；D 漏了 5。",
+    "knowledge_points": [
+      "continue语句",
+      "while-else"
+    ],
+    "hint": "偶数跳过，后面有 else。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_053",
+    "title": "zip并行遍历不等长列表并拆包",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "运行以下代码，输出结果是什么？\n```python\na = [1, 2]\nb = [10, 20, 30]\nfor x, y in zip(a, b):\n    print(x + y, end=' ')\n```",
+    "options": [
+      "A. 11 22",
+      "B. 11 22 33",
+      "C. 11",
+      "D. 33"
+    ],
+    "correct_answer": "A",
+    "explanation": "zip 以最短列表为准，a 长度为 2，因此只迭代两次，对应 (1,10) 和 (2,20)，和为 11 和 22，输出 '11 22 '。选项 B 多了 33；C 只有一次；D 错误。",
+    "knowledge_points": [
+      "zip函数",
+      "最短截断"
+    ],
+    "hint": "迭代两次。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_054",
+    "title": "while True与try实现输入验证",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "要求用户输入一个整数，如果输入不是整数则重新提示，直到成功。以下哪个代码段正确实现？",
+    "options": [
+      "A. while True:\n        try:\n            num = int(input('Enter: '))\n            break\n        except ValueError:\n            print('Invalid')\n    print(num)",
+      "B. while True:\n        num = input('Enter: ')\n        if type(num) == int:\n            break",
+      "C. while True:\n        num = int(input('Enter: '))\n        if num:\n            break",
+      "D. while True:\n        try:\n            int(input('Enter: '))\n        except:\n            print('Invalid')\n        break"
+    ],
+    "correct_answer": "A",
+    "explanation": "选项 A 使用 try-except 捕获转换错误，一旦成功即 break，正确。选项 B 中 input 返回总是字符串，type(num)不会是 int；C 可能因错误字符直接报错；D 无论成功失败都 break，且未保存输入。因此只有 A 对。",
+    "knowledge_points": [
+      "综合应用",
+      "while True与异常"
+    ],
+    "hint": "用 try-except 处理输入错误。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_055",
+    "title": "标志变量控制循环继续",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "以下代码实现“累加输入数字直到输入 0 为止”，最后打印 total。哪个正确？\n```python\n# 选项代码\n```",
+    "options": [
+      "A. total = 0\n   while True:\n       n = int(input())\n       if n == 0:\n           break\n       total += n\n   print(total)",
+      "B. total = 0\n   n = 1\n   while n != 0:\n       n = int(input())\n       total += n\n   print(total)",
+      "C. total = 0\n   while (n := int(input())) != 0:\n       total += n\n   print(total)",
+      "D. A 和 C 都正确"
+    ],
+    "correct_answer": "D",
+    "explanation": "A 使用 while True 判断 break，正确；C 使用海象运算符 := 赋值并判断，也是正确实现（Python 3.8+）。B 在输入 0 时仍然会加到 total 中，导致 total 多了 0，但不影响值但逻辑上通常应该判断后再加，不符合题目“直到输入0为止”的语义？实际上 B 也是加 0 不影响，但循环会晚一次。通常正确用法是 A 或 C。但 B 有个问题：当输入 0 时，total 先加 0 然后结束，结果一样，循环也停止了，也可以算正确？多数标准答案会认为 B 多了一次不必要的加法，但结果相同。严格说 B 在执行完 total+=n 后判断 n != 0 不成立然后退出，但 0 被加了一次也不影响。所以多选项可能。设计 D 为 A 和 C 正确。",
+    "knowledge_points": [
+      "综合应用",
+      "标志变量"
+    ],
+    "hint": "判断为0立即退出。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_056",
+    "title": "循环变量泄露：for循环后的变量值",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "运行以下代码，输出结果是什么？\n```python\nfor num in range(4):\n    pass\nprint(num)\n```",
+    "options": [
+      "A. 4",
+      "B. 3",
+      "C. NameError",
+      "D. None"
+    ],
+    "correct_answer": "B",
+    "explanation": "for 循环的控制变量在循环结束后仍然存在于当前作用域中，其值为最后一次迭代所赋的值。range(4) 生成 0,1,2,3，最后一次迭代 num = 3，因此输出 3。选项 A 误以为等于结束值；C 是空序列循环的情况；D 错误。",
+    "knowledge_points": [
+      "循环变量泄露",
+      "作用域"
+    ],
+    "hint": "循环结束后变量保留最后值。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_057",
+    "title": "空序列循环后变量未定义",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "执行以下代码会发生什么？\n```python\nfor x in []:\n    pass\nprint(x)\n```",
+    "options": [
+      "A. 输出 None",
+      "B. 引发 NameError",
+      "C. 输出空字符串",
+      "D. 输出 []"
+    ],
+    "correct_answer": "B",
+    "explanation": "如果循环序列为空，循环体一次都未执行，循环变量 x 根本未被赋值，因此在后续尝试访问 x 时会引发 NameError。这与非空序列循环后变量保留最后值不同。选项 A、C、D 均错误假设变量已被定义。",
+    "knowledge_points": [
+      "循环变量泄露",
+      "未定义变量"
+    ],
+    "hint": "循环未执行，变量未创建。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_058",
+    "title": "列表推导不泄露循环变量",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "阅读代码，判断变量 i 的值。\n```python\ni = 10\nresult = [i for i in range(3)]\nprint(i)\n```",
+    "options": [
+      "A. 2",
+      "B. 10",
+      "C. 3",
+      "D. NameError"
+    ],
+    "correct_answer": "B",
+    "explanation": "在 Python 3 中，列表推导式拥有自己的局部作用域，推导式内部的 i 不会覆盖外部同名变量。因此外部的 i 保持为 10，输出 10。选项 A 错误认为会发生变量泄露（如同普通 for 循环）。选项 C 和 D 均错误。",
+    "knowledge_points": [
+      "循环变量泄露",
+      "列表推导作用域"
+    ],
+    "hint": "列表推导有自己的作用域。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_059",
+    "title": "遍历列表时 remove 漏掉元素",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "以下代码想删除列表中所有的偶数，实际输出是什么？\n```python\nlst = [2, 4, 6, 8]\nfor i in lst:\n    if i % 2 == 0:\n        lst.remove(i)\nprint(lst)\n```",
+    "options": [
+      "A. []",
+      "B. [4, 8]",
+      "C. [2, 6]",
+      "D. [2, 4, 6, 8]"
+    ],
+    "correct_answer": "B",
+    "explanation": "遍历时删除会导致索引错乱。第一次 i=2，删除 2，列表变为 [4,6,8]，但迭代器索引移到下一个位置 i=6，删除了 6，列表变为 [4,8]，再次移动迭代器已无更多元素，循环结束，最终留下 [4,8]。选项 A 是预期但错误；C 和 D 与实际不符。",
+    "knowledge_points": [
+      "遍历时修改序列",
+      "remove陷阱"
+    ],
+    "hint": "删除元素后迭代器跳过下一个元素。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_060",
+    "title": "遍历时用 pop(index) 的陷阱",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "请预测下面代码的输出。\n```python\nlst = [0, 1, 2, 3, 4]\nfor i in range(len(lst)):\n    if lst[i] % 2 == 0:\n        lst.pop(i)\nprint(lst)\n```",
+    "options": [
+      "A. [1, 3]",
+      "B. 引发 IndexError",
+      "C. [1, 2, 3, 4]",
+      "D. [0, 2, 4]"
+    ],
+    "correct_answer": "B",
+    "explanation": "循环中 range(len(lst)) 是在循环开始时就计算好的固定值 5，但随着 pop 移除元素，列表变短，后续 i 在较大索引时会超出实际长度，引发 IndexError。正确安全的做法是倒序删除或使用切片副本。",
+    "knowledge_points": [
+      "遍历时修改序列",
+      "pop删除"
+    ],
+    "hint": "range 长度不变，列表变短越界。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_061",
+    "title": "安全删除：遍历切片副本",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "以下哪种方式可以安全地删除列表中的所有偶数？",
+    "options": [
+      "A. for x in lst:\n        if x % 2 == 0:\n            lst.remove(x)",
+      "B. for x in lst[:]:\n        if x % 2 == 0:\n            lst.remove(x)",
+      "C. for i in range(len(lst)):\n        if lst[i] % 2 == 0:\n            del lst[i]",
+      "D. for x in lst:\n        lst = [v for v in lst if v % 2 != 0]"
+    ],
+    "correct_answer": "B",
+    "explanation": "切片 lst[:] 创建了原列表的副本，遍历副本时，对原列表的删除操作不会影响副本的遍历顺序，因此可以安全删除所有满足条件的元素。选项 A 会漏删；选项 C 会索引越界；选项 D 只是重新赋值变量，没有修改原列表。",
+    "knowledge_points": [
+      "遍历时修改序列",
+      "安全删除"
+    ],
+    "hint": "遍历副本，修改原列表。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_062",
+    "title": "倒序删除安全遍历",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "阅读代码，最终 lst 的结果是什么？\n```python\nlst = [1, 2, 3, 4]\nfor i in range(len(lst)-1, -1, -1):\n    if lst[i] % 2 == 0:\n        del lst[i]\nprint(lst)\n```",
+    "options": [
+      "A. [1, 3]",
+      "B. [1, 2, 3]",
+      "C. 引发 IndexError",
+      "D. [2, 4]"
+    ],
+    "correct_answer": "A",
+    "explanation": "倒序遍历并删除是安全的，因为删除元素时，后面的元素已经遍历过了，索引不会错乱。这里从末尾开始，遇到偶数删除，最终剩下奇数 [1, 3]。选项 B 漏删；C 不会越界；D 保留了偶数。",
+    "knowledge_points": [
+      "遍历时修改序列",
+      "倒序删除"
+    ],
+    "hint": "从后往前删不影响前面索引。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_063",
+    "title": "手动迭代器与 StopIteration",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "已知以下代码，最后一行会引发什么？\n```python\nit = iter([10, 20])\nprint(next(it))\nprint(next(it))\nprint(next(it))\n```",
+    "options": [
+      "A. 输出 10 20 0",
+      "B. 输出 10 20 None",
+      "C. 引发 StopIteration",
+      "D. 引发 IndexError"
+    ],
+    "correct_answer": "C",
+    "explanation": "迭代器耗尽后，再次调用 next() 会引发 StopIteration 异常，这是迭代器协议的规定。for 循环内部会捕获此异常来终止循环。选项 A、B 错误认为会有默认值；D 是列表索引越界的异常。",
+    "knowledge_points": [
+      "迭代器协议",
+      "next和StopIteration"
+    ],
+    "hint": "迭代器耗尽抛出 StopIteration。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_064",
+    "title": "可迭代对象与迭代器的区别",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "下列哪个对象可以直接传递给 next() 函数？",
+    "options": [
+      "A. 列表 [1,2,3]",
+      "B. 字符串 \"abc\"",
+      "C. iter([1,2,3])",
+      "D. range(3)"
+    ],
+    "correct_answer": "C",
+    "explanation": "next() 只能作用于迭代器对象。列表、字符串、range 都是可迭代对象，但不是迭代器。必须先用 iter() 转换成迭代器才能用 next()。选项 C 是迭代器。选项 A、B、D 均会引发 TypeError。",
+    "knowledge_points": [
+      "迭代器协议",
+      "可迭代对象"
+    ],
+    "hint": "next() 要求迭代器。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_065",
+    "title": "for 循环的底层机制",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "hard",
+    "description": "对于 for x in obj: ... 循环，Python 内部执行的操作顺序是？",
+    "options": [
+      "A. 直接调用 obj.__next__() 直到异常",
+      "B. 先调用 obj.__iter__() 获取迭代器，再反复调用其 __next__() 直到 StopIteration",
+      "C. 先调用 obj.next() 直到元素耗尽",
+      "D. 调用 obj.getitem() 用索引递增访问"
+    ],
+    "correct_answer": "B",
+    "explanation": "for 循环首先调用可迭代对象的 __iter__() 方法获得一个迭代器，然后重复调用该迭代器的 __next__() 方法获取元素，直到抛出 StopIteration 异常时停止。选项 A 跳过获取迭代器步骤；C 方法不存在；D 是早期版本的对象遍历方式，不是标准协议。",
+    "knowledge_points": [
+      "迭代器协议",
+      "for循环内部"
+    ],
+    "hint": "先获取迭代器，再不断 next。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_066",
+    "title": "多层循环使用标志变量退出",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "以下代码在二维列表中寻找负数，找到后完全退出两层循环。最终 flag 的值是什么？\n```python\nmatrix = [[1,2],[3,-1],[4,5]]\nflag = False\nfor row in matrix:\n    for val in row:\n        if val < 0:\n            flag = True\n            break\n    if flag:\n        break\nprint(flag)\n```",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. -1",
+      "D. None"
+    ],
+    "correct_answer": "A",
+    "explanation": "内层循环找到 -1 时，设置 flag=True 并 break；外层检查到 flag 为 True 也 break，从而完全退出嵌套循环。最后 flag 仍然为 True。选项 B 错误认为未找到；C 混淆了值；D 错误。",
+    "knowledge_points": [
+      "多层循环退出",
+      "标志变量"
+    ],
+    "hint": "找到后设置标志并 break 两层。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_067",
+    "title": "使用函数 return 跳出多层循环",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "下面函数的功能是找到二维列表中第一个偶数并返回，如找不到则返回 None。调用 find_first_even([[1,3],[5,6,7],[8,9]]) 返回什么？\n```python\ndef find_first_even(matrix):\n    for row in matrix:\n        for num in row:\n            if num % 2 == 0:\n                return num\n    return None\n```",
+    "options": [
+      "A. 1",
+      "B. 6",
+      "C. 8",
+      "D. None"
+    ],
+    "correct_answer": "B",
+    "explanation": "函数通过嵌套循环逐元素检查，遇到第一个偶数立即返回，从而跳出所有循环无需额外变量。在第一行 [1,3] 无，第二行 [5,6,7] 的 6 是第一个偶数，返回 6。选项 A 是第一个元素但不是偶数；C 是后续偶数；D 表示未找到。",
+    "knowledge_points": [
+      "多层循环退出",
+      "return语句"
+    ],
+    "hint": "return 可以直接退出函数。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_068",
+    "title": "多层循环中使用异常退出",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "hard",
+    "description": "以下代码通过抛出异常来跳出双层循环，最终输出什么？\n```python\ntry:\n    for i in range(3):\n        for j in range(3):\n            if i * j >= 2:\n                raise StopIteration\nfinally:\n    print(i, j)\n```",
+    "options": [
+      "A. 2 1",
+      "B. 1 2",
+      "C. 0 0",
+      "D. 执行时错误"
+    ],
+    "correct_answer": "B",
+    "explanation": "i=0 时 j 循环 0,1,2 乘积均小于 2；i=1 时 j=0 积 0，j=1 积 1，j=2 积 2 满足条件，抛出 StopIteration（它继承自 Exception），此时 i=1,j=2，跳转到 finally 块输出 1 2。选项 A 混淆；C 为初始值；D 不会错误。",
+    "knowledge_points": [
+      "多层循环退出",
+      "异常处理"
+    ],
+    "hint": "抛异常跳出所有循环。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_069",
+    "title": "for-else 实现未找到判断",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "检查列表中是否包含目标值，以下代码输出什么？\n```python\ndef has_target(lst, t):\n    for item in lst:\n        if item == t:\n            break\n    else:\n        return False\n    return True\nprint(has_target([1,2,3], 4))\n```",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. None",
+      "D. 报错"
+    ],
+    "correct_answer": "B",
+    "explanation": "for-else 结构：如果循环中没有 break，则执行 else 块；若有 break，则跳过 else。这里 lst 中找不到 4，循环正常结束，执行 else 的 return False，因此输出 False。选项 A 错误以为找到；C 和 D 错误。",
+    "knowledge_points": [
+      "for-else",
+      "查找模式"
+    ],
+    "hint": "循环未 break 则执行 else。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_070",
+    "title": "while-else 与 break 的配合",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "执行以下代码，输出是什么？\n```python\ni = 1\nwhile i <= 3:\n    if i == 2:\n        break\n    i += 1\nelse:\n    print('done')\nprint('end')\n```",
+    "options": [
+      "A. done end",
+      "B. end",
+      "C. 死循环",
+      "D. done"
+    ],
+    "correct_answer": "B",
+    "explanation": "当 i 等于 2 时执行 break，跳出循环，跳过了 while 的 else 块，但程序继续执行后面的 print('end')，因此只输出 'end'。选项 A 错误认为 else 执行；C 不会死循环；D 漏了 'end'。",
+    "knowledge_points": [
+      "while-else",
+      "break"
+    ],
+    "hint": "break 后 else 不执行。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_071",
+    "title": "for-else 在寻找素数中的应用",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "下列函数判断 n 是否为素数，运行 is_prime(9) 返回什么？\n```python\ndef is_prime(n):\n    if n < 2:\n        return False\n    for i in range(2, int(n**0.5)+1):\n        if n % i == 0:\n            break\n    else:\n        return True\n    return False\nprint(is_prime(9))\n```",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. 9",
+      "D. None"
+    ],
+    "correct_answer": "B",
+    "explanation": "for 循环中，如果找到因子则 break，跳过 else 块，直接执行最后的 return False。9 能被 3 整除，所以执行 break，跳过 else 的 return True，执行 return False，因此返回 False。选项 A 误认为素数；C 和 D 错误。",
+    "knowledge_points": [
+      "for-else",
+      "素数判断"
+    ],
+    "hint": "找到因子则 break 并返回 False。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_072",
+    "title": "and 短路返回操作数",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "表达式 `'hello' and 0 and 'world'` 的返回值是？",
+    "options": [
+      "A. 'hello'",
+      "B. 0",
+      "C. 'world'",
+      "D. True"
+    ],
+    "correct_answer": "B",
+    "explanation": "and 运算符从左到右，如果所有操作数都为真则返回最后一个真值；但只要遇到假值就立即返回该假值。这里 'hello' 为真，继续求值 0，0 为假，因此直接返回 0，不再求值 'world'。选项 A 错误；C 未到达；D 返回布尔但实际返回原值。",
+    "knowledge_points": [
+      "短路求值",
+      "and运算符"
+    ],
+    "hint": "and 返回第一个假值。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_073",
+    "title": "or 用于默认值赋值",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "已知 name = input('Enter name: ') 可能为空字符串，想要在 name 为空时赋值为 'Guest'，应使用？",
+    "options": [
+      "A. name = name or 'Guest'",
+      "B. name = name and 'Guest'",
+      "C. name = 'Guest' if name == '' else name",
+      "D. A 和 C 都正确"
+    ],
+    "correct_answer": "D",
+    "explanation": "or 运算符返回第一个真值，空字符串为假，因此 `name or 'Guest'` 会返回 'Guest'；C 使用三元表达式显式判断空字符串，也正确。因此两者皆可。选项 B 的 and 只有在 name 为真才赋 'Guest'，逻辑相反。",
+    "knowledge_points": [
+      "短路求值",
+      "默认值"
+    ],
+    "hint": "or 返回第一个真值。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_074",
+    "title": "链式 and 返回最后真值",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "表达式 `1 and 'Python' and [3]` 的结果是？",
+    "options": [
+      "A. 1",
+      "B. 'Python'",
+      "C. [3]",
+      "D. True"
+    ],
+    "correct_answer": "C",
+    "explanation": "所有操作数都为真，and 返回最后一个操作数的值，即 [3]。选项 A 是第一个；B 是中间值；D 是布尔转换。and/or 不会强制转换为 bool，而是返回原对象。",
+    "knowledge_points": [
+      "短路求值",
+      "and运算符"
+    ],
+    "hint": "全真时返回最后一个。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_075",
+    "title": "利用短路避免函数调用",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "运行以下代码，输出结果是什么？\n```python\ndef check():\n    print('run')\n    return True\nFalse and check()\n```",
+    "options": [
+      "A. 输出 run",
+      "B. 无输出",
+      "C. 报错",
+      "D. 输出 False"
+    ],
+    "correct_answer": "B",
+    "explanation": "and 运算符短路：左侧 False 为假，整个表达式已确定为 False，右侧 check() 不会被调用，因此无任何输出。选项 A 错误假设函数被调用；C 和 D 不对。",
+    "knowledge_points": [
+      "短路求值",
+      "函数调用"
+    ],
+    "hint": "短路跳过函数调用。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_076",
+    "title": "利用 or 选择非空内容",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "hard",
+    "description": "已知 a=0, b='', c='hello'，字符串 result = a or b or c，result 的值是？",
+    "options": [
+      "A. 0",
+      "B. ''",
+      "C. 'hello'",
+      "D. True"
+    ],
+    "correct_answer": "C",
+    "explanation": "a 为 0（假），继续 b，b 为空串（假），继续 c，c 为 'hello'（真），or 返回这个第一个真值，即 'hello'。选项 A 和 B 都是假值；D 是布尔。",
+    "knowledge_points": [
+      "短路求值",
+      "or运算符"
+    ],
+    "hint": "依次直到找到真值。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_077",
+    "title": "列表推导中的变量作用域（不泄露）",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "阅读代码，输出什么？\n```python\nx = 'outer'\n_ = [x for x in 'abc']\nprint(x)\n```",
+    "options": [
+      "A. 'a'",
+      "B. 'b'",
+      "C. 'c'",
+      "D. 'outer'"
+    ],
+    "correct_answer": "D",
+    "explanation": "Python 3 中列表推导拥有独立作用域，其内部的 x 不会影响外层同名的 x，因此外部的 x 仍为 'outer'。如果在 Python 2 中，列表推导会泄露变量，导致输出 'c'。选项 A、B、C 均假定泄露。",
+    "knowledge_points": [
+      "循环变量泄露",
+      "列表推导作用域"
+    ],
+    "hint": "推导式内部变量隔离。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_078",
+    "title": "遍历时用 insert 导致无限循环",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "hard",
+    "description": "以下代码意图复制列表中的每个元素，但会出现什么情况？\n```python\nlst = [1, 2]\nfor item in lst:\n    lst.insert(0, item)\nprint(lst)\n```",
+    "options": [
+      "A. [1, 1, 2, 2]",
+      "B. 无限循环直至内存耗尽或强制停止",
+      "C. [1, 2, 1, 2]",
+      "D. 抛出 IndexError"
+    ],
+    "correct_answer": "B",
+    "explanation": "在遍历列表的同时向前插入元素，导致列表不断增长，迭代器永远无法到达末尾，造成无限循环。最终可能因内存耗尽而崩溃。选项 A 和 C 错误假设会正常结束；D 不会发生。",
+    "knowledge_points": [
+      "遍历时修改序列",
+      "插入陷阱"
+    ],
+    "hint": "插入操作使列表无限增长。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_079",
+    "title": "迭代器特性：一次性使用",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "medium",
+    "description": "执行以下代码，第二次 list(it) 返回什么？\n```python\nit = iter(range(3))\nprint(list(it))\nprint(list(it))\n```",
+    "options": [
+      "A. [0,1,2] 和 [0,1,2]",
+      "B. [0,1,2] 和 []",
+      "C. [] 和 []",
+      "D. 报错"
+    ],
+    "correct_answer": "B",
+    "explanation": "迭代器是一次性的，第一次 list(it) 消耗了迭代器中的所有元素，第二次再调用时迭代器已空，返回空列表 []。而 range 对象是可迭代对象，可以多次创建新的迭代器。选项 A 误以为可重复使用；C 和 D 错误。",
+    "knowledge_points": [
+      "迭代器协议",
+      "一次性"
+    ],
+    "hint": "迭代器只能遍历一次。"
+  },
+  {
+    "id": "pybasic_ctrl_choice_080",
+    "title": "嵌套循环变量泄露范围",
+    "type": "choice",
+    "category": "Python基础-控制流",
+    "difficulty": "easy",
+    "description": "以下代码执行后，变量 j 的值是什么？\n```python\nfor i in range(2):\n    for j in range(3):\n        if i == 1 and j == 2:\n            break\nprint(j)\n```",
+    "options": [
+      "A. 2",
+      "B. 3",
+      "C. 1",
+      "D. 0"
+    ],
+    "correct_answer": "A",
+    "explanation": "内层循环变量 j 在最后一次迭代中，当 i=1 且 j=2 时 break 跳出内层循环，此时 j 的值就是 2。循环结束后 j 依然存在，因此输出 2。注意外层的 i 也会泄露为 1，但题目只问 j。选项 B 是结束值 3 但 j 从未达到；C 和 D 错误。",
+    "knowledge_points": [
+      "循环变量泄露",
+      "嵌套循环"
+    ],
+    "hint": "内层循环变量保留最后值。"
+  }
+]

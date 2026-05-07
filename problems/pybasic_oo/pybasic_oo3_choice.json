@@ -1,0 +1,1146 @@
+[
+  {
+    "id": "pybasic_oo3_choice_001",
+    "title": "__str__与__repr__基本区别",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "easy",
+    "description": "关于 `__str__` 和 `__repr__`，以下哪项描述正确？",
+    "options": [
+      "A. __str__ 面向开发者调试，__repr__ 面向用户友好显示",
+      "B. __str__ 由 print() 调用，__repr__ 由交互式解释器直接显示对象时调用",
+      "C. 两者完全等价，没有区别",
+      "D. __repr__ 由 str() 调用，__str__ 由 repr() 调用"
+    ],
+    "correct_answer": "B",
+    "explanation": "`__str__` 旨在返回可读性高的字符串，由 `print()` 或 `str()` 调用；`__repr__` 旨在返回明确且可能包含更多细节的字符串，由交互式解释器或 `repr()` 调用。选项 A 把两者弄反了；C 错误；D 弄反了。",
+    "knowledge_points": [
+      "__str__",
+      "__repr__"
+    ],
+    "hint": "print调__str__，交互显示调__repr__。"
+  },
+  {
+    "id": "pybasic_oo3_choice_002",
+    "title": "只定义__repr__时__str__回退",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "执行以下代码，输出什么？\n```python\nclass Point:\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n    def __repr__(self):\n        return f\"Point({self.x}, {self.y})\"\np = Point(1, 2)\nprint(p)\n```",
+    "options": [
+      "A. Point(1, 2)",
+      "B. <__main__.Point object at 0x...>",
+      "C. None",
+      "D. 报错，因为没有定义 __str__"
+    ],
+    "correct_answer": "A",
+    "explanation": "当只定义了 `__repr__` 而没有定义 `__str__` 时，`__str__` 会回退到 `__repr__`，因此 print(p) 会调用 `__repr__` 返回 \"Point(1, 2)\"。选项 B 是未定义任何方法时的默认行为；C、D 错误。",
+    "knowledge_points": [
+      "__str__",
+      "__repr__回退"
+    ],
+    "hint": "__str__会回退到__repr__。"
+  },
+  {
+    "id": "pybasic_oo3_choice_003",
+    "title": "只定义__str__时__repr__不回退",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "如果只定义了 `__str__` 而没有定义 `__repr__`，在交互式环境中直接输入对象名，显示什么？",
+    "options": [
+      "A. 调用 __str__ 的结果",
+      "B. 默认的内存地址表示",
+      "C. 报错",
+      "D. 空字符串"
+    ],
+    "correct_answer": "B",
+    "explanation": "如果只定义了 `__str__` 而不定义 `__repr__`，则 `__repr__` 不会回退到 `__str__`，会使用默认的 object.__repr__ 实现，显示内存地址。选项 A 错误因为 __repr__ 不回退；C、D 错误。",
+    "knowledge_points": [
+      "__str__",
+      "__repr__回退"
+    ],
+    "hint": "__repr__不回退到__str__。"
+  },
+  {
+    "id": "pybasic_oo3_choice_004",
+    "title": "__eq__默认行为",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "easy",
+    "description": "不定义 `__eq__` 时，两个不同实例使用 `==` 比较的结果是？\n```python\nclass A:\n    pass\na1 = A()\na2 = A()\nprint(a1 == a2)\n```",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. TypeError",
+      "D. None"
+    ],
+    "correct_answer": "B",
+    "explanation": "默认的 `__eq__` 继承自 object，比较的是对象的内存地址（即 `is` 的行为）。两个不同的实例地址不同，因此返回 False。选项 A 错误认为按值比较；C、D 不可能。",
+    "knowledge_points": [
+      "__eq__"
+    ],
+    "hint": "默认比较内存地址。"
+  },
+  {
+    "id": "pybasic_oo3_choice_005",
+    "title": "__lt__使对象可排序",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "以下代码的输出是什么？\n```python\nclass Person:\n    def __init__(self, age):\n        self.age = age\n    def __lt__(self, other):\n        return self.age < other.age\npeople = [Person(30), Person(20), Person(25)]\npeople.sort()\nprint([p.age for p in people])\n```",
+    "options": [
+      "A. [20, 25, 30]",
+      "B. [30, 20, 25]",
+      "C. 报错，因为未定义 __eq__",
+      "D. [30, 25, 20]"
+    ],
+    "correct_answer": "A",
+    "explanation": "实现了 `__lt__` 后，`sort()` 就可以通过比较年龄进行排序，输出升序列表。未定义 `__eq__` 也不影响排序。选项 B 原顺序；C 错误；D 降序需要 reverse。",
+    "knowledge_points": [
+      "__lt__",
+      "排序"
+    ],
+    "hint": "定义__lt__即可排序。"
+  },
+  {
+    "id": "pybasic_oo3_choice_006",
+    "title": "total_ordering装饰器的作用",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "使用 `@functools.total_ordering` 装饰一个类，并实现了 `__eq__` 和 `__lt__`，以下哪种说法正确？",
+    "options": [
+      "A. 必须手动定义 __le__, __gt__, __ge__",
+      "B. __le__, __gt__, __ge__ 会自动推导生成",
+      "C. 这个装饰器只适用于数据类",
+      "D. 只能用于不可变对象"
+    ],
+    "correct_answer": "B",
+    "explanation": "`total_ordering` 装饰器会根据已定义的 `__eq__` 和 `__lt__`（或其他至少一个比较方法）自动推导生成其余的比较方法。选项 A 错误；C、D 不限。",
+    "knowledge_points": [
+      "比较运算符",
+      "total_ordering"
+    ],
+    "hint": "只定义eq和lt即可生成其余。"
+  },
+  {
+    "id": "pybasic_oo3_choice_007",
+    "title": "自定义 __eq__ 导致 __hash__ 为 None",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "如果自定义了 `__eq__` 但没有定义 `__hash__`，尝试将实例放入集合会怎样？\n```python\nclass A:\n    def __init__(self, x):\n        self.x = x\n    def __eq__(self, other):\n        return self.x == other.x\na = A(1)\ns = {a}\n```",
+    "options": [
+      "A. 正常放入集合",
+      "B. 引发 TypeError: unhashable type 'A'",
+      "C. 引发 AttributeError",
+      "D. 放入集合但哈希基于 id"
+    ],
+    "correct_answer": "B",
+    "explanation": "当自定义 `__eq__` 时，Python 会将 `__hash__` 隐式设为 None，表示该类的实例不可哈希，因此放入集合或作为字典键时会引发 TypeError。选项 A、D 错误。",
+    "knowledge_points": [
+      "__hash__",
+      "__eq__"
+    ],
+    "hint": "定义eq后hash被设为None。"
+  },
+  {
+    "id": "pybasic_oo3_choice_008",
+    "title": "不可变对象安全定义 __hash__",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "hard",
+    "description": "以下关于 `__hash__` 和 `__eq__` 的设计，哪个是安全且正确的？",
+    "options": [
+      "A. 可变对象定义了 __eq__ 和 __hash__，哈希基于可变属性",
+      "B. 不可变对象定义 __eq__ 和 __hash__，哈希基于不变属性",
+      "C. 任何对象都可以定义 __hash__",
+      "D. 只要定义了 __eq__，就必须保留默认 __hash__"
+    ],
+    "correct_answer": "B",
+    "explanation": "如果对象是可变的，且哈希值基于可变属性，放入集合后属性变化会导致哈希改变，无法正确查找，因此不推荐。不可变对象（如所有属性设置后不再改变）基于那些属性定义 __hash__ 是安全的。选项 A 危险；C 不是任何对象都可以；D 默认 __hash__ 存在冲突。",
+    "knowledge_points": [
+      "__hash__",
+      "不可变对象"
+    ],
+    "hint": "哈希基于不可变属性。"
+  },
+  {
+    "id": "pybasic_oo3_choice_009",
+    "title": "同时定义 __eq__ 和 __hash__",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "以下代码能否运行？\n```python\nclass Point:\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n    def __eq__(self, o):\n        return self.x == o.x and self.y == o.y\n    def __hash__(self):\n        return hash((self.x, self.y))\np = Point(1,2)\nd = {p: 'origin'}\n```",
+    "options": [
+      "A. 能运行，因为显式定义了 __hash__",
+      "B. 不能，因为定义了 __eq__ 后必须使用默认 __hash__",
+      "C. 能，但会警告",
+      "D. TypeError"
+    ],
+    "correct_answer": "A",
+    "explanation": "虽然定义了 `__eq__`，但显式定义了 `__hash__` 后，类仍是可哈希的。关键是要保证如果两个对象相等，哈希值也相等。这里哈希基于 (x,y) 元组，符合要求，因此可以。",
+    "knowledge_points": [
+      "__hash__",
+      "__eq__"
+    ],
+    "hint": "显式定义 __hash__ 后可哈希。"
+  },
+  {
+    "id": "pybasic_oo3_choice_010",
+    "title": "__add__运算符重载",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "easy",
+    "description": "以下代码的输出是什么？\n```python\nclass Vector:\n    def __init__(self, x):\n        self.x = x\n    def __add__(self, other):\n        return Vector(self.x + other.x)\nv1 = Vector(1)\nv2 = Vector(2)\nv3 = v1 + v2\nprint(v3.x)\n```",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. 3",
+      "D. 报错"
+    ],
+    "correct_answer": "C",
+    "explanation": "`__add__` 定义了 `+` 运算符的行为，v1 + v2 返回新 Vector(1+2=3)，因此 v3.x 为 3。选项 A、B 错误。",
+    "knowledge_points": [
+      "运算符重载",
+      "__add__"
+    ],
+    "hint": "定义 + 返回新对象。"
+  },
+  {
+    "id": "pybasic_oo3_choice_011",
+    "title": "__iadd__就地修改",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "关于 `__iadd__`（+= 运算符），以下哪项正确？\n```python\nclass Counter:\n    def __init__(self, n):\n        self.n = n\n    def __iadd__(self, other):\n        self.n += other\n        return self\nc = Counter(5)\nc += 3\nprint(c.n)\n```",
+    "options": [
+      "A. 输出 8，__iadd__ 修改了原对象并返回自身",
+      "B. 输出 5，因为没有 __add__",
+      "C. 报错，因为 __iadd__ 必须返回新对象",
+      "D. 输出 3"
+    ],
+    "correct_answer": "A",
+    "explanation": "`__iadd__` 用于实现 `+=`，可以就地修改对象并返回自身。这里 c.n 从 5 增加到 8。选项 B 误认为需要 __add__；C 可以返回自身；D 错误。",
+    "knowledge_points": [
+      "运算符重载",
+      "__iadd__"
+    ],
+    "hint": "__iadd__实现+=。"
+  },
+  {
+    "id": "pybasic_oo3_choice_012",
+    "title": "__radd__处理右操作数",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "hard",
+    "description": "以下代码中，表达式 `3 + v` 可以正确执行吗？\n```python\nclass Num:\n    def __init__(self, val):\n        self.val = val\n    def __radd__(self, other):\n        return Num(other + self.val)\n    def __repr__(self):\n        return str(self.val)\nv = Num(5)\nprint(3 + v)\n```",
+    "options": [
+      "A. 可以，输出 8",
+      "B. 不行，因为左侧是 int 没有 __add__ 处理 Num",
+      "C. 可以，输出 35",
+      "D. 引发 TypeError"
+    ],
+    "correct_answer": "A",
+    "explanation": "当 `3 + v` 时，int 的 `__add__` 无法处理 Num，Python 转去调用右侧 Num 的 `__radd__`，传入 other=3，返回 new Num(8)。因此输出 8。选项 B 错误；C 是拼接；D 不会。",
+    "knowledge_points": [
+      "运算符重载",
+      "__radd__"
+    ],
+    "hint": "左操作数不行时试右__radd__。"
+  },
+  {
+    "id": "pybasic_oo3_choice_013",
+    "title": "__len__支持len()",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "easy",
+    "description": "以下自定义类能否使用 `len()`？\n```python\nclass Group:\n    def __init__(self, members):\n        self.members = members\n    def __len__(self):\n        return len(self.members)\ng = Group([1,2,3])\nprint(len(g))\n```",
+    "options": [
+      "A. 可以，输出 3",
+      "B. 不可以，因为 Group 不是内置类型",
+      "C. 可以，输出对象的属性个数",
+      "D. 引发 TypeError"
+    ],
+    "correct_answer": "A",
+    "explanation": "定义了 `__len__` 方法后，`len()` 函数就能作用于该对象，返回方法的返回值。因此输出 3。",
+    "knowledge_points": [
+      "__len__"
+    ],
+    "hint": "定义__len__支持len()。"
+  },
+  {
+    "id": "pybasic_oo3_choice_014",
+    "title": "__getitem__支持索引",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "以下代码输出什么？\n```python\nclass MyList:\n    def __init__(self, data):\n        self.data = data\n    def __getitem__(self, index):\n        return self.data[index]\nml = MyList([10, 20, 30])\nprint(ml[1])\n```",
+    "options": [
+      "A. 10",
+      "B. 20",
+      "C. 30",
+      "D. 报错，因为 MyList 不支持索引"
+    ],
+    "correct_answer": "B",
+    "explanation": "实现了 `__getitem__` 方法后，对象就支持索引访问 `obj[index]`。ml[1] 返回 data[1] 即 20。选项 A 索引 0；C 索引 2；D 错误。",
+    "knowledge_points": [
+      "__getitem__"
+    ],
+    "hint": "__getitem__让对象可索引。"
+  },
+  {
+    "id": "pybasic_oo3_choice_015",
+    "title": "仅实现__getitem__可迭代",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "如果一个类只实现了 `__getitem__`，可以用 for 循环遍历吗？",
+    "options": [
+      "A. 可以，Python 会从索引 0 开始依次调用 __getitem__ 直到 IndexError",
+      "B. 不可以，必须实现 __iter__",
+      "C. 可以，但必须同时实现 __len__",
+      "D. 只能用于 while 循环"
+    ],
+    "correct_answer": "A",
+    "explanation": "Python 的迭代协议支持旧式迭代：如果找不到 `__iter__`，会尝试使用 `__getitem__` 从索引 0 开始依次取值，直到抛出 IndexError 为止。因此可以 for 循环。",
+    "knowledge_points": [
+      "__getitem__",
+      "迭代"
+    ],
+    "hint": "可退而求其次用__getitem__迭代。"
+  },
+  {
+    "id": "pybasic_oo3_choice_016",
+    "title": "__new__与__init__调用顺序",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "easy",
+    "description": "关于 `__new__` 和 `__init__` 的调用顺序，以下正确的是？",
+    "options": [
+      "A. 先 __init__ 后 __new__",
+      "B. 先 __new__ 后 __init__，且 __new__ 返回该类实例时才调用 __init__",
+      "C. 两者同时调用",
+      "D. 只调用其中之一"
+    ],
+    "correct_answer": "B",
+    "explanation": "创建实例时，先调用 `__new__` 分配并返回实例，若返回的是该类的实例，再调用 `__init__` 进行初始化。如果 __new__ 返回的不是该类实例，__init__ 不会被调用。选项 A 顺序错。",
+    "knowledge_points": [
+      "__new__",
+      "__init__"
+    ],
+    "hint": "先 new 后 init。"
+  },
+  {
+    "id": "pybasic_oo3_choice_017",
+    "title": "__new__在单例模式中的应用",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "hard",
+    "description": "以下单例模式实现中，第二次调用 `MyClass()` 会怎样？\n```python\nclass MyClass:\n    _instance = None\n    def __new__(cls):\n        if cls._instance is None:\n            cls._instance = super().__new__(cls)\n        return cls._instance\n```",
+    "options": [
+      "A. 返回第一次创建的同一个实例",
+      "B. 创建一个新的实例",
+      "C. 引发 AttributeError",
+      "D. 必须重写 __init__"
+    ],
+    "correct_answer": "A",
+    "explanation": "通过重写 `__new__` 控制实例创建过程，使用类变量 `_instance` 缓存第一个实例，后续调用都返回该相同实例，实现单例模式。选项 B 错误；C 不报错；D 不需。",
+    "knowledge_points": [
+      "__new__",
+      "单例"
+    ],
+    "hint": "缓存实例实现单例。"
+  },
+  {
+    "id": "pybasic_oo3_choice_018",
+    "title": "__new__返回非本类实例时不会调__init__",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "hard",
+    "description": "阅读代码，输出结果是什么？\n```python\nclass A:\n    def __new__(cls):\n        return \"not an instance\"\na = A()\nprint(type(a))\n```",
+    "options": [
+      "A. <class 'str'>",
+      "B. <class 'A'>",
+      "C. 引发 TypeError",
+      "D. None"
+    ],
+    "correct_answer": "A",
+    "explanation": "如果 `__new__` 返回的不是当前类的实例，Python 就不会调用 `__init__`，并且调用者的结果就是 __new__ 返回的对象。因此 a 是一个字符串，类型为 str。",
+    "knowledge_points": [
+      "__new__",
+      "__init__"
+    ],
+    "hint": "new返回别的类型，init不调。"
+  },
+  {
+    "id": "pybasic_oo3_choice_019",
+    "title": "综合：__eq__与__hash__于字典键",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "自定义类实例作为字典键时，需要实现哪些方法？",
+    "options": [
+      "A. 只需 __eq__",
+      "B. 只需 __hash__",
+      "C. 需要 __eq__ 和 __hash__",
+      "D. 什么也不需要"
+    ],
+    "correct_answer": "C",
+    "explanation": "作为字典键，必须可哈希（实现 `__hash__`）且可比较相等（实现 `__eq__`）。缺任何一个都会导致错误或行为不符合预期。选项 A、B 不完整。",
+    "knowledge_points": [
+      "__hash__",
+      "__eq__"
+    ],
+    "hint": "键需hash和eq。"
+  },
+  {
+    "id": "pybasic_oo3_choice_020",
+    "title": "__repr__与__str__回退关系示例",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "执行以下代码，输出什么？\n```python\nclass Demo:\n    def __str__(self):\n        return 'str'\n    def __repr__(self):\n        return 'repr'\nd = Demo()\nprint(repr(d))\nprint(str(d))\n```",
+    "options": [
+      "A. repr 和 str",
+      "B. str 和 repr",
+      "C. repr 和 repr",
+      "D. str 和 str"
+    ],
+    "correct_answer": "A",
+    "explanation": "`repr(d)` 直接调用 `__repr__` 返回 'repr'；`str(d)` 调用 `__str__` 返回 'str'。两者都有定义，各自被调用，没有回退。",
+    "knowledge_points": [
+      "__str__",
+      "__repr__"
+    ],
+    "hint": "repr和str各自调用。"
+  },
+  {
+    "id": "pybasic_oo3_choice_021",
+    "title": "__add__返回新对象 vs __iadd__就地修改",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "对于可变对象，`__add__` 和 `__iadd__` 的典型区别是？",
+    "options": [
+      "A. __add__ 返回新对象，__iadd__ 可以就地修改并返回 self",
+      "B. 两者都返回新对象",
+      "C. __add__ 就地修改，__iadd__ 返回新对象",
+      "D. 两者都必须返回新对象"
+    ],
+    "correct_answer": "A",
+    "explanation": "`__add__` 实现 `+` 通常返回新对象；`__iadd__` 实现 `+=` 可以对原对象就地修改后返回 self。如果未定义 `__iadd__`，`+=` 会退而求其次使用 `__add__` 并重新赋值。选项 B、C、D 错误。",
+    "knowledge_points": [
+      "运算符重载",
+      "__add__",
+      "__iadd__"
+    ],
+    "hint": "+ 新对象，+= 可改自身。"
+  },
+  {
+    "id": "pybasic_oo3_choice_022",
+    "title": "total_ordering 自动补全比较",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "对于使用了 `@total_ordering` 并定义了 `__eq__` 和 `__lt__` 的类，可以直接使用 `>` 吗？",
+    "options": [
+      "A. 可以，因为 total_ordering 推导了 __gt__",
+      "B. 不可以，必须手动定义",
+      "C. 可以，但只限于数字类型",
+      "D. 必须同时定义 __ne__"
+    ],
+    "correct_answer": "A",
+    "explanation": "`total_ordering` 装饰器根据 `__eq__` 和 `__lt__` 自动推导出 `__le__`, `__gt__`, `__ge__`，因此可以直接使用 `>`（由 `__gt__` 处理）。选项 B、C、D 错误。",
+    "knowledge_points": [
+      "比较运算符",
+      "total_ordering"
+    ],
+    "hint": "自动生成其余比较方法。"
+  },
+  {
+    "id": "pybasic_oo3_choice_023",
+    "title": "综合：__len__与__getitem__使对象可迭代",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "以下类能使用 for 循环遍历吗？\n```python\nclass Seq:\n    def __init__(self, items):\n        self.items = items\n    def __len__(self):\n        return len(self.items)\n    def __getitem__(self, i):\n        return self.items[i]\ns = Seq([5, 6, 7])\nfor x in s:\n    print(x)\n```",
+    "options": [
+      "A. 能，因为实现了 __getitem__，依次输出 5 6 7",
+      "B. 不能，因为没有 __iter__",
+      "C. 能，但必须也定义 __next__",
+      "D. 只能通过下标访问"
+    ],
+    "correct_answer": "A",
+    "explanation": "Python 的 for 循环在找不到 `__iter__` 时会回退使用 `__getitem__`，从索引 0 递增直到抛出 IndexError。因此可以遍历。",
+    "knowledge_points": [
+      "__len__",
+      "__getitem__",
+      "迭代"
+    ],
+    "hint": "有__getitem__即可迭代。"
+  },
+  {
+    "id": "pybasic_oo3_choice_024",
+    "title": "运算符重载实现自定义乘法",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "easy",
+    "description": "以下类中 `v * 3` 会得到什么？\n```python\nclass Vector:\n    def __init__(self, x):\n        self.x = x\n    def __mul__(self, scalar):\n        return Vector(self.x * scalar)\n    def __repr__(self):\n        return f'Vector({self.x})'\nv = Vector(2)\nprint(v * 3)\n```",
+    "options": [
+      "A. Vector(6)",
+      "B. Vector(2)",
+      "C. Vector(5)",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "`__mul__` 定义了 `*` 运算符，v * 3 返回 Vector(2*3=6)。__repr__ 返回友好格式。选项 B 不变；C 加法；D 不报错。",
+    "knowledge_points": [
+      "运算符重载",
+      "__mul__"
+    ],
+    "hint": "__mul__实现乘法。"
+  },
+  {
+    "id": "pybasic_oo3_choice_025",
+    "title": "比较运算符与排序应用",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "以下自定义类按什么顺序排序？\n```python\nclass Item:\n    def __init__(self, name, price):\n        self.name = name\n        self.price = price\n    def __lt__(self, other):\n        return self.price < other.price\n    def __repr__(self):\n        return f'({self.name}, {self.price})'\nitems = [Item('C', 30), Item('A', 20), Item('B', 30)]\nprint(sorted(items))\n```",
+    "options": [
+      "A. [(A, 20), (B, 30), (C, 30)]",
+      "B. [(A, 20), (C, 30), (B, 30)]",
+      "C. [(C, 30), (A, 20), (B, 30)]",
+      "D. 报错，因为价格相同无法排序"
+    ],
+    "correct_answer": "A",
+    "explanation": "`__lt__` 定义了按价格比较，sorted 升序返回。当价格相同（30），保留原始相对顺序（稳定排序），因此 B 在前 C 在后。选项 B 顺序对但未体现；题目显示 'A' 对应 20。实际上 Item('A',20), ('B',30), ('C',30)，排序后 'A' 最先，然后 'B','C' 按原序。选项 A 符合。选项 C 反了。",
+    "knowledge_points": [
+      "__lt__",
+      "sorted"
+    ],
+    "hint": "按价格升序。"
+  },
+  {
+    "id": "pybasic_oo3_choice_026",
+    "title": "__new__用于不可变类型继承",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "hard",
+    "description": "以下自定义不可变类，正确的创建方法是？\n```python\nclass MyInt(int):\n    def __new__(cls, value):\n        return super().__new__(cls, value)\n```",
+    "options": [
+      "A. 重写 __new__ 是正确的方式，因为 int 不可变",
+      "B. 应该重写 __init__ 来设置值",
+      "C. 不能继承 int",
+      "D. 必须用 __new__ 和 __init__ 一起"
+    ],
+    "correct_answer": "A",
+    "explanation": "继承不可变类型（如 int、str、tuple）时，必须在 `__new__` 中创建并返回值，因为在 `__init__` 执行时对象已经创建且不可改变。重写 __new__ 是正确做法。选项 B 错误；C 可以；D 不需要。",
+    "knowledge_points": [
+      "__new__",
+      "不可变类型"
+    ],
+    "hint": "不可变对象在 __new__ 中赋值。"
+  },
+  {
+    "id": "pybasic_oo3_choice_027",
+    "title": "__hash__要求与__eq__一致",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "以下关于 __hash__ 与 __eq__ 的叙述，哪个正确？",
+    "options": [
+      "A. 如果 a == b 则必须 hash(a) == hash(b)",
+      "B. 如果 hash(a) == hash(b) 则必须 a == b",
+      "C. 两者无关系",
+      "D. __hash__ 的返回值必须与 __eq__ 无关"
+    ],
+    "correct_answer": "A",
+    "explanation": "哈希约定：如果两个对象通过 __eq__ 比较相等，那么它们的 __hash__ 必须返回相同的值。反之不一定成立（哈希冲突）。选项 B 不是必须的；C、D 错误。",
+    "knowledge_points": [
+      "__hash__",
+      "__eq__"
+    ],
+    "hint": "相等必须同哈希。"
+  },
+  {
+    "id": "pybasic_oo3_choice_028",
+    "title": "综合：__repr__和__str__委托",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "easy",
+    "description": "如果只想编写一个方法，让它同时担任 __str__ 和 __repr__ 的角色，应该定义哪一个？",
+    "options": [
+      "A. __repr__",
+      "B. __str__",
+      "C. 任何一个都可以",
+      "D. 必须两个都定义"
+    ],
+    "correct_answer": "A",
+    "explanation": "若只定义 `__repr__`，则 `__str__` 会自动回退到 `__repr__`，两者都生效。若只定义 `__str__`，`__repr__` 不会回退。因此定义 __repr__ 最经济。选项 B 不全面；C 错误；D 不必须。",
+    "knowledge_points": [
+      "__str__",
+      "__repr__"
+    ],
+    "hint": "只定义__repr__即可公用。"
+  },
+  {
+    "id": "pybasic_oo3_choice_029",
+    "title": "__call__实现可调用对象",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "easy",
+    "description": "执行以下代码，输出什么？\n```python\nclass Adder:\n    def __init__(self, n):\n        self.n = n\n    def __call__(self, x):\n        return x + self.n\nadd5 = Adder(5)\nprint(add5(3))\n```",
+    "options": [
+      "A. 8",
+      "B. 3",
+      "C. 5",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "定义了 __call__ 方法的类的实例可以像函数一样调用，add5(3) 会调用 __call__，返回 3 + 5 = 8。选项 B 是参数；C 是 n 的值；D 不会报错。",
+    "knowledge_points": [
+      "__call__"
+    ],
+    "hint": "实例可当函数调用。"
+  },
+  {
+    "id": "pybasic_oo3_choice_030",
+    "title": "__call__带状态计数器",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "easy",
+    "description": "运行以下代码，输出是什么？\n```python\nclass Counter:\n    def __init__(self):\n        self.count = 0\n    def __call__(self):\n        self.count += 1\n        return self.count\nc = Counter()\nprint(c(), c(), c())\n```",
+    "options": [
+      "A. 1 2 3",
+      "B. 1 1 1",
+      "C. 0 1 2",
+      "D. 3 3 3"
+    ],
+    "correct_answer": "A",
+    "explanation": "每次调用实例 c() 都会执行 __call__ 方法，count 递增并返回。三次调用分别返回 1, 2, 3。选项 B 是 count 没变；C 起始错误；D 是全3。",
+    "knowledge_points": [
+      "__call__"
+    ],
+    "hint": "调用对象改变内部状态。"
+  },
+  {
+    "id": "pybasic_oo3_choice_031",
+    "title": "类装饰器使用__call__",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "以下代码输出什么？\n```python\nclass CountCalls:\n    def __init__(self, func):\n        self.func = func\n        self.count = 0\n    def __call__(self, *args, **kwargs):\n        self.count += 1\n        return self.func(*args, **kwargs)\n@CountCalls\ndef add(a, b):\n    return a + b\nprint(add(1, 2), add.count)\n```",
+    "options": [
+      "A. 3 1",
+      "B. 3 0",
+      "C. 3 2",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "装饰器将 add 替换为 CountCalls 实例，调用 add(1,2) 触发 __call__ 并计数。add.count 属性记录了调用次数 1。输出 3 和 1。选项 B 未计数；C 计数错误；D 不会。",
+    "knowledge_points": [
+      "__call__",
+      "类装饰器"
+    ],
+    "hint": "装饰器实例记录调用。"
+  },
+  {
+    "id": "pybasic_oo3_choice_032",
+    "title": "__enter__与__exit__基本流程",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "easy",
+    "description": "执行以下代码，输出顺序是？\n```python\nclass Resource:\n    def __enter__(self):\n        print('open')\n        return self\n    def __exit__(self, *args):\n        print('close')\nwith Resource() as r:\n    print('use')\n```",
+    "options": [
+      "A. open use close",
+      "B. use open close",
+      "C. open close use",
+      "D. close open use"
+    ],
+    "correct_answer": "A",
+    "explanation": "with 语句首先调用 __enter__ 打印 'open'，然后将返回值绑定到 r，执行块打印 'use'，最后无论是否异常都调用 __exit__ 打印 'close'。因此顺序为 open use close。",
+    "knowledge_points": [
+      "__enter__",
+      "__exit__"
+    ],
+    "hint": "enter -> 块 -> exit。"
+  },
+  {
+    "id": "pybasic_oo3_choice_033",
+    "title": "__exit__抑制异常",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "运行以下代码，会发生什么？\n```python\nclass Suppress:\n    def __enter__(self):\n        pass\n    def __exit__(self, exc_type, exc_val, exc_tb):\n        return True\nwith Suppress():\n    raise ValueError\nprint('done')\n```",
+    "options": [
+      "A. 打印 done",
+      "B. 异常传播，程序崩溃",
+      "C. 什么都不打印",
+      "D. 无线循环"
+    ],
+    "correct_answer": "A",
+    "explanation": "如果 __exit__ 返回 True，with 块中发生的异常会被抑制，不再向外传播。因此程序继续执行，打印 'done'。选项 B 是不返回 True 的情况；C、D 错误。",
+    "knowledge_points": [
+      "__exit__",
+      "异常抑制"
+    ],
+    "hint": "返回 True 吃掉异常。"
+  },
+  {
+    "id": "pybasic_oo3_choice_034",
+    "title": "__exit__无异常时参数为None",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "easy",
+    "description": "以下代码输出什么？\n```python\nclass Tracker:\n    def __enter__(self):\n        pass\n    def __exit__(self, exc_type, exc_val, exc_tb):\n        print(exc_type, exc_val, exc_tb)\nwith Tracker():\n    pass\n```",
+    "options": [
+      "A. None None None",
+      "B. (,,)",
+      "C. 报错",
+      "D. 不打印"
+    ],
+    "correct_answer": "A",
+    "explanation": "当 with 块中没有发生异常时，__exit__ 的三个参数都会被传入 None，因此打印出三个 None。选项 B 错误；C 不会；D 会打印。",
+    "knowledge_points": [
+      "__exit__"
+    ],
+    "hint": "无异常时三个参数都是 None。"
+  },
+  {
+    "id": "pybasic_oo3_choice_035",
+    "title": "带参数的类装饰器",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "hard",
+    "description": "以下自定义的带参数装饰器输出什么？\n```python\nclass Repeat:\n    def __init__(self, times):\n        self.times = times\n    def __call__(self, func):\n        def wrapper(*args):\n            for _ in range(self.times):\n                func(*args)\n        return wrapper\n@Repeat(2)\ndef greet():\n    print('Hi')\ngreet()\n```",
+    "options": [
+      "A. 打印两次 Hi",
+      "B. 打印一次 Hi",
+      "C. 语法错误",
+      "D. 打印 Hi 后报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "Repeat(2) 创建实例，然后作为装饰器调用 __call__(greet)，返回 wrapper 函数。调用 greet() 时，wrapper 会执行原函数两次，因此打印两次 Hi。选项 B 误以为一次；C、D 错误。",
+    "knowledge_points": [
+      "__call__",
+      "类装饰器"
+    ],
+    "hint": "装饰器参数控制重复次数。"
+  },
+  {
+    "id": "pybasic_oo3_choice_036",
+    "title": "__bool__定义对象真值",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "easy",
+    "description": "以下代码输出什么？\n```python\nclass MyList:\n    def __init__(self, data):\n        self.data = data\n    def __bool__(self):\n        return len(self.data) > 0\nml = MyList([])\nprint(bool(ml))\n```",
+    "options": [
+      "A. False",
+      "B. True",
+      "C. 报错",
+      "D. []"
+    ],
+    "correct_answer": "A",
+    "explanation": "`__bool__` 返回 `len(self.data) > 0`，空列表时为 False。`bool()` 调用该方法，因此输出 False。选项 B 误判；C 不会；D 不合理。",
+    "knowledge_points": [
+      "__bool__"
+    ],
+    "hint": "空列表使对象为假。"
+  },
+  {
+    "id": "pybasic_oo3_choice_037",
+    "title": "无__bool__时回退__len__",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "easy",
+    "description": "运行以下代码，输出是什么？\n```python\nclass Container:\n    def __init__(self, n):\n        self.n = n\n    def __len__(self):\n        return self.n\nc = Container(0)\nif c:\n    print('true')\nelse:\n    print('false')\n```",
+    "options": [
+      "A. false",
+      "B. true",
+      "C. 报错",
+      "D. None"
+    ],
+    "correct_answer": "A",
+    "explanation": "类没有定义 `__bool__`，但定义了 `__len__`，Python 会调用 `__len__` 判断真值。返回 0 表示 False，因此走 else 分支打印 'false'。",
+    "knowledge_points": [
+      "__bool__",
+      "__len__"
+    ],
+    "hint": "没有__bool__就用__len__。"
+  },
+  {
+    "id": "pybasic_oo3_choice_038",
+    "title": "__bool__必须返回布尔值",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "hard",
+    "description": "以下代码会引发什么？\n```python\nclass Bad:\n    def __bool__(self):\n        return 1\nb = Bad()\nif b:\n    print('ok')\n```",
+    "options": [
+      "A. 打印 ok",
+      "B. TypeError",
+      "C. AttributeError",
+      "D. ValueError"
+    ],
+    "correct_answer": "B",
+    "explanation": "`__bool__` 必须返回布尔值 (True 或 False)，返回整数 1 不是布尔类型，Python 会引发 TypeError。选项 A 错误认为能工作；C、D 错误。",
+    "knowledge_points": [
+      "__bool__"
+    ],
+    "hint": "__bool__只能返回bool。"
+  },
+  {
+    "id": "pybasic_oo3_choice_039",
+    "title": "__getattr__处理缺失属性",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "easy",
+    "description": "观察以下代码，输出是什么？\n```python\nclass Dynamic:\n    def __getattr__(self, name):\n        return f\"{name} not found\"\nd = Dynamic()\nprint(d.foo)\n```",
+    "options": [
+      "A. foo not found",
+      "B. 引发 AttributeError",
+      "C. None",
+      "D. 'foo'"
+    ],
+    "correct_answer": "A",
+    "explanation": "`__getattr__` 在常规属性查找失败时被调用，这里没有 foo 属性，所以调用 __getattr__ 返回 'foo not found'。选项 B 是默认行为；C、D 不对。",
+    "knowledge_points": [
+      "__getattr__"
+    ],
+    "hint": "属性未找到时触发。"
+  },
+  {
+    "id": "pybasic_oo3_choice_040",
+    "title": "__getattribute__拦截所有访问",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "执行以下代码，会输出什么？\n```python\nclass AllGet:\n    def __getattribute__(self, name):\n        print('access', name)\n        return object.__getattribute__(self, name)\nclass Test(AllGet):\n    x = 10\nt = Test()\nprint(t.x)\n```",
+    "options": [
+      "A. access x 然后 10",
+      "B. 10",
+      "C. 报错",
+      "D. access x 然后 None"
+    ],
+    "correct_answer": "A",
+    "explanation": "`__getattribute__` 在每次属性访问时被调用。它打印信息，然后必须调用 `object.__getattribute__` 进行实际取值，否则会无限递归。输出 'access x' 后返回 10。",
+    "knowledge_points": [
+      "__getattribute__"
+    ],
+    "hint": "每次属性访问都调用。"
+  },
+  {
+    "id": "pybasic_oo3_choice_041",
+    "title": "__getattribute__无限递归陷阱",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "以下代码在执行 `b.x` 时会怎样？\n```python\nclass BadAccess:\n    def __init__(self):\n        self.x = 1\n    def __getattribute__(self, name):\n        return self.__dict__[name]\nb = BadAccess()\nprint(b.x)\n```",
+    "options": [
+      "A. 输出 1",
+      "B. 引发 RecursionError",
+      "C. 引发 KeyError",
+      "D. 引发 AttributeError"
+    ],
+    "correct_answer": "B",
+    "explanation": "`self.__dict__` 访问会再次触发 `__getattribute__`，导致无限递归，最终抛出 RecursionError。正确做法是使用 `object.__getattribute__`。",
+    "knowledge_points": [
+      "__getattribute__"
+    ],
+    "hint": "self.__dict__ 会再次触发。"
+  },
+  {
+    "id": "pybasic_oo3_choice_042",
+    "title": "__setattr__控制属性赋值",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "以下代码中 `g.public = 5` 会怎样？\n```python\nclass Guard:\n    def __setattr__(self, name, value):\n        if not name.startswith('_'):\n            raise AttributeError(\"Cannot set\")\n        object.__setattr__(self, name, value)\ng = Guard()\ng._ok = 7\ng.public = 5\n```",
+    "options": [
+      "A. 正常赋值",
+      "B. 引发 AttributeError: Cannot set",
+      "C. 引发 TypeError",
+      "D. 被忽略"
+    ],
+    "correct_answer": "B",
+    "explanation": "`__setattr__` 检查属性名是否以下划线开头，非下划线开头的属性会抛出 AttributeError，因此 `g.public = 5` 会报错，而 `g._ok = 7` 正常。",
+    "knowledge_points": [
+      "__setattr__"
+    ],
+    "hint": "只允许下划线开头的属性。"
+  },
+  {
+    "id": "pybasic_oo3_choice_043",
+    "title": "__delattr__阻止属性删除",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "运行以下代码，`del p.secret` 会怎样？\n```python\nclass Protected:\n    def __delattr__(self, name):\n        if name in ('secret',):\n            raise AttributeError(\"Cannot delete\")\n        object.__delattr__(self, name)\np = Protected()\np.x = 1\ndel p.x\np.secret = 2\ndel p.secret\n```",
+    "options": [
+      "A. 正常删除",
+      "B. 引发 AttributeError: Cannot delete",
+      "C. 引发 ValueError",
+      "D. 删除但不报错"
+    ],
+    "correct_answer": "B",
+    "explanation": "`__delattr__` 检查要删除的属性名，若为 'secret' 则抛出 AttributeError，禁止删除。因此 `del p.secret` 报错。",
+    "knowledge_points": [
+      "__delattr__"
+    ],
+    "hint": "禁止删除受保护属性。"
+  },
+  {
+    "id": "pybasic_oo3_choice_044",
+    "title": "综合：__call__与with结合",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "以下代码输出什么？\n```python\nclass Transaction:\n    def __init__(self):\n        self.active = False\n    def __enter__(self):\n        self.active = True\n        print('begin')\n        return self\n    def __exit__(self, *args):\n        self.active = False\n        print('end')\n    def __call__(self, func):\n        def wrapper(*args, **kwargs):\n            with self:\n                return func(*args, **kwargs)\n        return wrapper\n\n@Transaction()\ndef work():\n    print('working')\nwork()\n```",
+    "options": [
+      "A. begin working end",
+      "B. working begin end",
+      "C. begin end working",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "@Transaction() 创建一个 Transaction 实例，然后将其作为装饰器调用 __call__(work)，返回 wrapper。调用 wrapper 时进入 with self 块，打印 begin，执行 work 打印 working，退出时打印 end。",
+    "knowledge_points": [
+      "__call__",
+      "__enter__",
+      "__exit__"
+    ],
+    "hint": "装饰器内使用 with 管理上下文。"
+  },
+  {
+    "id": "pybasic_oo3_choice_045",
+    "title": "综合：__getattr__代理模式",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "以下代码输出什么？\n```python\nclass Proxy:\n    def __init__(self, obj):\n        self._obj = obj\n    def __getattr__(self, name):\n        return getattr(self._obj, name)\np = Proxy([1, 2, 3])\nprint(p.pop())\n```",
+    "options": [
+      "A. 3",
+      "B. [1, 2]",
+      "C. 报错",
+      "D. 1"
+    ],
+    "correct_answer": "A",
+    "explanation": "`__getattr__` 将未定义的属性访问转发给内部对象 `_obj`。`pop` 方法不在 Proxy 中定义，因此调用 `_obj.pop()` 返回并移除最后一个元素 3。",
+    "knowledge_points": [
+      "__getattr__",
+      "代理"
+    ],
+    "hint": "属性访问转发给内部对象。"
+  },
+  {
+    "id": "pybasic_oo3_choice_046",
+    "title": "__bool__真值判断示例",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "easy",
+    "description": "执行以下代码，输出是什么？\n```python\nclass Positive:\n    def __init__(self, n):\n        self.n = n\n    def __bool__(self):\n        return self.n > 0\np = Positive(0)\nprint(bool(p))\n```",
+    "options": [
+      "A. False",
+      "B. True",
+      "C. TypeError",
+      "D. None"
+    ],
+    "correct_answer": "A",
+    "explanation": "`__bool__` 返回 n > 0，n=0 时为 False。因此 bool(p) 为 False。选项 B 误判；C 不会；D 错误。",
+    "knowledge_points": [
+      "__bool__"
+    ],
+    "hint": "0 使对象为假。"
+  },
+  {
+    "id": "pybasic_oo3_choice_047",
+    "title": "__call__实现记忆化",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "阅读代码，输出是什么？\n```python\nclass Memoize:\n    def __init__(self, func):\n        self.func = func\n        self.cache = {}\n    def __call__(self, *args):\n        if args not in self.cache:\n            self.cache[args] = self.func(*args)\n        return self.cache[args]\n@Memoize\ndef add(a, b):\n    return a + b\nprint(add(1, 2), add(1, 2))\n```",
+    "options": [
+      "A. 3 3",
+      "B. 3 3 但原函数只计算一次",
+      "C. 3 6",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "Memoize 作为装饰器，add(1,2) 第一次计算并缓存结果 3，第二次直接从缓存返回 3。因此输出 3 3。选项 B 描述正确但问题的输出只有数字；A 展示数字正确。",
+    "knowledge_points": [
+      "__call__",
+      "缓存"
+    ],
+    "hint": "缓存函数调用结果。"
+  },
+  {
+    "id": "pybasic_oo3_choice_048",
+    "title": "__enter__/__exit__实现文件管理",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "以下代码中，退出 with 块后文件是否关闭？\n```python\nclass File:\n    def __init__(self, name):\n        self.name = name\n    def __enter__(self):\n        self.file = open(self.name, 'w')\n        return self.file\n    def __exit__(self, *args):\n        self.file.close()\nwith File('test.txt') as f:\n    f.write('hello')\n```",
+    "options": [
+      "A. 是，__exit__ 自动关闭",
+      "B. 否，必须显式调用 f.close()",
+      "C. 抛出异常",
+      "D. 文件未创建"
+    ],
+    "correct_answer": "A",
+    "explanation": "在 __exit__ 中调用了 self.file.close()，因此离开 with 块时文件会被自动关闭，无需手动关闭。选项 B 错误；C 不会；D 文件已写入。",
+    "knowledge_points": [
+      "__enter__",
+      "__exit__"
+    ],
+    "hint": "exit 中关闭资源。"
+  },
+  {
+    "id": "pybasic_oo3_choice_049",
+    "title": "综合：__setattr__与__getattribute__记录日志",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "hard",
+    "description": "执行以下代码，输出什么？\n```python\nclass Logged:\n    def __init__(self):\n        object.__setattr__(self, '_log', [])\n    def __setattr__(self, name, value):\n        log = object.__getattribute__(self, '_log')\n        log.append(f'set {name}')\n        object.__setattr__(self, name, value)\n    def __getattribute__(self, name):\n        if name == '_log':\n            return object.__getattribute__(self, name)\n        return object.__getattribute__(self, name)\nobj = Logged()\nobj.x = 10\nobj.y = 20\nprint(obj._log)\n```",
+    "options": [
+      "A. ['set x', 'set y']",
+      "B. ['set x']",
+      "C. 报错",
+      "D. []"
+    ],
+    "correct_answer": "A",
+    "explanation": "__setattr__ 拦截每次赋值，在 _log 列表中记录 'set x'、'set y'。__getattribute__ 中通过 object 方法访问 _log 避免递归。最终打印日志列表。",
+    "knowledge_points": [
+      "__setattr__",
+      "__getattribute__"
+    ],
+    "hint": "用 object 方法避免递归。"
+  },
+  {
+    "id": "pybasic_oo3_choice_050",
+    "title": "综合：__getattr__/__setattr__/__delattr__配合",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "以下代码中，删除属性后再访问会得到什么？\n```python\nclass SmartDict:\n    def __init__(self):\n        self.data = {}\n    def __getattr__(self, name):\n        return self.data.get(name, None)\n    def __setattr__(self, name, value):\n        if name == 'data':\n            object.__setattr__(self, name, value)\n        else:\n            self.data[name] = value\n    def __delattr__(self, name):\n        del self.data[name]\nsd = SmartDict()\nsd.a = 1\nprint(sd.a)\ndel sd.a\nprint(sd.a)\n```",
+    "options": [
+      "A. 1 和 None",
+      "B. 1 和 AttributeError",
+      "C. 1 和 1",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "sd.a 赋值通过 __setattr__ 存入 data；访问时 __getattr__ 返回 data.get(name, None)，删除后再次访问 data 中已无该键，get 返回 None。因此输出 1 和 None。",
+    "knowledge_points": [
+      "__getattr__",
+      "__setattr__",
+      "__delattr__"
+    ],
+    "hint": "通过内部字典管理属性。"
+  },
+  {
+    "id": "pybasic_oo3_choice_051",
+    "title": "__call__与__bool__组合",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "以下代码输出什么？\n```python\nclass ConditionalFunc:\n    def __init__(self, func, condition):\n        self.func = func\n        self.condition = condition\n    def __call__(self, *args):\n        if self.condition():\n            return self.func(*args)\n        else:\n            return None\n    def __bool__(self):\n        return self.condition()\nc = ConditionalFunc(lambda: 42, lambda: False)\nif c:\n    print('ok')\nelse:\n    print('not ok')\n```",
+    "options": [
+      "A. not ok",
+      "B. ok",
+      "C. 42",
+      "D. TypeError"
+    ],
+    "correct_answer": "A",
+    "explanation": "`__bool__` 返回 `self.condition()` 的结果，这里 condition 返回 False，因此对象被视为假，打印 'not ok'。选项 B 错误；C 是返回值；D 不会。",
+    "knowledge_points": [
+      "__call__",
+      "__bool__"
+    ],
+    "hint": "对象真假由 condition 决定。"
+  },
+  {
+    "id": "pybasic_oo3_choice_052",
+    "title": "综合：可调用上下文管理器装饰器",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "以下代码输出什么？\n```python\nclass context:\n    def __init__(self, name):\n        self.name = name\n    def __enter__(self):\n        print(f'enter {self.name}')\n        return self\n    def __exit__(self, *args):\n        print(f'exit {self.name}')\n    def __call__(self, func):\n        def wrapper(*args, **kwargs):\n            with self:\n                return func(*args, **kwargs)\n        return wrapper\n\n@context('my_block')\ndef do_work():\n    print('work')\ndo_work()\n```",
+    "options": [
+      "A. enter my_block, work, exit my_block",
+      "B. work, enter my_block, exit my_block",
+      "C. enter my_block, exit my_block, work",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "装饰器 context('my_block') 先创建实例，然后 __call__ 返回 wrapper。调用 do_work() 进入 wrapper，执行 with self，依次打印 enter my_block, work，退出时打印 exit my_block。",
+    "knowledge_points": [
+      "__call__",
+      "__enter__",
+      "__exit__"
+    ],
+    "hint": "装饰器内用 with 包裹函数。"
+  },
+  {
+    "id": "pybasic_oo3_choice_053",
+    "title": "__getattribute__实现访问计数",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "hard",
+    "description": "以下代码中 len(c) 会触发属性访问增加 _count，最终打印什么？\n```python\nclass CountAccess:\n    def __init__(self, obj):\n        self._obj = obj\n        self._count = 0\n    def __getattribute__(self, name):\n        if name in ('_obj', '_count', 'get_count'):\n            return object.__getattribute__(self, name)\n        object.__setattr__(self, '_count', object.__getattribute__(self, '_count') + 1)\n        return getattr(object.__getattribute__(self, '_obj'), name)\n    def get_count(self):\n        return object.__getattribute__(self, '_count')\nc = CountAccess([1, 2, 3])\nlen(c)\nprint(c.get_count())\n```",
+    "options": [
+      "A. 1",
+      "B. 0",
+      "C. 2",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "len(c) 会先查找 `__len__` 属性，触发 `__getattribute__`，在其中 `_count` 增加 1。随后调用 `get_count()` 返回计数值 1。选项 B 为初始值；C 误计了其他；D 不会。",
+    "knowledge_points": [
+      "__getattribute__"
+    ],
+    "hint": "每次未豁免的属性访问都计数。"
+  },
+  {
+    "id": "pybasic_oo3_choice_054",
+    "title": "__bool__优先于__len__",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "easy",
+    "description": "如果同时定义了 __bool__ 和 __len__，bool() 使用哪一个？\n```python\nclass A:\n    def __bool__(self):\n        return False\n    def __len__(self):\n        return 10\na = A()\nprint(bool(a))\n```",
+    "options": [
+      "A. False",
+      "B. True",
+      "C. 引发 TypeError",
+      "D. 10"
+    ],
+    "correct_answer": "A",
+    "explanation": "当两个方法都定义时，`__bool__` 会被优先使用。__bool__ 返回 False，因此 bool(a) 为 False，不会去检查 __len__。",
+    "knowledge_points": [
+      "__bool__",
+      "__len__"
+    ],
+    "hint": "__bool__优先级更高。"
+  },
+  {
+    "id": "pybasic_oo3_choice_055",
+    "title": "__call__实现链式调用",
+    "type": "choice",
+    "category": "面向对象-魔术方法与属性",
+    "difficulty": "medium",
+    "description": "运行以下代码，输出什么？\n```python\nclass Pipe:\n    def __init__(self, value):\n        self.value = value\n    def __call__(self, func):\n        self.value = func(self.value)\n        return self\np = Pipe(5)\np(lambda x: x + 1)(lambda x: x * 2)\nprint(p.value)\n```",
+    "options": [
+      "A. 12",
+      "B. 11",
+      "C. 10",
+      "D. 6"
+    ],
+    "correct_answer": "A",
+    "explanation": "Pipe 实例可调用，p(lambda) 应用函数并返回 self，实现链式调用。先 x+1 得 6，再 x*2 得 12。选项 B 计算错；C 是直接乘；D 只有加法。",
+    "knowledge_points": [
+      "__call__"
+    ],
+    "hint": "返回自身实现链式。"
+  }
+]

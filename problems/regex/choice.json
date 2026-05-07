@@ -1,0 +1,2205 @@
+[
+  {
+    "id": "regex_choice_001",
+    "title": "匹配数字字符的元字符",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "easy",
+    "description": "在正则表达式中，哪个元字符表示匹配任意数字字符？",
+    "options": [
+      "A. \\w",
+      "B. \\d",
+      "C. \\s",
+      "D. \\n"
+    ],
+    "correct_answer": "B",
+    "explanation": "\\d 匹配任意数字字符（0-9），\\w 匹配字母数字下划线，\\s 匹配空白符，\\n 匹配换行符。",
+    "knowledge_points": [
+      "元字符",
+      "字符类"
+    ],
+    "hint": "数字的英文是 digit"
+  },
+  {
+    "id": "regex_choice_002",
+    "title": "匹配非数字字符",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "easy",
+    "description": "哪个元字符匹配除了数字以外的任意字符？",
+    "options": [
+      "A. \\d",
+      "B. \\D",
+      "C. \\w",
+      "D. \\S"
+    ],
+    "correct_answer": "B",
+    "explanation": "\\D 是大写形式，表示取反，匹配任意非数字字符。类似地，\\W 匹配非字母数字下划线，\\S 匹配非空白符。",
+    "knowledge_points": [
+      "元字符",
+      "字符类"
+    ],
+    "hint": "大小写往往表示相反含义。"
+  },
+  {
+    "id": "regex_choice_003",
+    "title": "匹配任意空白符",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "easy",
+    "description": "下列哪个符号可以匹配一个空格、制表符或换行符？",
+    "options": [
+      "A. \\w",
+      "B. \\d",
+      "C. \\s",
+      "D. \\b"
+    ],
+    "correct_answer": "C",
+    "explanation": "\\s 匹配任意空白字符（空格、tab、换行等）。\\b 匹配单词边界，本身不匹配字符。",
+    "knowledge_points": [
+      "元字符",
+      "空白符"
+    ],
+    "hint": "空白字符的英文是 whitespace，首字母 s。"
+  },
+  {
+    "id": "regex_choice_004",
+    "title": "量词 {2,4} 的含义",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "medium",
+    "description": "正则 `a{2,4}` 能匹配以下哪一项？",
+    "options": [
+      "A. 恰好2个a，不能多也不能少",
+      "B. 2个或4个a",
+      "C. 至少2个a，至多4个a",
+      "D. 必须2个a后面跟4个a"
+    ],
+    "correct_answer": "C",
+    "explanation": "{n,m} 表示前面的模式连续出现至少 n 次、至多 m 次。{2,4} 可以匹配 aa、aaa 或 aaaa。",
+    "knowledge_points": [
+      "量词"
+    ],
+    "hint": "花括号里的两个数字分别代表最少和最多出现次数。"
+  },
+  {
+    "id": "regex_choice_005",
+    "title": "分组的作用",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "medium",
+    "description": "在正则表达式 `(ab)+` 中，括号的作用是什么？",
+    "options": [
+      "A. 将 ab 视为一个整体，然后加号表示这个整体重复一次或多次",
+      "B. 表示 a 和 b 必须各自重复一次",
+      "C. 表示 ab 是可选的",
+      "D. 仅用于提高可读性，不改变匹配逻辑"
+    ],
+    "correct_answer": "A",
+    "explanation": "括号将多个字符组合成一个子模式，量词 `+` 作用于整个 'ab' 序列。不加括号的话 `ab+` 只让 b 重复。",
+    "knowledge_points": [
+      "分组",
+      "量词"
+    ],
+    "hint": "括号让量词作用到整个括号内的内容，类似数学里的优先级。"
+  },
+  {
+    "id": "regex_choice_006",
+    "title": "匹配空白字符元字符",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "easy",
+    "description": "在正则表达式中，用来匹配空格、制表符、换行等空白字符的元字符是？",
+    "options": [
+      "A. \\d",
+      "B. \\w",
+      "C. \\s",
+      "D. \\t"
+    ],
+    "correct_answer": "C",
+    "explanation": "\\s 匹配任意空白字符，\\d 匹配数字，\\w 匹配字母数字下划线，\\t 仅匹配制表符。",
+    "knowledge_points": [
+      "元字符",
+      "字符类"
+    ],
+    "hint": "空白对应英文 space"
+  },
+  {
+    "id": "regex_choice_007",
+    "title": "匹配单词字符元字符",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "easy",
+    "description": "正则中能匹配大小写字母、数字和下划线的元字符是？",
+    "options": [
+      "A. \\W",
+      "B. \\w",
+      "C. \\D",
+      "D. \\S"
+    ],
+    "correct_answer": "B",
+    "explanation": "\\w 匹配字母、数字、下划线；大写同类元字符表示反向不匹配。",
+    "knowledge_points": [
+      "元字符",
+      "字符类"
+    ],
+    "hint": "单词对应英文 word"
+  },
+  {
+    "id": "regex_choice_008",
+    "title": "匹配非数字元字符",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "easy",
+    "description": "正则表达式中，表示匹配所有非数字字符的元字符是？",
+    "options": [
+      "A. \\d",
+      "B. \\D",
+      "C. \\w",
+      "D. \\s"
+    ],
+    "correct_answer": "B",
+    "explanation": "\\d 匹配数字，大写 \\D 为取反，匹配任意非数字字符。",
+    "knowledge_points": [
+      "元字符",
+      "字符类"
+    ],
+    "hint": "正则大写元字符一般为反向匹配"
+  },
+  {
+    "id": "regex_choice_009",
+    "title": "匹配非空白元字符",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "easy",
+    "description": "正则中匹配任意非空白字符的元字符是？",
+    "options": [
+      "A. \\s",
+      "B. \\S",
+      "C. \\n",
+      "D. \\r"
+    ],
+    "correct_answer": "B",
+    "explanation": "\\s 匹配空白，大写 \\S 匹配除空白以外的所有字符。",
+    "knowledge_points": [
+      "元字符",
+      "字符类"
+    ],
+    "hint": "大写元字符代表反向取反"
+  },
+  {
+    "id": "regex_choice_010",
+    "title": "匹配任意单个字符符号",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "easy",
+    "description": "正则中哪个符号可以匹配除换行符外的任意单个字符？",
+    "options": [
+      "A. *",
+      "B. .",
+      "C. ?",
+      "D. +"
+    ],
+    "correct_answer": "B",
+    "explanation": "英文句号 . 是正则通配符，匹配除换行外任意一个字符。",
+    "knowledge_points": [
+      "元字符",
+      "通配符"
+    ],
+    "hint": "句号作为万能单字符匹配"
+  },
+  {
+    "id": "regex_choice_011",
+    "title": "0次或多次量词",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "easy",
+    "description": "正则量词中，表示前面规则出现0次或多次的符号是？",
+    "options": [
+      "A. +",
+      "B. ?",
+      "C. *",
+      "D. {}"
+    ],
+    "correct_answer": "C",
+    "explanation": "* 代表0次或多次，+ 代表1次或多次，? 代表0次或1次。",
+    "knowledge_points": [
+      "量词",
+      "重复匹配"
+    ],
+    "hint": "星号代表可有可无、任意次数"
+  },
+  {
+    "id": "regex_choice_012",
+    "title": "1次或多次量词",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "easy",
+    "description": "正则中表示前面字符至少出现1次的量词是？",
+    "options": [
+      "A. *",
+      "B. +",
+      "C. ?",
+      "D. ."
+    ],
+    "correct_answer": "B",
+    "explanation": "+ 量词含义为匹配前面内容1次或多次，不可为0次。",
+    "knowledge_points": [
+      "量词",
+      "重复匹配"
+    ],
+    "hint": "加号代表至少一次"
+  },
+  {
+    "id": "regex_choice_013",
+    "title": "字符串开头锚点",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "easy",
+    "description": "正则中用于匹配字符串起始位置的锚点符号是？",
+    "options": [
+      "A. $",
+      "B. ^",
+      "C. #",
+      "D. &"
+    ],
+    "correct_answer": "B",
+    "explanation": "^ 匹配字符串开头，$ 匹配字符串结尾，属于位置锚点不占用字符。",
+    "knowledge_points": [
+      "锚点",
+      "位置匹配"
+    ],
+    "hint": "尖角符号定位开头"
+  },
+  {
+    "id": "regex_choice_014",
+    "title": "字符串结尾锚点",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "easy",
+    "description": "正则中用于匹配字符串结束位置的锚点符号是？",
+    "options": [
+      "A. ^",
+      "B. $",
+      "C. !",
+      "D. %"
+    ],
+    "correct_answer": "B",
+    "explanation": "$ 为正则结尾锚点，只定位末尾位置，不匹配任何可见字符。",
+    "knowledge_points": [
+      "锚点",
+      "位置匹配"
+    ],
+    "hint": "美元符号定位结尾"
+  },
+  {
+    "id": "regex_choice_015",
+    "title": "小写字母范围匹配",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "easy",
+    "description": "正则中正确匹配所有小写英文字母的写法是？",
+    "options": [
+      "A. [a-z]",
+      "B. (a-z)",
+      "C. {a-z}",
+      "D. \"a-z\""
+    ],
+    "correct_answer": "A",
+    "explanation": "方括号 [] 用于定义字符集范围，[a-z] 匹配全部小写字母。",
+    "knowledge_points": [
+      "字符集",
+      "范围匹配"
+    ],
+    "hint": "方括号用于字符范围筛选"
+  },
+  {
+    "id": "regex_choice_016",
+    "title": "匹配固定长度数字",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "medium",
+    "description": "下列哪个正则能精确匹配**6位纯数字**？",
+    "options": [
+      "A. ^\\d{6}$",
+      "B. \\d{6}",
+      "C. ^\\d+$",
+      "D. \\d{0,6}"
+    ],
+    "correct_answer": "A",
+    "explanation": "^和$限定开头结尾，\\d{6}表示必须是6个数字，组合后精确匹配6位纯数字。",
+    "knowledge_points": [
+      "量词",
+      "位置锚点"
+    ],
+    "hint": "精确匹配必须限定开头和结尾"
+  },
+  {
+    "id": "regex_choice_017",
+    "title": "匹配可选字符",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "medium",
+    "description": "正则中哪个符号表示**前面的字符出现0次或1次（可选）**？",
+    "options": [
+      "A. *",
+      "B. +",
+      "C. ?",
+      "D. ."
+    ],
+    "correct_answer": "C",
+    "explanation": "? 表示匹配前面元素0次或1次，常用于匹配可选字符。",
+    "knowledge_points": [
+      "量词"
+    ],
+    "hint": "问号代表可有可无"
+  },
+  {
+    "id": "regex_choice_018",
+    "title": "匹配大写字母",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "medium",
+    "description": "下列哪个正则能匹配**任意一个大写英文字母**？",
+    "options": [
+      "A. [a-z]",
+      "B. [A-Z]",
+      "C. [0-9]",
+      "D. \\w"
+    ],
+    "correct_answer": "B",
+    "explanation": "[A-Z]是标准字符集范围，匹配所有大写字母；[a-z]匹配小写。",
+    "knowledge_points": [
+      "字符集",
+      "范围匹配"
+    ],
+    "hint": "大写字母范围用A-Z表示"
+  },
+  {
+    "id": "regex_choice_019",
+    "title": "非捕获分组",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "medium",
+    "description": "正则中**只分组不捕获内容**的分组写法是？",
+    "options": [
+      "A. (abc)",
+      "B. [abc]",
+      "C. (?:abc)",
+      "D. {abc}"
+    ],
+    "correct_answer": "C",
+    "explanation": "(?:)是非捕获分组，仅分组不存储匹配结果，性能优于普通分组。",
+    "knowledge_points": [
+      "分组",
+      "非捕获分组"
+    ],
+    "hint": "分组前加?:表示不捕获"
+  },
+  {
+    "id": "regex_choice_020",
+    "title": "匹配排除字符",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "medium",
+    "description": "正则[^0-9]表示什么含义？",
+    "options": [
+      "A. 匹配数字",
+      "B. 匹配非数字字符",
+      "C. 匹配开头数字",
+      "D. 匹配结尾数字"
+    ],
+    "correct_answer": "B",
+    "explanation": "字符集内^表示取反，[^0-9]匹配所有不是0-9的字符。",
+    "knowledge_points": [
+      "字符集",
+      "反向匹配"
+    ],
+    "hint": "[]内的^代表排除"
+  },
+  {
+    "id": "regex_choice_021",
+    "title": "手机号格式匹配",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "medium",
+    "description": "最简匹配11位手机号的正则是？",
+    "options": [
+      "A. ^\\d{11}$",
+      "B. \\d{11}",
+      "C. ^1\\d{10}$",
+      "D. \\d+"
+    ],
+    "correct_answer": "C",
+    "explanation": "手机号以1开头，后跟10位数字，^1\\d{10}$为标准最简匹配。",
+    "knowledge_points": [
+      "实际应用",
+      "数字匹配"
+    ],
+    "hint": "手机号必须以1开头"
+  },
+  {
+    "id": "regex_choice_022",
+    "title": "至少出现次数",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "medium",
+    "description": "匹配前面字符**至少出现3次**的正则写法是？",
+    "options": [
+      "A. \\d{3}",
+      "B. \\d{3,}",
+      "C. \\d{0,3}",
+      "D. \\d?"
+    ],
+    "correct_answer": "B",
+    "explanation": "{n,}表示最少匹配n次，{3,}即字符至少出现3次。",
+    "knowledge_points": [
+      "量词",
+      "次数范围"
+    ],
+    "hint": "次数后面加逗号表示至少"
+  },
+  {
+    "id": "regex_choice_023",
+    "title": "匹配英文句号",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "medium",
+    "description": "正则中如何**精确匹配英文句号.本身**？",
+    "options": [
+      "A. .",
+      "B. \\.",
+      "C. [.]",
+      "D. #."
+    ],
+    "correct_answer": "B",
+    "explanation": ".是元字符，匹配自身需要转义，\\.表示匹配普通句号。",
+    "knowledge_points": [
+      "转义字符",
+      "元字符"
+    ],
+    "hint": "特殊字符匹配前加反斜杠"
+  },
+  {
+    "id": "regex_choice_024",
+    "title": "多选项匹配",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "medium",
+    "description": "匹配 apple 或 banana 的正则是？",
+    "options": [
+      "A. apple|banana",
+      "B. apple&banana",
+      "C. apple+banana",
+      "D. (apple)(banana)"
+    ],
+    "correct_answer": "A",
+    "explanation": "|是正则或运算符，匹配符号左右任意一个内容。",
+    "knowledge_points": [
+      "或运算",
+      "多选匹配"
+    ],
+    "hint": "竖线代表二选一"
+  },
+  {
+    "id": "regex_choice_025",
+    "title": "字母数字组合",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "medium",
+    "description": "匹配8-16位**字母+数字组合**的账号，正确的是？",
+    "options": [
+      "A. ^[a-zA-Z0-9]{8,16}$",
+      "B. ^\\w{8,16}$",
+      "C. ^[a-z0-9]{8,16}$",
+      "D. ^\\d{8,16}$"
+    ],
+    "correct_answer": "A",
+    "explanation": "[a-zA-Z0-9]包含大小写字母和数字，{8,16}限定长度范围。",
+    "knowledge_points": [
+      "字符集",
+      "长度限定"
+    ],
+    "hint": "大小写字母都要包含"
+  },
+  {
+    "id": "regex_choice_026",
+    "title": "正向先行断言匹配",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "正则中用于【正向先行断言】的语法是？",
+    "options": [
+      "A. (?=pattern)",
+      "B. (?!pattern)",
+      "C. (?<=pattern)",
+      "D. (?<!pattern)"
+    ],
+    "correct_answer": "A",
+    "explanation": "(?=) 是正向先行断言，匹配后面满足条件的位置，不消耗字符。",
+    "knowledge_points": [
+      "断言",
+      "零宽断言"
+    ],
+    "hint": "先行断言判断后续内容"
+  },
+  {
+    "id": "regex_choice_027",
+    "title": "负向先行断言匹配",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "下列哪个是【负向先行断言】语法？",
+    "options": [
+      "A. (?=a)",
+      "B. (?!a)",
+      "C. (?<=a)",
+      "D. (?<!a)"
+    ],
+    "correct_answer": "B",
+    "explanation": "(?!) 负向先行断言，匹配后面不满足指定规则的位置。",
+    "knowledge_points": [
+      "断言",
+      "零宽断言"
+    ],
+    "hint": "感叹号代表否定"
+  },
+  {
+    "id": "regex_choice_028",
+    "title": "非贪婪匹配模式",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "让 *、+ 量词变成【非贪婪匹配】的符号是？",
+    "options": [
+      "A. ?",
+      "B. !",
+      "C. ^",
+      "D. $"
+    ],
+    "correct_answer": "A",
+    "explanation": "量词后加 ? 变为非贪婪模式，匹配最短内容。",
+    "knowledge_points": [
+      "贪婪匹配",
+      "非贪婪匹配"
+    ],
+    "hint": "问号关闭贪婪模式"
+  },
+  {
+    "id": "regex_choice_029",
+    "title": "反向引用分组",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "正则中【引用第1个分组匹配内容】的语法是？",
+    "options": [
+      "A. \\1",
+      "B. $1",
+      "C. #1",
+      "D. @1"
+    ],
+    "correct_answer": "A",
+    "explanation": "\\1 代表匹配第一个分组捕获的内容，用于重复内容匹配。",
+    "knowledge_points": [
+      "分组",
+      "反向引用"
+    ],
+    "hint": "反斜杠加数字引用分组"
+  },
+  {
+    "id": "regex_choice_030",
+    "title": "精确邮箱格式匹配",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "下列哪个是标准【邮箱格式】正则表达式？",
+    "options": [
+      "A. ^\\w+@\\w+\\.\\w+$",
+      "B. ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+      "C. ^\\w+@\\w+$",
+      "D. ^.*@.*$"
+    ],
+    "correct_answer": "B",
+    "explanation": "该正则严格匹配用户名、域名、后缀，符合RFC标准邮箱规范。",
+    "knowledge_points": [
+      "实战应用",
+      "邮箱验证"
+    ],
+    "hint": "邮箱包含域名多级后缀"
+  },
+  {
+    "id": "regex_choice_031",
+    "title": "正向后行断言",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "正则中【正向后行断言】语法是？",
+    "options": [
+      "A. (?=pattern)",
+      "B. (?!pattern)",
+      "C. (?<=pattern)",
+      "D. (?<!pattern)"
+    ],
+    "correct_answer": "C",
+    "explanation": "(?<=) 正向后行断言，匹配前面满足条件的位置。",
+    "knowledge_points": [
+      "断言",
+      "零宽断言"
+    ],
+    "hint": "后行断言判断前面内容"
+  },
+  {
+    "id": "regex_choice_032",
+    "title": "密码强度验证",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "使用断言实现【必须包含数字和字母】的8位密码，正确的是？",
+    "options": [
+      "A. ^(?=.*[a-z])(?=.*\\d)[a-z\\d]{8}$",
+      "B. ^[a-z\\d]{8}$",
+      "C. ^(?=all)[a-z\\d]{8}$",
+      "D. ^[a-z]+\\d{8}$"
+    ],
+    "correct_answer": "A",
+    "explanation": "使用两个正向先行断言同时校验字母与数字存在，再限制长度。",
+    "knowledge_points": [
+      "断言",
+      "密码验证"
+    ],
+    "hint": "多个断言同时生效"
+  },
+  {
+    "id": "regex_choice_033",
+    "title": "匹配不包含某字符串",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配【不包含test】的字符串，正确的正则是？",
+    "options": [
+      "A. ^(?!.*test).*$",
+      "B. ^test.*$",
+      "C. ^.*test.*$",
+      "D. ^[^test]*$"
+    ],
+    "correct_answer": "A",
+    "explanation": "利用负向先行断言，匹配整个字符串中不出现test。",
+    "knowledge_points": [
+      "断言",
+      "排除匹配"
+    ],
+    "hint": "否定整个字符串包含目标"
+  },
+  {
+    "id": "regex_choice_034",
+    "title": "原子分组（不回溯）",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "正则中【禁止回溯的原子分组】语法是？",
+    "options": [
+      "A. (?>pattern)",
+      "B. (:?pattern)",
+      "C. (|pattern)",
+      "D. (&pattern)"
+    ],
+    "correct_answer": "A",
+    "explanation": "(?>) 原子分组，匹配后不回溯，提升复杂正则性能。",
+    "knowledge_points": [
+      "分组",
+      "原子分组"
+    ],
+    "hint": "大于号代表不回溯"
+  },
+  {
+    "id": "regex_choice_035",
+    "title": "URL标准格式匹配",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配带http/https协议的标准URL，正确的是？",
+    "options": [
+      "A. ^https?://\\w+\\.\\w+$",
+      "B. ^(https?://)?([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$",
+      "C. ^www.*$",
+      "D. ^http.*$"
+    ],
+    "correct_answer": "B",
+    "explanation": "支持协议、域名、路径、参数，覆盖标准URL所有格式。",
+    "knowledge_points": [
+      "实战应用",
+      "URL验证"
+    ],
+    "hint": "URL包含协议域名路径参数"
+  },
+  {
+    "id": "regex_choice_036",
+    "title": "负向后行断言语法",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "正则中负向后行断言，匹配前方不是指定内容的语法是？",
+    "options": [
+      "A. (?<=abc)",
+      "B. (?<!abc)",
+      "C. (?=abc)",
+      "D. (?!abc)"
+    ],
+    "correct_answer": "B",
+    "explanation": "(?<!xxx) 为负向后行零宽断言，表示当前位置左边不能是 xxx。",
+    "knowledge_points": [
+      "零宽断言",
+      "后行断言"
+    ],
+    "hint": "<! 代表向后否定"
+  },
+  {
+    "id": "regex_choice_037",
+    "title": "贪婪与非贪婪匹配区别",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "对于字符串 '<a>123</a>'，表达式 /<.*>/ 默认会匹配到哪一部分？",
+    "options": [
+      "A. <a>",
+      "B. </a>",
+      "C. <a>123</a>",
+      "D. 无匹配"
+    ],
+    "correct_answer": "C",
+    "explanation": ".* 默认是贪婪匹配，会尽可能匹配最长内容，直接从第一个<匹配到最后一个>。",
+    "knowledge_points": [
+      "贪婪匹配",
+      "非贪婪匹配"
+    ],
+    "hint": "默认量词都是贪心匹配最长"
+  },
+  {
+    "id": "regex_choice_038",
+    "title": "非贪婪最短匹配写法",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "想要仅匹配 <a>123</a> 中单独的 <a>，正确非贪婪写法是？",
+    "options": [
+      "A. <.*>",
+      "B. <.*?>",
+      "C. <.+>",
+      "D. <.?>"
+    ],
+    "correct_answer": "B",
+    "explanation": ".*? 为非贪婪模式，匹配满足条件的最短字符，能精准匹配单个标签。",
+    "knowledge_points": [
+      "量词修饰",
+      "非贪婪模式"
+    ],
+    "hint": "量词后加? 开启非贪婪"
+  },
+  {
+    "id": "regex_choice_039",
+    "title": "反向引用匹配重复单词",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "能匹配连续重复单词如 'ab ab' 的正则写法是？",
+    "options": [
+      "A. (\\w+) \\1",
+      "B. \\1 (\\w+)",
+      "C. (\\1) \\w+",
+      "D. \\w+ \\w+"
+    ],
+    "correct_answer": "A",
+    "explanation": "(\\w+) 捕获第一个单词，\\1 反向引用分组内容，匹配相同单词再次出现。",
+    "knowledge_points": [
+      "分组捕获",
+      "反向引用"
+    ],
+    "hint": "先捕获再用\\1引用"
+  },
+  {
+    "id": "regex_choice_040",
+    "title": "正则忽略大小写修饰符",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "正则中开启忽略大小写匹配的修饰符是？",
+    "options": [
+      "A. g",
+      "B. m",
+      "C. i",
+      "D. s"
+    ],
+    "correct_answer": "C",
+    "explanation": "i 修饰符：ignoreCase 忽略大小写；g 全局匹配，m 多行匹配，s 单行模式。",
+    "knowledge_points": [
+      "正则修饰符",
+      "匹配模式"
+    ],
+    "hint": "i 对应 ignore 忽略大小写"
+  },
+  {
+    "id": "regex_choice_041",
+    "title": "多行模式锚点生效",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "开启哪个修饰符可让 ^ 和 $ 匹配每一行的开头和结尾？",
+    "options": [
+      "A. i",
+      "B. m",
+      "C. g",
+      "D. u"
+    ],
+    "correct_answer": "B",
+    "explanation": "m 多行模式，使 ^ 匹配每行起始、$ 匹配每行结束，不再只匹配整个字符串首尾。",
+    "knowledge_points": [
+      "正则修饰符",
+      "多行模式"
+    ],
+    "hint": "m 代表 multiline 多行"
+  },
+  {
+    "id": "regex_choice_042",
+    "title": "单行模式点号匹配换行",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "开启哪个修饰符可让 . 匹配包含换行符在内的所有字符？",
+    "options": [
+      "A. s",
+      "B. m",
+      "C. i",
+      "D. g"
+    ],
+    "correct_answer": "A",
+    "explanation": "s 单行模式（DOTALL），让 . 元字符可以匹配换行符 \\n。",
+    "knowledge_points": [
+      "正则修饰符",
+      "单行模式"
+    ],
+    "hint": "s 让点号通配一切含换行"
+  },
+  {
+    "id": "regex_choice_043",
+    "title": "匹配合法IPv4地址",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "以下哪一个是合法简化版 IPv4 地址正则匹配规则？",
+    "options": [
+      "A. ^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$",
+      "B. ^(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$",
+      "C. ^\\d+\\.\\d+\\.\\d+\\.\\d+$",
+      "D. ^[0-9].[0-9].[0-9].[0-9]$"
+    ],
+    "correct_answer": "B",
+    "explanation": "IPv4 每段范围 0~255，需分段限制数值区间，非简单三位数字即可。",
+    "knowledge_points": [
+      "实战正则",
+      "IP地址匹配"
+    ],
+    "hint": "要限制每段0-255合法区间"
+  },
+  {
+    "id": "regex_choice_044",
+    "title": "密码多规则组合校验",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "要求密码8-16位，必须包含大写、小写、数字，正确正则为？",
+    "options": [
+      "A. ^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{8,16}$",
+      "B. ^[A-Za-z\\d]{8,16}$",
+      "C. ^(?=.*[A-Z])(?=.*[a-z])[A-Za-z]{8,16}$",
+      "D. ^\\w{8,16}$"
+    ],
+    "correct_answer": "A",
+    "explanation": "通过多个正向先行断言分别强制包含大写、小写、数字，再限定长度和字符范围。",
+    "knowledge_points": [
+      "零宽断言",
+      "强密码校验"
+    ],
+    "hint": "多个(?=)叠加做组合限制"
+  },
+  {
+    "id": "regex_choice_045",
+    "title": "排除以指定开头的字符串",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配**不以http开头**的整行字符串，正确写法是？",
+    "options": [
+      "A. ^(?!http).*$",
+      "B. ^http.*$",
+      "C. ^[^http].*$",
+      "D. .*(?!http)$"
+    ],
+    "correct_answer": "A",
+    "explanation": "(?!http) 负向先行断言，在起始位置限制不能以http开头，再匹配整行内容。",
+    "knowledge_points": [
+      "零宽断言",
+      "开头排除匹配"
+    ],
+    "hint": "开头位置用(?!xxx)做拦截"
+  },
+  {
+    "id": "regex_choice_046",
+    "title": "命名分组捕获语法",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "正则中【命名分组捕获】的标准语法是？",
+    "options": [
+      "A. (?<name>pattern)",
+      "B. (:name>pattern)",
+      "C. (^name>pattern)",
+      "D. ($name>pattern)"
+    ],
+    "correct_answer": "A",
+    "explanation": "(?<name>pattern) 是命名分组语法，可通过名称引用分组内容。",
+    "knowledge_points": [
+      "分组",
+      "命名捕获"
+    ],
+    "hint": "使用 ?<名称> 定义命名分组"
+  },
+  {
+    "id": "regex_choice_047",
+    "title": "匹配连续不重复字符",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "使用正则匹配**无重复字符**的4位字符串，核心语法是？",
+    "options": [
+      "A. (.)(?!\\1)",
+      "B. (.)(?=\\1)",
+      "C. (.)\\1",
+      "D. (.)[^\\1]"
+    ],
+    "correct_answer": "A",
+    "explanation": "(.)捕获字符，(?!\\1)负向先行断言确保后续不出现相同字符，实现去重。",
+    "knowledge_points": [
+      "断言",
+      "反向引用"
+    ],
+    "hint": "否定断言+反向引用实现去重"
+  },
+  {
+    "id": "regex_choice_048",
+    "title": "全局匹配修饰符",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "正则中开启【全局查找所有匹配项】的修饰符是？",
+    "options": [
+      "A. i",
+      "B. g",
+      "C. m",
+      "D. s"
+    ],
+    "correct_answer": "B",
+    "explanation": "g 代表 global，开启全局匹配，找到所有符合规则的结果。",
+    "knowledge_points": [
+      "修饰符",
+      "全局模式"
+    ],
+    "hint": "g 对应 global 全局"
+  },
+  {
+    "id": "regex_choice_049",
+    "title": "零宽断言不消耗字符",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "关于零宽断言的特性，以下说法正确的是？",
+    "options": [
+      "A. 会占用匹配字符",
+      "B. 仅匹配位置，不消耗任何字符",
+      "C. 必须配合分组使用",
+      "D. 只能用于字符串开头"
+    ],
+    "correct_answer": "B",
+    "explanation": "零宽断言只匹配位置边界，不匹配实际字符，不会消耗字符串内容。",
+    "knowledge_points": [
+      "零宽断言",
+      "匹配特性"
+    ],
+    "hint": "零宽代表无宽度、不占字符"
+  },
+  {
+    "id": "regex_choice_050",
+    "title": "身份证号码格式校验",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "18位中国大陆身份证号的标准正则表达式是？",
+    "options": [
+      "A. ^\\d{18}$",
+      "B. ^\\d{17}(\\d|X|x)$",
+      "C. ^\\d{15,18}$",
+      "D. ^[0-9X]{18}$"
+    ],
+    "correct_answer": "B",
+    "explanation": "17位数字+1位校验码（数字/X/x），是18位身份证的核心格式规则。",
+    "knowledge_points": [
+      "实战应用",
+      "身份证验证"
+    ],
+    "hint": "最后一位可以是大写X"
+  },
+  {
+    "id": "regex_choice_051",
+    "title": "非捕获分组特性",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "非捕获分组 (?:pattern) 的核心作用是？",
+    "options": [
+      "A. 存储分组结果供引用",
+      "B. 仅分组不占用捕获序号，提升性能",
+      "C. 强制贪婪匹配",
+      "D. 开启忽略大小写"
+    ],
+    "correct_answer": "B",
+    "explanation": "非捕获分组实现分组功能，但不存储结果，不占用分组序号，性能更高。",
+    "knowledge_points": [
+      "分组",
+      "非捕获分组"
+    ],
+    "hint": "只分组，不捕获、不存储"
+  },
+  {
+    "id": "regex_choice_052",
+    "title": "匹配中文汉字",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "正则中匹配**任意一个中文汉字**的正确写法是？",
+    "options": [
+      "A. [\\u4e00-\\u9fa5]",
+      "B. [a-z]",
+      "C. \\w",
+      "D. [^0-9]"
+    ],
+    "correct_answer": "A",
+    "explanation": "\\u4e00-\\u9fa5 是中文汉字的Unicode编码范围，精准匹配中文。",
+    "knowledge_points": [
+      "字符集",
+      "Unicode匹配"
+    ],
+    "hint": "中文匹配使用Unicode编码范围"
+  },
+  {
+    "id": "regex_choice_053",
+    "title": "回溯禁用优化",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "正则中【原子分组】禁止回溯的语法是？",
+    "options": [
+      "A. (?|pattern)",
+      "B. (?>pattern)",
+      "C. (:>pattern)",
+      "D. (?!pattern)"
+    ],
+    "correct_answer": "B",
+    "explanation": "(?>) 原子分组，匹配成功后禁止正则引擎回溯，大幅提升复杂匹配性能。",
+    "knowledge_points": [
+      "原子分组",
+      "性能优化"
+    ],
+    "hint": "?> 组合代表禁止回溯的原子分组"
+  },
+  {
+    "id": "regex_choice_054",
+    "title": "前后同时断言校验",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配**前后均为字母**的数字，正确的正则是？",
+    "options": [
+      "A. (?<=[a-zA-Z])\\d(?=[a-zA-Z])",
+      "B. [a-zA-Z]\\d[a-zA-Z]",
+      "C. \\d(?=[a-zA-Z])",
+      "D. (?<=[a-zA-Z])\\d"
+    ],
+    "correct_answer": "A",
+    "explanation": "后行断言匹配前导字母，先行断言匹配后续字母，中间匹配数字。",
+    "knowledge_points": [
+      "零宽断言",
+      "组合匹配"
+    ],
+    "hint": "前后同时使用断言限定位置"
+  },
+  {
+    "id": "regex_choice_055",
+    "title": "特殊字符转义规则",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "正则中匹配**加号 + 本身**，正确的转义写法是？",
+    "options": [
+      "A. +",
+      "B. \\+",
+      "C. &+",
+      "D. #+"
+    ],
+    "correct_answer": "B",
+    "explanation": "+ 是量词元字符，匹配自身必须使用反斜杠转义为 \\+。",
+    "knowledge_points": [
+      "转义字符",
+      "元字符"
+    ],
+    "hint": "特殊字符前加反斜杠匹配自身"
+  },
+  {
+    "id": "regex_choice_056",
+    "title": "条件分支正则语法",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "正则中实现【条件匹配：分组1存在则匹配A，否则匹配B】的语法是？",
+    "options": [
+      "A. (?(1)A|B)",
+      "B. (1?A:B)",
+      "C. (?1:A|B)",
+      "D. (A|B|1)"
+    ],
+    "correct_answer": "A",
+    "explanation": "(?(1)A|B) 是条件分支语法，判断第1个分组是否匹配，再选择分支。",
+    "knowledge_points": [
+      "条件正则",
+      "高级分组"
+    ],
+    "hint": "?(分组号)满足条件则执行对应匹配"
+  },
+  {
+    "id": "regex_choice_057",
+    "title": "Unicode单词边界",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "支持中文/Unicode字符的单词边界匹配语法是？",
+    "options": [
+      "A. \\b",
+      "B. \\B",
+      "C. (?<=\\W|^)(?=\\w)",
+      "D. [\\b]"
+    ],
+    "correct_answer": "C",
+    "explanation": "\\b 仅支持英文，Unicode环境需用断言自定义边界，(?<=\\W|^)(?=\\w) 通用兼容。",
+    "knowledge_points": [
+      "单词边界",
+      "Unicode匹配"
+    ],
+    "hint": "英文\\b不支持中文，需用断言实现"
+  },
+  {
+    "id": "regex_choice_058",
+    "title": "递归匹配嵌套结构",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "正则中匹配**无限层级嵌套括号**的核心递归语法是？",
+    "options": [
+      "A. \\((?>[^()]+|(?R))*\\)",
+      "B. \\(.*\\)",
+      "C. \\([^()]*\\)",
+      "D. \\(+\\)+"
+    ],
+    "correct_answer": "A",
+    "explanation": "(?R) 表示递归整个正则，可匹配任意深度嵌套括号，普通正则无法实现。",
+    "knowledge_points": [
+      "递归正则",
+      "嵌套匹配"
+    ],
+    "hint": "(?R) 代表递归调用自身"
+  },
+  {
+    "id": "regex_choice_059",
+    "title": "负向零宽断言行尾排除",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配**不以数字结尾**的整行字符串，正确语法是？",
+    "options": [
+      "A. .*$(?<!\\d)",
+      "B. ^.*(?<!\\d)$",
+      "C. ^.*[^\\d]$",
+      "D. ^.*(?!\\d)$"
+    ],
+    "correct_answer": "B",
+    "explanation": "(?<!\\d)$ 负向后行断言，确保字符串结尾位置前不是数字，精准匹配非数字结尾。",
+    "knowledge_points": [
+      "负向后行断言",
+      "结尾校验"
+    ],
+    "hint": "结尾排除用后行断言"
+  },
+  {
+    "id": "regex_choice_060",
+    "title": "占有优先量词",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "正则中【占有优先量词，禁止回溯】的符号是？",
+    "options": [
+      "A. *?",
+      "B. *+",
+      "C. *.",
+      "D. *!"
+    ],
+    "correct_answer": "B",
+    "explanation": "*+ 是占有优先量词，匹配后不释放字符，彻底禁止回溯，性能最优。",
+    "knowledge_points": [
+      "占有量词",
+      "性能优化"
+    ],
+    "hint": "量词后+号代表禁止回溯"
+  },
+  {
+    "id": "regex_choice_061",
+    "title": "匹配大小写严格交替",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配【大写字母+小写字母严格交替】字符串的核心语法是？",
+    "options": [
+      "A. (?=^[A-Za-z]+$)(?:[A-Z][a-z])+",
+      "B. [A-Za-z]+",
+      "C. [A-Z]+[a-z]+",
+      "D. (?i)[A-Za-z]+"
+    ],
+    "correct_answer": "A",
+    "explanation": "通过断言限定字符范围，分组强制大小写交替格式，普通写法无法实现严格交替。",
+    "knowledge_points": [
+      "组合断言",
+      "格式校验"
+    ],
+    "hint": "必须用分组强制大小写顺序"
+  },
+  {
+    "id": "regex_choice_062",
+    "title": "正则注释语法",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "正则表达式中【注释语法，不参与匹配】的写法是？",
+    "options": [
+      "A. (?#注释内容)",
+      "B. //注释内容",
+      "C. /*注释内容*/",
+      "D. #注释内容"
+    ],
+    "correct_answer": "A",
+    "explanation": "(?#注释内容) 是正则标准注释语法，仅用于说明，不参与匹配逻辑。",
+    "knowledge_points": [
+      "正则注释",
+      "格式化"
+    ],
+    "hint": "正则专用注释以(?#开头)"
+  },
+  {
+    "id": "regex_choice_063",
+    "title": "匹配连续三位不重复数字",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配【123、456这类三位不重复连续数字】的正则是？",
+    "options": [
+      "A. (\\d)(?!\\1)(?=(\\d))\\2{2}",
+      "B. \\d{3}",
+      "C. (\\d)\\1\\1",
+      "D. [1-9]{3}"
+    ],
+    "correct_answer": "A",
+    "explanation": "通过断言禁止重复、匹配连续递增数字，普通量词无法校验连续不重复。",
+    "knowledge_points": [
+      "数字校验",
+      "高级断言"
+    ],
+    "hint": "需同时使用去重+连续断言"
+  },
+  {
+    "id": "regex_choice_064",
+    "title": "非捕获分组与断言混用",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配【abc或ab，且后面紧跟数字】，正确的正则是？",
+    "options": [
+      "A. (?:abc|ab)(?=\\d)",
+      "B. (abc|ab)\\d",
+      "C. [abc|ab]\\d",
+      "D. abc|ab\\d"
+    ],
+    "correct_answer": "A",
+    "explanation": "(?:) 非捕获分组提升性能，(?=\\d) 正向断言限定后续字符，组合最精准。",
+    "knowledge_points": [
+      "非捕获分组",
+      "先行断言"
+    ],
+    "hint": "分组+断言组合实现精准匹配"
+  },
+  {
+    "id": "regex_choice_065",
+    "title": "正则模式修饰符内嵌语法",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "在正则表达式**内部**开启忽略大小写的语法是？",
+    "options": [
+      "A. (?i)",
+      "B. (/i)",
+      "C. {i}",
+      "D. <i>"
+    ],
+    "correct_answer": "A",
+    "explanation": "(?i) 是内嵌修饰符，可在正则内部局部开启忽略大小写，无需外部配置。",
+    "knowledge_points": [
+      "内嵌修饰符",
+      "匹配模式"
+    ],
+    "hint": "正则内部用(?i)开启忽略大小写"
+  },
+  {
+    "id": "regex_choice_066",
+    "title": "中国大陆手机号匹配",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "以1开头、第二位为3-9、总长度11位的纯数字中国大陆手机号，正确正则是？",
+    "options": [
+      "A. ^1[3-9]\\d{9}$",
+      "B. ^1\\d{10}$",
+      "C. ^\\d{11}$",
+      "D. ^1[0-9]\\d{8}$"
+    ],
+    "correct_answer": "A",
+    "explanation": "1开头+第二位3-9+9位数字，构成标准11位手机号格式。",
+    "knowledge_points": [
+      "实战验证",
+      "数字格式匹配"
+    ],
+    "hint": "手机号第二位不能是0、1、2"
+  },
+  {
+    "id": "regex_choice_067",
+    "title": "标准邮箱格式匹配",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "用户名支持字母/数字/._%+-，@后接域名，后缀为2-6位字母的标准邮箱，正确正则是？",
+    "options": [
+      "A. ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$",
+      "B. ^\\w+@\\w+\\.\\w+$",
+      "C. ^.*@.*\\..*$",
+      "D. ^[a-z]+@[a-z]+\\.com$"
+    ],
+    "correct_answer": "A",
+    "explanation": "严格符合RFC邮箱规范，支持合法特殊字符、多级域名与标准后缀长度。",
+    "knowledge_points": [
+      "实战验证",
+      "邮箱格式匹配"
+    ],
+    "hint": "邮箱用户名可包含 . _ % + - 符号"
+  },
+  {
+    "id": "regex_choice_068",
+    "title": "高强度密码校验",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "8-16位字符，必须包含小写字母、大写字母、数字、特殊符号四类字符的密码，正确正则是？",
+    "options": [
+      "A. ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\w\\s]).{8,16}$",
+      "B. ^\\w{8,16}$",
+      "C. ^[A-Za-z\\d]{8,16}$",
+      "D. ^.*.{8,16}$"
+    ],
+    "correct_answer": "A",
+    "explanation": "使用四个正向断言强制包含四类字符，同时限制长度8-16位。",
+    "knowledge_points": [
+      "零宽断言",
+      "密码强度验证"
+    ],
+    "hint": "特殊符号指非字母数字且非空白的字符"
+  },
+  {
+    "id": "regex_choice_069",
+    "title": "18位身份证号码匹配",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "前17位为数字，最后一位为数字或大小写X的18位身份证号码，正确正则是？",
+    "options": [
+      "A. ^\\d{17}([0-9]|X|x)$",
+      "B. ^\\d{18}$",
+      "C. ^\\d{15}|\\d{18}$",
+      "D. ^[\\dX]{18}$"
+    ],
+    "correct_answer": "A",
+    "explanation": "严格匹配18位身份证格式，前17位数字，最后一位支持数字/X/x。",
+    "knowledge_points": [
+      "实战验证",
+      "身份证格式匹配"
+    ],
+    "hint": "身份证最后一位可以是大写或小写X"
+  },
+  {
+    "id": "regex_choice_070",
+    "title": "非贪婪匹配HTML标签",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配单个HTML开始标签（如<div>），采用非贪婪模式避免过度匹配，正确正则是？",
+    "options": [
+      "A. <.*?>",
+      "B. <.*>",
+      "C. <.+>",
+      "D. <.>"
+    ],
+    "correct_answer": "A",
+    "explanation": ".*?为非贪婪匹配，只匹配从<到最近的>，不会跨标签匹配。",
+    "knowledge_points": [
+      "非贪婪匹配",
+      "文本提取"
+    ],
+    "hint": "量词后加?表示非贪婪（最短匹配）"
+  },
+  {
+    "id": "regex_choice_071",
+    "title": "URL主域名匹配",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配支持http/https协议、包含字母/数字/横杠的多级主域名，正确正则是？",
+    "options": [
+      "A. (https?://)?([\\w-]+\\.)+[\\w-]+",
+      "B. www\\..*",
+      "C. https?://.*",
+      "D. /\\w+/\\w+"
+    ],
+    "correct_answer": "A",
+    "explanation": "兼容http/https协议，匹配标准域名结构，支持多级子域名。",
+    "knowledge_points": [
+      "实战应用",
+      "URL域名提取"
+    ],
+    "hint": "域名由字母、数字、横杠、点组成"
+  },
+  {
+    "id": "regex_choice_072",
+    "title": "空白字符匹配",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配空格、制表符、换行符、回车符等所有空白字符的元字符是？",
+    "options": [
+      "A. \\s",
+      "B. \\d",
+      "C. \\w",
+      "D. \\b"
+    ],
+    "correct_answer": "A",
+    "explanation": "\\s是空白字符元字符，匹配所有类型空白。",
+    "knowledge_points": [
+      "元字符",
+      "空白匹配"
+    ],
+    "hint": "s是space（空白）的缩写"
+  },
+  {
+    "id": "regex_choice_073",
+    "title": "中文姓名匹配",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配长度为2-4个纯中文汉字的姓名，正确正则是？",
+    "options": [
+      "A. ^[\\u4e00-\\u9fa5]{2,4}$",
+      "B. ^[a-z]{2,4}$",
+      "C. ^\\w{2,4}$",
+      "D. ^.*.{2,4}$"
+    ],
+    "correct_answer": "A",
+    "explanation": "\\u4e00-\\u9fa5是汉字Unicode范围，{2,4}限制长度。",
+    "knowledge_points": [
+      "实战应用",
+      "中文匹配"
+    ],
+    "hint": "匹配汉字必须使用Unicode编码范围"
+  },
+  {
+    "id": "regex_choice_074",
+    "title": "邮政编码匹配",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配长度固定为6位的纯数字中国大陆邮政编码，正确正则是？",
+    "options": [
+      "A. ^\\d{6}$",
+      "B. ^\\d{1,6}$",
+      "C. ^[0-9]+$",
+      "D. ^\\w{6}$"
+    ],
+    "correct_answer": "A",
+    "explanation": "^和$限定首尾，\\d{6}强制必须是6位数字。",
+    "knowledge_points": [
+      "实战验证",
+      "数字格式匹配"
+    ],
+    "hint": "邮编是固定6位纯数字"
+  },
+  {
+    "id": "regex_choice_075",
+    "title": "排除指定敏感词匹配",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配整个字符串中不包含子串admin的任意字符组合，正确正则是？",
+    "options": [
+      "A. ^(?!.*admin).*$",
+      "B. ^admin.*$",
+      "C. ^.*admin.*$",
+      "D. ^[^admin]*$"
+    ],
+    "correct_answer": "A",
+    "explanation": "负向先行断言(?!.*admin)确保字符串任何位置都不出现admin。",
+    "knowledge_points": [
+      "零宽断言",
+      "排除匹配"
+    ],
+    "hint": "[^admin]只能排除单个字符，不能排除单词"
+  },
+  {
+    "id": "regex_choice_076",
+    "title": "零宽断言判断数字结尾",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配以任意数字字符结尾的整行字符串，不占用结尾字符，正确的正则是？",
+    "options": [
+      "A. ^.*(?=\\d)$",
+      "B. ^.*(?<=\\d)$",
+      "C. ^.*\\d$",
+      "D. ^\\d.*$"
+    ],
+    "correct_answer": "B",
+    "explanation": "(?<=\\d) 是正向后行断言，用于判断结尾前一个字符是数字，不消耗字符。",
+    "knowledge_points": [
+      "零宽断言",
+      "后行断言"
+    ],
+    "hint": "判断已出现的内容用后行断言 (?<=)"
+  },
+  {
+    "id": "regex_choice_077",
+    "title": "非贪婪匹配标签内容",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配 <div> 与 </div> 之间最短内容，使用非贪婪模式，正确正则是？",
+    "options": [
+      "A. <div>.*</div>",
+      "B. <div>.+</div>",
+      "C. <div>.*?</div>",
+      "D. <div>.+?</div>"
+    ],
+    "correct_answer": "C",
+    "explanation": ".*? 是非贪婪匹配，能匹配最短内容，避免跨多个标签匹配。",
+    "knowledge_points": [
+      "非贪婪匹配",
+      "文本提取"
+    ],
+    "hint": "量词后加 ? 表示非贪婪"
+  },
+  {
+    "id": "regex_choice_078",
+    "title": "反向引用匹配重复字符",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配连续出现两次相同的单词字符（如 aa、55），正确正则是？",
+    "options": [
+      "A. (\\w)\\1",
+      "B. \\w\\1",
+      "C. (\\w)\\2",
+      "D. \\w{2}"
+    ],
+    "correct_answer": "A",
+    "explanation": "(\\w) 捕获字符，\\1 引用分组内容，实现重复字符匹配。",
+    "knowledge_points": [
+      "反向引用",
+      "分组捕获"
+    ],
+    "hint": "先分组捕获，再用 \\1 引用"
+  },
+  {
+    "id": "regex_choice_079",
+    "title": "内嵌修饰符忽略大小写",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "在正则表达式内部局部开启忽略大小写匹配的语法是？",
+    "options": [
+      "A. (?i)",
+      "B. (/i)",
+      "C. {i}",
+      "D. <i>"
+    ],
+    "correct_answer": "A",
+    "explanation": "(?i) 是正则内嵌修饰符，可局部开启不区分大小写匹配。",
+    "knowledge_points": [
+      "内嵌修饰符",
+      "匹配模式"
+    ],
+    "hint": "正则内部模式修饰符以 (? 开头"
+  },
+  {
+    "id": "regex_choice_080",
+    "title": "负向先行断言排除字符串",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配整个字符串中任何位置都不出现 test 字符串，正确正则是？",
+    "options": [
+      "A. ^(?!.*test).*$",
+      "B. ^[^test]*$",
+      "C. ^.*(?!test)$",
+      "D. ^test.*$"
+    ],
+    "correct_answer": "A",
+    "explanation": "(?!.*test) 负向先行断言，确保字符串中不存在指定子串。",
+    "knowledge_points": [
+      "负向先行断言",
+      "排除匹配"
+    ],
+    "hint": "[^test] 只能排除单个字符"
+  },
+  {
+    "id": "regex_choice_081",
+    "title": "原子分组禁止回溯",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "正则中用于提升性能、禁止回溯的原子分组语法是？",
+    "options": [
+      "A. (?>pattern)",
+      "B. (?:pattern)",
+      "C. (?=pattern)",
+      "D. (?!pattern)"
+    ],
+    "correct_answer": "A",
+    "explanation": "(?>) 原子分组，匹配成功后不允许正则引擎回溯，性能最优。",
+    "knowledge_points": [
+      "原子分组",
+      "性能优化"
+    ],
+    "hint": "原子分组专用符号 ?>"
+  },
+  {
+    "id": "regex_choice_082",
+    "title": "强密码三层组合校验",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "8-16位，必须包含大小写字母和数字，不允许特殊符号，正确正则是？",
+    "options": [
+      "A. ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,16}$",
+      "B. ^[a-zA-Z\\d]{8,16}$",
+      "C. ^(?=.*[a-z])(?=.*\\d)[a-z\\d]{8,16}$",
+      "D. ^\\w{8,16}$"
+    ],
+    "correct_answer": "A",
+    "explanation": "三层断言强制包含小写、大写、数字，字符集仅允许字母数字。",
+    "knowledge_points": [
+      "零宽断言",
+      "密码验证"
+    ],
+    "hint": "同时满足多个条件使用多个 (?=) 断言"
+  },
+  {
+    "id": "regex_choice_083",
+    "title": "Unicode 匹配中文汉字",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配单个标准中文汉字的 Unicode 正则范围是？",
+    "options": [
+      "A. [\\u4e00-\\u9fa5]",
+      "B. [\\u0000-\\u00ff]",
+      "C. [a-zA-Z]",
+      "D. [^0-9]"
+    ],
+    "correct_answer": "A",
+    "explanation": "\\u4e00-\\u9fa5 是官方定义的常用中文汉字编码范围。",
+    "knowledge_points": [
+      "Unicode",
+      "中文匹配"
+    ],
+    "hint": "中文匹配必须使用 Unicode 编码区间"
+  },
+  {
+    "id": "regex_choice_084",
+    "title": "多行模式修饰符",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "开启后让 ^ 和 $ 匹配每一行开头与结尾的正则修饰符是？",
+    "options": [
+      "A. m",
+      "B. i",
+      "C. g",
+      "D. s"
+    ],
+    "correct_answer": "A",
+    "explanation": "m 代表多行模式（multiline），使锚点作用于每一行。",
+    "knowledge_points": [
+      "正则修饰符",
+      "多行模式"
+    ],
+    "hint": "m = multiline 多行"
+  },
+  {
+    "id": "regex_choice_085",
+    "title": "前后断言组合匹配数字",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配前后均为英文小写字母的单个数字字符，正确正则是？",
+    "options": [
+      "A. (?<=[a-z])\\d(?=[a-z])",
+      "B. [a-z]\\d[a-z]",
+      "C. (?=[a-z])\\d(?<=[a-z])",
+      "D. \\d[a-z]+"
+    ],
+    "correct_answer": "A",
+    "explanation": "后行断言判断左侧字母，先行断言判断右侧字母，中间仅匹配数字。",
+    "knowledge_points": [
+      "组合断言",
+      "精准匹配"
+    ],
+    "hint": "左边用后行，右边用先行"
+  },
+  {
+    "id": "regex_choice_086",
+    "title": "匹配纯数字不能以0开头",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配非0开头、由1-9开头后跟任意多位数字的正整数字符串，正确正则是？",
+    "options": [
+      "A. ^[1-9]\\d*$",
+      "B. ^\\d+$",
+      "C. ^[0-9]\\d*$",
+      "D. ^[1-9]\\d{1,}$"
+    ],
+    "correct_answer": "A",
+    "explanation": "[1-9] 保证首位不为0，\\d* 允许后面0位或多位数字，适配所有非0开头整数。",
+    "knowledge_points": [
+      "字符集",
+      "开头规则限制"
+    ],
+    "hint": "首位1-9，后面可跟任意数字"
+  },
+  {
+    "id": "regex_choice_087",
+    "title": "匹配合法小数格式",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配整数部分非0开头、可带1位小数点和小数位的合法正数小数，正确正则是？",
+    "options": [
+      "A. ^[1-9]\\d*(\\.\\d+)?$",
+      "B. ^\\d+\\.\\d+$",
+      "C. ^[1-9].*$",
+      "D. ^\\d*(\\.\\d+)$"
+    ],
+    "correct_answer": "A",
+    "explanation": "(\\.\\d+)? 表示小数部分可选，整体支持整数和合法小数，且禁止前导0。",
+    "knowledge_points": [
+      "量词分组",
+      "小数格式校验"
+    ],
+    "hint": "小数点及小数部分为可选结构"
+  },
+  {
+    "id": "regex_choice_088",
+    "title": "单词边界正确理解",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "正则中 \\b 单词边界的匹配规则描述正确的是？",
+    "options": [
+      "A. 匹配空格位置",
+      "B. 匹配单词字符与非单词字符的交界位置",
+      "C. 只匹配换行位置",
+      "D. 匹配任意特殊符号"
+    ],
+    "correct_answer": "B",
+    "explanation": "\\b 是零宽单词边界，匹配 \\w 与 \\W 之间的位置，不占用实际字符。",
+    "knowledge_points": [
+      "零宽断言",
+      "单词边界"
+    ],
+    "hint": "单词边界不是匹配字符，是匹配交界位置"
+  },
+  {
+    "id": "regex_choice_089",
+    "title": "匹配不首尾含空格",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配字符串整体首尾不能有空白字符，中间可正常包含字符，正确正则是？",
+    "options": [
+      "A. ^\\S.*\\S$",
+      "B. ^.*$",
+      "C. ^\\s.*\\s$",
+      "D. ^\\S*$"
+    ],
+    "correct_answer": "A",
+    "explanation": "^\\S 开头非空白，\\S$ 结尾非空白，中间 .* 允许任意内容，严格限制首尾无空格。",
+    "knowledge_points": [
+      "锚点",
+      "空白限制"
+    ],
+    "hint": "\\S 代表匹配非空白字符"
+  },
+  {
+    "id": "regex_choice_090",
+    "title": "匹配仅包含字母和中文",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配只能由大小写字母和中文汉字组成，不包含数字与符号的字符串，正确正则是？",
+    "options": [
+      "A. ^[a-zA-Z\\u4e00-\\u9fa5]+$",
+      "B. ^[\\u4e00-\\u9fa5]+$",
+      "C. ^[a-zA-Z]+$",
+      "D. ^\\w+$"
+    ],
+    "correct_answer": "A",
+    "explanation": "合并字母区间与中文Unicode区间，限定只能出现字母和汉字。",
+    "knowledge_points": [
+      "字符集",
+      "Unicode混合匹配"
+    ],
+    "hint": "可同时叠加字母和汉字范围"
+  },
+  {
+    "id": "regex_choice_091",
+    "title": "负向后行断言应用",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配后面不是数字、自身为字母的字符，使用负向后行断言正确写法是？",
+    "options": [
+      "A. (?<!\\d)[a-zA-Z]",
+      "B. (?<=\\d)[a-zA-Z]",
+      "C. [a-zA-Z](?!\\d)",
+      "D. [a-zA-Z](?=\\d)"
+    ],
+    "correct_answer": "A",
+    "explanation": "(?<!\\d) 负向后行断言，限定当前字母左侧不能是数字。",
+    "knowledge_points": [
+      "零宽断言",
+      "负向后行"
+    ],
+    "hint": "后行断言校验当前位置左边内容"
+  },
+  {
+    "id": "regex_choice_092",
+    "title": "非捕获分组作用场景",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "只做分组多选、不占用捕获索引、不用于反向引用的分组语法是？",
+    "options": [
+      "A. (pattern)",
+      "B. (?:pattern)",
+      "C. (?<name>pattern)",
+      "D. (?>pattern)"
+    ],
+    "correct_answer": "B",
+    "explanation": "(?:) 非捕获分组，仅用于分组和分支选择，不生成捕获组索引。",
+    "knowledge_points": [
+      "分组",
+      "非捕获分组"
+    ],
+    "hint": "?: 开头为非捕获分组"
+  },
+  {
+    "id": "regex_choice_093",
+    "title": "单行模式DOTALL作用",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "开启单行模式s修饰符后，正则中点号 . 具备什么能力？",
+    "options": [
+      "A. 只匹配数字",
+      "B. 可匹配包含换行符在内的所有字符",
+      "C. 只匹配空白字符",
+      "D. 只匹配字母汉字"
+    ],
+    "correct_answer": "B",
+    "explanation": "s 单行模式也称DOTALL，让 . 可以匹配换行符 \\n，实现跨行匹配。",
+    "knowledge_points": [
+      "正则修饰符",
+      "单行模式"
+    ],
+    "hint": "s 模式让点号真正匹配任意字符"
+  },
+  {
+    "id": "regex_choice_094",
+    "title": "匹配固定两位大小写字母组合",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "严格匹配第一位大写字母、第二位小写字母的两位固定格式字符串，正确正则是？",
+    "options": [
+      "A. ^[A-Z][a-z]$",
+      "B. ^[a-z][A-Z]$",
+      "C. ^[A-Za-z]{2}$",
+      "D. ^\\w{2}$"
+    ],
+    "correct_answer": "A",
+    "explanation": "[A-Z] 匹配首位大写，[a-z] 匹配第二位小写，首尾锚点严格限定两位固定格式。",
+    "knowledge_points": [
+      "字符顺序",
+      "固定格式匹配"
+    ],
+    "hint": "按位置依次限定字符类型"
+  },
+  {
+    "id": "regex_choice_095",
+    "title": "正则或分支优先级",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "正则中竖线 | 分支匹配想要限定范围，避免全局或逻辑，需要使用什么符号包裹？",
+    "options": [
+      "A. []",
+      "B. ()",
+      "C. {}",
+      "D. <>"
+    ],
+    "correct_answer": "B",
+    "explanation": "| 默认范围极大，用 () 分组可限定或分支的作用区间，避免匹配逻辑错乱。",
+    "knowledge_points": [
+      "分支匹配",
+      "分组优先级"
+    ],
+    "hint": "多分支一定要用小括号划定范围"
+  },
+  {
+    "id": "regex_choice_096",
+    "title": "正整数且不能以0开头、至少1位",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配非零开头、长度至少1位的正整数字符串，正确正则是？",
+    "options": [
+      "A. ^[1-9]\\d*$",
+      "B. ^\\d+$",
+      "C. ^0\\d+$",
+      "D. ^[1-9]\\d+$"
+    ],
+    "correct_answer": "A",
+    "explanation": "[1-9]确保首位非0，\\d*允许后续0位及以上数字，满足至少1位正整数。",
+    "knowledge_points": [
+      "数字校验",
+      "开头限制"
+    ],
+    "hint": "首位不能为0，长度至少1位"
+  },
+  {
+    "id": "regex_choice_097",
+    "title": "匹配合法小数（支持整数与小数）",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配非0开头整数，或带小数点且小数部分非空的合法正数，正确正则是？",
+    "options": [
+      "A. ^[1-9]\\d*(\\.\\d+)?$",
+      "B. ^\\d+\\.\\d+$",
+      "C. ^[1-9]\\d*\\.\\d*$",
+      "D. ^\\d*(\\.\\d+)?$"
+    ],
+    "correct_answer": "A",
+    "explanation": "支持纯整数与合法小数，小数点及后数字为可选，且禁止前导零。",
+    "knowledge_points": [
+      "小数校验",
+      "可选分组"
+    ],
+    "hint": "小数点后必须有至少一位数字"
+  },
+  {
+    "id": "regex_choice_098",
+    "title": "断言匹配字母+数字组合字符串",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配必须同时包含字母和数字，长度6-12位的字符串，正确正则是？",
+    "options": [
+      "A. ^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{6,12}$",
+      "B. ^[a-zA-Z\\d]{6,12}$",
+      "C. ^(?=.*[a-zA-Z])[a-zA-Z\\d]{6,12}$",
+      "D. ^[a-zA-Z]+\\d{6,12}$"
+    ],
+    "correct_answer": "A",
+    "explanation": "双正向断言强制包含字母与数字，字符集仅允许字母数字并限制长度。",
+    "knowledge_points": [
+      "零宽断言",
+      "组合校验"
+    ],
+    "hint": "两个(?=)断言同时生效"
+  },
+  {
+    "id": "regex_choice_099",
+    "title": "负向先行断言排除字符串开头",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配不以test开头的任意字符串，正确正则是？",
+    "options": [
+      "A. ^(?!test).*$",
+      "B. ^[^test].*$",
+      "C. ^.*(?<!test)$",
+      "D. ^test.*$"
+    ],
+    "correct_answer": "A",
+    "explanation": "(?!test)在开头位置做负向先行断言，禁止以指定字符串开头。",
+    "knowledge_points": [
+      "负向先行断言",
+      "开头排除"
+    ],
+    "hint": "排除开头用(?!xxx)"
+  },
+  {
+    "id": "regex_choice_100",
+    "title": "非贪婪匹配HTML标签内容",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配<div>和</div>之间最短内容，不跨标签，正确正则是？",
+    "options": [
+      "A. <div>.*?</div>",
+      "B. <div>.*</div>",
+      "C. <div>.+</div>",
+      "D. <div>\\w+</div>"
+    ],
+    "correct_answer": "A",
+    "explanation": ".*?非贪婪模式，匹配到最近的</div>，避免跨标签过度匹配。",
+    "knowledge_points": [
+      "非贪婪匹配",
+      "标签提取"
+    ],
+    "hint": "量词后加?表示最短匹配"
+  },
+  {
+    "id": "regex_choice_101",
+    "title": "匹配中文、字母、下划线，不含数字与符号",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配仅包含汉字、大小写字母、下划线，无其他字符的字符串，正确正则是？",
+    "options": [
+      "A. ^[a-zA-Z_\\u4e00-\\u9fa5]+$",
+      "B. ^[\\u4e00-\\u9fa5\\w]+$",
+      "C. ^[a-zA-Z_]+$",
+      "D. ^\\w+$"
+    ],
+    "correct_answer": "A",
+    "explanation": "精准组合汉字Unicode、字母、下划线，排除数字与特殊符号。",
+    "knowledge_points": [
+      "字符集",
+      "中文混合匹配"
+    ],
+    "hint": "\\w包含数字，本题不允许数字"
+  },
+  {
+    "id": "regex_choice_102",
+    "title": "负向后行断言判断非数字前缀",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配左侧不是数字的英文字母，正确正则是？",
+    "options": [
+      "A. (?<!\\d)[a-zA-Z]",
+      "B. (?<=\\d)[a-zA-Z]",
+      "C. [a-zA-Z](?!\\d)",
+      "D. [a-zA-Z](?=\\d)"
+    ],
+    "correct_answer": "A",
+    "explanation": "(?<!\\d)负向后行断言，限定字母前面不能是数字。",
+    "knowledge_points": [
+      "负向后行断言",
+      "位置校验"
+    ],
+    "hint": "判断左边内容用后行断言"
+  },
+  {
+    "id": "regex_choice_103",
+    "title": "正则单行模式（DOTALL）作用",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "开启s修饰符（单行模式）后，点号.的变化是？",
+    "options": [
+      "A. 可以匹配换行符",
+      "B. 只匹配数字",
+      "C. 只匹配单词字符",
+      "D. 只匹配空白"
+    ],
+    "correct_answer": "A",
+    "explanation": "s模式让.匹配包括换行\\n在内的所有字符，实现跨行匹配。",
+    "knowledge_points": [
+      "修饰符",
+      "单行模式"
+    ],
+    "hint": "s=DOTALL，点匹配一切"
+  },
+  {
+    "id": "regex_choice_104",
+    "title": "反向引用匹配连续重复字符",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配连续两个相同的单词字符（如00、bb、__），正确正则是？",
+    "options": [
+      "A. (\\w)\\1",
+      "B. \\w{2}",
+      "C. (\\w)\\2",
+      "D. \\w\\1"
+    ],
+    "correct_answer": "A",
+    "explanation": "(\\w)捕获第一个字符，\\1引用分组内容，强制匹配重复字符。",
+    "knowledge_points": [
+      "反向引用",
+      "分组捕获"
+    ],
+    "hint": "先捕获，再用\\1重复匹配"
+  },
+  {
+    "id": "regex_choice_105",
+    "title": "匹配首尾非空白、中间允许任意字符",
+    "type": "choice",
+    "category": "正则表达式",
+    "difficulty": "hard",
+    "description": "匹配字符串首尾不能有空白，中间可包含任意字符，正确正则是？",
+    "options": [
+      "A. ^\\S.*\\S$",
+      "B. ^\\S*$",
+      "C. ^\\s.*\\s$",
+      "D. ^.*$"
+    ],
+    "correct_answer": "A",
+    "explanation": "^\\S限定开头非空白，\\S$限定结尾非空白，中间支持任意字符。",
+    "knowledge_points": [
+      "锚点",
+      "空白校验"
+    ],
+    "hint": "\\S代表非空白字符"
+  }
+]

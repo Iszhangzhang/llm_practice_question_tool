@@ -1,0 +1,1141 @@
+[
+  {
+    "id": "pybasic_oo_choice_001",
+    "title": "__init__方法中的self",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "easy",
+    "description": "以下关于 __init__ 方法的说法，哪个是正确的？\n```python\nclass Dog:\n    def __init__(self, name):\n        self.name = name\n```",
+    "options": [
+      "A. 创建 Dog 实例时，self 参数需要手动传入",
+      "B. self 代表类本身，所有实例共享",
+      "C. 创建实例时，Python 自动传入 self，我们只需提供 name",
+      "D. __init__ 只能在类中定义一次"
+    ],
+    "correct_answer": "C",
+    "explanation": "在调用类创建实例时，Python 自动将实例对象传递给 __init__ 的 self 参数，因此只需提供除 self 以外的参数。选项 A 错误；B 描述的是 cls；D 错误，__init__ 不能多次定义但这不是重点。",
+    "knowledge_points": [
+      "__init__构造方法",
+      "self"
+    ],
+    "hint": "实例化时只需传 name。"
+  },
+  {
+    "id": "pybasic_oo_choice_002",
+    "title": "实例属性的独立性",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "easy",
+    "description": "执行以下代码，输出结果是什么？\n```python\nclass Cat:\n    def __init__(self, name):\n        self.name = name\n\nc1 = Cat(\"Tom\")\nc2 = Cat(\"Jerry\")\nc1.name = \"Tommy\"\nprint(c2.name)\n```",
+    "options": [
+      "A. \"Jerry\"",
+      "B. \"Tom\"",
+      "C. \"Tommy\"",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "每个实例拥有独立的实例属性，c1.name 的修改不会影响 c2.name，因此 c2.name 仍为 \"Jerry\"。选项 B、C 错误。",
+    "knowledge_points": [
+      "实例属性"
+    ],
+    "hint": "实例属性各自独立。"
+  },
+  {
+    "id": "pybasic_oo_choice_003",
+    "title": "动态添加实例属性",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "easy",
+    "description": "对于已存在的实例 obj，以下哪个操作合法？\n```python\nclass MyClass:\n    pass\nobj = MyClass()\n# 选项中的代码\n```",
+    "options": [
+      "A. obj.new_attr = 100",
+      "B. obj.__dict__['new_attr'] = 100",
+      "C. setattr(obj, 'new_attr', 100)",
+      "D. 以上都可以"
+    ],
+    "correct_answer": "D",
+    "explanation": "Python 允许在运行时为实例动态添加新属性，可以通过直接赋值、操作 __dict__ 或使用 setattr 内置函数实现。因此三种方式都正确。",
+    "knowledge_points": [
+      "实例属性"
+    ],
+    "hint": "实例属性可动态添加。"
+  },
+  {
+    "id": "pybasic_oo_choice_004",
+    "title": "类属性共享特性",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "easy",
+    "description": "以下代码输出什么？\n```python\nclass A:\n    count = 0\n    def __init__(self):\n        A.count += 1\n\na = A()\nb = A()\nprint(a.count, b.count, A.count)\n```",
+    "options": [
+      "A. 1 1 1",
+      "B. 2 2 2",
+      "C. 1 1 2",
+      "D. 0 0 2"
+    ],
+    "correct_answer": "B",
+    "explanation": "count 是类属性，通过 A.count 修改。创建两个实例后，类属性变为 2。通过实例访问 a.count 和 b.count 都会找到该类属性，因此都输出 2。选项 A 和 C 错误认为实例有独立副本；D 错误。",
+    "knowledge_points": [
+      "类属性"
+    ],
+    "hint": "类属性被所有实例共享。"
+  },
+  {
+    "id": "pybasic_oo_choice_005",
+    "title": "实例赋值遮蔽类属性",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "运行以下代码，输出结果是什么？\n```python\nclass B:\n    x = 10\n\nobj = B()\nobj.x = 20\nprint(B.x, obj.x)\n```",
+    "options": [
+      "A. 10 20",
+      "B. 20 20",
+      "C. 10 10",
+      "D. 20 10"
+    ],
+    "correct_answer": "A",
+    "explanation": "通过实例赋值 `obj.x = 20` 会在实例的 __dict__ 中创建一个同名实例属性，遮蔽类属性。类属性 B.x 仍为 10，而 obj.x 访问到实例属性 20。因此打印 10 20。选项 B 误以为修改了类属性；C、D 错误。",
+    "knowledge_points": [
+      "类属性",
+      "实例属性遮蔽"
+    ],
+    "hint": "实例赋值不会修改类属性。"
+  },
+  {
+    "id": "pybasic_oo_choice_006",
+    "title": "可变类属性的陷阱",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "预测以下代码的输出。\n```python\nclass Team:\n    members = []\n\n    def add_member(self, name):\n        self.members.append(name)\n\nt1 = Team()\nt2 = Team()\nt1.add_member(\"Alice\")\nt2.add_member(\"Bob\")\nprint(t1.members)\n```",
+    "options": [
+      "A. ['Alice']",
+      "B. ['Bob']",
+      "C. ['Alice', 'Bob']",
+      "D. 报错"
+    ],
+    "correct_answer": "C",
+    "explanation": "members 是可变类属性，所有实例共享同一个列表对象。t1.add_member('Alice') 和 t2.add_member('Bob') 都在该列表中添加元素，因此最终列表包含 Alice 和 Bob。选项 A、B 误以为独立；D 不会。",
+    "knowledge_points": [
+      "类属性",
+      "可变对象陷阱"
+    ],
+    "hint": "可变类属性被所有实例共享。"
+  },
+  {
+    "id": "pybasic_oo_choice_007",
+    "title": "实例方法通过类调用需传self",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "下列代码中，调用方式正确的是？\n```python\nclass Greeter:\n    def greet(self, name):\n        return f\"Hi {name}\"\ng = Greeter()\n```",
+    "options": [
+      "A. g.greet(\"Tom\") 和 Greeter.greet(g, \"Tom\") 都正确",
+      "B. 只能 g.greet(\"Tom\")",
+      "C. 只能 Greeter.greet(g, \"Tom\")",
+      "D. 两者都错"
+    ],
+    "correct_answer": "A",
+    "explanation": "实例方法可以通过实例调用，自动传递 self；也可以通过类名调用，但需要显式传入实例作为第一个参数。两种方式均合法。选项 B、C 各遗漏一种方式。",
+    "knowledge_points": [
+      "实例方法"
+    ],
+    "hint": "类调用需手动传实例。"
+  },
+  {
+    "id": "pybasic_oo_choice_008",
+    "title": "实例方法访问实例属性",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "easy",
+    "description": "以下实例方法中，如何访问实例属性 name？\n```python\nclass Person:\n    def __init__(self, name):\n        self.name = name\n    def say_hi(self):\n        # 这里\n```",
+    "options": [
+      "A. self.name",
+      "B. Person.name",
+      "C. __init__.name",
+      "D. cls.name"
+    ],
+    "correct_answer": "A",
+    "explanation": "实例方法内通过 self 参数访问当前实例的属性，因此 self.name 正确。选项 B 是类属性访问方式；C 无此语法；D 用于类方法。",
+    "knowledge_points": [
+      "实例方法"
+    ],
+    "hint": "必须通过 self。"
+  },
+  {
+    "id": "pybasic_oo_choice_009",
+    "title": "@classmethod 的基本使用",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "easy",
+    "description": "对于以下类方法，调用正确的是？\n```python\nclass Util:\n    @classmethod\n    def version(cls):\n        return cls.__name__\n```",
+    "options": [
+      "A. Util.version() 返回 'Util'",
+      "B. Util().version() 返回 None",
+      "C. version() 可直接调用",
+      "D. 必须实例化后才能调用"
+    ],
+    "correct_answer": "A",
+    "explanation": "类方法可以通过类名直接调用，cls 接收类本身。Util.version() 返回类的名称 'Util'。选项 B 错误，实例调用也会正确返回；C 无此函数；D 错误。",
+    "knowledge_points": [
+      "类方法"
+    ],
+    "hint": "类方法可透过类直接调用。"
+  },
+  {
+    "id": "pybasic_oo_choice_010",
+    "title": "@classmethod 工厂方法",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "以下代码中，通过类方法 from_string 创建实例后，p.name 是什么？\n```python\nclass Person:\n    def __init__(self, name):\n        self.name = name\n    @classmethod\n    def from_string(cls, s):\n        name = s.split(',')[0]\n        return cls(name)\np = Person.from_string(\"Alice,25\")\n```",
+    "options": [
+      "A. \"Alice\"",
+      "B. \"Alice,25\"",
+      "C. 25",
+      "D. 报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "类方法 from_string 解析字符串，取第一部分作为 name，然后调用 cls(name) 即 Person(\"Alice\") 创建实例。因此 p.name 为 \"Alice\"。选项 B 是原字符串；C 是年龄；D 不会。",
+    "knowledge_points": [
+      "类方法",
+      "工厂方法"
+    ],
+    "hint": "类方法作为替代构造器。"
+  },
+  {
+    "id": "pybasic_oo_choice_011",
+    "title": "@classmethod 访问类属性",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "easy",
+    "description": "以下哪个方法可以访问类属性 count 并修改？\n```python\nclass Counter:\n    count = 0\n    @classmethod\n    def inc(cls):\n        # 代码\n```",
+    "options": [
+      "A. cls.count += 1",
+      "B. self.count += 1",
+      "C. Counter.count += 1",
+      "D. A 和 C 都可以"
+    ],
+    "correct_answer": "D",
+    "explanation": "在类方法中，可以通过 cls 参数访问类属性，也可直接使用类名 Counter。因此 cls.count 和 Counter.count 都可修改类属性。选项 B 使用 self 会试图创建实例属性或报错。",
+    "knowledge_points": [
+      "类方法",
+      "类属性"
+    ],
+    "hint": "通过 cls 或类名访问。"
+  },
+  {
+    "id": "pybasic_oo_choice_012",
+    "title": "@staticmethod 没有隐式参数",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "easy",
+    "description": "对于静态方法，以下说法正确的是？",
+    "options": [
+      "A. 必须接收 self 参数",
+      "B. 必须接收 cls 参数",
+      "C. 不自动接收任何隐式参数",
+      "D. 不能通过类名调用"
+    ],
+    "correct_answer": "C",
+    "explanation": "静态方法像普通函数一样定义在类中，但不接收 self 或 cls 隐式参数。可通过实例或类调用。选项 A 是实例方法；B 是类方法；D 错误。",
+    "knowledge_points": [
+      "静态方法"
+    ],
+    "hint": "无 self/cls。"
+  },
+  {
+    "id": "pybasic_oo_choice_013",
+    "title": "静态方法与函数对比",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "以下代码中，静态方法的作用是？\n```python\nclass Math:\n    @staticmethod\n    def add(a, b):\n        return a + b\n```\n下列哪个说法正确？",
+    "options": [
+      "A. 它只能通过 Math.add(1,2) 调用",
+      "B. 它只能通过 Math().add(1,2) 调用",
+      "C. 它既可通过 Math.add(1,2) 也可通过 Math().add(1,2) 调用",
+      "D. 必须在 __init__ 中调用"
+    ],
+    "correct_answer": "C",
+    "explanation": "静态方法可以通过类名调用，也可以通过实例调用，行为类似普通函数。选项 A、B 限制了某一种；D 错误。",
+    "knowledge_points": [
+      "静态方法"
+    ],
+    "hint": "类和实例均可调用。"
+  },
+  {
+    "id": "pybasic_oo_choice_014",
+    "title": "实例方法、类方法、静态方法的区别",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "下列代码中，哪些调用会报错？\n```python\nclass Demo:\n    def imethod(self): return \"I\"\n    @classmethod\n    def cmethod(cls): return \"C\"\n    @staticmethod\n    def smethod(): return \"S\"\nd = Demo()\n```",
+    "options": [
+      "A. Demo.imethod()",
+      "B. d.cmethod()",
+      "C. d.smethod()",
+      "D. A 会报错，因为没有传 self"
+    ],
+    "correct_answer": "D",
+    "explanation": "实例方法通过类名调用时需要显式传入实例，否则会缺少 self 参数而报 TypeError。B 类方法通过实例调用合法；C 静态方法也合法。因此 A 错误，D 描述了该错误。",
+    "knowledge_points": [
+      "实例方法",
+      "类方法",
+      "静态方法"
+    ],
+    "hint": "类调用实例方法需传 self。"
+  },
+  {
+    "id": "pybasic_oo_choice_015",
+    "title": "__init__ 返回值",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "以下代码中，obj 是什么？\n```python\nclass Test:\n    def __init__(self):\n        return 42\nobj = Test()\nprint(obj)\n```",
+    "options": [
+      "A. 42",
+      "B. Test 的实例",
+      "C. TypeError: __init__ 返回了非 None 的值",
+      "D. None"
+    ],
+    "correct_answer": "C",
+    "explanation": "__init__ 方法不应该返回除 None 以外的任何值，否则在实例化时会引发 TypeError。选项 A 错误认为能返回 42；B 是正常情况。",
+    "knowledge_points": [
+      "__init__",
+      "构造方法限制"
+    ],
+    "hint": "__init__ 只能返回 None。"
+  },
+  {
+    "id": "pybasic_oo_choice_016",
+    "title": "类属性的访问路径",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "当实例属性和类属性同名时，通过实例访问会得到哪个？\n```python\nclass X:\n    value = 100\n    def __init__(self):\n        self.value = 200\nobj = X()\nprint(obj.value)\n```",
+    "options": [
+      "A. 100",
+      "B. 200",
+      "C. 报错",
+      "D. 0"
+    ],
+    "correct_answer": "B",
+    "explanation": "实例属性会遮蔽同名的类属性，通过实例访问时优先找到实例属性 200。类属性 X.value 仍为 100，但 obj.value 是 200。",
+    "knowledge_points": [
+      "实例属性",
+      "类属性"
+    ],
+    "hint": "实例属性优先。"
+  },
+  {
+    "id": "pybasic_oo_choice_017",
+    "title": "通过类属性统计实例个数",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "以下代码的输出结果是？\n```python\nclass Counter:\n    num = 0\n    def __init__(self):\n        Counter.num += 1\n        self.num = Counter.num\n\nc1 = Counter()\nc2 = Counter()\nprint(c1.num, c2.num, Counter.num)\n```",
+    "options": [
+      "A. 1 2 2",
+      "B. 1 1 2",
+      "C. 2 2 2",
+      "D. 1 2 1"
+    ],
+    "correct_answer": "A",
+    "explanation": "类属性 Counter.num 初始 0，c1 创建时变为 1，同时 self.num 设为 1（实例属性）；c2 创建时类属性变为 2，self.num 设为 2。因此 c1.num 是实例属性 1，c2.num 是实例属性 2，Counter.num 最终 2。",
+    "knowledge_points": [
+      "类属性",
+      "实例属性"
+    ],
+    "hint": "self.num 创建了实例属性。"
+  },
+  {
+    "id": "pybasic_oo_choice_018",
+    "title": "类方法修改类属性",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "easy",
+    "description": "以下代码运行后，Config.count 的值是？\n```python\nclass Config:\n    count = 0\n    @classmethod\n    def update(cls, n):\n        cls.count = n\nConfig.update(5)\n```",
+    "options": [
+      "A. 0",
+      "B. 5",
+      "C. 1",
+      "D. 报错"
+    ],
+    "correct_answer": "B",
+    "explanation": "类方法通过 cls 参数修改类属性 count 为 5。由于是通过类直接调用的，cls 就是 Config，因此 Config.count 变为 5。",
+    "knowledge_points": [
+      "类方法",
+      "类属性"
+    ],
+    "hint": "cls 指向类本身。"
+  },
+  {
+    "id": "pybasic_oo_choice_019",
+    "title": "静态方法不能访问实例属性",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "以下代码中，调用 s = Stat(); s.method() 会怎样？\n```python\nclass Stat:\n    def __init__(self):\n        self.x = 10\n    @staticmethod\n    def method():\n        return self.x\n```",
+    "options": [
+      "A. 返回 10",
+      "B. 引发 NameError: name 'self' is not defined",
+      "C. 引发 AttributeError",
+      "D. 返回 None"
+    ],
+    "correct_answer": "B",
+    "explanation": "静态方法没有 self 参数，因此在方法内部引用 self 会引发 NameError，因为 self 未定义。选项 A 错误认为可以；C 在访问不存在的属性时发生，但这里先有 NameError。",
+    "knowledge_points": [
+      "静态方法"
+    ],
+    "hint": "静态方法无 self。"
+  },
+  {
+    "id": "pybasic_oo_choice_020",
+    "title": "动态添加方法与 self",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "能否在实例外部为类添加一个实例方法？下列代码正确的是？\n```python\nclass MyClass:\n    pass\ndef new_method(self):\n    return self.name\n# 选项中的代码\n```",
+    "options": [
+      "A. MyClass.new_method = new_method，然后 obj.new_method() 可以正常工作",
+      "B. MyClass.new_method = new_method，但调用时会缺少 self 导致错误",
+      "C. obj.new_method = new_method，然后 obj.new_method() 正常工作",
+      "D. 不能为类动态添加方法"
+    ],
+    "correct_answer": "A",
+    "explanation": "在 Python 中，可以为类动态添加方法，赋值给类属性后，该函数会成为绑定方法，实例调用时会自动传入 self。选项 B 错误；C 直接赋给实例不会自动传 self；D 错误。",
+    "knowledge_points": [
+      "实例方法",
+      "动态添加"
+    ],
+    "hint": "赋值给类属性即可。"
+  },
+  {
+    "id": "pybasic_oo_choice_021",
+    "title": "self 参数名称可以更改",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "easy",
+    "description": "以下类定义是否合法？\n```python\nclass Dog:\n    def __init__(this, name):\n        this.name = name\n```",
+    "options": [
+      "A. 不合法，必须使用 self",
+      "B. 合法，第一个参数名称可以是任意合法标识符",
+      "C. 合法，但运行时错误",
+      "D. 只能在静态方法中更改"
+    ],
+    "correct_answer": "B",
+    "explanation": "self 只是一个命名习惯，并非关键字。方法的第一个参数可以使用任何合法变量名，如 this。Python 会自动传递实例。因此合法。选项 A 错误；C 和 D 错误。",
+    "knowledge_points": [
+      "self"
+    ],
+    "hint": "self 不是关键字。"
+  },
+  {
+    "id": "pybasic_oo_choice_022",
+    "title": "类属性访问通过类名更安全",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "修改类属性时，推荐使用什么方式避免意外创建实例属性？",
+    "options": [
+      "A. 使用实例 obj.attr = value",
+      "B. 使用类名 Class.attr = value",
+      "C. 使用 self.attr = value",
+      "D. 以上都可以"
+    ],
+    "correct_answer": "B",
+    "explanation": "通过实例赋值会创建或修改实例属性，可能会遮蔽类属性；通过类名赋值直接修改类属性，避免意外。因此推荐使用类名修改类属性。选项 A 可能创建实例属性；C 类似 A；D 不准确。",
+    "knowledge_points": [
+      "类属性"
+    ],
+    "hint": "使用类名修改类属性。"
+  },
+  {
+    "id": "pybasic_oo_choice_023",
+    "title": "类方法作为替代构造器返回子类",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "hard",
+    "description": "以下代码中，Dog.from_kind('Hound') 创建的实例类型是什么？\n```python\nclass Animal:\n    @classmethod\n    def from_kind(cls, kind):\n        if kind == 'Dog':\n            return Dog()\n        return cls()\nclass Dog(Animal):\n    pass\n```",
+    "options": [
+      "A. Animal",
+      "B. Dog",
+      "C. object",
+      "D. 报错"
+    ],
+    "correct_answer": "B",
+    "explanation": "由于 cls 在 Dog 类调用时为 Dog，from_kind 在 kind 不是 'Dog' 时返回 cls() 即 Dog 实例；但 kind 为 'Dog' 时特判返回 Dog()，同样是 Dog 实例。因此无论哪种，类型都是 Dog。选项 A 错误。",
+    "knowledge_points": [
+      "类方法",
+      "多态"
+    ],
+    "hint": "cls 在子类调用时指向子类。"
+  },
+  {
+    "id": "pybasic_oo_choice_024",
+    "title": "静态方法在继承中的行为",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "以下代码输出什么？\n```python\nclass Base:\n    @staticmethod\n    def who():\n        return \"Base\"\nclass Child(Base):\n    @staticmethod\n    def who():\n        return \"Child\"\nb = Base()\nc = Child()\nprint(Base.who(), Child.who(), b.who(), c.who())\n```",
+    "options": [
+      "A. Base Child Base Child",
+      "B. Base Child Child Child",
+      "C. Child Child Child Child",
+      "D. Base Base Base Child"
+    ],
+    "correct_answer": "A",
+    "explanation": "静态方法支持继承和覆盖，Base.who() 返回 \"Base\"，Child.who() 返回 \"Child\"。实例 b 和 c 分别调用各自类的方法，因此输出 A。",
+    "knowledge_points": [
+      "静态方法",
+      "继承"
+    ],
+    "hint": "静态方法可以被覆盖。"
+  },
+  {
+    "id": "pybasic_oo_choice_025",
+    "title": "实例方法中使用__class__",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "在实例方法中访问 `self.__class__.__name__` 可以得到什么？",
+    "options": [
+      "A. 当前实例的类名",
+      "B. 实例的 id",
+      "C. 实例的文档字符串",
+      "D. 类的基类名称"
+    ],
+    "correct_answer": "A",
+    "explanation": "每个对象都有 `__class__` 属性指向其类，`__name__` 是类的名称属性。因此可以获取当前实例所属类的名字。选项 B、C、D 错误。",
+    "knowledge_points": [
+      "实例方法",
+      "反射"
+    ],
+    "hint": "__class__ 获取类。"
+  },
+  {
+    "id": "pybasic_oo_choice_026",
+    "title": "综合：类方法调用静态方法",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "在类方法中是否可以调用同一个类中定义的静态方法？\n```python\nclass Mix:\n    @staticmethod\n    def static_hello():\n        return \"hello\"\n    @classmethod\n    def call_static(cls):\n        return cls.static_hello()\nprint(Mix.call_static())\n```",
+    "options": [
+      "A. 可以，输出 \"hello\"",
+      "B. 不可以，报错 NameError",
+      "C. 可以，输出 None",
+      "D. 不能通过 cls 调用"
+    ],
+    "correct_answer": "A",
+    "explanation": "通过 cls 可以访问类的属性和方法，包括静态方法。因此静态方法可在类方法中调用，返回其值。输出 \"hello\"。",
+    "knowledge_points": [
+      "类方法",
+      "静态方法"
+    ],
+    "hint": "cls 可访问所有类成员。"
+  },
+  {
+    "id": "pybasic_oo_choice_027",
+    "title": "类属性作默认值注意",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "以下代码中，a1.items 和 a2.items 是什么关系？\n```python\nclass A:\n    items = []\na1 = A()\na2 = A()\na1.items.append(1)\nprint(a2.items)\n```",
+    "options": [
+      "A. [1]，因为 items 是共享的类属性",
+      "B. []，因为每个实例 gets 自己的 items",
+      "C. 报错",
+      "D. [1] 但 a2.items 是独立副本"
+    ],
+    "correct_answer": "A",
+    "explanation": "items 是类属性列表，被所有实例共享。通过 a1 追加元素，a2 访问的是同一个列表，因此输出 [1]。选项 B 错误认为独立；D 前后矛盾。",
+    "knowledge_points": [
+      "类属性",
+      "可变默认"
+    ],
+    "hint": "可变的类属性共享。"
+  },
+  {
+    "id": "pybasic_oo_choice_028",
+    "title": "实例方法的第一个参数自动绑定",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "hard",
+    "description": "分析以下代码，输出结果是什么？\n```python\nclass Test:\n    def method(self):\n        return self.value\n\nobj = Test()\nobj.value = 5\nm = obj.method\nprint(m())\n```",
+    "options": [
+      "A. 5",
+      "B. 引发 TypeError，因为手动调用需要传 self",
+      "C. 引发 AttributeError",
+      "D. None"
+    ],
+    "correct_answer": "A",
+    "explanation": "当我们通过实例获取方法时，会得到一个绑定方法对象（bound method），self 已经绑定到 obj。因此直接调用 m() 无需传入参数，正常返回 5。选项 B 是如果通过类获取未绑定方法时；C、D 错误。",
+    "knowledge_points": [
+      "实例方法"
+    ],
+    "hint": "obj.method 是绑定方法。"
+  },
+  {
+    "id": "pybasic_oo_choice_029",
+    "title": "单下划线属性约定",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "easy",
+    "description": "关于类中定义的 `_data` 属性，以下说法正确的是？\n```python\nclass MyClass:\n    def __init__(self):\n        self._data = 42\n```",
+    "options": [
+      "A. 解释器会阻止外部访问 obj._data",
+      "B. `_data` 只是一种约定，表示不应在外部直接访问，但实际可以访问",
+      "C. `_data` 会被名称改写，变为 _MyClass__data",
+      "D. `_data` 是私有属性，子类不能访问"
+    ],
+    "correct_answer": "B",
+    "explanation": "单下划线前缀只是一个约定，用来提示开发者该属性是内部实现细节，不应直接访问，但 Python 不会强制限制。选项 A 错误；C 描述的是双下划线 `__data` 的行为；D 错误，子类也能访问。",
+    "knowledge_points": [
+      "私有属性约定",
+      "单下划线"
+    ],
+    "hint": "约定非强制。"
+  },
+  {
+    "id": "pybasic_oo_choice_030",
+    "title": "双下划线名称改写",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "运行以下代码，输出结果是什么？\n```python\nclass A:\n    def __init__(self):\n        self.__secret = 10\n\na = A()\nprint(a.__secret)\n```",
+    "options": [
+      "A. 10",
+      "B. 引发 AttributeError，因为 __secret 被改写",
+      "C. 引发 TypeError",
+      "D. None"
+    ],
+    "correct_answer": "B",
+    "explanation": "双下划线开头且不以双下划线结尾的属性会被名称改写为 `_A__secret`，因此外部访问 `a.__secret` 会引发 AttributeError。但可通过 `a._A__secret` 访问。选项 A 错误；C、D 错误。",
+    "knowledge_points": [
+      "名称改写",
+      "双下划线"
+    ],
+    "hint": "双下划线触发名称改写。"
+  },
+  {
+    "id": "pybasic_oo_choice_031",
+    "title": "名称改写后仍然可以访问",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "easy",
+    "description": "接上题，如何从外部正确访问被改写的 __secret 属性？",
+    "options": [
+      "A. a._A__secret",
+      "B. a.__secret",
+      "C. a._secret",
+      "D. a.get_secret()"
+    ],
+    "correct_answer": "A",
+    "explanation": "名称改写后的属性可通过 `_类名__属性名` 强制访问，即 `a._A__secret`。选项 B 会报错；C 为单下划线属性，不是改写后的名字；D 假设有方法但未定义。",
+    "knowledge_points": [
+      "名称改写"
+    ],
+    "hint": "改写规则：_ClassName__var。"
+  },
+  {
+    "id": "pybasic_oo_choice_032",
+    "title": "特殊方法不触发名称改写",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "以下哪个属性不会被名称改写机制修改？",
+    "options": [
+      "A. __init__",
+      "B. __data",
+      "C. __private",
+      "D. __value"
+    ],
+    "correct_answer": "A",
+    "explanation": "名称改写仅适用于双下划线开头且不以双下划线结尾的属性。`__init__` 以双下划线结尾，是特殊方法，不会被改写。其他选项均会被改写。",
+    "knowledge_points": [
+      "名称改写例外",
+      "特殊方法"
+    ],
+    "hint": "__xxx__ 格式不改写。"
+  },
+  {
+    "id": "pybasic_oo_choice_033",
+    "title": "双下划线避免子类冲突",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "以下代码的输出是什么？\n```python\nclass Parent:\n    def __init__(self):\n        self.__value = 10\n    def get(self):\n        return self.__value\n\nclass Child(Parent):\n    def __init__(self):\n        super().__init__()\n        self.__value = 20\n\nc = Child()\nprint(c.get())\n```",
+    "options": [
+      "A. 10",
+      "B. 20",
+      "C. 报错",
+      "D. 0"
+    ],
+    "correct_answer": "A",
+    "explanation": "父类的 `__value` 被改写为 `_Parent__value`，子类的 `__value` 被改写为 `_Child__value`，两者是独立的属性。`get()` 方法在父类中定义，访问的是 `_Parent__value`，因此输出 10。",
+    "knowledge_points": [
+      "名称改写",
+      "子类"
+    ],
+    "hint": "父类和子类的改写名不同。"
+  },
+  {
+    "id": "pybasic_oo_choice_034",
+    "title": "@property 访问属性方法",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "easy",
+    "description": "对于以下类，如何访问 full_name 的值？\n```python\nclass Person:\n    def __init__(self, first, last):\n        self.first = first\n        self.last = last\n    @property\n    def full_name(self):\n        return f\"{self.first} {self.last}\"\np = Person(\"Alice\", \"Smith\")\n```",
+    "options": [
+      "A. p.full_name()",
+      "B. p.full_name",
+      "C. Person.full_name(p)",
+      "D. p.__full_name"
+    ],
+    "correct_answer": "B",
+    "explanation": "@property 将方法转换为属性，访问时无需括号，直接 `p.full_name` 即可。选项 A 加了括号会报错；C 虽可但繁琐且非常规；D 错误。",
+    "knowledge_points": [
+      "@property"
+    ],
+    "hint": "属性访问不加括号。"
+  },
+  {
+    "id": "pybasic_oo_choice_035",
+    "title": "@property 定义 setter",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "想要让 radius 属性在赋值时自动校验为正数，以下哪段代码正确？",
+    "options": [
+      "A. 使用 @radius.setter 装饰器定义 setter 方法，并在其中校验",
+      "B. 直接在 __init__ 中定义 self.radius = radius 并校验",
+      "C. 无法对属性赋值进行校验",
+      "D. 使用 __setattr__ 特殊方法"
+    ],
+    "correct_answer": "A",
+    "explanation": "通过 @property 装饰 getter，再用 @radius.setter 装饰 setter，可以在赋值时添加校验逻辑。选项 A 是标准做法。选项 B 仅初始化时有效；C 错误；D 可以实现但不使用 @property。",
+    "knowledge_points": [
+      "@property",
+      "setter"
+    ],
+    "hint": "setter 装饰器控制赋值。"
+  },
+  {
+    "id": "pybasic_oo_choice_036",
+    "title": "@property 实现只读属性",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "下面只读属性 area，如果尝试 `c.area = 100` 会怎样？\n```python\nclass Circle:\n    def __init__(self, r):\n        self._r = r\n    @property\n    def area(self):\n        return 3.14 * self._r ** 2\nc = Circle(5)\nc.area = 100\n```",
+    "options": [
+      "A. 成功赋值，覆盖属性",
+      "B. 引发 AttributeError: can't set attribute",
+      "C. 引发 TypeError",
+      "D. 没有任何效果"
+    ],
+    "correct_answer": "B",
+    "explanation": "仅定义了 getter 的 property 是只读的，尝试赋值会引发 AttributeError。选项 A 错误；C、D 错误。",
+    "knowledge_points": [
+      "@property",
+      "只读属性"
+    ],
+    "hint": "无 setter 即只读。"
+  },
+  {
+    "id": "pybasic_oo_choice_037",
+    "title": "@property 的 deleter",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "以下关于 @property deleter 的说明，正确的是？\n```python\nclass Demo:\n    def __init__(self):\n        self._x = 1\n    @property\n    def x(self):\n        return self._x\n    @x.deleter\n    def x(self):\n        print('deleting')\n        del self._x\n```",
+    "options": [
+      "A. 使用 del obj.x 会触发 deleter 并打印 'deleting'",
+      "B. deleter 在每次访问属性时调用",
+      "C. deleter 必须和 setter 同时定义",
+      "D. deleter 不能真正删除底层属性"
+    ],
+    "correct_answer": "A",
+    "explanation": "@x.deleter 装饰的方法会在执行 `del obj.x` 时被调用，执行自定义删除逻辑。选项 B 错误，deleter 仅在 del 时调用；C 不必；D 可以删除。",
+    "knowledge_points": [
+      "@property",
+      "deleter"
+    ],
+    "hint": "del 触发 deleter。"
+  },
+  {
+    "id": "pybasic_oo_choice_038",
+    "title": "__slots__ 限制实例属性",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "easy",
+    "description": "定义了 __slots__ = ('x', 'y') 的类，尝试为实例添加新属性 z 会怎样？\n```python\nclass Point:\n    __slots__ = ('x', 'y')\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\np = Point(1, 2)\np.z = 3\n```",
+    "options": [
+      "A. 正常添加 z 属性",
+      "B. 引发 AttributeError",
+      "C. 引发 TypeError",
+      "D. 默默忽略"
+    ],
+    "correct_answer": "B",
+    "explanation": "当类定义了 __slots__ 时，实例不再具有 __dict__，只能拥有 __slots__ 中定义的属性。动态添加 z 会引发 AttributeError。",
+    "knowledge_points": [
+      "__slots__"
+    ],
+    "hint": "__slots__ 阻止动态添加。"
+  },
+  {
+    "id": "pybasic_oo_choice_039",
+    "title": "__slots__ 无 __dict__",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "对比有 __slots__ 和无 __slots__ 的类实例，以下正确的是？\n```python\nclass A:\n    __slots__ = ('x',)\nclass B:\n    pass\na = A(); b = B()\n```",
+    "options": [
+      "A. a 有 __dict__ 属性，b 没有",
+      "B. a 没有 __dict__ 属性，b 有",
+      "C. 两者都有 __dict__",
+      "D. 两者都没有 __dict__"
+    ],
+    "correct_answer": "B",
+    "explanation": "使用 __slots__ 的类实例没有 __dict__ 属性（除非显式包含 '__dict__'），因此 a 没有 __dict__；普通类实例 b 有 __dict__。",
+    "knowledge_points": [
+      "__slots__",
+      "__dict__"
+    ],
+    "hint": "有 __slots__ 默认无 __dict__。"
+  },
+  {
+    "id": "pybasic_oo_choice_040",
+    "title": "__slots__ 继承特性",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "以下代码中，Child 实例是否有 __dict__？\n```python\nclass Parent:\n    __slots__ = ('x',)\nclass Child(Parent):\n    pass\nc = Child()\nc.x = 1\nc.y = 2\n```",
+    "options": [
+      "A. 没有，继承父类的 __slots__",
+      "B. 有 __dict__，因为子类未定义 __slots__",
+      "C. 会因添加 y 报错",
+      "D. 报错，因为 __slots__ 不能被继承"
+    ],
+    "correct_answer": "B",
+    "explanation": "如果子类没有定义自己的 __slots__，它会拥有 __dict__，可以动态添加属性 y 不会报错。因此 c 有 __dict__。选项 A 错误；C 错误；D 错误。",
+    "knowledge_points": [
+      "__slots__",
+      "继承"
+    ],
+    "hint": "子类需显式定义 __slots__ 才能限制。"
+  },
+  {
+    "id": "pybasic_oo_choice_041",
+    "title": "__slots__ 节省内存",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "easy",
+    "description": "使用 __slots__ 的主要优势是？",
+    "options": [
+      "A. 加快属性访问速度并节省内存（无 __dict__）",
+      "B. 使类不能被继承",
+      "C. 提高安全性，防止属性访问",
+      "D. 支持多重继承"
+    ],
+    "correct_answer": "A",
+    "explanation": "__slots__ 消除每个实例的 __dict__，减少内存开销，同时属性查找速度也有所提升。它不阻止访问，也不影响继承。选项 B、C、D 错误。",
+    "knowledge_points": [
+      "__slots__",
+      "内存优化"
+    ],
+    "hint": "无 __dict__ 省内存。"
+  },
+  {
+    "id": "pybasic_oo_choice_042",
+    "title": "综合：@property 与私有属性",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "以下代码使用了 @property 包装私有属性 _age，输出是什么？\n```python\nclass Person:\n    def __init__(self, age):\n        self._age = age\n    @property\n    def age(self):\n        return self._age\n    @age.setter\n    def age(self, value):\n        if value < 0:\n            raise ValueError\n        self._age = value\n\np = Person(25)\np.age = 30\nprint(p.age)\n```",
+    "options": [
+      "A. 25",
+      "B. 30",
+      "C. 引发 ValueError",
+      "D. 引发 AttributeError"
+    ],
+    "correct_answer": "B",
+    "explanation": "通过 age setter 设置新值 30，校验合法后存到 _age 中，再通过 age getter 返回 30。选项 A 为初值未修改；C 因值合法不触发；D 无错误。",
+    "knowledge_points": [
+      "@property",
+      "私有属性"
+    ],
+    "hint": "property 控制访问。"
+  },
+  {
+    "id": "pybasic_oo_choice_043",
+    "title": "__slots__ 与类属性冲突",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "以下类定义会导致什么？\n```python\nclass C:\n    value = 100\n    __slots__ = ('value',)\n```",
+    "options": [
+      "A. 正常，value 既是类属性又是 __slots__ 属性",
+      "B. 引发 ValueError: 'value' in __slots__ conflicts with class variable",
+      "C. 实例的 value 覆盖类属性",
+      "D. 警告但能运行"
+    ],
+    "correct_answer": "B",
+    "explanation": "类定义中如果 __slots__ 与已存在的类变量同名，会引发 ValueError 冲突，因为 __slots__ 会尝试为实例创建数据描述符，与类属性冲突。选项 A 错误；C、D 描述不准确。",
+    "knowledge_points": [
+      "__slots__",
+      "类属性冲突"
+    ],
+    "hint": "类变量与 __slots__ 同名冲突。"
+  },
+  {
+    "id": "pybasic_oo_choice_044",
+    "title": "综合：__slots__ 与 @property 结合",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "hard",
+    "description": "以下类能正常工作吗？\n```python\nclass Point:\n    __slots__ = ('x', 'y')\n    def __init__(self, x, y):\n        self._x = x\n        self._y = y\n    @property\n    def x(self):\n        return self._x\n```",
+    "options": [
+      "A. 不能，因为 __slots__ 中没有 _x 导致 AttributeError",
+      "B. 能，但 _x 存储在 __dict__ 中",
+      "C. 能，__slots__ 和 @property 可以组合使用",
+      "D. 不能，因为 __slots__ 与 @property 冲突"
+    ],
+    "correct_answer": "A",
+    "explanation": "类中 __slots__ 指定了允许的属性名称为 'x' 和 'y'，但代码中试图设置 `self._x`，该名称不在 __slots__ 中，会引发 AttributeError。因此不能正常工作。需要把 `_x` 加入 __slots__ 或使用 `x` 作为存储属性。",
+    "knowledge_points": [
+      "__slots__",
+      "@property"
+    ],
+    "hint": "__slots__ 中的属性名必须匹配。"
+  },
+  {
+    "id": "pybasic_oo_choice_045",
+    "title": "私有属性与 @property 只读组合",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "以下代码实现了只读的 id 属性，正确吗？\n```python\nclass User:\n    def __init__(self, uid):\n        self.__uid = uid\n    @property\n    def uid(self):\n        return self.__uid\n```",
+    "options": [
+      "A. 正确，外部无法修改 uid，但可通过 _User__uid 修改",
+      "B. 错误，因为 __uid 无法访问",
+      "C. 正确，完全不能修改 uid",
+      "D. 错误，缺少 setter"
+    ],
+    "correct_answer": "A",
+    "explanation": "双下划线 __uid 被改写为 _User__uid，通过 uid property getter 可以访问。但如果有人知道改写名，仍可通过 `_User__uid` 修改，因此并非绝对安全。但 property 本身提供了只读接口。选项 B 错误；C 不完全准确；D 不需要 setter。",
+    "knowledge_points": [
+      "@property",
+      "私有属性"
+    ],
+    "hint": "名称改写可绕过。"
+  },
+  {
+    "id": "pybasic_oo_choice_046",
+    "title": "__slots__ 与弱引用",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "若想对定义了 __slots__ 的类使用弱引用（weakref），需要怎么做？",
+    "options": [
+      "A. 在 __slots__ 中包含 '__weakref__'",
+      "B. 自动支持弱引用",
+      "C. 不能使用弱引用",
+      "D. 使用 @weakrefable 装饰器"
+    ],
+    "correct_answer": "A",
+    "explanation": "默认情况下定义了 __slots__ 的类不支持弱引用，除非在 __slots__ 中显式添加 '__weakref__'。选项 B、C、D 错误。",
+    "knowledge_points": [
+      "__slots__",
+      "弱引用"
+    ],
+    "hint": "加入 '__weakref__'。"
+  },
+  {
+    "id": "pybasic_oo_choice_047",
+    "title": "__slots__ 继承后子类添加属性",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "hard",
+    "description": "以下代码会引发什么？\n```python\nclass A:\n    __slots__ = ('a',)\nclass B(A):\n    __slots__ = ('b',)\nb = B()\nb.a = 1\nb.b = 2\nb.c = 3\n```",
+    "options": [
+      "A. b.c = 3 会引发 AttributeError，因为 B 拥有 __slots__",
+      "B. b.c = 3 正常，因为子类有 __dict__",
+      "C. 定义 B 时就报错",
+      "D. b.b = 2 会报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "如果子类也定义了自己的 __slots__，则子类实例同样没有 __dict__，只能拥有 __slots__ 中指定的属性（包括父类 __slots__ 的合并）。因此 b.c = 3 会触发 AttributeError。选项 B 错误；C、D 错误。",
+    "knowledge_points": [
+      "__slots__继承"
+    ],
+    "hint": "子类定义 __slots__ 依然无 __dict__。"
+  },
+  {
+    "id": "pybasic_oo_choice_048",
+    "title": "@property 中 getter 与 setter 逻辑",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "以下代码输出是什么？\n```python\nclass Circle:\n    def __init__(self, radius):\n        self._radius = radius\n    @property\n    def radius(self):\n        return self._radius\n    @radius.setter\n    def radius(self, value):\n        if value <= 0:\n            raise ValueError\n        self._radius = value\nc = Circle(10)\nc.radius = -5\nprint(c.radius)\n```",
+    "options": [
+      "A. -5",
+      "B. 10",
+      "C. 引发 ValueError",
+      "D. None"
+    ],
+    "correct_answer": "C",
+    "explanation": "setter 中检测到值 <= 0 会抛出 ValueError，赋值失败，因此后续 print 不会执行。选项 A 错误认为赋值成功；B 是原值；D 错误。",
+    "knowledge_points": [
+      "@property",
+      "setter验证"
+    ],
+    "hint": "setter 抛出异常阻止赋值。"
+  },
+  {
+    "id": "pybasic_oo_choice_049",
+    "title": "__slots__ 与 __dict__ 共存",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "hard",
+    "description": "如果定义了 `__slots__ = ('x', '__dict__')`，那么实例的行为是？",
+    "options": [
+      "A. 只有 x 属性，不能动态添加",
+      "B. 可以动态添加任意属性，因为这些属性存在 __dict__ 中，但是 x 在 slot 中",
+      "C. 报错，不能同时有 __dict__ 和 __slots__",
+      "D. 实例只能有 x 和 '__dict__' 属性"
+    ],
+    "correct_answer": "B",
+    "explanation": "在 __slots__ 中显式包含 '__dict__'，则实例会有 __dict__ 属性，可以动态添加任意属性。同时 __slots__ 限定的属性 'x' 会被存储在 slot 中，其余属性在 __dict__ 中。这是允许的。选项 A 错误；C 错误；D 不准确。",
+    "knowledge_points": [
+      "__slots__",
+      "__dict__"
+    ],
+    "hint": "显式包含 '__dict__' 可恢复动态属性。"
+  },
+  {
+    "id": "pybasic_oo_choice_050",
+    "title": "名称改写与 property 结合",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "hard",
+    "description": "以下代码能否通过 property 正确访问？\n```python\nclass Demo:\n    def __init__(self):\n        self.__val = 100\n    @property\n    def val(self):\n        return self.__val\n    @val.setter\n    def val(self, v):\n        self.__val = v\nd = Demo()\nd.val = 200\nprint(d.val)\n```",
+    "options": [
+      "A. 能，输出 200",
+      "B. 不能，因为 __val 被改写，property 内部访问错误",
+      "C. 能，但需要在外部使用 _Demo__val 访问",
+      "D. 不能，setter 会报错"
+    ],
+    "correct_answer": "A",
+    "explanation": "在类内部，__val 会被自动改写为 _Demo__val，但编译器在类内部会自动处理，因此在 property 的 getter 和 setter 中，self.__val 仍然能正确访问改写后的属性。所以一切正常工作，输出 200。",
+    "knowledge_points": [
+      "名称改写",
+      "@property"
+    ],
+    "hint": "类内部自动处理改写。"
+  },
+  {
+    "id": "pybasic_oo_choice_051",
+    "title": "@property 的底层原理",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "@property 底层是通过什么实现的？",
+    "options": [
+      "A. 数据描述符协议（实现 __get__, __set__, __delete__）",
+      "B. 类装饰器",
+      "C. 元类",
+      "D. 只是普通函数调用"
+    ],
+    "correct_answer": "A",
+    "explanation": "property 是一个描述符类，实现了描述符协议（__get__, __set__, __delete__），通过属性访问时调用这些方法来实现控制。选项 B、C、D 错误。",
+    "knowledge_points": [
+      "@property",
+      "描述符"
+    ],
+    "hint": "实现描述符协议。"
+  },
+  {
+    "id": "pybasic_oo_choice_052",
+    "title": "综合：__slots__ 与私有属性结合",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "easy",
+    "description": "以下哪个选项正确地为 Point 类限制属性并使用了私有属性 _x？\n```python\nclass Point:\n    __slots__ = ('__x', '__y')\n    def __init__(self, x, y):\n        self.__x = x\n        self.__y = y\n```",
+    "options": [
+      "A. 正确，属性限制生效",
+      "B. 错误，因为 __slots__ 不接受双下划线名称",
+      "C. 错误，因为 __x 会被改写，导致 __slots__ 与实际属性名不匹配",
+      "D. 正确，但实例仍可动态添加属性"
+    ],
+    "correct_answer": "C",
+    "explanation": "当在 __slots__ 中写入 '__x' 时，实际存储的属性名是 '__x' 本身，但类体中 self.__x 会被改写为 _Point__x，这导致 __slots__ 没有预期属性，会引发 AttributeError。必须在 __slots__ 中使用改写后的名称 `_Point__x` 或改用单下划线。选项 C 正确。",
+    "knowledge_points": [
+      "__slots__",
+      "名称改写"
+    ],
+    "hint": "__slots__ 中的名称不会被改写。"
+  },
+  {
+    "id": "pybasic_oo_choice_053",
+    "title": "_var 在子类中可访问",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "easy",
+    "description": "单下划线 _var 属性，子类是否可以直接访问？\n```python\nclass Base:\n    def __init__(self):\n        self._data = 42\nclass Derived(Base):\n    def show(self):\n        return self._data\nd = Derived()\nprint(d.show())\n```",
+    "options": [
+      "A. 不可以，会报 AttributeError",
+      "B. 可以，输出 42",
+      "C. 可以，但必须用 self.__data",
+      "D. 只有基类的方法内才能访问"
+    ],
+    "correct_answer": "B",
+    "explanation": "单下划线只是约定，并不强制限制访问。子类 Derived 可以直接访问 self._data，因此输出 42。选项 A 错误；C、D 错误。",
+    "knowledge_points": [
+      "私有属性约定"
+    ],
+    "hint": "单下划线不限制访问。"
+  },
+  {
+    "id": "pybasic_oo_choice_054",
+    "title": "@property 防止循环调用",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "medium",
+    "description": "以下 getter 实现会导致什么问题？\n```python\nclass Rec:\n    @property\n    def area(self):\n        return self.area\n```",
+    "options": [
+      "A. 返回计算值",
+      "B. 递归调用导致 RecursionError",
+      "C. 返回 None",
+      "D. 引发 TypeError"
+    ],
+    "correct_answer": "B",
+    "explanation": "在 getter 内部又访问 self.area 会再次触发同一个 property 的 getter，导致无限递归，最终抛出 RecursionError。应该使用一个内部存储属性如 _area。",
+    "knowledge_points": [
+      "@property",
+      "递归陷阱"
+    ],
+    "hint": "自己调用自己导致递归。"
+  },
+  {
+    "id": "pybasic_oo_choice_055",
+    "title": "综合：@property 与 __slots__ 共存",
+    "type": "choice",
+    "category": "面向对象-类与实例",
+    "difficulty": "hard",
+    "description": "以下类试图使用 @property 和 __slots__ 来管理属性，能否正常工作？\n```python\nclass Square:\n    __slots__ = ('_side',)\n    def __init__(self, side):\n        self.side = side\n    @property\n    def side(self):\n        return self._side\n    @side.setter\n    def side(self, val):\n        self._side = val\n```",
+    "options": [
+      "A. 能，因为 _side 在 __slots__ 中，property 操作正常",
+      "B. 不能，因为 __slots__ 不允许定义 property",
+      "C. 不能，因为 side 不在 __slots__ 中会报错",
+      "D. 能，但必须将 side 加入 __slots__"
+    ],
+    "correct_answer": "A",
+    "explanation": "__slots__ 定义了 '_side'，而 self._side 是存储实际值的属性，property 的 getter 和 setter 操作 _side，因此不会产生冲突。side 是 property 对象，属于类属性，不需要放入 __slots__。选项 A 正确。选项 B、C 误解；D 错误。",
+    "knowledge_points": [
+      "@property",
+      "__slots__"
+    ],
+    "hint": "property 本身是类属性，无需入 slot。"
+  }
+]
